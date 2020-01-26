@@ -6,6 +6,12 @@ $config['db_host'] = 'localhost';
 $config['db_charset'] = 'UTF-8';
 $config['db_driver'] = 'mysql';
 
+// $config['db_user'] = 'u0906549_antonio';
+// $config['db_pass'] = 'randomizer_db';
+// $config['db_base'] = 'u0906549_default';
+// $config['db_host'] = '127.0.0.1:3306';
+// $config['db_charset'] = 'UTF-8';
+// $config['db_driver'] = 'mysql';
 
 $config['path_root'] = __DIR__;
 $config['path_public'] = $config['path_root'] . '/../public';
