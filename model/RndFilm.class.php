@@ -3,6 +3,8 @@ declare(strict_types=1);
 class RndFilm extends Model {
 	// public $dataBase;
 	public $filmsTable = 'films';
+	public $categories = 'categories';
+	public $countries = 'countries';
 	public $filmsCategories = 'films_categories';
 	public $filmsCountries = 'films_countries';
 
@@ -18,7 +20,8 @@ class RndFilm extends Model {
 		// print_r($maxRating);
 		// exit();
 
-		$sql = "SELECT * FROM `$this->filmsTable` WHERE `year` >= $minYear and `year` <= $maxYear and `rating` >= $minRating and `rating` <= $maxRating ORDER BY `year` DESC LIMIT 100";
+		$sql = "SELECT f.`id`, title_ru, description_ru, year, cat.`category_title` as `main_category`, cntr.`coutry_title` as `country`, f.`main_img`  FROM `$this->filmsTable` as f LEFT JOIN `$this->categories` as cat ON f.`main_category_id` = cat.id LEFT JOIN `$this->countries` as cntr ON f.`country_id` = cntr.id WHERE `year` >= 2010 and `year` <= 2020 ORDER BY `year` DESC LIMIT 100";
+
 		// var_dump($this->dataBase->getRows($sql, null));
 		$films = $this->dataBase->getRows($sql, null);
 		// $idFilms = [];

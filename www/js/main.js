@@ -27,14 +27,14 @@ function getRndFilm() {
 			if (data.result === "OK") {
 				let film = data.film;
 				console.log(data.film);
-				$('#main_rnd').remove();
-				$('#rnd_film').remove();
-				$("#main_rnd_block").prepend(`
-				<div id="rnd_film">
-					<h1 class='film_title'> ${film.title_ru} </h1>
-					<a class="film_year">Год выпуска: <a/><span> ${film.year} </span>
-					<p class='film_desc'> ${film.description_ru} </p>
-				</div>
+				$('.main-block-data-primary').empty();
+				$(".main-block-data-primary").prepend(`
+					<div class="main-block-data-pic"><img src="img/films/${film.main_img}" width="276" height="415"></div>
+                    <div class="main-block-data-text">
+						<h1 class="film-title">«${film.title_ru}»</h1>
+						<p class="film-info">${film.year}, ${film.main_category}, ${film.country}</p>
+						<p class="film-desc">${film.description_ru}</p>
+                    </div>
 				`);
 			} else {
 				console.log('ERROR_GET_FILM');;
