@@ -132,8 +132,12 @@ class ApiMethod {
 		$rating = $_POST['postData']['rating'] ?? '';
 		$categories = $_POST['postData']['categories'] ?? '';
 		$film = $this->rndFilm->getRandomFilm($years,$rating,$categories);
+		$categories = $this->rndFilm->getFilmCategories($film['id']);
+		// print_r($maxRating);
+		// exit();
 		if ($film) {
 			$data['film'] = $film;
+			$data['categories'] = $categories;
 			$data['result'] = "OK";
 			$this->success($data);
 		} else {

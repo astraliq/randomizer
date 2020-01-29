@@ -3,8 +3,8 @@ declare(strict_types=1);
 class RndFilm extends Model {
 	// public $dataBase;
 	public $filmsTable = 'films';
-	public $categories = 'categories';
-	public $countries = 'countries';
+	public $categories = 'f_categories';
+	public $countries = 'f_countries';
 	public $filmsCategories = 'films_categories';
 	public $filmsCountries = 'films_countries';
 
@@ -20,10 +20,10 @@ class RndFilm extends Model {
 		// print_r($maxRating);
 		// exit();
 
-		$sql = "SELECT f.`id`, title_ru, description_ru, year, cat.`category_title` as `main_category`, cntr.`coutry_title` as `country`, f.`main_img`  FROM `$this->filmsTable` as f LEFT JOIN `$this->categories` as cat ON f.`main_category_id` = cat.id LEFT JOIN `$this->countries` as cntr ON f.`country_id` = cntr.id WHERE `year` >= 2010 and `year` <= 2020 ORDER BY `year` DESC LIMIT 100";
+		$sql_films = "SELECT f.`id`, title_ru, description_ru, year, cat.`category_title` as `main_category`, cntr.`coutry_title` as `country`, f.`main_img`, f.`actors`, f.`genres`  FROM `$this->filmsTable` as f LEFT JOIN `$this->categories` as cat ON f.`main_category_id` = cat.id LEFT JOIN `$this->countries` as cntr ON f.`country_id` = cntr.id WHERE `year` >= 2010 and `year` <= 2020 ORDER BY `year`";
 
-		// var_dump($this->dataBase->getRows($sql, null));
-		$films = $this->dataBase->getRows($sql, null);
+		$films = $this->dataBase->getRows($sql_films, null);
+
 		// $idFilms = [];
 		// $k=0;
 		// foreach ($films as $film) {
@@ -35,23 +35,17 @@ class RndFilm extends Model {
 
 		$randomFilm = $films[array_rand($films, 1)];
 
-
 		return $randomFilm;
 	}
 
+	public function getFilmCategories($filmId) {
 
-public function getProduct($product_id) {
-			$whereObject = [
-				'id' => $product_id
-			];
-			return $this->dataBase->uniSelect($this->productsTable, $whereObject);
-		}
-public function getLastReviews($quantityOfReviews) {
-		$sql = "SELECT * FROM `$this->reviewsTable` ORDER BY `date` DESC LIMIT $quantityOfReviews";
-		// var_dump($this->dataBase->getRows($sql, null));
-		return $this->dataBase->getRows($sql, null);
+		$sql = "SELECT cat.`category_title` as `categories`  FROM `$this->filmsCategories` as f_cat LEFT JOIN `$this->categories` as cat ON f_cat.`category_id` = cat.id  WHERE `film_id` = $filmId";
+
+		$films_categories = $this->dataBase->getRows($sql, null);
+
+		return $films_categories;
 	}
 }
-
 ?>
 

@@ -26,14 +26,20 @@ function getRndFilm() {
 			data = JSON.parse(data);
 			if (data.result === "OK") {
 				let film = data.film;
-				console.log(data.film);
+				let film_cats = data.categories.map(function(elem) {
+					return elem.categories;
+				});
+				console.log(data);
 				$('.main-block-data-primary').empty();
 				$(".main-block-data-primary").prepend(`
 					<div class="main-block-data-pic"><img src="img/films/${film.main_img}" width="276" height="415"></div>
                     <div class="main-block-data-text">
 						<h1 class="film-title">«${film.title_ru}»</h1>
-						<p class="film-info">${film.year}, ${film.main_category}, ${film.country}</p>
+						<p class="film-info">${film.year}, ${film_cats.splice(0, 3).join(', ')}, ${film.country}</p>
 						<p class="film-desc">${film.description_ru}</p>
+						<p class="film-desc"><b>В главных ролях:</b> ${film.actors}</p>
+						<p class="film-desc"><b>Режиссёр:</b> ${film.genres}</p>
+						
                     </div>
 				`);
 			} else {
