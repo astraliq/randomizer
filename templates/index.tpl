@@ -34,45 +34,7 @@
                 <div class="other-cat">Кроме фильмов наш генератор выдаёт варианты из <a href="#" class="link-in-text">других категорий</a>, например, &laquo;<a href="#" class="link-in-text">Исторический факт</a>&raquo;</div>
             </div>
             </section>
-            <section class="see-now">
-                <div class="see-now-title">Просматривают сейчас <span class="see-now-count">(4 случайности из 1 348)</span></div>
-                <div class="see-now-main">
-                    <div class="see-now-main-data">
-                        <div class="data-title"><a href="#" class="data-title-link">Цитаты</a></div>
-                        <div class="data-desc-1">
-                            <p class="data-text">До той секунды, пока не прозвучал первый пушечный залп, всякая война называется дипломатией.</p>
-                            <p class="data-person">Пьер Певель</p>
-                        </div>
-                    </div>
-                    <div class="see-now-main-data">
-                        <div class="data-title"><a href="#" class="data-title-link">Подарки</a></div>
-                        <div class="data-desc-2">
-                            <div class="see-now-img"><img src="img/other/img_krugka.png" width="100" height="100"></div>
-                            <div class="see-now-text">
-                                <p class="present-title">Кружка авторская &laquo;Год новый,<br>а ты старый&raquo;</p>
-                                <p class="present-price">1 999 ₽</p>
-                                <p><a class="present-link">Подробнее</a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="see-now-main-data">
-                        <div class="data-title">
-                            <a href="#" class="data-title-link">Произведение искусства</a>
-                        </div>
-                        <div class="data-desc-2">
-                            <div class="see-now-img">
-                                <img src="img/arts/img_art_001.png" width="100">
-                            </div>
-                            <div class="see-now-text">
-                                <p class="art-title">Крик, Эдвард Мунк, 1893г.</p>
-                                <p class="art-text">Центральная фигура картины изображает фигуру человека, который обхватил руками лицо и широко раскрыл рот.
-                                Эта фигура очень примитивизирована, поэтому некоторые видят в ней некое бесполое существо, скелет, мумию или даже эмбриона.
-                                С помощью волнообразных линий художник изобразил звук крика, но непонятно, кричит ли это человек или же он в страхе и отчаянии от услышанного «крика природы», который разносится повсюду.</p>
-                            </div>
-                        </div>
-                    </div>                    
-                </div>
-            </section>
+            {% include 'see_now.tpl' %}
         </main>
         {% include 'footer.tpl' %}
         
@@ -80,6 +42,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous" async></script>
 	<script type="text/javascript" defer src="js/jquery-3.4.1.js"></script>
 	<script type="text/javascript" defer src="js/main.js"></script>
+    <script type="text/javascript" defer src="js/quote.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous" async></script>
 </body>
 </html>

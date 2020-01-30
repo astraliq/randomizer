@@ -11,7 +11,7 @@
                     <ul class="nav-list">
 <!--                        <li class="nav-item-1">Категории:</li>-->
                         <li class="nav-item"><a href="#" class="nav-item-link">Фильм</a></li>
-                        <li class="nav-item"><a href="#" class="nav-item-link">Поздравление</a></li>
+                        <li class="nav-item"><a href="#" class="nav-item-link quote_main">Цитата</a></li>
                         <li class="nav-item"><a href="#" class="nav-item-link">Кулинарный рецепт</a></li>
                         <li class="nav-item"><a href="#" class="nav-item-link">Произведение искусства</a></li>
                         <li class="nav-item"><a href="#" class="nav-item-link">Ещё</a></li>

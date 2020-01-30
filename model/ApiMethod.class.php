@@ -21,12 +21,14 @@ class ApiMethod {
 	public $dataBase;
 	public $method;
 	public $rndFilm;
+	public $rndQuote;
 	public $userModel;
 
     public function __construct($method) {
         $this->method = $method;
         $this->dataBase = SQL::getInstance();
         $this->rndFilm = new RndFilm();
+        $this->rndQuote = new RndQuote();
         $this->userModel = new UserModel();
     }
 
@@ -129,15 +131,31 @@ class ApiMethod {
 	public function getRndFilm() {
 		
 		$years = $_POST['postData']['years'] ?? '';
-		$rating = $_POST['postData']['rating'] ?? '';
+		// $rating = $_POST['postData']['rating'] ?? '';
 		$categories = $_POST['postData']['categories'] ?? '';
-		$film = $this->rndFilm->getRandomFilm($years,$rating,$categories);
+		$film = $this->rndFilm->getRandomFilm($years,$categories);
 		$categories = $this->rndFilm->getFilmCategories($film['id']);
 		// print_r($maxRating);
 		// exit();
 		if ($film) {
-			$data['film'] = $film;
+			$data['rnd'] = $film;
 			$data['categories'] = $categories;
+			$data['result'] = "OK";
+			$this->success($data);
+		} else {
+			$this->error('Ошибка чтения из БД');
+		}
+	}
+
+	public function getRndQuote() {
+		
+		$filters = $_POST['postData']['filters'] ?? '';
+		$alreadyViewedIds = $_POST['postData']['alreadyViewedIds'] ?? '';
+		$quote = $this->rndQuote->getRandomQuote($filters);
+		// print_r($maxRating);
+		// exit();
+		if ($quote) {
+			$data['rnd'] = $quote;
 			$data['result'] = "OK";
 			$this->success($data);
 		} else {

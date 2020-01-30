@@ -1,6 +1,5 @@
 "use strict"
 
-
 //Функция AJAX получения рандомного фильма
 function getRndFilm() {
 	let years = [2015,2020];  // минимальный и максимальный год
@@ -16,7 +15,6 @@ function getRndFilm() {
 			apiMethod: 'getRndFilm',
 			postData: {
 				years: {'min':years[0],'max':years[1]},
-				rating: {'min':rating[0],'max':rating[1]},
 				categories: categories
 			}
 		},
@@ -25,7 +23,7 @@ function getRndFilm() {
 			
 			data = JSON.parse(data);
 			if (data.result === "OK") {
-				let film = data.film;
+				let film = data.rnd;
 				let film_cats = data.categories.map(function(elem) {
 					return elem.categories;
 				});
@@ -43,7 +41,7 @@ function getRndFilm() {
                     </div>
 				`);
 			} else {
-				console.log('ERROR_GET_FILM');;
+				console.log('ERROR_GET_FILM');
 			}
 		}
 	});

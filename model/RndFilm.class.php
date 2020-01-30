@@ -12,17 +12,17 @@ class RndFilm extends Model {
 		parent::__construct();
     }
 
-	public function getRandomFilm($years, $rating, $categories) {
+	public function getRandomFilm($years, $categories) {
 		$minYear = ($rating['min'] == '') ? 1950 : $rating['min'];
 		$maxYear = ($rating['max'] == '') ? date("Y") : $rating['max'];
-		$minRating = ($rating['min'] == '') ? 0 : $rating['min'];
-		$maxRating = ($rating['max'] == '') ? 10 : $rating['max'];
+		// $minRating = ($rating['min'] == '') ? 0 : $rating['min'];
+		// $maxRating = ($rating['max'] == '') ? 10 : $rating['max'];
 		// print_r($maxRating);
 		// exit();
 
-		$sql_films = "SELECT f.`id`, title_ru, description_ru, year, cat.`category_title` as `main_category`, cntr.`coutry_title` as `country`, f.`main_img`, f.`actors`, f.`genres`  FROM `$this->filmsTable` as f LEFT JOIN `$this->categories` as cat ON f.`main_category_id` = cat.id LEFT JOIN `$this->countries` as cntr ON f.`country_id` = cntr.id WHERE `year` >= 2010 and `year` <= 2020 ORDER BY `year`";
+		$sql = "SELECT f.`id`, title_ru, description_ru, year, cat.`category_title` as `main_category`, cntr.`coutry_title` as `country`, f.`main_img`, f.`actors`, f.`genres`  FROM `$this->filmsTable` as f LEFT JOIN `$this->categories` as cat ON f.`main_category_id` = cat.id LEFT JOIN `$this->countries` as cntr ON f.`country_id` = cntr.id WHERE `year` >= 2010 and `year` <= 2020 ORDER BY `year`";
 
-		$films = $this->dataBase->getRows($sql_films, null);
+		$films = $this->dataBase->getRows($sql, null);
 
 		// $idFilms = [];
 		// $k=0;
