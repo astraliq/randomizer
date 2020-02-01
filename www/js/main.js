@@ -86,8 +86,7 @@ class Films {
 	
 	_render(film,filmCategories) {	
 		$('.main-block-data-menu').empty();
-		$('.main-block-data-menu').prepend(`
-		Ваша случайность из категории:<span class="cat-sel">Фильм</span>
+		$('.main-block-data-menu').prepend(`Ваша случайность из категории:<span class="cat-sel">Фильм</span>
 		<span class="cat-settings">Настроить фильтр</span>
 		<span class="next-random">Следующая случайность</span>
 		`);

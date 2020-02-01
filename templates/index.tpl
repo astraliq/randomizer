@@ -13,14 +13,11 @@
         <section class="main-block">
 <!--            <div class="main-block-free"></div>-->
             <div class="main-block-data">
-                <p class="main-block-data-menu">Ваша случайность из категории:<span class="cat-sel">{{ content.categoryTitle }}</span><span class="cat-settings">Настроить фильтр</span><span class="next-random" onclick="">Следующая случайность</span></p>
-                <div class="main-block-data-primary">
-                        {%if content.categoryTitle == 'Фильм' %}           
-                            {% include 'film_block.tpl' %}              
-                        {% elseif content.categoryTitle == 'Цитата' %}                      
-                            {% include 'quote_block.tpl' %}                        
-                        {% endif %} 
-                </div>
+                {%if content.categoryTitle == 'Фильм' %}           
+                    {% include 'film_block.tpl' %}              
+                {% elseif content.categoryTitle == 'Цитата' %}                      
+                    {% include 'quote_block.tpl' %}                        
+                {% endif %} 
                 <div class="other-cat">Кроме фильмов наш генератор выдаёт варианты из <a href="#" class="link-in-text">других категорий</a>, например, &laquo;<a href="#" class="link-in-text">Исторический факт</a>&raquo;</div>
             </div>
             </section>
