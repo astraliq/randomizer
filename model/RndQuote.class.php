@@ -10,12 +10,14 @@ class RndQuote extends Model {
 
 	public function getRandomQuote($filters) {
 
-		$idCategories = implode(", ", $filters);
-
-		$sql = "SELECT q.`id`, `text`, `author_title` as author, `category_title` as categories FROM `$this->quoteTable` as q LEFT JOIN `$this->quoteCategories` as cat ON q.`category_id` = cat.id LEFT JOIN `$this->quoteAuthors` as author ON q.`author_id` = author.id WHERE cat.id IN ($idCategories)";
+		if (empty($filters)) {
+			$sql = "SELECT q.`id`, `text`, `author_title` as author, `category_title` as categories FROM `$this->quoteTable` as q LEFT JOIN `$this->quoteCategories` as cat ON q.`category_id` = cat.id LEFT JOIN `$this->quoteAuthors` as author ON q.`author_id` = author.id LIMIT 10000";
+		} else {
+			$idCategories = implode(", ", $filters);
+			$sql = "SELECT q.`id`, `text`, `author_title` as author, `category_title` as categories FROM `$this->quoteTable` as q LEFT JOIN `$this->quoteCategories` as cat ON q.`category_id` = cat.id LEFT JOIN `$this->quoteAuthors` as author ON q.`author_id` = author.id WHERE cat.id IN ($idCategories)";
+		}
 
 		$quotes = $this->dataBase->getRows($sql, null);
-
 		$randomQuote = $quotes[array_rand($quotes, 1)];
 
 		return $randomQuote;

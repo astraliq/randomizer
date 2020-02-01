@@ -2,7 +2,7 @@
                 <div class="see-now-title">Просматривают сейчас <span class="see-now-count">(4 случайности из 1 348)</span></div>
                 <div class="see-now-main">
                     <div class="see-now-main-data">
-                        <div class="data-title"><a href="#" class="data-title-link">Цитаты</a></div>
+                        <div class="data-title"><a class="data-title-link">Цитаты</a></div>
                         <div class="data-desc-1">
                             <p class="data-text">До той секунды, пока не прозвучал первый пушечный залп, всякая война называется дипломатией.</p>
                             <p class="data-person">Пьер Певель</p>
@@ -21,7 +21,7 @@
                     </div>
                     <div class="see-now-main-data">
                         <div class="data-title">
-                            <a href="#" class="data-title-link">Произведение искусства</a>
+                            <a class="data-title-link">Произведение искусства</a>
                         </div>
                         <div class="data-desc-2">
                             <div class="see-now-img">
