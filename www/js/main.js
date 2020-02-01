@@ -87,8 +87,10 @@ class Films {
 	_render(film,filmCategories) {	
 		$('.main-block-data-menu').empty();
 		$('.main-block-data-menu').prepend(`Ваша случайность из категории:<span class="cat-sel">Фильм</span>
-		<span class="cat-settings">Настроить фильтр</span>
-		<span class="next-random">Следующая случайность</span>
+		<a href="#openModal" id="film-filter-open">
+			<span class="cat-settings">Настроить фильтр</span>
+		</a>
+		<span class="next-random">Следующий фильм</span>
 		`);
         $('.main-block-data-primary').empty();
         $('.main-block-data-primary').prepend(`

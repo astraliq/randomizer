@@ -38,12 +38,17 @@ class RndFilm extends Model {
 		return $randomFilm;
 	}
 
+	public function getFilmById($id) {
+		$sql = "SELECT f.`id`, title_ru, description_ru, year, cat.`category_title` as `main_category`, cntr.`coutry_title` as `country`, f.`main_img`, f.`actors`, f.`genres`, duration  FROM `$this->filmsTable` as f LEFT JOIN `$this->categories` as cat ON f.`main_category_id` = cat.id LEFT JOIN `$this->countries` as cntr ON f.`country_id` = cntr.id WHERE f.`id` = $id";
+		$film = $this->dataBase->getRow($sql, null);
+		return $film;
+	}
+
 	public function getFilmCategories($filmId) {
 
 		$sql = "SELECT cat.`category_title` as `categories`  FROM `$this->filmsCategories` as f_cat LEFT JOIN `$this->categories` as cat ON f_cat.`category_id` = cat.id  WHERE `film_id` = $filmId";
 
 		$films_categories = $this->dataBase->getRows($sql, null);
-
 		return $films_categories;
 	}
 }

@@ -15,11 +15,11 @@ class IndexController extends Controller {
         $this->mainTitle .= '';
         // $catTitle = $this->randomType->getRandomCategory()['category_title'];
         $catTitle = $this->randomType->getRandomCategory();
-        // print_r($catTitle);
-        // exit();
+        ;
         $arrayContent = [
             'categoryTitle' => $catTitle,
             'randomData' =>  $this->randomType->getRandomData($catTitle),
+
         ];
         return $arrayContent;
 	}

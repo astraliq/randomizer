@@ -19,6 +19,8 @@ class Quote {
         this.alreadyViewedIds = [];
     }
 
+
+
     getRndQuote() {  
         return $.post({
             url: '/index.php',
@@ -41,12 +43,12 @@ class Quote {
 
     _getNextQuote() {
         let nextRndBtn = document.querySelector('.next-random');
-        nextRndBtn.addEventListener('click', e => { quote.getRndQuote() });
+        nextRndBtn.addEventListener('click', e => { quote.init() });
     }
 
     _putAlreadyViewedIds(quote) {
         this.alreadyViewedIds = [...this.alreadyViewedIds, quote.id];
-//        console.log(this.alreadyViewedIds);
+        console.log(this.alreadyViewedIds);
     }
 
     init() {
@@ -59,7 +61,7 @@ class Quote {
                 fakeAPI.authorInfo = data.rnd.authorInfo;
                 fakeAPI.catgegories = data.rnd.categories;
                 fakeAPI.picture = data.rnd.picture;
-//                console.log(fakeAPI);
+                console.log(fakeAPI);
                 this._render(fakeAPI);
                 this._getNextQuote();
                 this._putAlreadyViewedIds(fakeAPI);
@@ -67,21 +69,20 @@ class Quote {
     }
 
     _render(quote) {
-        $(".main-block-data-primary").empty();
-        $(".main-block-data-primary").prepend(`
-            <div class="main-block-data-primary">
-        <div class="main-block-free">
-        <p class="poet-pic"> ${quote.picture} </p>
-        <p class="poet-desc"> ${quote.authorInfo} </p>
-    </div>
-    <div class="main-block-data">
-        <p class="main-block-data-menu">Cлучайность из категории:<span class="cat-sel">Цитаты</span><span class="cat-settings">Настроить фильтр</span><span class="next-random">Следующая цитата</span></p>
+        $(".main-block-data").empty();
+       // $(".main-block-data-menu").empty();
+        $(".main-block-data").prepend(`
+        <p class="main-block-data-menu">Cлучайность из категории:<span class="cat-sel">Цита ты</span><span class="cat-settings">Настроить фильтр</span><span class="next-random">Следующая цитата</span></p>
         <div class="main-block-data-primary">
-            <div class="main-block-data-text">
-                <p class="quotes-desc"><span class="left-aquo">&laquo;</span> ${quote.text} </p>
-                <p class="qoutes-title"> ${quote.author} </p>
+            <div class="main-block-free">
+                <img class="poet-pic" width="276" height="415" src="${quote.picture}" alt="Здесь будет картинка">
+                <p class="poet-desc"> ${quote.authorInfo === null || "" ? "" : quote.authorInfo} </p>
             </div>
-        </div>
+            <div class="main-block-data-text">
+                <p class="quotes-desc"><span class="left-aquo">&laquo;${quote.text}&raquo;</span></p>
+                <p class="qoutes-title"> ${quote.author === null || "" ? "" : quote.author}</p>
+             </div>
+        </div>     
         `);
         $(".cat-sel").text(`Цитаты`);
     }

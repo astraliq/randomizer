@@ -19,7 +19,20 @@ class Random extends Model {
 			    		'min' => '',
 			    		'max' => '',
 			    ];
-		        $result = $this->film->getRandomFilm($years,'');
+		        $film = $this->film->getRandomFilm($years,'');
+		        $getCategories = $this->film->getFilmCategories(1);
+		        $categories = [];
+		        $k = 0;
+		        foreach ($getCategories as $id) {
+		        	$categories[$k] = $id['categories'];
+		        	$k++;
+		        }
+		        $result = [
+		        	'data' => $film,
+		        	'categories' => $this->film->getFilmCategories($film['id'])
+		        	// 'data' => $this->film->getFilmById(1),
+		        	// 'categories' => $categories
+		        ];
 		        break;
 		    case "Цитата":
 		        $result = $this->quote->getRandomQuote('');
