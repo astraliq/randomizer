@@ -108,9 +108,9 @@ class Films {
 let film = new Films();
 mainFilmLink.addEventListener('click', e => { film.getRndFilm() });
 
-if (categoryName.text() === 'Фильм') {
-	nextRandom.addEventListener('click', e => { film.getRndFilm() });
-};
+//if (categoryName.text() === 'Фильм') {
+//	nextRandom.addEventListener('click', e => { film.getRndFilm() });
+//};
 
 
 
