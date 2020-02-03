@@ -1,6 +1,6 @@
 <header class="main-header">
             <div class="main-header-logo">
-                <a href="index.html" class="logo-link">
+                <a href="index.php" class="logo-link">
                     <p class="main-header-logo-name">RANDOMIZER</p>
                     <p class="main-header-logo-desc">СЛУЧАЙНОСТИ НЕ СЛУЧАЙНЫ</p>
                 </a>
@@ -14,7 +14,7 @@
                         <li class="nav-item"><a class="nav-item-link quote_main_lnk">Цитата</a></li>
                         <li class="nav-item"><a class="nav-item-link poem_main_lnk">Кулинарный рецепт</a></li>
                         <li class="nav-item"><a class="nav-item-link">Произведение искусства</a></li>
-                        <li class="nav-item"><a class="nav-item-link">Ещё</a></li>
+                        <li class="nav-item"><a class="nav-item-link more_cats">Ещё</a></li>
                     </ul>
                 </nav>
             </div>

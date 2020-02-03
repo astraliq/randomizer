@@ -130,12 +130,12 @@ class ApiMethod {
 
 	public function getRndFilm() {
 		
-		$years = $_POST['postData']['years'] ?? '';
-		// $rating = $_POST['postData']['rating'] ?? '';
-		$categories = $_POST['postData']['categories'] ?? '';
-		$film = $this->rndFilm->getRandomFilm($years,$categories);
+		$years = $_POST['postData']['years'] ?? [0];
+		$countries = $_POST['postData']['countries'] ?? [0];
+		$categories = $_POST['postData']['categories'] ?? [0];
+		$film = $this->rndFilm->getRandomFilm($years, $categories, $countries);
 		$categories = $this->rndFilm->getFilmCategories($film['id']);
-		// print_r($maxRating);
+		// print_r($_POST['postData']);
 		// exit();
 		if ($film) {
 			$data['rnd'] = $film;
@@ -152,7 +152,7 @@ class ApiMethod {
 		$filters = $_POST['postData']['filters'] ?? '';
 		$alreadyViewedIds = $_POST['postData']['alreadyViewedIds'] ?? '';
 		$quote = $this->rndQuote->getRandomQuote($filters);
-		// print_r($maxRating);
+		// print_r($_POST['postData']);
 		// exit();
 		if ($quote) {
 			$data['rnd'] = $quote;

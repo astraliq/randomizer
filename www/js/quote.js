@@ -72,7 +72,7 @@ class Quote {
         $(".main-block-data").empty();
        // $(".main-block-data-menu").empty();
         $(".main-block-data").prepend(`
-        <p class="main-block-data-menu">Cлучайность из категории:<span class="cat-sel">Цита ты</span><span class="cat-settings">Настроить фильтр</span><span class="next-random">Следующая цитата</span></p>
+        <p class="main-block-data-menu">Cлучайность из категории:<span class="cat-sel">Цитаты</span><span class="cat-settings">Настроить фильтр</span><span class="next-random">Следующая цитата</span></p>
         <div class="main-block-data-primary">
             <div class="main-block-free">
                 <img class="poet-pic" width="276" height="415" src="${quote.picture}" alt="Здесь будет картинка">

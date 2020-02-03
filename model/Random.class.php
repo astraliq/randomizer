@@ -16,11 +16,13 @@ class Random extends Model {
 		switch ($categoryTitle) {
 		    case "Фильм":
 		    	$years = [
-			    		'min' => '',
-			    		'max' => '',
+			    		0 => [
+			    			'min' => 1900,
+				    		'max' => 2030,
+				    	]
 			    ];
-		        $film = $this->film->getRandomFilm($years,'');
-		        $getCategories = $this->film->getFilmCategories(1);
+		        $film = $this->film->getRandomFilm($years,[0],[0]);
+		        $getCategories = $this->film->getFilmCategories($film['id']);
 		        $categories = [];
 		        $k = 0;
 		        foreach ($getCategories as $id) {
@@ -29,9 +31,7 @@ class Random extends Model {
 		        }
 		        $result = [
 		        	'data' => $film,
-		        	'categories' => $this->film->getFilmCategories($film['id'])
-		        	// 'data' => $this->film->getFilmById(1),
-		        	// 'categories' => $categories
+		        	'categories' => $categories
 		        ];
 		        break;
 		    case "Цитата":
