@@ -23,6 +23,7 @@ class ApiMethod {
 	public $rndFilm;
 	public $rndQuote;
 	public $userModel;
+	public $rndCongratulate;
 
     public function __construct($method) {
         $this->method = $method;
@@ -30,6 +31,7 @@ class ApiMethod {
         $this->rndFilm = new RndFilm();
         $this->rndQuote = new RndQuote();
         $this->userModel = new UserModel();
+        $this->rndCongratulate = new RndCongratulate();
     }
 
 	//Функция вывода ошибки
@@ -163,6 +165,21 @@ class ApiMethod {
 		}
 	}
 
+	public function getRndCongratulate() {
+		
+		$filters = $_POST['postData']['filters'] ?? '';
+		$alreadyViewedIds = $_POST['postData']['alreadyViewedIds'] ?? '';
+		$congr = $this->rndCongratulate->getRandomCongratulate($filters);
+		// print_r($_POST['postData']);
+		// exit();
+		if ($congr) {
+			$data['rnd'] = $congr;
+			$data['result'] = "OK";
+			$this->success($data);
+		} else {
+			$this->error('Ошибка чтения из БД');
+		}
+	}
 }
 
 ?>
