@@ -151,7 +151,7 @@ class FilmsFilter {
 //		console.log(this.countries);
 	}
 	
-	// получить значение фильтра по id
+	// установить значение фильтра по id
 	_checkFilter(id,value) {
 		$(this.filters.ids[id]).prop('checked', value);
 		this.filters.value[id] = value;
