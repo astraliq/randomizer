@@ -48,7 +48,7 @@ class Quote {
 
     _putAlreadyViewedIds(quote) {
         this.alreadyViewedIds = [...this.alreadyViewedIds, quote.id];
-        console.log(this.alreadyViewedIds);
+//        console.log(this.alreadyViewedIds);
     }
 
     init() {
@@ -61,7 +61,10 @@ class Quote {
                 fakeAPI.authorInfo = data.rnd.authorInfo;
                 fakeAPI.catgegories = data.rnd.categories;
                 fakeAPI.picture = data.rnd.picture;
-                console.log(fakeAPI);
+				fakeAPI.picture = fakeAPI.picture === null ? 'img/quoters/stub.jpg' : fakeAPI.picture;
+				fakeAPI.author = (fakeAPI.author === null) ? "" : fakeAPI.author;
+				fakeAPI.authorInfo = (fakeAPI.authorInfo === null) ? "" : fakeAPI.authorInfo;
+//                console.log(fakeAPI);
                 this._render(fakeAPI);
                 this._getNextQuote();
                 this._putAlreadyViewedIds(fakeAPI);
@@ -69,22 +72,33 @@ class Quote {
     }
 
     _render(quote) {
-        $(".main-block-data").empty();
-       // $(".main-block-data-menu").empty();
-        $(".main-block-data").prepend(`
-        <p class="main-block-data-menu">Cлучайность из категории:<span class="cat-sel">Цитаты</span><span class="cat-settings">Настроить фильтр</span><span class="next-random">Следующая цитата</span></p>
-        <div class="main-block-data-primary">
-            <div class="main-block-free">
-                <img class="poet-pic" width="276" height="415" src="${quote.picture}" alt="Здесь будет картинка">
-                <p class="poet-desc"> ${quote.authorInfo === null || "" ? "" : quote.authorInfo} </p>
-            </div>
-            <div class="main-block-data-text">
-                <p class="quotes-desc"><span class="left-aquo">&laquo;${quote.text}&raquo;</span></p>
-                <p class="qoutes-title"> ${quote.author === null || "" ? "" : quote.author}</p>
-             </div>
-        </div>     
+		document.querySelector('.main-block').className = 'main-block main-color-4';
+        $(".main-block").empty();
+        $(".main-block").prepend(`
+		<div class="main-block-menu">
+			<div>
+				Cлучайность из категории:<span class="cat-sel">Цитата</span>
+			</div>
+			<div>
+				<span class="cat-settings">Настроить фильтр</span>
+				<span class="next-random">Следующая цитата</span>
+			</div>
+		</div>
+		<div class="main-block-data">
+			<div class="main-block-data-primary">
+				<div class="main-block-data-pic">
+						<img src="${quote.picture}" width="276" alt="${quote.author}" title="${quote.author}">
+				</div>
+				<div class="main-block-data-text">
+					<p class="main-data-title"><span class="left-aquo">&laquo;${quote.text}&raquo;</span></p>
+					<p class="qoutes-title">${quote.author}</p>
+					<p class="poet-desc">${quote.authorInfo}</p>
+				</div>
+			</div>
+		</div>
+		<div class="other-cat">Кроме цитат наш генератор выдаёт варианты из <a href="#" class="link-in-text">других категорий</a>, например, &laquo;<a href="#" class="link-in-text" onclick="film.getRndFilm()">Фильмы</a>&raquo;
+		</div>
         `);
-        $(".cat-sel").text(`Цитаты`);
     }
 
 }

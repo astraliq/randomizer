@@ -231,7 +231,7 @@ class FilmsFilter {
 	}
 	// обновление события открытия окна
 	updateLinkFilmFilterOpen() {
-        $('.main-block-data-menu').on('click', '#film-filter-open',(e) => { this.openFilmFilter(e) });
+        $('.main-block-menu').on('click', '#film-filter-open',(e) => { this.openFilmFilter(e) });
     }
 	// обновление события закрытия окна на крестик
 	updateLinkFilmFilterClose() {
@@ -329,29 +329,33 @@ class Films {
     }
 	
 	_render(film,filmCategories) {	
-		$('.main-block-data-menu').empty();
-		$('.main-block-data-menu').prepend(`Ваша случайность из категории:<span class="cat-sel">Фильм</span>
-		<a href="#openModal" id="film-filter-open">
-			<span class="cat-settings">Настроить фильтр</span>
-		</a>
-		<span class="next-random">Следующий фильм</span>
+		document.querySelector('.main-block').className = 'main-block main-color-1';
+		$('.main-block').empty();
+		$('.main-block').prepend(`
+			<div class="main-block-menu">
+                <div>Cлучайность из категории:<span class="cat-sel">Фильм</span></div>
+                <div>
+                    <span class="cat-settings" id="film-filter-open">Настроить фильтр</span>
+                    <span class="next-random">Следующий фильм</span>
+                </div>
+            </div>
+            <div class="main-block-data">
+                <div class="main-block-data-primary">
+                    <div class="main-block-data-pic">
+                        <img src="img/films/${film.main_img}" width="276" alt="Фильм &laquo;${film.title_ru}&raquo;" title="${film.title_ru}">
+                    </div>
+                    <div class="main-block-data-text">
+                        <p class="main-data-title">
+							<span class="left-aquo">«${film.title_ru}»</span>
+						</p>
+                        <p class="film-info">${film.year}, ${filmCategories.splice(0, 3).join(', ')}, ${film.country}, ${film.duration} мин.</p>
+                        <p class="film-desc">${film.description_ru}</p>
+                        <p class="film-desc"><b>В главных ролях:</b> ${film.actors}</p>
+                        <p class="film-desc"><b>Режиссёр:</b> ${film.genres}</p>
+                    </div>
+                </div>
+            </div>
 		`);
-        $('.main-block-data-primary').empty();
-        $('.main-block-data-primary').prepend(`
-			<div class="main-block-data-pic"><img src="img/films/${film.main_img}" width="276" height="415" alt="${film.title_ru}" title="${film.title_ru}"></div>
-			<div class="main-block-data-text">
-				<h1 class="film-title">«${film.title_ru}»</h1>
-				<p class="film-info">${film.year}, ${filmCategories.splice(0, 3).join(', ')}, ${film.country}, ${film.duration} мин.</p>
-				<p class="film-desc">${film.description_ru}</p>
-				<p class="film-desc"><b>В главных ролях:</b> ${film.actors}</p>
-				<p class="film-desc"><b>Режиссёр:</b> ${film.genres}</p>
-
-			</div>
-        `);
-		$('.other-cat').empty();
-		$('.other-cat').prepend(`
-			<div class="other-cat">Кроме фильмов наш генератор выдаёт варианты из <a class="link-in-text">других категорий</a>, например, &laquo;<a href="#" class="link-in-text" onclick="quote.init()">Цитата</a>&raquo;</div>
-        `);
     }
 };
 let film = new Films();
@@ -435,98 +439,98 @@ mainFilmLink.addEventListener('click', e => { film.getRndFilm() });
 
 
 //Функция AJAX авторизации
-function login() {
-	//Получаем input'ы логина и пароля
-	const $login_input = $('[name="login"]');
-	const $password_input = $('[name="password"]');
+//function login() {
+//	//Получаем input'ы логина и пароля
+//	const $login_input = $('[name="login"]');
+//	const $password_input = $('[name="password"]');
+//
+//	//Получаем значение login и password
+//	const login = $login_input.val();
+//	const password = $password_input.val();
+//
+//	//Инициализируем поле для сообщений
+//	const message_field = $('.message');
+//
+//	//Вызываем функцию jQuery AJAX с методом POST
+//	//Передаем туда url где будет обрабатваться API
+//	//И data которое будет помещена в $_POST
+//	//success - вызывается при успешном ответе от сервера
+//	$.post({
+//		url: '/index.php',
+//		data: {
+//			apiMethod: 'login',
+//			postData: {
+//				login: login,
+//				password: password
+//			}
+//		},
+//		success: function (data) {
+//			//data приходят те данные, который прислал на сервер
+//
+//
+//			//Вариант с json
+//			// if(data.error) {
+//			// 	$message_field.text(data.error_text);
+//			// } else {
+//			// 	location.reload();
+//			// }
+//
+//			//Вариан без json
+//			if (data.result === 'OK') {
+//				if (data.referrer === '/index.php?path=user/createorder') {
+//					return location.href = '/index.php?path=user/createorder';
+//				}
+//				document.location.reload(true);
+//			} else {
+//				message_field.text(data['error_text']);
+//			}
+//		}
+//	});
+//}
 
-	//Получаем значение login и password
-	const login = $login_input.val();
-	const password = $password_input.val();
 
-	//Инициализируем поле для сообщений
-	const message_field = $('.message');
-
-	//Вызываем функцию jQuery AJAX с методом POST
-	//Передаем туда url где будет обрабатваться API
-	//И data которое будет помещена в $_POST
-	//success - вызывается при успешном ответе от сервера
-	$.post({
-		url: '/index.php',
-		data: {
-			apiMethod: 'login',
-			postData: {
-				login: login,
-				password: password
-			}
-		},
-		success: function (data) {
-			//data приходят те данные, который прислал на сервер
-
-
-			//Вариант с json
-			// if(data.error) {
-			// 	$message_field.text(data.error_text);
-			// } else {
-			// 	location.reload();
-			// }
-
-			//Вариан без json
-			if (data.result === 'OK') {
-				if (data.referrer === '/index.php?path=user/createorder') {
-					return location.href = '/index.php?path=user/createorder';
-				}
-				document.location.reload(true);
-			} else {
-				message_field.text(data['error_text']);
-			}
-		}
-	});
-}
-
-
-function registration() {
-	//Получаем input'ы логина и пароля
-	const $login_input = $('[name="login"]');
-	const $password_input = $('[name="password"]');
-	const $password_repeat_input = $('[name="password_repeat"]');
-	//Получаем значение login и password
-	const login = $login_input.val();
-	const password = $password_input.val();
-	const password_repeat = $password_repeat_input.val();
-	//Инициализируем поле для сообщений
-	const message_field = $('.message');
-
-	//Вызываем функцию jQuery AJAX с методом POST
-	//Передаем туда url где будет обрабатваться API
-	//И data которое будет помещена в $_POST
-	//success - вызывается при успешном ответе от сервера
-	$.post({
-		url: '/index.php',
-		data: {
-			apiMethod: 'reg',
-			postData: {
-				login: login,
-				password: password,
-				password_repeat: password_repeat
-			}
-		},
-		success: function (data) {
-			//data приходят те данные, который прислал на сервер
-			//Вариант с json
-			// if(data.error) {
-			// 	$message_field.text(data.error_text);
-			// } else {
-			// 	location.reload();
-			// }
-
-			//Вариан без json
-			if (data === 'OK') {
-				message_field.text('');
-				document.location.reload(true);
-			} else {
-				message_field.text(data['error_text']);
-			}
-		}
-	});
-}
+//function registration() {
+//	//Получаем input'ы логина и пароля
+//	const $login_input = $('[name="login"]');
+//	const $password_input = $('[name="password"]');
+//	const $password_repeat_input = $('[name="password_repeat"]');
+//	//Получаем значение login и password
+//	const login = $login_input.val();
+//	const password = $password_input.val();
+//	const password_repeat = $password_repeat_input.val();
+//	//Инициализируем поле для сообщений
+//	const message_field = $('.message');
+//
+//	//Вызываем функцию jQuery AJAX с методом POST
+//	//Передаем туда url где будет обрабатваться API
+//	//И data которое будет помещена в $_POST
+//	//success - вызывается при успешном ответе от сервера
+//	$.post({
+//		url: '/index.php',
+//		data: {
+//			apiMethod: 'reg',
+//			postData: {
+//				login: login,
+//				password: password,
+//				password_repeat: password_repeat
+//			}
+//		},
+//		success: function (data) {
+//			//data приходят те данные, который прислал на сервер
+//			//Вариант с json
+//			// if(data.error) {
+//			// 	$message_field.text(data.error_text);
+//			// } else {
+//			// 	location.reload();
+//			// }
+//
+//			//Вариан без json
+//			if (data === 'OK') {
+//				message_field.text('');
+//				document.location.reload(true);
+//			} else {
+//				message_field.text(data['error_text']);
+//			}
+//		}
+//	});
+//}

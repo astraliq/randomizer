@@ -151,21 +151,27 @@ body {
 	cursor: pointer;
 }
 
+.main-block-free {
+	width: 300px;
+	box-sizing: border-box;
+	text-align: center;
+}
+
 .main-block-poem {
 	background-color: #39c571;
 	display: flex;
 }
 
 .poet-desc {
-	margin: 0 0 0 0;
-	padding: 0 0 0 0;
+	margin: 0 0 30px 0;
+	padding: 0 20px 0 20px;
 	font-family: "roboto";
 	color: #000;
-	font-size: 17px;
+	font-size: 14px;
 	text-align: left;
 }
 
-.main-data-title {
+.quotes-desc {
 	margin: 0 0 0 0;
 	padding: 0 0 10px 0;
 	color: #000;
@@ -176,6 +182,10 @@ body {
 
 .left-aquo {
 	margin: 0 0 0 -15px;
+	padding: 0 0 0 0;
+	font-family: "roboto";
+	color: #000;
+	font-size: 35px;
 }
 
 .qoutes-title {
@@ -201,6 +211,13 @@ body {
 .main-block-quotes {
 	background-color: #5c9bdb;
 	display: flex;
+}
+
+.main-block {
+	margin: 0 auto;
+	padding: 0 10%;
+	display: flex;
+	flex-direction: column;
 }
 
 .main-color-1 {
@@ -231,12 +248,11 @@ body {
 	background-color: #5157ad;
 }
 
-.main-block {
+.main-block-data {
 	margin: 0 auto;
-	padding: 0 10%;
-	display: flex;
-	flex-direction: column;
+	padding: 0 0 0 0;
 }
+
 
 .main-block-menu {
 	padding: 10px 0 30px 0;
@@ -249,9 +265,12 @@ body {
 	flex-wrap: wrap;
 }
 
-.main-block-data {
-	margin: 0 auto;
-	padding: 0 0 0 0;
+.main-block-data-menu {
+	color: #000;
+	font-family: "roboto";
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 22px;
 }
 
 .main-block-data-primary {
@@ -280,6 +299,7 @@ body {
 	font-weight: 400;
 	line-height: 22px;
 	text-decoration: none;
+
 }
 
 .cat-settings {
@@ -292,6 +312,7 @@ body {
 	line-height: 22px;
 	text-decoration: underline;
 	opacity: 0.5;
+
 }
 
 .cat-settings:hover {
@@ -316,6 +337,16 @@ body {
 	cursor: pointer;
 	text-decoration: none;
 	opacity: 1;
+}
+
+.film-title {
+	margin: 0 0 10px -20px;
+	padding: 5px 0 0 0;
+	color: #000;
+	font-family: "roboto";
+	font-size: 40px;
+	font-weight: 400;
+	line-height: 22px;
 }
 
 .poem-title {
@@ -349,7 +380,8 @@ body {
 }
 
 .other-cat {
-	padding: 0 0 30px 0;
+	margin: 0 0 30px 0;
+	padding: 0 0 0 0;
 	color: #000;
 	font-family: "roboto";
 	font-size: 20px;
@@ -635,8 +667,7 @@ body {
 }
 
 .button-send,
-.button-send-2,
-.button-send-big {
+.button-send-2 {
 	margin: 10px 0 0 0;
 	padding: 10px 20px;
 	background-color: #ebbd2f;
@@ -651,20 +682,9 @@ body {
 }
 
 .button-send:hover,
-.button-send-2:hover,
-.button-send-big:hover {
+.button-send-2:hover {
 	cursor: pointer;
 	border-radius: 20px;
-}
-
-.button-send-2 {
-	margin: 5px 0 0 0;
-	background-color: #a1a1a1;
-	color: #000;
-}
-
-.button-send-big {
-	width: 200px;
 }
 
 .textarea {
@@ -681,6 +701,17 @@ body {
 	font-size: 14px;
 	line-height: 22px;
 	margin: 5px 0 5px 0;
+}
+
+.button-send-2 {
+	margin: 5px 0 0 0;
+	background-color: #a1a1a1;
+	color: #000;
+}
+
+.button-send-2:hover {
+	cursor: pointer;
+	border-radius: 20px;
 }
 
 .modalDialog {
@@ -741,6 +772,7 @@ body {
 	width: 650px;
 	box-sizing: border-box;
 	margin: 0 0 20px 0;
+	/*    border: 1px solid red;*/
 }
 
 ul {

@@ -1,17 +1,25 @@
 <section class="see-now">
-                <div class="see-now-title">Просматривают сейчас <span class="see-now-count">(4 случайности из 1 348)</span></div>
+                <div class="see-now-title">
+                    Просматривают сейчас <span class="see-now-count">(4 случайности из 1 348)</span>
+                </div>
                 <div class="see-now-main">
                     <div class="see-now-main-data">
-                        <div class="data-title"><a class="data-title-link">Цитаты</a></div>
+                        <div class="data-title">
+                            <a href="#" class="data-title-link">Цитаты</a>
+                        </div>
                         <div class="data-desc-1">
                             <p class="data-text">До той секунды, пока не прозвучал первый пушечный залп, всякая война называется дипломатией.</p>
                             <p class="data-person">Пьер Певель</p>
                         </div>
                     </div>
                     <div class="see-now-main-data">
-                        <div class="data-title"><a href="#" class="data-title-link">Подарки</a></div>
+                        <div class="data-title">
+                            <a href="#" class="data-title-link">Подарки</a>
+                        </div>
                         <div class="data-desc-2">
-                            <div class="see-now-img"><img src="img/other/img_krugka.png" width="100" height="100"></div>
+                            <div class="see-now-img">
+                                <img src="img/other/img_krugka.png" width="100" height="100">
+                            </div>
                             <div class="see-now-text">
                                 <p class="present-title">Кружка авторская &laquo;Год новый,<br>а ты старый&raquo;</p>
                                 <p class="present-price">1 999 ₽</p>
@@ -21,7 +29,7 @@
                     </div>
                     <div class="see-now-main-data">
                         <div class="data-title">
-                            <a class="data-title-link">Произведение искусства</a>
+                            <a href="#" class="data-title-link">Произведение искусства</a>
                         </div>
                         <div class="data-desc-2">
                             <div class="see-now-img">

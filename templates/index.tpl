@@ -8,18 +8,13 @@
 <body>
     <div class="container">
     	{% include 'header.tpl' %}
-        
         <main>
-        <section class="main-block">
-<!--            <div class="main-block-free"></div>-->
-            <div class="main-block-data">
-                {%if content.categoryTitle == 'Фильм' %}           
-                    {% include 'film_block.tpl' %}              
-                {% elseif content.categoryTitle == 'Цитата' %}                      
-                    {% include 'quote_block.tpl' %}                        
-                {% endif %} 
-            </div>
-            </section>
+            {%if content.categoryTitle == 'Фильм' %}           
+                {% include 'film_block.tpl' %}              
+            {% elseif content.categoryTitle == 'Цитата' %}                      
+                {% include 'quote_block.tpl' %}                        
+            {% endif %}
+                 
             {% include 'see_now.tpl' %}
         </main>
         {% include 'footer.tpl' %}
