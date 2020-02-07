@@ -50,6 +50,7 @@ class Random extends Model {
 		$randomCategory = $list[array_rand($list, 1)];
 		return $randomCategory;
 	}
+
 }
 
 ?>

@@ -4,9 +4,11 @@ class RndCongratulate extends Model {
 	public $congratulateTable = 'congratulate';
 	public $congratulateWho = 'congratulate_who';
 	public $congratulateTheme = 'congratulate_theme';
+	public $history;
 
 	public function __construct() {
 		parent::__construct();
+		$this->history = new History();
     }
 
 	public function getRandomCongratulate($filters) {
@@ -20,7 +22,8 @@ class RndCongratulate extends Model {
 
 		$congratulates = $this->dataBase->getRows($sql, null);
 		$randomCongr = $congratulates[array_rand($congratulates, 1)];
-
+		$catId = $this->history->getCategoryId('Поздравление');
+		$addToGenHistory = $this->history->addRandomToGeneralHistory($catId, $randomFilm['randomCongr']);
 		return $randomCongr;
 	}
 

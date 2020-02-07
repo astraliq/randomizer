@@ -24,6 +24,7 @@ class ApiMethod {
 	public $rndQuote;
 	public $userModel;
 	public $rndCongratulate;
+	public $history;
 
     public function __construct($method) {
         $this->method = $method;
@@ -32,6 +33,7 @@ class ApiMethod {
         $this->rndQuote = new RndQuote();
         $this->userModel = new UserModel();
         $this->rndCongratulate = new RndCongratulate();
+        $this->history = new History();
     }
 
 	//Функция вывода ошибки
@@ -137,12 +139,14 @@ class ApiMethod {
 		$categories = $_POST['postData']['categories'] ?? [0];
 		$film = $this->rndFilm->getRandomFilm($years, $categories, $countries);
 		$categories = $this->rndFilm->getFilmCategories($film['id']);
+
 		// print_r($_POST['postData']);
 		// exit();
 		if ($film) {
 			$data['rnd'] = $film;
 			$data['categories'] = $categories;
 			$data['result'] = "OK";
+			
 			$this->success($data);
 		} else {
 			$this->error('Ошибка чтения из БД');

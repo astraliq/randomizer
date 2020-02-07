@@ -4,8 +4,11 @@ class RndQuote extends Model {
 	public $quoteTable = 'quotes';
 	public $quoteCategories = 'quotes_categories';
 	public $quoteAuthors = 'quotes_authors';
+	public $history;
+
 	public function __construct() {
 		parent::__construct();
+		$this->history = new History();
     }
 
 	public function getRandomQuote($filters) {
@@ -19,7 +22,8 @@ class RndQuote extends Model {
 
 		$quotes = $this->dataBase->getRows($sql, null);
 		$randomQuote = $quotes[array_rand($quotes, 1)];
-
+		$catId = $this->history->getCategoryId('Цитата');
+		$addToGenHistory = $this->history->addRandomToGeneralHistory($catId, $randomQuote['id']);
 		return $randomQuote;
 	}
 

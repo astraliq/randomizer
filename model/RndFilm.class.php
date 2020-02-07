@@ -7,9 +7,11 @@ class RndFilm extends Model {
 	public $countries = 'f_countries';
 	public $filmsCategories = 'films_categories';
 	public $filmsCountries = 'films_countries';
+	public $history;
 
 	public function __construct() {
 		parent::__construct();
+		$this->history = new History();
     }
 
 	public function getRandomFilm($years, $categories, $countries) {
@@ -65,7 +67,8 @@ class RndFilm extends Model {
 		// exit();
 
 		$randomFilm = $films[array_rand($films, 1)];
-
+		$catId = $this->history->getCategoryId('Фильм');
+		$addToGenHistory = $this->history->addRandomToGeneralHistory($catId, $randomFilm['id']);
 		return $randomFilm;
 	}
 
