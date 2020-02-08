@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 class JsonFileParse extends Model {
-	public $table_main = 'congratulate';
+	public $table_main = 'foreignword';
 	public $table_first = '';
 	public $table_second = '';
 
@@ -10,7 +10,7 @@ class JsonFileParse extends Model {
     }
 
 	public function getArrayFromFile() {
-		$string = file_get_contents($config['sitename'] . "congratulate.json");
+		$string = file_get_contents($config['sitename'] . "foreignword.json");
 		if ($string === false) {
 		    echo 'Ошибка чтения файла'; 
 		    exit;
@@ -29,10 +29,10 @@ class JsonFileParse extends Model {
 	}
 
 	public function addArrToSql($arr) {
-		$columns = ['who_id','theme_id','congratulate'];
+		$columns = ['word','transcription','translation','example','language_id'];
 		$object = array();
 		foreach ($arr as $element) {
-			$object[] = [$element['who'],$element['theme'],$element['congratulate']];
+			$object[] = [$element['word'],$element['transcription'],$element['translation'],$element['example'],$element['language']];
 			
 		};
 		echo '<pre>'; 

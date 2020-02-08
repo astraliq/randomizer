@@ -79,6 +79,27 @@
 				return self::getRows($query,null);
 			};
 		}
+
+		public function uniSelectLast($table, $whereObj, $order) {
+			if ($whereObj) {
+				$sets = array();
+				foreach ($whereObj as $key => $value) {
+					$sets[] = "`$key` = :$key";
+					if ($value === NULL) {
+						$whereObj[$key] = 'NULL';
+					}
+				};
+				$sets_s = implode(' AND ',$sets);
+
+				$query = "SELECT * FROM `$table` WHERE $sets_s ORDER BY `$order` DESC LIMIT 1";
+
+				return self::getRow($query, $whereObj);
+			} else {
+				$query = "SELECT * FROM `$table` ORDER BY `$order` DESC LIMIT 1";
+
+				return self::getRows($query,null);
+			};
+		}
 		
 		public function uniSelectOrderLimitSort($table, $whereObj, $order, $limit = [0, 1], $sort = null) {
 			$sort = is_null($sort) ? 'ASC' : $sort;

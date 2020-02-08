@@ -27,6 +27,15 @@ class RndQuote extends Model {
 		return $randomQuote;
 	}
 
+	public function getQuoteById($id) {
+		$sql = "SELECT q.`id`, `text`, `author_title` as author, `category_title` as categories, author.`authorInfo`, q.`img` as picture FROM `$this->quoteTable` as q LEFT JOIN `$this->quoteCategories` as cat ON q.`category_id` = cat.id LEFT JOIN `$this->quoteAuthors` as author ON q.`author_id` = author.id WHERE q.`id` = $id";
+
+		$quote = $this->dataBase->getRow($sql, null);
+		
+		return $quote;
+	}
+
+
 }
 ?>
 

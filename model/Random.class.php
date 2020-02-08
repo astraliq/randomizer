@@ -2,8 +2,18 @@
 declare(strict_types=1);
 class Random extends Model {
 	public $categoriesTable = 'random_categories';
+	public $browseNowTable = 'browse_now';
 	public $film;
 	public $quote;
+	public $browseNowTpl = [
+		'Фильм' => 'see_now_film.tpl',
+		'Цитата' => 'see_now_quote.tpl',
+		'Подарок' => 'see_now_gift.tpl',
+		'Произведение искусства' => 'see_now_artwork.tpl',
+		'Слово на иностранном языке' => 'see_now_foreign_word.tpl',
+		'Поздравление' => 'see_now_congratulate.tpl',
+
+	];
 
 	public function __construct() {
 		parent::__construct();
@@ -49,6 +59,46 @@ class Random extends Model {
 		$list = ['Фильм', 'Цитата'];
 		$randomCategory = $list[array_rand($list, 1)];
 		return $randomCategory;
+	}
+
+	public function getRndBrowseNowCat($usedCategories) {
+		$check;
+		do {
+			$check = 0;
+			$randCat = array_rand($this->browseNowTpl, 1);
+			foreach ($usedCategories as $cat) {
+				if ($randCat === $cat) {
+					$check = 1;
+				};
+			}
+		} while ( $check === 1 );
+		return $randCat;
+	}
+
+	public function getBrowseNowData($usedCategories) {
+		$data;
+		foreach ($usedCategories as $cat) {
+			switch ($cat) {
+				case 'Фильм':
+					$object = [
+						'category_id' => 1
+					];
+					$browse = $this->dataBase->uniSelectLast($this->browseNowTable, $object, 'id');
+					$data['filmData'] = $this->film->getFilmById($browse['random_id']);
+					break;
+				case 'Цитата':
+					$object = [
+						'category_id' => 2
+					];
+					$browse = $this->dataBase->uniSelectLast($this->browseNowTable, $object, 'id');
+					$data['quoteData'] = $this->quote->getQuoteById($browse['random_id']);
+					break;
+				default:
+					// code...
+					break;
+			}
+		}
+		return $data;
 	}
 
 }

@@ -32,12 +32,16 @@
     <div class="main-block-data">
         <div class="main-block-data-primary">
             <div class="main-block-data-pic">
-                    <img src="{{content.randomData.picture}}" width="276" >
+                {% set img = 'img/quoters/stub.jpg' %} 
+                {%if content.randomData.picture is not null %}           
+                    {% set img = content.randomData.picture %}                                   
+                {% endif %}
+                    <img src="{{img}}" width="276" >
             </div>
             <div class="main-block-data-text">
                 <p class="main-data-title"><span class="left-aquo">&laquo;{{content.randomData.text}}&raquo;</span></p>
                 <p class="qoutes-title">
-                    {%if content.randomData.author == '' %}           
+                    {%if content.randomData.author is not null %}           
                         {{content.randomData.author}}     
                     {% endif %} 
                 </p>

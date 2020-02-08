@@ -38,7 +38,7 @@
                 <div class="main-block-data-primary">
                     <div class="main-block-data-pic">
                     	{% set img = 'stub.jpg' %} 
-						{%if content.randomData.data.main_img != '' %}           
+						{%if content.randomData.data.main_img is not null %}           
 					        {% set img = content.randomData.data.main_img %}                                   
 					    {% endif %}
                         <img src="img/films/{{img}}" width="276" alt="Фильм &laquo;{{ content.randomData.data.title_ru }}&raquo;" title="{{ content.randomData.data.title_ru }}">
