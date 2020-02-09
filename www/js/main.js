@@ -11,6 +11,171 @@ let mainFilmLink = document.querySelector('.film_main_lnk');
 let nextRandom = document.querySelector('.next-random');
 let categoryName = $('.cat-sel');
 
+class BrowseNow {
+    constructor() {
+		this.html = '';
+		this.browseNowData = [];
+    }
+	
+	_getCategoryHTML(catName) {
+		let html;
+		switch (catName) {
+			case 'Фильм':
+				this.browseNowData.filmData.main_img = this.browseNowData.filmData.main_img === null ? 'stub.jpg' : this.browseNowData.filmData.main_img;
+				html = `
+				<div class="see-now-main-data">
+					<div class="data-title">
+						<a class="data-title-link" onclick="film.getRndFilm()">Фильм</a>
+					</div>
+					<div class="data-desc-2">
+						<div class="see-now-img">
+							<img src="img/films/${this.browseNowData.filmData.main_img}" width="100" alt="Фильм &laquo;${ this.browseNowData.filmData.title_ru }&raquo;" title="${ this.browseNowData.filmData.title_ru }">
+						</div>
+						<div class="see-now-text">
+							<p class="art-title">${ this.browseNowData.filmData.title_ru }</p>
+							<p class="art-title">${ this.browseNowData.filmData.year }, ${ this.browseNowData.filmData.country }, ${ this.browseNowData.filmData.duration } мин.</p>
+							<p class="art-text">${ this.browseNowData.filmData.description_ru }</p>
+						</div>
+					</div>
+				</div>`;
+			break;
+			case 'Цитата':
+				this.browseNowData.quoteData.picture = this.browseNowData.quoteData.picture === null ? 'img/quoters/stub.jpg' : this.browseNowData.quoteData.picture;
+				this.browseNowData.quoteData.author = (this.browseNowData.quoteData.author === null) ? "" : this.browseNowData.quoteData.author;
+				this.browseNowData.quoteData.authorInfo = (this.browseNowData.quoteData.authorInfo === null) ? "" : this.browseNowData.quoteData.authorInfo;
+				html = `
+				<div class="see-now-main-data">
+					<div class="data-title">
+						<a class="data-title-link" onclick="quote.init()">Цитата</a>
+					</div>
+					<div class="data-desc-2">
+						<div class="see-now-img">
+							<img src="${this.browseNowData.quoteData.picture}" width="100" alt="Автор" title="Автор">
+						</div>
+						<div class="see-now-text">
+							<p class="art-title">
+								${this.browseNowData.quoteData.author}    
+							</p>
+							<p class="art-text">${this.browseNowData.quoteData.text}</p>
+						</div>
+					</div>
+				</div>`;
+			break;
+			case 'Произведение искусства':
+				html = `
+				<div class="see-now-main-data">
+					<div class="data-title">
+						<a href="#" class="data-title-link">Произведение искусства</a>
+					</div>
+					<div class="data-desc-2">
+						<div class="see-now-img">
+							<img src="img/arts/img_art_001.png" width="100">
+						</div>
+						<div class="see-now-text">
+							<p class="art-title">Крик, Эдвард Мунк, 1893г.</p>
+							<p class="art-text">Центральная фигура картины изображает фигуру человека, который обхватил руками лицо и широко раскрыл рот.
+							Эта фигура очень примитивизирована, поэтому некоторые видят в ней некое бесполое существо, скелет, мумию или даже эмбриона.
+							С помощью волнообразных линий художник изобразил звук крика, но непонятно, кричит ли это человек или же он в страхе и отчаянии от услышанного «крика природы», который разносится повсюду.</p>
+						</div>
+					</div>
+				</div>`;
+			break;
+			case 'Слово на иностранном языке':
+				html = `
+				<div class="see-now-main-data">
+					<div class="data-title">
+						<a href="#" class="data-title-link">Слово на иностранном языке</a>
+					</div>
+					<div class="data-desc-1">
+						<p class="art-text">guerra [ˈɡwɛrra] - война</p>
+						<p class="data-person">Например: Проиграть войну – perdere la guerra.</p>
+					</div>
+				</div>`;
+			break;
+			case 'Поздравление':
+				html = `
+				<div class="see-now-main-data">
+					<div class="data-title">
+						<a href="#" class="data-title-link">Поздравление</a>
+					</div>
+					<div class="data-desc-1">
+						<p class="data-person">Для него.</p>
+						<p class="art-text">Под президентское посланье
+				 И яркий грохот за окном
+				 Позволь озвучить пожеланье
+				 Богатства, счастья, солнца в дом!</p>
+						<p class="data-person">Тема: Новый Год</p>
+					</div>
+				</div>`;
+			break;
+			case 'Подарок':
+				html = `
+				<div class="see-now-main-data">
+					<div class="data-title">
+						<a href="#" class="data-title-link">Подарки</a>
+					</div>
+					<div class="data-desc-2">
+						<div class="see-now-img">
+							<img src="img/other/img_krugka.png" width="100" height="100">
+						</div>
+						<div class="see-now-text">
+							<p class="present-title">Кружка авторская &laquo;Год новый,<br>а ты старый&raquo;</p>
+							<p class="present-price">1 999 ₽</p>
+							<p><a class="present-link">Подробнее</a></p>
+						</div>
+					</div>
+				</div>`;
+			break;
+			default:
+				html = ``;
+		}
+		return html;
+	}
+	
+	_getJson(url, data) {
+		return $.post({
+            url: url,
+            data: data,
+            success: function (data) {
+                //data приходят те данные, который прислал на сервер
+                data = JSON.parse(data);
+                if (data.result !== "OK") {
+                    console.log('ERROR_GET_DATA');
+                }
+            }
+        })
+	}
+	
+	getBrowseNowData(currentCategory) {
+		let sendData = {
+			apiMethod: 'getBrowseNowData',
+			postData: {
+				currentCat: currentCategory,
+			}
+		};
+		this._getJson(`/index.php`, sendData)
+			.then(data => {
+				data = JSON.parse(data);
+				if (data.result === "OK") {
+					this.browseNowData = data.browseNowData;
+					this.html = this._getCategoryHTML(data.browseFirst);
+					this.html += this._getCategoryHTML(data.browseSecond);
+					this.html += this._getCategoryHTML(data.browseThird);
+					this._render(this.html);
+				} else {
+					console.log('ERROR_GET_BROWSEDATA');
+				}
+			});
+    }
+	
+	_render(browseNowHTML) {	
+		$('.see-now-main').empty();
+		$('.see-now-main').prepend(browseNowHTML);
+    }
+}
+
+
+
 class FilmsFilter {
     constructor() {
 		this.maxCountFilters = 28; // максимальное количество фильтров + 1
@@ -252,6 +417,7 @@ class Films {
 		this.filter = new FilmsFilter();
 		this.filter.updateLinkFilmFilterOpen();
 		this.filter.updateLinkFilmFilterClose();
+		this.browseNow = new BrowseNow();
     }
 
 //	_getJson(url, data) {
@@ -273,7 +439,7 @@ class Films {
                 //data приходят те данные, который прислал на сервер
                 data = JSON.parse(data);
                 if (data.result !== "OK") {
-                    console.log('ERROR_GET_QUOTE');
+                    console.log('ERROR_GET_DATA');
                 }
             }
         })
@@ -322,6 +488,7 @@ class Films {
 					this._updateLinkFilm();
 					this._putAlreadyViewedIds(film);
 					this.filter.updateLinkFilmFilterOpen();
+					this.browseNow.getBrowseNowData('Фильм');
 				} else {
 					console.log('ERROR_GET_FILM');
 				}

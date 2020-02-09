@@ -17,6 +17,7 @@ class Quote {
     constructor() {
         this.filters = [];
         this.alreadyViewedIds = [];
+		this.browseNow = new BrowseNow();
     }
 
 
@@ -68,6 +69,7 @@ class Quote {
                 this._render(fakeAPI);
                 this._getNextQuote();
                 this._putAlreadyViewedIds(fakeAPI);
+				this.browseNow.getBrowseNowData('Цитата');
             });
     }
 

@@ -25,6 +25,7 @@ class ApiMethod {
 	public $userModel;
 	public $rndCongratulate;
 	public $history;
+	public $randomType;
 
     public function __construct($method) {
         $this->method = $method;
@@ -34,6 +35,7 @@ class ApiMethod {
         $this->userModel = new UserModel();
         $this->rndCongratulate = new RndCongratulate();
         $this->history = new History();
+        $this->randomType = new Random();
     }
 
 	//Функция вывода ошибки
@@ -178,6 +180,27 @@ class ApiMethod {
 		// exit();
 		if ($congr) {
 			$data['rnd'] = $congr;
+			$data['result'] = "OK";
+			$this->success($data);
+		} else {
+			$this->error('Ошибка чтения из БД');
+		}
+	}
+
+	public function getBrowseNowData() {
+		
+		$catTitle = $_POST['postData']['currentCat'] ?? '';
+
+		$browseFirst = $this->randomType->getRndBrowseNowCat([$catTitle]);
+        $browseSecond = $this->randomType->getRndBrowseNowCat([$catTitle, $browseFirst]);
+        $browseThird = $this->randomType->getRndBrowseNowCat([$catTitle, $browseFirst, $browseSecond]);
+        $browseNowData = $this->randomType->getBrowseNowData([$browseFirst, $browseSecond, $browseThird]);
+
+		if ($browseNowData) {
+			$data['browseFirst'] = $browseFirst;
+			$data['browseSecond'] = $browseSecond;
+			$data['browseThird'] = $browseThird;
+			$data['browseNowData'] = $browseNowData;
 			$data['result'] = "OK";
 			$this->success($data);
 		} else {
