@@ -537,8 +537,31 @@ mainFilmLink.addEventListener('click', e => { film.getRndFilm() });
 //	nextRandom.addEventListener('click', e => { film.getRndFilm() });
 //};
 
+function updatePage(id) {
+	location.href = 'http://randomizer/index.php?path=kino&id=' + id;
+}
+console.log(document.location.search.slice(0,10));
+if (document.location.search.slice(0,10) === '?path=kino') {
+	let params = {};
 
+	if(window.location.href.match(/.*\?.*/)) {
+		for (let i = 0; i < tmp_params.length; i++) {
+		let _tmp = window.location.href.replace(/.*\?/, '')
+			.split('&')[i]
+			.split('=');
 
+		params[_tmp[0]] = _tmp[1];
+		}
+	}
+	console.log(params);
+	
+	
+	
+	
+//	setTimeout(updatePage(nextID), 10000);
+	// 'https://www.kinopoisk.ru/film/299/'
+
+}
 
 
 
