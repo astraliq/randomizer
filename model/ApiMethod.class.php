@@ -195,8 +195,7 @@ class ApiMethod {
         $browseSecond = $this->randomType->getRndBrowseNowCat([$catTitle, $browseFirst]);
         $browseThird = $this->randomType->getRndBrowseNowCat([$catTitle, $browseFirst, $browseSecond]);
         $browseNowData = $this->randomType->getBrowseNowData([$browseFirst, $browseSecond, $browseThird]);
-
-		if ($browseNowData) {
+		if ($browseThird) {
 			$data['browseFirst'] = $browseFirst;
 			$data['browseSecond'] = $browseSecond;
 			$data['browseThird'] = $browseThird;
