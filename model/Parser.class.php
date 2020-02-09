@@ -149,13 +149,13 @@ class Parser
                 if ($arHeaders) {
                     curl_setopt($rCh, CURLOPT_HTTPHEADER, $arHeaders);
                 }
-
+                
                 if ($sPost) {
                     curl_setopt($rCh, CURLOPT_POSTFIELDS, $sPost);
                 }
 
                 curl_setopt($rCh, CURLINFO_HEADER_OUT, true);
-
+                curl_setopt($rCh,CURLOPT_ENCODING, '');
                 $sContent = curl_exec($rCh);
                 $arInfo = curl_getinfo($rCh);
 

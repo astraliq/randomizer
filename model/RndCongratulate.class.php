@@ -11,13 +11,20 @@ class RndCongratulate extends Model {
 		$this->history = new History();
     }
 
-	public function getRandomCongratulate($filters) {
+	public function getRandomCongratulate($who, $theme) {
 
-		if (empty($filters)) {
+		if (empty($who) and empty($theme)) {
 			$sql = "SELECT congr.`id`, who.`who_title` as who, theme.`theme_title_ru` as theme, congr.`congratulate` FROM `$this->congratulateTable` as congr LEFT JOIN `$this->congratulateWho` as who ON congr.`who_id` = who.id LEFT JOIN `$this->congratulateTheme` as theme ON congr.`theme_id` = theme.id LIMIT 10000";
 		} else {
-			$idWho = implode(", ", $filters);
-			$sql = "SELECT congr.`id`, who.`who_title` as who, theme.`theme_title_ru` as theme, congr.`congratulate` FROM `$this->congratulateTable` as congr LEFT JOIN `$this->congratulateWho` as who ON congr.`who_id` = who.id LEFT JOIN `$this->congratulateTheme` as theme ON congr.`theme_id` = theme.id WHERE who.id IN ($idWho)";
+			$whoIds = implode(", ", $who);
+			$whoSql = (!empty($who)) ? "who.id IN ($whoIds)" : '';
+			
+			$and = (!empty($who) and !empty($theme)) ? ' AND ' : '';
+
+			$themeIds = implode(", ", $theme);
+			$themeSql = (!empty($theme)) ? "theme.id IN ($themeIds)" : '';
+
+			$sql = "SELECT congr.`id`, who.`who_title` as who, theme.`theme_title_ru` as theme, congr.`congratulate` FROM `$this->congratulateTable` as congr LEFT JOIN `$this->congratulateWho` as who ON congr.`who_id` = who.id LEFT JOIN `$this->congratulateTheme` as theme ON congr.`theme_id` = theme.id WHERE " . $whoSql . $and . $themeSql;
 		}
 
 		$congratulates = $this->dataBase->getRows($sql, null);

@@ -173,9 +173,10 @@ class ApiMethod {
 
 	public function getRndCongratulate() {
 		
-		$filters = $_POST['postData']['filters'] ?? '';
+		$who = $_POST['postData']['who'] ?? '';
+		$theme = $_POST['postData']['theme'] ?? '';
 		$alreadyViewedIds = $_POST['postData']['alreadyViewedIds'] ?? '';
-		$congr = $this->rndCongratulate->getRandomCongratulate($filters);
+		$congr = $this->rndCongratulate->getRandomCongratulate($who, $theme);
 		// print_r($_POST['postData']);
 		// exit();
 		if ($congr) {
