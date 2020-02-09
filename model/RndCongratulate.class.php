@@ -17,14 +17,20 @@ class RndCongratulate extends Model {
 			$sql = "SELECT congr.`id`, who.`who_title` as who, theme.`theme_title_ru` as theme, theme.`theme_title_en` as theme_en, congr.`congratulate` FROM `$this->congratulateTable` as congr LEFT JOIN `$this->congratulateWho` as who ON congr.`who_id` = who.id LEFT JOIN `$this->congratulateTheme` as theme ON congr.`theme_id` = theme.id LIMIT 10000";
 		} else {
 			if (!empty($who)) {
-				$whoIds = implode(", ", $who);
-				$whoSql = "who.who_title IN ($whoIds)";
-			}
+				// $whoIds = implode("', '", $who);
+				// $whoSql = "who.who_title IN ('$whoIds')";
+				$whoSql = "who.who_title = '$who'";
+			} else {
+				$whoSql = '';
+			};
 			$and = (!empty($who) and !empty($theme)) ? ' AND ' : '';
 			if (!empty($theme)) {
-				$themeIds = implode(", ", $theme);
-				$themeSql = "theme.theme_title_ru IN ($themeIds)";
-			}
+				// $themeIds = implode("', '", $theme);
+				// $themeSql = "theme.theme_title_ru IN ('$themeIds')";
+				$themeSql = "theme.theme_title_ru = '$theme'";
+			} else {
+				$themeSql = '';
+			};
 
 			$sql = "SELECT congr.`id`, who.`who_title` as who, theme.`theme_title_ru` as theme, theme.`theme_title_en` as theme_en, congr.`congratulate` FROM `$this->congratulateTable` as congr LEFT JOIN `$this->congratulateWho` as who ON congr.`who_id` = who.id LEFT JOIN `$this->congratulateTheme` as theme ON congr.`theme_id` = theme.id WHERE " . $whoSql . $and . $themeSql;
 		}

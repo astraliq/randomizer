@@ -3,6 +3,14 @@ function updatePage(id) {
 	location.href = 'http://randomizer/index.php?path=kino&id=' + id;
 }
 
+function delay(f, ms) {
+
+  return function() {
+    setTimeout(() => f.apply(this, arguments), ms);
+  };
+
+}
+
 if (document.location.search.slice(0,10) === '?path=kino') {
 	let params = window.location.search
     .replace('?','')
@@ -22,7 +30,7 @@ if (document.location.search.slice(0,10) === '?path=kino') {
 	nextID++;
 	console.log(nextID);
 	
-	setInterval(updatePage(nextID), 10000);
+	delay(updatePage(nextID), 10000);
 	// 'https://www.kinopoisk.ru/film/299/'
 
 }
