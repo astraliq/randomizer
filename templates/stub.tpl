@@ -1,5 +1,3 @@
-{{ content.html }}
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>

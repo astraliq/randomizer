@@ -207,6 +207,19 @@ class ApiMethod {
 			$this->error('Ошибка чтения из БД');
 		}
 	}
+
+	public function addParserData() {
+		
+		$film = $_POST['postData']['film'] ?? '';
+
+        $add = $this->rndFilm->addFilmToDB($film);
+		if ($add) {
+			$data['result'] = "OK";
+			$this->success($data);
+		} else {
+			$this->error('Ошибка чтения из БД');
+		}
+	}
 }
 
 ?>

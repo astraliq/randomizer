@@ -93,6 +93,25 @@ class RndFilm extends Model {
 		
 		return $films;
 	}
+
+	public function addFilmToDB($film) {
+
+
+		$object = [
+			'title_ru' => $film['title_ru'],
+			'title_en' => $film['title_en'],
+			'description_ru' => $film['description'],
+			'main_category_id' => $film['category_id'],
+			'country_id' => $film['country_id'],
+			'rating' => $film['rating'],
+			'main_img' => $film['main_img'],
+			'year' => $film['year'],
+			'actors' => $film['actors'],
+			'genres' => $film['genres'],
+			'duration' => $film['duration'],
+		];
+		return $this->dataBase->uniInsert($this->filmsTable, $object);
+	}
 }
 
 ?>
