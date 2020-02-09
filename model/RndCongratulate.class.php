@@ -18,12 +18,12 @@ class RndCongratulate extends Model {
 		} else {
 			if (!empty($who)) {
 				$whoIds = implode(", ", $who);
-				$whoSql = "who.id IN ($whoIds)";
+				$whoSql = "who.who_title IN ($whoIds)";
 			}
 			$and = (!empty($who) and !empty($theme)) ? ' AND ' : '';
 			if (!empty($theme)) {
 				$themeIds = implode(", ", $theme);
-				$themeSql = "theme.id IN ($themeIds)";
+				$themeSql = "theme.theme_title_ru IN ($themeIds)";
 			}
 
 			$sql = "SELECT congr.`id`, who.`who_title` as who, theme.`theme_title_ru` as theme, theme.`theme_title_en` as theme_en, congr.`congratulate` FROM `$this->congratulateTable` as congr LEFT JOIN `$this->congratulateWho` as who ON congr.`who_id` = who.id LEFT JOIN `$this->congratulateTheme` as theme ON congr.`theme_id` = theme.id WHERE " . $whoSql . $and . $themeSql;

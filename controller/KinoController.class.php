@@ -59,10 +59,10 @@ class KinoController extends Controller {
         //     // "post" => "'param1=val1&param2=val2" // string Все данные, передаваемые в HTTP POST-запросе
         // ]);
         // echo $html['data']['content'];
-        echo '<pre>';
-        print_r($html['data']);
-        echo '</pre>';
-        exit();
+        // echo '<pre>';
+        // print_r($html['data']);
+        // echo '</pre>';
+        // exit();
         $arrayContent = [
             'html' => $html
         ];
