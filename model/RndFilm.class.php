@@ -54,7 +54,7 @@ class RndFilm extends Model {
 			$filterCategory = " AND f.`id` IN ($filmsIds)";
 		}
 
-		$sql = "SELECT f.`id`, title_ru, description_ru, year, cat.`category_title` as `main_category`, cntr.`coutry_title` as `country`, f.`main_img`, f.`actors`, f.`genres`, duration  FROM `$this->filmsTable` as f LEFT JOIN `$this->categories` as cat ON f.`main_category_id` = cat.id LEFT JOIN `$this->countries` as cntr ON f.`country_id` = cntr.id WHERE `year` IN ($allYears)" . $filterCountry . $filterCategory;
+		$sql = "SELECT f.`id`, title_ru, description_ru, year, cat.`category_title` as `main_category`, cntr.`country_title` as `country`, f.`main_img`, f.`actors`, f.`genres`, duration  FROM `$this->filmsTable` as f LEFT JOIN `$this->categories` as cat ON f.`main_category_id` = cat.id LEFT JOIN `$this->countries` as cntr ON f.`country_id` = cntr.id WHERE `year` IN ($allYears)" . $filterCountry . $filterCategory;
 		$films = $this->dataBase->getRows($sql, null);
 
 		// $idFilms = [];
@@ -73,7 +73,7 @@ class RndFilm extends Model {
 	}
 
 	public function getFilmById($id) {
-		$sql = "SELECT f.`id`, title_ru, description_ru, year, cat.`category_title` as `main_category`, cntr.`coutry_title` as `country`, f.`main_img`, f.`actors`, f.`genres`, duration  FROM `$this->filmsTable` as f LEFT JOIN `$this->categories` as cat ON f.`main_category_id` = cat.id LEFT JOIN `$this->countries` as cntr ON f.`country_id` = cntr.id WHERE f.`id` = $id";
+		$sql = "SELECT f.`id`, title_ru, description_ru, year, cat.`category_title` as `main_category`, cntr.`country_title` as `country`, f.`main_img`, f.`actors`, f.`genres`, duration  FROM `$this->filmsTable` as f LEFT JOIN `$this->categories` as cat ON f.`main_category_id` = cat.id LEFT JOIN `$this->countries` as cntr ON f.`country_id` = cntr.id WHERE f.`id` = $id";
 		$film = $this->dataBase->getRow($sql, null);
 		
 		return $film;
@@ -96,21 +96,57 @@ class RndFilm extends Model {
 
 	public function addFilmToDB($film) {
 
-
+		$path = Config::get('path_public') . '/img/films/' . $film['main_img'];
+		file_put_contents($path, file_get_contents($film['imgSrc']));
+		$counter1 = 0;
+		$film['category_id'] = [];
+		foreach ($film['categories'] as $cat) {
+			$sql = "SELECT * FROM `$this->categories` WHERE LOWER(`category_title`) = LOWER('$cat')";
+			$catID = $this->dataBase->getRow($sql, null);
+			$film['category_id'][$counter1] = $catID['id'];
+			$counter1++;
+		}
+		
+		$counter2 = 0;
+		$film['country_id'] = [];
+		foreach ($film['countries'] as $country) {
+			$sql = "SELECT * FROM `$this->countries` WHERE LOWER(`country_title`) = LOWER('$country')";
+			$countryID = $this->dataBase->getRow($sql, null);
+			$film['country_id'][$counter2] = $countryID['id'];
+			$counter2++;
+		}
 		$object = [
 			'title_ru' => $film['title_ru'],
 			'title_en' => $film['title_en'],
-			'description_ru' => $film['description'],
-			'main_category_id' => $film['category_id'],
-			'country_id' => $film['country_id'],
+			'description_ru' => $film['description_ru'],
+			'main_category_id' => $film['category_id'][0],
+			'country_id' => $film['country_id'][0],
 			'rating' => $film['rating'],
 			'main_img' => $film['main_img'],
 			'year' => $film['year'],
 			'actors' => $film['actors'],
 			'genres' => $film['genres'],
-			'duration' => $film['duration'],
+			'duration' => $film['duration']
 		];
-		return $this->dataBase->uniInsert($this->filmsTable, $object);
+		$result = $this->dataBase->uniInsert($this->filmsTable, $object);
+		$lastID = $this->dataBase->getLastInsertId();
+
+		$columns = ['film_id','category_id'];
+		$object = array();
+		foreach ($film['category_id'] as $element) {
+			$object[] = [$lastID, $element];
+		};
+		$result = $this->dataBase->uniInsertArray($this->filmsCategories, $columns, $object);
+
+		$columns = ['film_id','country_id'];
+		$object = array();
+		foreach ($film['country_id'] as $element) {
+			$object[] = [$lastID, $element];
+		};
+		$result = $this->dataBase->uniInsertArray($this->filmsCountries, $columns, $object);
+
+
+		return $result;
 	}
 }
 

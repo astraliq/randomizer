@@ -26,13 +26,14 @@ function delay(f, ms) {
 
 }
 
-let startUpd = delay(updatePage, 10000);
+let startUpd = delay(updatePage, 15000);
 
-function addFilm(sendData) {
-	this._getJson(`/index.php`, sendData)
+function addFilm(sendData, params) {
+	getJson(`/index.php`, sendData)
 	.then(data => {
 		data = JSON.parse(data);
 		if (data.result === "OK") {
+			console.log('result OK');
 			let nextID = params.id;
 			nextID++;
 			startUpd(nextID);
@@ -65,12 +66,14 @@ if (document.location.search.slice(0,10) === '?path=kino') {
 	film.countries = $('.info tr:nth-child(2) .type ~ td div').text();
 	film.countries = film.countries.replace(/\s{2,}/g, '');
 	film.countries = film.countries.split(',');
+	film.country_id = [];
 	
 	film.genres = $('.info tr:nth-child(4) .type ~ td a').text();
 	
 	film.categories = $('[itemprop="genre"]').text();
-	film.categories = film.categories.replace(/\s{2,}/g, '');
+	film.categories = film.categories.replace(/\s{1,}/g, '');
 	film.categories = film.categories.split(',');
+	film.category_id = [];
 	
 	film.duration = $('.time').text();
 	film.duration = film.duration.slice(0,3);
@@ -78,22 +81,21 @@ if (document.location.search.slice(0,10) === '?path=kino') {
 	film.description_ru = $('.film-synopsys').text();
 	film.rating = $('.rating_ball').text();
 	
-	film.actorsStr = $('#actorList ul').text();
-	film.actorsStr = film.actorsStr.split(' ');
-	film.actors = [];
+	film.actorsStr = $("#actorList ul a").map(function(indx, element){
+		return $(element).text();
+	}).get();
 	let counter = 0;
 	for (let i = 1; i < film.actorsStr.length; i++) {
-		if (i % 2 == 1) {
-			film.actors[counter] = '';
-			film.actors[counter] += film.actorsStr[i] + ' ';
-		}
-		if (i % 2 == 0 ) {
-			film.actors[counter] += film.actorsStr[i];
-			counter++;
+		if (film.actorsStr[i] === '...') {
+			counter = i
+			break;
 		}
 	}
+	film.actors = film.actorsStr.slice(0,counter);
+	film.actors = film.actors.join(', ');
 	
-	
+	film.imgSrc = $('.popupBigImage img').attr('src');
+	film.main_img = film.imgSrc.slice(44,100);
 	console.log(film);
 	let sendData = {
 		apiMethod: 'addParserData',
@@ -102,7 +104,7 @@ if (document.location.search.slice(0,10) === '?path=kino') {
 		}
 	};
 	
-//	addFilm(sendData);
+	addFilm(sendData, params);
 	// 'https://www.kinopoisk.ru/film/299/'
 }
 

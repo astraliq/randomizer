@@ -14,7 +14,7 @@ $config['db_driver'] = 'mysql';
 // $config['db_driver'] = 'mysql';
 
 $config['path_root'] = __DIR__;
-$config['path_public'] = $config['path_root'] . '/../public';
+$config['path_public'] = $config['path_root'] . '/../www';
 $config['path_model'] = $config['path_root'] . '/../model';
 $config['path_controller'] = $config['path_root'] . '/../controller';
 $config['path_cache'] = $config['path_root'] . '/../cache';
