@@ -11,10 +11,66 @@ let findings = {
 
 const renderFirst = `
         <div class="main-block-data">
-            <div class="main-block-data-primary">        
-                <div class="main-block-data-text" style="min-height: 400px;"></div>   
+            <div class="main-block-data-primary" style="position: relative;">        
+                <div class="main-block-data-text" style="min-height: 400px;"></div>
+                <div class="modal_shadow off_block_off"></div>
+                <div class="modal_congr off_block_off"> 
+                    <div class="modal_text" style="width: 100%; height: 100%;"></div>
+                </div>
+                <div class="cross off_block_off">&#10006;</div>
             </div>     
-        </div>    
+        </div> 
+        <style>
+        .off_block_off {
+            display: none;
+        }
+        .modal_shadow {
+            position: fixed;
+            font-family: Arial, Helvetica, sans-serif;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.6);           
+            z-index: 0; 
+            background-color: #000; 
+            filter: opacity(0.5);
+        }
+        .modal_congr {
+            min-width: 650px;
+            position: relative;
+            margin: 10% auto;
+            padding: 5px 20px 13px 20px;
+            border-radius: 10px;
+            background: #fff; 
+            box-sizing: border-box;
+            margin: 0 0 20px 0;         
+            z-index: 15;
+        }
+        .cross{
+            background: #606061;
+            color: #FFFFFF;
+            line-height: 25px;
+            position: absolute;
+            right: -12px;
+            text-align: center;
+            top: -10px;
+            width: 24px;
+            text-decoration: none;
+            font-weight: bold;
+            -webkit-border-radius: 12px;
+            -moz-border-radius: 12px;
+            border-radius: 12px;
+            -moz-box-shadow: 1px 1px 3px #000;
+            -webkit-box-shadow: 1px 1px 3px #000;
+            box-shadow: 1px 1px 3px #000;
+            cursor: pointer;             
+            z-index: 15;
+        }
+        .cross:hover {
+            background-color: #ebbd2f;
+        }
+        </style>   
         `;
 
 const renderMenu = ` <div class="main-block-menu">
@@ -27,7 +83,7 @@ const renderMenu = ` <div class="main-block-menu">
 `;
 
 const renderGo = `
-        <div class="main-block-data-primary">
+        <div class="main-block-data-primary" style="position: relative; z-index: 15;">
             <div class="congratulate_them">
                 <div class="congratulate_him who" data-one="Для него">поздравить его</div>
                 <div class="congratulate_her who" data-one="Для нее">поздравить её</div>
@@ -35,33 +91,33 @@ const renderGo = `
             </div>
             <div class="congratulete_select">
                 <div class="congr_select_him off_block_off">
-                    <div class="birthday_him congr" data-two="День Рождения">с днем рождения</div>
-                    <div class="jubilee_him congr" data-two="Юбилей">с юбилеем</div>
-                    <div class="new_year_him congr" data-two="Новый год">с новым годом</div>
-                    <div class="february_23 congr" data-two="День защитника отечества">с 23 февраля</div>
-                    <div class="february_14_him congr" data-two="День святого валентина">с 14 февраля</div>
-                    <div class="wedding_day_him congr" data-two="На свадьбу">с днем свадьбы</div>
-                    <div class="another_him congr" data-two="Прочее">прочее</div>
+                    <div class="birthday_him off_color congr" data-two="День Рождения">с днем рождения</div>
+                    <div class="jubilee_him off_color congr" data-two="Юбилей">с юбилеем</div>
+                    <div class="new_year_him off_color congr" data-two="Новый Год">с новым годом</div>
+                    <div class="february_23 off_color congr" data-two="День защитника отечества">с 23 февраля</div>
+                    <div class="february_14_him off_color congr" data-two="День святого валентина">с 14 февраля</div>
+                    <div class="wedding_day_him off_color congr" data-two="На свадьбу">с днем свадьбы</div>
+                    <div class="another_him off_color congr" data-two="Прочее">прочее</div>
                 </div>
                 <div class="congr_select_her off_block_off">
-                    <div class="birthday_her congr" data-two="День Рождения">с днем рождения</div>
-                    <div class="jubilee_her congr" data-two="Юбилей">с юбилеем</div>
-                    <div class="new_year_her congr" data-two="Новый год">с новым годом</div>
-                    <div class="march_8 congr" data-two="Международный женский день (8 марта)">с 8-м марта</div>
-                    <div class="february_14_her congr" data-two="День святого валентина">с 14 февраля</div>
-                    <div class="wedding_day_her congr" data-two="На свадьбу">с днем свадьбы</div>
-                    <div class="another_her congr" data-two="Прочее">прочее</div>
+                    <div class="birthday_her off_color congr" data-two="День Рождения">с днем рождения</div>
+                    <div class="jubilee_her off_color congr" data-two="Юбилей">с юбилеем</div>
+                    <div class="new_year_her off_color congr" data-two="Новый Год">с новым годом</div>
+                    <div class="march_8 off_color congr" data-two="Международный женский день (8 марта)">с 8-м марта</div>
+                    <div class="february_14_her off_color congr" data-two="День святого валентина">с 14 февраля</div>
+                    <div class="wedding_day_her off_color congr" data-two="На свадьбу">с днем свадьбы</div>
+                    <div class="another_her off_color congr" data-two="Прочее">прочее</div>
                 </div>
                 <div class="congr_select_group off_block_off">
-                    <div class="birthday_group congr" data-two="День Рождения">с днем рождения</div>
-                    <div class="jubilee_group congr" data-two="Юбилей">с юбилеем</div>
-                    <div class="new_year_group congr" data-two="Новый год">с новым годом</div>
-                    <div class="february_23_group congr" data-two="День защитника отечества">с 23 февраля</div>
-                    <div class="march_8_group congr" data-two="Международный женский день (8 марта)">с 8-м марта</div>
-                    <div class="wedding_daygroupr congr" data-two="На свадьбу">с днем свадьбы</div>
-                    <div class="another_group congr" data-two="Прочее">прочее</div>
+                    <div class="birthday_group off_color congr" data-two="День Рождения">с днем рождения</div>
+                    <div class="jubilee_group off_color congr" data-two="Юбилей">с юбилеем</div>
+                    <div class="new_year_group off_color congr" data-two="Новый Год">с новым годом</div>
+                    <div class="february_23_group off_color congr" data-two="День защитника отечества">с 23 февраля</div>
+                    <div class="march_8_group off_color congr" data-two="Международный женский день (8 марта)">с 8-м марта</div>
+                    <div class="wedding_daygroupr off_color congr" data-two="На свадьбу">с днем свадьбы</div>
+                    <div class="another_group off_color congr" data-two="Прочее">прочее</div>
                 </div>
-                <div class="main-block-data-text"></div>
+                <button class="button-send btn_congr off_block_off" style="width: 150px; height: 50px; margin: 300px 0 0 100px;">Поздравление</button>
             </div>
             
 
@@ -126,7 +182,7 @@ const renderGo = `
                 
                 .off_color {
                     color: #ccc;
-                }
+                }                
             </style>
         </div>       
 `;
@@ -161,16 +217,26 @@ function runProgr(event) {
         colorMain.classList.remove('main-color-6');
         colorMain.classList.remove('main-color-7');
 
-        setTimeout(firstRnd, 500);//время задержки, что бы успел выполниться callback у запроса 
+        // setTimeout(firstRnd, 500);//время задержки, что бы успел выполниться callback у запроса 
+        firstRnd();
+
     });
 };
 
 //грузим модуль с фильтром выбора поздравлений
 function rendGo() {
-    let mainBlock = document.querySelector('.main-block-data');
+    let modalShadow = document.querySelector('.modal_shadow');
+    let modalBlock = document.querySelector('.modal_congr');
+    let modalCross = document.querySelector('.cross');
+    modalCross.classList.remove('off_block_off');
+    modalShadow.classList.remove('off_block_off');
+    modalBlock.classList.remove('off_block_off');
+    let mainBlock = document.querySelector('.modal_text');//было - .main-block-data    
     let mainBlockMenu = document.querySelector('.main-block-menu');//место вставки строки
     mainBlock.innerHTML = renderGo;
     mainBlockMenu.innerHTML = renderMenu;
+    congratulate.btnCross(); // отключение по кресту
+    congratulate.btnShadow(); // отключение по тени
     congratulate.init();
     findings.congrRnd = "";
     congratulate.renderText(findings.congrRnd);
@@ -258,51 +324,115 @@ class Congratulate {
 
         congr.forEach(function (congrBtn) {
             congrBtn.addEventListener('click', function (ev) {
-
                 //определяем значение класса data-two
                 findings.congratulate = ev.srcElement.dataset.two;
-                //---------------------------------------------------------------------------------
+                congrBtn.classList.remove('off_color'); //меняем цвет у выбранного поздравления   
+                console.log(findings.congratulate);
+                congratulate.deleteSubject();
+                congratulate.onBtnCongr();
+                congratulate.goBtnCongr();
 
-                let sendData = {
-                    apiMethod: 'getRndCongratulate',
-                    postData: {
-                        who: findings.who,
-                        theme: findings.congratulate,
-                        alreadyViewedIds: congratulate.alreadyViewedIds
-                    }
-                };
-
-                //запрос по критерию отбора (who, theme) 
-                congratulate._getRndCongratulate(`/index.php`, sendData)
-                    .then(data => {
-                        data = JSON.parse(data);
-                        if (data.result === "OK") {
-                            congratulate.data = data.rnd;
-                            console.log(congratulate.data);
-
-                            if (findings.who === congratulate.data.who && findings.congratulate === congratulate.data.theme) {
-
-                                // if (!congratulate.alreadyViewedIds.includes(congratulate.data.id)) {
-                                findings.congrRnd = congratulate.data.congratulate;
-
-                                congratulate.renderText(findings.congrRnd);
-                                congratulate.alreadyViewedIds = [...congratulate.alreadyViewedIds, congratulate.data.id];
-
-                                console.log(congratulate.alreadyViewedIds);
-                                // }
-                            }
-                        } else {
-                            console.log('ERROR');
-                        }
-                    });
-
-                //сбрасываем массив поторов, если он раве 4 или более     
-
-                if (congratulate.alreadyViewedIds.length >= 4) {
-                    congratulate.alreadyViewedIds = [];
-                }
             });
         });
+    }
+    // отключаем неактивный выбор поздравления
+    deleteSubject() {
+        let subject = document.querySelectorAll('.congr');
+        subject.forEach(function (subj) {
+            if (findings.congratulate !== subj.dataset.two) {
+                subj.classList.add('off_color');
+            }
+        });
+    }
+
+    //отключение окна при нажатии на крест
+    btnCross() {
+        let cross = document.querySelector('.cross');
+        let modalBlock = document.querySelector('.modal_congr');
+        let modalShadow = document.querySelector('.modal_shadow');
+
+        cross.addEventListener("click", function () {
+            cross.classList.add('off_block_off');
+            modalBlock.classList.add('off_block_off');
+            modalShadow.classList.add('off_block_off');
+            // firstRnd();
+            findings = {};
+        });
+    }
+
+    //отключение окна при нажатии на тень
+    btnShadow() {
+        let cross = document.querySelector('.cross');
+        let modalBlock = document.querySelector('.modal_congr');
+        let modalShadow = document.querySelector('.modal_shadow');
+
+        modalShadow.addEventListener("click", function () {
+            cross.classList.add('off_block_off');
+            modalBlock.classList.add('off_block_off');
+            modalShadow.classList.add('off_block_off');
+            // firstRnd();
+            findings = {};
+        });
+    }
+
+    //включаем кнопку поздравлений
+    onBtnCongr() {
+        let btn = document.querySelector('.btn_congr');
+        btn.classList.remove('off_block_off');
+    }
+
+    //обрабатываем нажатие на кнопку - Поздравление
+    goBtnCongr() {
+        let btn = document.querySelector('.btn_congr');
+        let modalBlock = document.querySelector('.modal_congr');
+        let modalShadow = document.querySelector('.modal_shadow');
+        let modalCross = document.querySelector('.cross');
+
+        btn.addEventListener('click', function () {
+            modalBlock.classList.add('off_block_off');
+            modalShadow.classList.add('off_block_off');
+            modalCross.classList.add('off_block_off');
+            congratulate.getCongr();
+        });
+    }
+
+    //получаем рандомное значение с сервера по результатам запроса
+    getCongr() {
+        let sendData = {
+            apiMethod: 'getRndCongratulate',
+            postData: {
+                who: findings.who,
+                theme: findings.congratulate,
+                alreadyViewedIds: congratulate.alreadyViewedIds
+            }
+        };
+
+        //запрос по критерию отбора (who, theme) 
+        congratulate._getRndCongratulate(`/index.php`, sendData)
+            .then(data => {
+                data = JSON.parse(data);
+                if (data.result === "OK") {
+                    congratulate.data = data.rnd;
+                    console.log(congratulate.data);
+
+                    if (findings.who === congratulate.data.who && findings.congratulate === congratulate.data.theme) {
+
+                        findings.congrRnd = congratulate.data.congratulate;
+
+                        congratulate.renderText(findings.congrRnd);
+                        congratulate.alreadyViewedIds = [...congratulate.alreadyViewedIds, congratulate.data.id];
+
+                        console.log(congratulate.alreadyViewedIds);
+                    }
+                } else {
+                    console.log('ERROR');
+                }
+            });
+
+        //сбрасываем массив поторов, если он раве 4 или более 
+        if (congratulate.alreadyViewedIds.length >= 4) {
+            congratulate.alreadyViewedIds = [];
+        }
     }
 
     //рендер поздравления

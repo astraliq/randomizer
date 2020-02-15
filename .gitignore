@@ -2,3 +2,4 @@
 config/config.default.php
 /www/img/films/
 model/cookie.txt
+www/js/parser.js

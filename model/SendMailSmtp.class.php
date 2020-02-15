@@ -9,7 +9,7 @@
 * @author Ipatov Evgeniy <admin@ipatov-soft.ru>
 * @version 1.0
 */
-class SendMailSmtpClass {
+class SendMailSmtp extends Model {
 
     /**
     * 

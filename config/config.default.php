@@ -25,7 +25,7 @@ $config['sitename'] = 'randomizer';
 
 $config['mail'] = 'randomizer.me@yandex.ru';
 $config['mail_pass'] = '6R2^j6&_u1';
-
+$config['mail_name'] = 'randomizer';
 
 
 // $config['mainMenu'] = [
