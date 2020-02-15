@@ -41,7 +41,7 @@ function delay(f, ms) {
 
 }
 
-let startUpd = delay(updatePage, 1000);
+let startUpd = delay(updatePage, 100);
 let startUpd2 = delay(updatePage2, 2000);
 
 function addFilm(sendData, urlParams, check) {

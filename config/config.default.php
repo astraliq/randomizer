@@ -23,6 +23,11 @@ $config['path_templates'] = $config['path_root'] . '/../templates';
 $config['path_logs'] = $config['path_root'] . '/../logs';
 $config['sitename'] = 'randomizer';
 
+$config['mail'] = 'randomizer.me@yandex.ru';
+$config['mail_pass'] = '6R2^j6&_u1';
+
+
+
 // $config['mainMenu'] = [
 // 	[
 // 		'title' => 'Главная',
