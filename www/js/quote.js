@@ -18,6 +18,7 @@ class Quote {
         this.filters = [];
         this.alreadyViewedIds = [];
 		this.browseNow = new BrowseNow();
+		this.otherCat = new OtherCategory();
     }
 
 
@@ -67,6 +68,7 @@ class Quote {
 				fakeAPI.authorInfo = (fakeAPI.authorInfo === null) ? "" : fakeAPI.authorInfo;
 //                console.log(fakeAPI);
                 this._render(fakeAPI);
+				this.otherCat.render(data.otherCat);
                 this._getNextQuote();
                 this._putAlreadyViewedIds(fakeAPI);
 				this.browseNow.getBrowseNowData('Цитата');

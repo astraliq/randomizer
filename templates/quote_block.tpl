@@ -49,6 +49,5 @@
             </div>
         </div>
     </div>
-    <div class="other-cat">Кроме цитат наш генератор выдаёт варианты из <a href="#" class="link-in-text">других категорий</a>, например, &laquo;<a href="#" class="link-in-text" onclick="film.getRndFilm()">Фильмы</a>&raquo;
-    </div>
+    {% include 'other_cat.tpl' %}
 </section>

@@ -95,12 +95,17 @@ class RndFilm extends Model {
 	}
 
 	public function addFilmToDB($film) {
-
-		$path = Config::get('path_public') . '/img/films/' . $film['main_img'];
-		file_put_contents($path, file_get_contents($film['imgSrc']));
+		if ($film['imgSrc']) {
+			$path = Config::get('path_public') . '/img/films/' . $film['main_img'];
+			file_put_contents($path, file_get_contents($film['imgSrc']));
+		}
+		
 		$counter1 = 0;
 		$film['category_id'] = [];
 		foreach ($film['categories'] as $cat) {
+			if ($cat === 'длявзрослых') {
+				$cat = 'Для взрослых';
+			};
 			$sql = "SELECT * FROM `$this->categories` WHERE LOWER(`category_title`) = LOWER('$cat')";
 			$catID = $this->dataBase->getRow($sql, null);
 			$film['category_id'][$counter1] = $catID['id'];
@@ -115,37 +120,63 @@ class RndFilm extends Model {
 			$film['country_id'][$counter2] = $countryID['id'];
 			$counter2++;
 		}
-		$object = [
-			'title_ru' => $film['title_ru'],
-			'title_en' => $film['title_en'],
-			'description_ru' => $film['description_ru'],
-			'main_category_id' => $film['category_id'][0],
-			'country_id' => $film['country_id'][0],
-			'rating' => $film['rating'],
-			'main_img' => $film['main_img'],
-			'year' => $film['year'],
-			'actors' => $film['actors'],
-			'genres' => $film['genres'],
-			'duration' => $film['duration']
-		];
-		$result = $this->dataBase->uniInsert($this->filmsTable, $object);
-		$lastID = $this->dataBase->getLastInsertId();
+		if ($film['description_ru'] != '') {
+			$object = [
+				'title_ru' => $film['title_ru'],
+				'title_en' => $film['title_en'],
+				'description_ru' => $film['description_ru'],
+				'main_category_id' => $film['category_id'][0],
+				'country_id' => $film['country_id'][0],
+				'rating' => $film['rating'],
+				'main_img' => $film['main_img'],
+				'year' => $film['year'],
+				'actors' => $film['actors'],
+				'genres' => $film['genres'],
+				'duration' => $film['duration']
+			];
+			$result = $this->dataBase->uniInsert($this->filmsTable, $object);
+			$lastID = $this->dataBase->getLastInsertId();
 
-		$columns = ['film_id','category_id'];
+			$columns = ['film_id','category_id'];
+			$object = array();
+			foreach ($film['category_id'] as $element) {
+				$object[] = [$lastID, $element];
+			};
+			$result = $this->dataBase->uniInsertArray($this->filmsCategories, $columns, $object);
+
+			$columns = ['film_id','country_id'];
+			$object = array();
+			foreach ($film['country_id'] as $element) {
+				$object[] = [$lastID, $element];
+			};
+			$result = $this->dataBase->uniInsertArray($this->filmsCountries, $columns, $object);
+		} else {
+			$result = false;
+		}
+
+		$ifExist = $this->dataBase->uniSelect($this->filmsTable, ['main_img'=>$film['main_img']]);
+		
+
+		if ($result || $film['description_ru'] === '' || $ifExist || $film['countries'][0] === '') {
+			$id = $this->dataBase->uniSelect('kinopoisk_id', ['film_id'=>$film['id']]);
+		}	
+		if ($id) {
+			$nextId = $this->dataBase->uniSelect('kinopoisk_id', ['id'=>$id['id']+1]);
+		}
+
+		return $nextId['film_id'];
+	}
+
+	public function addKinoIdToBD($ids) {
+
+		$columns = ['film_id'];
 		$object = array();
-		foreach ($film['category_id'] as $element) {
-			$object[] = [$lastID, $element];
+		foreach ($ids['id'] as $id) {
+			$object[] = [$id];
+			
 		};
-		$result = $this->dataBase->uniInsertArray($this->filmsCategories, $columns, $object);
-
-		$columns = ['film_id','country_id'];
-		$object = array();
-		foreach ($film['country_id'] as $element) {
-			$object[] = [$lastID, $element];
-		};
-		$result = $this->dataBase->uniInsertArray($this->filmsCountries, $columns, $object);
-
-
+		$result = $this->dataBase->uniInsertArray('kinopoisk_id', $columns, $object);
+		
 		return $result;
 	}
 }

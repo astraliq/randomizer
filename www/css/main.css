@@ -252,6 +252,7 @@ body {
 .main-block-data {
 	margin: 0 auto;
 	padding: 0 0 0 0;
+	width: 100%;
 }
 
 .main-block-data-primary {

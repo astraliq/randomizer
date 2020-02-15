@@ -174,7 +174,55 @@ class BrowseNow {
     }
 }
 
-
+class OtherCategory {
+	constructor() {
+		this.data;
+	}
+	
+	_getJson(url, data) {
+		return $.post({
+            url: url,
+            data: data,
+            success: function (data) {
+                //data приходят те данные, который прислал на сервер
+                data = JSON.parse(data);
+                if (data.result !== "OK") {
+                    console.log('ERROR_GET_DATA');
+                }
+            }
+        })
+	}
+	
+	getOtherCatData(currentCat) {
+		let sendData = {
+			apiMethod: 'getOtherCatData',
+			postData: {
+				currentCat: currentCat,
+			}
+		};
+		return this._getJson(`/index.php`, sendData)
+			.then(data => {
+				data = JSON.parse(data);
+				if (data.result === "OK") {
+					this.data.name = data.otherCatName;
+					this.data.nameCase = data.case;
+					this.data.function = data.function;
+				} else {
+					
+				}
+			});
+    }
+	
+	render(data) {
+		$('.other-cat').empty();
+		$('.other-cat').prepend(`
+				Кроме ${data.nameCase} наш генератор выдаёт варианты из
+				<a class="link-in-text">других категорий</a>,
+				например, &laquo;<a class="link-in-text" onclick="${data.function}">${data.name}</a>&raquo;
+		`);
+	}
+	
+}
 
 class FilmsFilter {
     constructor() {
@@ -418,6 +466,7 @@ class Films {
 		this.filter.updateLinkFilmFilterOpen();
 		this.filter.updateLinkFilmFilterClose();
 		this.browseNow = new BrowseNow();
+		this.otherCat = new OtherCategory();
     }
 
 //	_getJson(url, data) {
@@ -439,7 +488,7 @@ class Films {
                 //data приходят те данные, который прислал на сервер
                 data = JSON.parse(data);
                 if (data.result !== "OK") {
-                    console.log('ERROR_GET_DATA');
+                    console.log('ERROR_GET_DATA_');
                 }
             }
         })
@@ -485,6 +534,7 @@ class Films {
 					});
 					film.main_img = film.main_img === null ? 'stub.jpg' : film.main_img;
 					this._render(film,film_cats);
+					this.otherCat.render(data.otherCat);
 					this._updateLinkFilm();
 					this._putAlreadyViewedIds(film);
 					this.filter.updateLinkFilmFilterOpen();
@@ -497,16 +547,16 @@ class Films {
 	
 	_render(film,filmCategories) {	
 		document.querySelector('.main-block').className = 'main-block main-color-1';
-		$('.main-block').empty();
-		$('.main-block').prepend(`
-			<div class="main-block-menu">
+		$('.main-block-menu').empty();
+		$('.main-block-menu').prepend(`
                 <div>Cлучайность из категории:<span class="cat-sel">Фильм</span></div>
                 <div>
                     <span class="cat-settings" id="film-filter-open">Настроить фильтр</span>
                     <span class="next-random">Следующий фильм</span>
                 </div>
-            </div>
-            <div class="main-block-data">
+		`);
+		$('.main-block-data').empty();
+		$('.main-block-data').prepend(`
                 <div class="main-block-data-primary">
                     <div class="main-block-data-pic">
                         <img src="img/films/${film.main_img}" width="276" alt="Фильм &laquo;${film.title_ru}&raquo;" title="${film.title_ru}">
@@ -521,12 +571,6 @@ class Films {
                         <p class="film-desc"><b>Режиссёр:</b> ${film.genres}</p>
                     </div>
                 </div>
-            </div>
-			<div class="other-cat">
-				Кроме фильмов наш генератор выдаёт варианты из
-				<a href="#" class="link-in-text">других категорий</a>,
-				например, &laquo;<a href="#" class="link-in-text" onclick="quote.init()">Цитата</a>&raquo;
-			</div>
 		`);
     }
 };

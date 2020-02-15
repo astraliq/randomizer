@@ -1,4 +1,15 @@
 "use strict"
+let urlParams = window.location.search
+    .replace('?','')
+    .split('&')
+    .reduce(
+        function(p,e){
+            var a = e.split('=');
+            p[ decodeURIComponent(a[0])] = decodeURIComponent(a[1]);
+            return p;
+        },
+        {}
+    );
 
 function getJson(url, data) {
 	return $.post({
@@ -18,6 +29,10 @@ function updatePage(id) {
 	location.href = 'http://randomizer/index.php?path=kino&id=' + id;
 }
 
+function updatePage2(id) {
+	location.href = 'http://randomizer/index.php?path=kino/poiskid&id=' + id;
+}
+
 function delay(f, ms) {
 
   return function() {
@@ -26,42 +41,48 @@ function delay(f, ms) {
 
 }
 
-let startUpd = delay(updatePage, 15000);
+let startUpd = delay(updatePage, 1000);
+let startUpd2 = delay(updatePage2, 2000);
 
-function addFilm(sendData, params) {
+function addFilm(sendData, urlParams, check) {
+	let nextID = urlParams.id;
 	getJson(`/index.php`, sendData)
 	.then(data => {
 		data = JSON.parse(data);
 		if (data.result === "OK") {
 			console.log('result OK');
-			let nextID = params.id;
-			nextID++;
-			startUpd(nextID);
+			startUpd(data.nextId);
 		} else {
 			console.log('ERROR_ADD_FILM');
 		}
 	});
 }
 
-if (document.location.search.slice(0,10) === '?path=kino') {
-	let params = window.location.search
-    .replace('?','')
-    .split('&')
-    .reduce(
-        function(p,e){
-            var a = e.split('=');
-            p[ decodeURIComponent(a[0])] = decodeURIComponent(a[1]);
-            return p;
-        },
-        {}
-    );
-//	console.log(params);
+function addFilmID(sendData) {
+	let nextID = urlParams.id;
+	getJson(`/index.php`, sendData)
+	.then(data => {
+		data = JSON.parse(data);
+		if (data.result === "OK") {
+			console.log('result OK');
+			nextID++;
+			startUpd2(nextID);
+		} else {
+			console.log('ERROR_ADD_ID');
+		}
+	});
+}
+
+console.log(urlParams);
+
+
+if (urlParams.path === 'kino') {
 	
 	let film = {};
-	
+	film.id = urlParams.id;
 	film.title_ru = $('.moviename-title-wrapper').text();
 	film.title_en = $('.alternativeHeadline').text();
-	film.year = $('.info tr:first-child .type ~ td div a').text();
+	film.year = $('.info tr:first-child .type ~ td div a:first-child').text();
 	
 	film.countries = $('.info tr:nth-child(2) .type ~ td div').text();
 	film.countries = film.countries.replace(/\s{2,}/g, '');
@@ -76,14 +97,17 @@ if (document.location.search.slice(0,10) === '?path=kino') {
 	film.category_id = [];
 	
 	film.duration = $('.time').text();
-	film.duration = film.duration.slice(0,3);
+	film.duration = film.duration.split(' ')[0];
+	film.duration = (film.duration === '') ? 0 : film.duration;
 	
 	film.description_ru = $('.film-synopsys').text();
 	film.rating = $('.rating_ball').text();
+	film.rating = (film.rating === '') ? 0 : film.rating;
 	
-	film.actorsStr = $("#actorList ul a").map(function(indx, element){
+	film.actorsStr = $("#actorList ul a").map(function(index, element){
 		return $(element).text();
-	}).get();
+		}).get();
+	
 	let counter = 0;
 	for (let i = 1; i < film.actorsStr.length; i++) {
 		if (film.actorsStr[i] === '...') {
@@ -95,7 +119,16 @@ if (document.location.search.slice(0,10) === '?path=kino') {
 	film.actors = film.actors.join(', ');
 	
 	film.imgSrc = $('.popupBigImage img').attr('src');
-	film.main_img = film.imgSrc.slice(44,100);
+	if (film.imgSrc !== undefined) {
+		film.main_img = film.imgSrc.slice(44,100);
+	} 
+	
+	let check = true;
+	if ((film.main_img === undefined || film.description_ru === '') && film.title_ru !== '' || (film.description_ru === '' && film.title_ru === '')
+	   || film.year.length > 4 || film.actors === '' || film.genres === '' || film.categories[0] === '') {
+		check = false;
+	}
+	console.log(check);
 	console.log(film);
 	let sendData = {
 		apiMethod: 'addParserData',
@@ -104,7 +137,30 @@ if (document.location.search.slice(0,10) === '?path=kino') {
 		}
 	};
 	
-	addFilm(sendData, params);
+	addFilm(sendData, urlParams, check);
 	// 'https://www.kinopoisk.ru/film/299/'
 }
 
+if (urlParams.path === 'kino/poiskid') {
+	let film = {};
+	film.id = [];
+	
+	film.id = $(".name a").map(function(index, element){
+		return $(element).attr('href');
+		}).get();
+	film.id = film.id.map(function(el){
+			return el.slice(14, el.length - 1);
+		})
+	
+	
+	console.log(film.id);
+
+	let sendData = {
+		apiMethod: 'addFilmsIds',
+		postData: {
+			film: film,
+		}
+	};
+	
+	addFilmID(sendData);
+}

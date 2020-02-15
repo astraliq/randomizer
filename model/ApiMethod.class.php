@@ -141,12 +141,20 @@ class ApiMethod {
 		$categories = $_POST['postData']['categories'] ?? [0];
 		$film = $this->rndFilm->getRandomFilm($years, $categories, $countries);
 		$categories = $this->rndFilm->getFilmCategories($film['id']);
+		$currentCategory = 'Фильм';
+		$otherCat = $this->randomType->getRndBrowseNowCat([$currentCategory]);
+		$otherCatData = $this->randomType->categories[$otherCat];
 
 		// print_r($_POST['postData']);
 		// exit();
-		if ($film) {
+		if ($film && $otherCat) {
 			$data['rnd'] = $film;
 			$data['categories'] = $categories;
+			$data['otherCat'] = [
+				'nameCase' => $this->randomType->categories[$currentCategory]['case'],
+				'function' => $otherCatData['function'],
+				'name' => $otherCat,
+			];
 			$data['result'] = "OK";
 			
 			$this->success($data);
@@ -160,10 +168,19 @@ class ApiMethod {
 		$filters = $_POST['postData']['filters'] ?? '';
 		$alreadyViewedIds = $_POST['postData']['alreadyViewedIds'] ?? '';
 		$quote = $this->rndQuote->getRandomQuote($filters);
+		$currentCategory = 'Цитата';
+		$otherCat = $this->randomType->getRndBrowseNowCat([$currentCategory]);
+		$otherCatData = $this->randomType->categories[$otherCat];
+
 		// print_r($_POST['postData']);
 		// exit();
 		if ($quote) {
 			$data['rnd'] = $quote;
+			$data['otherCat'] = [
+				'nameCase' => $this->randomType->categories[$currentCategory]['case'],
+				'function' => $otherCatData['function'],
+				'name' => $otherCat,
+			];
 			$data['result'] = "OK";
 			$this->success($data);
 		} else {
@@ -208,11 +225,42 @@ class ApiMethod {
 		}
 	}
 
+	public function getOtherCatData() {
+		
+		$catTitle = $_POST['postData']['currentCat'] ?? '';
+
+		$otherCat = $this->randomType->getRndBrowseNowCat([$catTitle]);
+		$otherCatData = $this->randomType->categories[$otherCat];
+		if ($otherCatData) {
+			$data['otherCatName'] = $otherCat;
+			$data['function'] = $otherCatData['function'];
+			$data['case'] = $this->randomType->categories[$catTitle]['case'];
+			$data['result'] = "OK";
+			$this->success($data);
+		} else {
+			$this->error('Ошибка чтения из БД');
+		}
+	}
+
 	public function addParserData() {
 		
 		$film = $_POST['postData']['film'] ?? '';
 
-        $add = $this->rndFilm->addFilmToDB($film);
+        $nextId = $this->rndFilm->addFilmToDB($film);
+		if ($nextId) {
+			$data['result'] = "OK";
+			$data['nextId'] = $nextId;
+			$this->success($data);
+		} else {
+			$this->error('Ошибка чтения из БД');
+		}
+	}
+
+	public function addFilmsIds() {
+		
+		$filmsIds = $_POST['postData']['film'] ?? '';
+
+		$add = $this->rndFilm->addKinoIdToBD($filmsIds);
 		if ($add) {
 			$data['result'] = "OK";
 			$this->success($data);

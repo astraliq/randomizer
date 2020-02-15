@@ -5,14 +5,38 @@ class Random extends Model {
 	public $browseNowTable = 'browse_now';
 	public $film;
 	public $quote;
-	public $browseNowTpl = [
-		'Фильм' => 'see_now_film.tpl',
-		'Цитата' => 'see_now_quote.tpl',
-		'Подарок' => 'see_now_gift.tpl',
-		'Произведение искусства' => 'see_now_artwork.tpl',
-		'Слово на иностранном языке' => 'see_now_foreign_word.tpl',
-		'Поздравление' => 'see_now_congratulate.tpl',
-
+	// имена ключей должны быть одинаковыми
+	public $categories = [
+		'Фильм' => [
+			'tpl' => 'see_now_film.tpl',
+			'case' => 'фильмов',
+			'function' => 'film.getRndFilm()',
+		],
+		'Цитата' => [
+			'tpl' => 'see_now_quote.tpl',
+			'case' => 'цитат',
+			'function' => 'quote.init()',
+		],
+		'Подарок' => [
+			'tpl' => 'see_now_gift.tpl',
+			'case' => 'подарков',
+			'function' => '',
+		],
+		'Произведение искусства' => [
+			'tpl' => 'see_now_artwork.tpl',
+			'case' => 'произведений искусств',
+			'function' => '',
+		],
+		'Слово на иностранном языке' => [
+			'tpl' => 'see_now_foreign_word.tpl',
+			'case' => 'иностранных слов',
+			'function' => '',
+		],
+		'Поздравление' => [
+			'tpl' => 'see_now_congratulate.tpl',
+			'case' => 'поздравлений',
+			'function' => '',
+		],
 	];
 
 	public function __construct() {
@@ -65,7 +89,7 @@ class Random extends Model {
 		$check;
 		do {
 			$check = 0;
-			$randCat = array_rand($this->browseNowTpl, 1);
+			$randCat = array_rand($this->categories, 1);
 			foreach ($usedCategories as $cat) {
 				if ($randCat === $cat) {
 					$check = 1;

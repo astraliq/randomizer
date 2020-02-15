@@ -261,34 +261,46 @@ class Congratulate {
 
                 //определяем значение класса data-two
                 findings.congratulate = ev.srcElement.dataset.two;
+                //---------------------------------------------------------------------------------
 
                 let sendData = {
                     apiMethod: 'getRndCongratulate',
                     postData: {
                         who: findings.who,
-                        theme: findings.congratulate
+                        theme: findings.congratulate,
+                        alreadyViewedIds: congratulate.alreadyViewedIds
                     }
                 };
-                //запрос по критерию отбора (who, theme)
+
+                //запрос по критерию отбора (who, theme) 
                 congratulate._getRndCongratulate(`/index.php`, sendData)
                     .then(data => {
                         data = JSON.parse(data);
                         if (data.result === "OK") {
-
                             congratulate.data = data.rnd;
                             console.log(congratulate.data);
 
-                            setTimeout(function () {
-                                if (findings.who === congratulate.data.who && findings.congratulate === congratulate.data.theme) {
-                                    findings.congrRnd = congratulate.data.congratulate;
+                            if (findings.who === congratulate.data.who && findings.congratulate === congratulate.data.theme) {
 
-                                    congratulate.renderText(congratulate.data.congratulate);
-                                }
-                            }, 500);
+                                // if (!congratulate.alreadyViewedIds.includes(congratulate.data.id)) {
+                                findings.congrRnd = congratulate.data.congratulate;
+
+                                congratulate.renderText(findings.congrRnd);
+                                congratulate.alreadyViewedIds = [...congratulate.alreadyViewedIds, congratulate.data.id];
+
+                                console.log(congratulate.alreadyViewedIds);
+                                // }
+                            }
                         } else {
                             console.log('ERROR');
                         }
                     });
+
+                //сбрасываем массив поторов, если он раве 4 или более     
+
+                if (congratulate.alreadyViewedIds.length >= 4) {
+                    congratulate.alreadyViewedIds = [];
+                }
             });
         });
     }

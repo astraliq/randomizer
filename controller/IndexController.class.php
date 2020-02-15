@@ -22,13 +22,19 @@ class IndexController extends Controller {
         $browseSecond = $this->randomType->getRndBrowseNowCat([$catTitle, $browseFirst]);
         $browseThird = $this->randomType->getRndBrowseNowCat([$catTitle, $browseFirst, $browseSecond]);
         $browseNowData = $this->randomType->getBrowseNowData([$browseFirst, $browseSecond, $browseThird]);
+        $otherCategory = $this->randomType->getRndBrowseNowCat([$catTitle]);
+
+
         $arrayContent = [
             'categoryTitle' => $catTitle,
             'randomData' =>  $randomData,
-            'browseNow1' =>  $this->randomType->browseNowTpl[$browseFirst],
-            'browseNow2' =>  $this->randomType->browseNowTpl[$browseSecond],
-            'browseNow3' =>  $this->randomType->browseNowTpl[$browseThird],
+            'browseNow1' =>  $this->randomType->categories[$browseFirst]['tpl'],
+            'browseNow2' =>  $this->randomType->categories[$browseSecond]['tpl'],
+            'browseNow3' =>  $this->randomType->categories[$browseThird]['tpl'],
             'browseNowData' => $browseNowData,
+            'categoryCase' => $this->randomType->categories[$catTitle]['case'],
+            'otherCategory' => $otherCategory,
+            'otherCatParams' => $this->randomType->categories[$otherCategory],
         ];
         return $arrayContent;
 	}
