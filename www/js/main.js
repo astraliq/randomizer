@@ -616,8 +616,8 @@ class Mailing {
     }
 };
 let mailing = new Mailing();
-let mainFilmLink = document.querySelector('.button-send');
-mainFilmLink.addEventListener('click', e => { film.getRndFilm() });
+let mailingLink = document.querySelector('.button-send');
+mailingLink.addEventListener('click', e => { film.getRndFilm() });
 
 
 
