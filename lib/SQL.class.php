@@ -221,6 +221,16 @@
 			return self::update($query, $superObject);
 		}
 
+		// ** set параметр без проверки!!!
+		public function uniUpdateArray($table, $set, $whereColumn, $whereValues) {
+			
+			$sets_w = implode(',', array_fill(0, count($whereValues), '?'));
+
+			$query = "UPDATE `$table` SET $set WHERE `$whereColumn` IN ($sets_w)";
+
+			return self::update($query, $whereValues);
+		}
+
 		public function uniUpdateChanging($table, $object, $whereObj) {
 			
 			$sets = array();

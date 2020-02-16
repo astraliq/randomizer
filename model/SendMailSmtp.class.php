@@ -97,7 +97,7 @@ class SendMailSmtp extends Model {
 			// $mailTo = ltrim($mailTo, '<');
 			// $mailTo = rtrim($mailTo, '>');
             // $email_to_array = explode(',', $mailTo);
-                foreach($mailTo as $key => $email) {
+            foreach($mailTo as $key => $email) {
                 $emails = ltrim($email, '');
                 fputs($socket, "RCPT TO: <$emails>\r\n");
                 if (!$this->_parseServer($socket, "250")) {

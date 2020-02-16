@@ -20,11 +20,13 @@ $arrayContent = [
 $message = $template->render($arrayContent);
 $result = $mailing->sendMailsEW($message);
 
-if($result === true){
+if($result['result'] === true){
+	// увеличение счетчика рассылок
+	$updCounter = $mailing->updateMailingCounter($result['emails']);
     echo "Письма успешно отправлены";
 }else{
-    echo "Письма не отправлены. Ошибка: " . $result;
+    echo "Письма не отправлены. Ошибка: " . $result['result'];
 }
 
 
- ?>
+?>

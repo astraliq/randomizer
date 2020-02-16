@@ -928,9 +928,9 @@ ul {
 	position: fixed;
 	top: 40%;
 	left: 45%;
-	width: 180px;
-	height: 160px;
-	background-color: rgba(200,200,200,0.6);
+	width: 200px;
+	height: 180px;
+	background-color: rgba(200,200,200,0.7);
 	border-radius: 20px;
 	display: -webkit-flex;
 	display: -moz-flex;
@@ -949,5 +949,7 @@ ul {
     font-weight: 700;
     margin: 0;
     padding: 3px;
+	display: inline-block;
+	text-align: center;
 }
 

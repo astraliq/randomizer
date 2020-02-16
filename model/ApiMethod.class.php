@@ -287,7 +287,15 @@ class ApiMethod {
 
 		$add = $this->mailing->addMailToDB($email);
 		if ($add) {
-			// отправить писмьо подтверждение
+			// отправка письма с подтверждением
+			$send = $this->mailing->sendConfirmMail($email);
+			if ($send['result']) {
+				$updToken = $this->dataBase->uniUpdate('mailing',['token'=>$send['hash']],['email'=>$email]);
+			}
+			if (!$updToken) {
+				$this->error('Ошибка записи в БД');
+			}
+			$data['sendConfirm'] = $send ? "OK" : "error";
 			$data['result'] = "OK";
 			$this->success($data);
 		} else {

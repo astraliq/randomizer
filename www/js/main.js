@@ -653,7 +653,7 @@ class Mailing {
 		$('.container').append(`
 			<div class="done slide-in-bottom">
 				 <img src="img/done_mark.png" width="150">
-				 <span>Подписка оформлена.</span>
+				 <span>Отправлено письмо с подтверждением.</span>
 			</div>
 		`);
 		setTimeout(() => {
@@ -679,12 +679,14 @@ class Mailing {
 		this._postJson(`/index.php`, sendData)
 			.then(data => {
 				data = JSON.parse(data);
-				if (data.result === "OK") {
+				if (data.result === 'OK' && data.sendConfirm === 'OK') {
 					this.changeStyleDefault();
 					this.clearInput();
 					this.hideErr();
 					this.showOK();
 					console.log('Email add to mailing!');
+				} else if (data.sendConfirm === 'error') {
+					console.log('Не удалось отправить письмо с подтверждением');
 				} else {
 					this.changeStyleErr();
 					if (data.error_text === 'Email already exist in mailing.') {

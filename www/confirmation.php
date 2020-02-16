@@ -1,24 +1,48 @@
 <?PHP
 require ("../autoload.php");
-if (isset($_SERVER) && isset($_GET)) {
-	$this->web(isset($_GET['path']) ? $_GET['path'] : '');		
+
+class VerifyToken extends Model {
+	public function __construct() {
+		parent::__construct();
+    }
+
+	public function verify($token) {
+
+		$loader = new \Twig\Loader\FilesystemLoader('../templates');
+		$twig = new \Twig\Environment($loader);
+
+		$checkToken = $this->dataBase->uniSelect('mailing',['token'=>$token]);
+
+		if ($checkToken) {
+			$changeStatus = $this->dataBase->uniUpdate('mailing',['confirm'=>1,'token'=>NULL],['id'=>$checkToken['id']]);
+			$template = $twig->loadtemplate('confirmation_success.tpl');
+		} else {
+			$template = $twig->loadtemplate('confirmation_false.tpl');
+		}
+		
+		$arrayContent = [
+		    'email' =>  $checkToken['email'],
+		];
+
+		echo $template->render($arrayContent);
+	}
 }
 
-$loader = new \Twig\Loader\FilesystemLoader('../templates');
-$twig = new \Twig\Environment($loader);
-$template = $twig->loadtemplate('confirm_success.tpl');
+if (isset($_SERVER) && isset($_GET)) {
+	$token = isset($_GET['token']) ? $_GET['token'] : 'error';
+	if ($token === 'error') {
+		echo '404. Error.';
+		exit();
+	}
+	$verify = new VerifyToken();
+	$verify->verify($token); 		
+} else {
+	echo '404. Error.';
+	exit();
+}
 
 
-$data = $randomType->getRandomDataByCats(['Фильм']);
 
-$arrayContent = [
-    'email' =>  $email,
-];
-echo '<pre>';
-print_r($arrayContent);
-echo '</pre/>';
-exit();
 
-echo $template->render($arrayContent);
 
 ?>
