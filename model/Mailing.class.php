@@ -49,6 +49,12 @@ class Mailing extends Model {
     	return $add;
 	}
 
+	public function checkEmailExist($email) {
+		$check = $this->dataBase->uniSelect($this->mailingTable, [
+			'email'=>$email,
+		]);
+    	return $check;
+	}
 
 }
 

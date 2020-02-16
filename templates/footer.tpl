@@ -23,9 +23,12 @@
                 <p class="email-send">
                     Подпишись на рассылку и получай подборку из 10 случайностей себе на почту раз в неделю.
                 </p>
-                <form>
-                    <input type="email" class="email-input" placeholder="info@randomizer.me">
+                <form class="mailing-form" novalidate>
+                    <input id="email-mailing" type="email" class="email-input" placeholder="info@randomizer.me" required>
                     <button class="button-send">Подписаться</button>
+                    <div class="mail_check_err">
+                        <p class="mail_check_msg">Адрес электронной почты должен содержать символ "@". Поверьте правильность указанного адреса.</p>
+                    </div>
                 </form>
             </div>
             <div class="footer-main-blocks">

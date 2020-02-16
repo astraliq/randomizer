@@ -580,6 +580,7 @@ mainFilmLink.addEventListener('click', e => { film.getRndFilm() });
 class Mailing {
     constructor() {
 		this.emailAdd;
+		this.emailInput = document.querySelector('#email-mailing');
     }
 
 	_postJson(url, data) {
@@ -594,9 +595,77 @@ class Mailing {
             }
         })
 	}
-
+	
+	changeStyleErr() {
+		this.emailInput.style.border = '1px solid red';
+		this.emailInput.style.backgroundColor = '#E0B3B3';
+	}
+	
+	changeStyleDefault() {
+		this.emailInput.style.border = '1px solid #a1a1a1';
+		this.emailInput.style.backgroundColor = '#a1a1a1';
+	}
+	
+	clearInput() {
+		this.emailInput.value = '';
+	}
+	
+	showErr(errorMsg) {
+		let standartMsg = 'Адрес электронной почты должен содержать символ "@". Поверьте правильность указанного адреса.';
+		let msg = errorMsg ? errorMsg : standartMsg;
+		$('.mail_check_msg').text(msg);
+		$('.mail_check_err').show();
+	}
+	
+	hideErr() {
+		$('.mail_check_err').hide();
+	}
+	
+	checkEmail() {
+		let email = this.emailInput.value;
+		let check = email.match(/.+@./i);
+		if (check === null) {
+			this.changeStyleErr();
+			this.showErr();
+			return false;
+		} else {
+			this.changeStyleDefault();
+			this.hideErr();
+		}
+		return email;
+	}
+	
+	getEmailFromForm() {
+		let email = this.emailInput.value;
+		let check = email.match(/.+@./i);
+		if (check === null) {
+			this.changeStyleErr();
+			this.showErr();
+			return false;
+		}
+		return email;
+	}
+	
+	showOK() {
+		$('.container').append(`
+			<div class="done slide-in-bottom">
+				 <img src="img/done_mark.png" width="150">
+				 <span>Подписка оформлена.</span>
+			</div>
+		`);
+		setTimeout(() => {
+			$('.done').removeClass('slide-in-bottom');
+			$('.done').addClass('slide-out-top');
+		}, 5000);
+	}
+	
     sendEmail() {
-		this.emailAdd = this.filter.years;
+		let email = this.getEmailFromForm();
+		if (!email) {
+			return false;
+		}
+			
+		this.emailAdd = email;
 		
 		let sendData = {
 			apiMethod: 'addEmailToMailing',
@@ -604,12 +673,23 @@ class Mailing {
 				email: this.emailAdd,
 			}
 		};
-		this._getJson(`/index.php`, sendData)
+		this._postJson(`/index.php`, sendData)
 			.then(data => {
 				data = JSON.parse(data);
 				if (data.result === "OK") {
+					this.changeStyleDefault();
+					this.clearInput();
+					this.hideErr();
+					this.showOK();
 					console.log('Email add to mailing!');
 				} else {
+					this.changeStyleErr();
+					if (data.error_text === 'Email already exist in mailing.') {
+						this.showErr('Данный адрес уже участвует в рассылке.');
+					} else {
+						this.showErr();
+					}
+					
 					console.log('ERROR_ADD_EMAIL');
 				}
 			});
@@ -617,8 +697,14 @@ class Mailing {
 };
 let mailing = new Mailing();
 let mailingLink = document.querySelector('.button-send');
-mailingLink.addEventListener('click', e => { film.getRndFilm() });
-
+let mailingInput = document.querySelector('#email-mailing');
+mailingLink.addEventListener('click', e => { 
+	e.preventDefault();
+	mailing.sendEmail();
+});
+mailingInput.addEventListener('blur', e => { 
+	mailing.checkEmail();
+});
 
 
 

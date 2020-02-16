@@ -254,7 +254,7 @@ class ApiMethod {
 			$data['nextId'] = $nextId;
 			$this->success($data);
 		} else {
-			$this->error('Ошибка чтения из БД');
+			$this->error('Ошибка записи в БД');
 		}
 	}
 
@@ -267,20 +267,30 @@ class ApiMethod {
 			$data['result'] = "OK";
 			$this->success($data);
 		} else {
-			$this->error('Ошибка чтения из БД');
+			$this->error('Ошибка записи в БД');
 		}
 	}
 
 	public function addEmailToMailing() {
 		
 		$email = $_POST['postData']['email'] ?? '';
+		$check = preg_match("/.+@./i", $email);
+		
+		if (!$check) {
+			$this->error('Отсутствует символ @ в адресе электронной почты!');
+		}
+
+		$checkExist = $this->mailing->checkEmailExist($email);
+		if ($checkExist) {
+			$this->error('Email already exist in mailing.');
+		}
 
 		$add = $this->mailing->addMailToDB($email);
 		if ($add) {
 			$data['result'] = "OK";
 			$this->success($data);
 		} else {
-			$this->error('Ошибка чтения из БД');
+			$this->error('Ошибка записи в БД');
 		}
 	}
 

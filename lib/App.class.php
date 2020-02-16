@@ -81,25 +81,38 @@ class App {
 	}	
 
 	protected function api($post) {
-		if (isset($post['apiMethod'])) {
-			$methodName = $post['apiMethod'];
-			$model = new ApiMethod($methodName); //создаем модель класса api
-			if (!method_exists($model, $methodName)) {
-				// header('Content-Type: application/json; charset=utf-8');
+		$postHeaders = getallheaders();
+		if ($postHeaders['Origin'] === 'https://randomizer.me' || $postHeaders['Host'] === 'randomizer.me' ||
+			$postHeaders['Origin'] === 'http://randomizer' || $postHeaders['Host'] === 'randomizer') {
+
+			if (isset($post['apiMethod'])) {
+				$methodName = $post['apiMethod'];
+				$model = new ApiMethod($methodName); //создаем модель класса api
+				if (!method_exists($model, $methodName)) {
+					// header('Content-Type: application/json; charset=utf-8');
+					echo json_encode([
+						'error' => true,
+						'error_text' => 'Api метод "' . $methodName . '" не существует!',
+						'data' => null
+					], JSON_UNESCAPED_UNICODE);
+					exit();
+				}
+				$data = $model->$methodName(); 
+				exit();	
+			} else {
+				header('Content-Type: application/json; charset=utf-8');
 				echo json_encode([
 					'error' => true,
-					'error_text' => 'Api метод "' . $methodName . '" не существует!',
+					'error_text' => 'Не передан api метод!',
 					'data' => null
 				], JSON_UNESCAPED_UNICODE);
 				exit();
 			}
-			$data = $model->$methodName(); 
-			exit();	
+			
 		} else {
-			header('Content-Type: application/json; charset=utf-8');
 			echo json_encode([
 				'error' => true,
-				'error_text' => 'Не передан api метод!',
+				'error_text' => 'Access denied.',
 				'data' => null
 			], JSON_UNESCAPED_UNICODE);
 			exit();
