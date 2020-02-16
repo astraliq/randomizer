@@ -6,13 +6,6 @@ $config['db_host'] = 'localhost';
 $config['db_charset'] = 'UTF-8';
 $config['db_driver'] = 'mysql';
 
-// $config['db_user'] = 'u0906549_antonio';
-// $config['db_pass'] = 'randomizer_db';
-// $config['db_base'] = 'u0906549_default';
-// $config['db_host'] = '127.0.0.1:3306';
-// $config['db_charset'] = 'UTF-8';
-// $config['db_driver'] = 'mysql';
-
 $config['path_root'] = __DIR__;
 $config['path_public'] = $config['path_root'] . '/../www';
 $config['path_model'] = $config['path_root'] . '/../model';
@@ -22,10 +15,6 @@ $config['path_libs'] = $config['path_root'] . '/../lib';
 $config['path_templates'] = $config['path_root'] . '/../templates';
 $config['path_logs'] = $config['path_root'] . '/../logs';
 $config['sitename'] = 'randomizer';
-
-$config['mail'] = 'randomizer.me@yandex.ru';
-$config['mail_pass'] = '6R2^j6&_u1';
-$config['mail_name'] = 'randomizer';
 
 
 // $config['mainMenu'] = [
