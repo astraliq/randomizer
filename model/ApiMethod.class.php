@@ -275,7 +275,7 @@ class ApiMethod {
 		
 		$email = $_POST['postData']['email'] ?? '';
 		$check = preg_match("/.+@./i", $email);
-		
+
 		if (!$check) {
 			$this->error('Отсутствует символ @ в адресе электронной почты!');
 		}
@@ -287,6 +287,7 @@ class ApiMethod {
 
 		$add = $this->mailing->addMailToDB($email);
 		if ($add) {
+			// отправить писмьо подтверждение
 			$data['result'] = "OK";
 			$this->success($data);
 		} else {

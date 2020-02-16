@@ -6,7 +6,7 @@ $randomType = new Random();
 
 $loader = new \Twig\Loader\FilesystemLoader('../mail_templates');
 $twig = new \Twig\Environment($loader);
-$template = $twig->loadtemplate('mailing.tpl');
+$template = $twig->loadtemplate('week_mailing.tpl');
 
 
 $data = $randomType->getRandomDataByCats(['Фильм']);

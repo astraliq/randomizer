@@ -1,6 +1,7 @@
 
 config/config.default.php
 config/config.dev.php
+config/config.dev1.php
 /www/img/films/
 model/cookie.txt
 www/js/parser.js
