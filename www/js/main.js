@@ -611,7 +611,7 @@ class Mailing {
 	}
 	
 	showErr(errorMsg) {
-		let standartMsg = 'Адрес электронной почты должен содержать символ "@". Поверьте правильность указанного адреса.';
+		let standartMsg = 'Адрес электронной почты должен содержать символ "@". Проверьте правильность указанного адреса.';
 		let msg = errorMsg ? errorMsg : standartMsg;
 		$('.mail_check_msg').text(msg);
 		$('.mail_check_err').show();
