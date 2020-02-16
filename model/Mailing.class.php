@@ -41,6 +41,14 @@ class Mailing extends Model {
 
 	}
 
+	public function addMailToDB($email) {
+		$add = $this->dataBase->uniInsert($this->mailingTable, [
+			'email'=>$email,
+			'send_ew'=>1
+		]);
+    	return $add;
+	}
+
 
 }
 

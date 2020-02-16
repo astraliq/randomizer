@@ -17,10 +17,6 @@ class Model {
 		header("Location: /index.php?path=user/login");
 	}
 
-	public function redirectToCreateOrder() {
-		header("Location: /index.php?path=user/createorder");
-	}
-
 	public function getMenu($menu) {
 		$i = '';
 		$menuText = '<ul class="menu' . $i . '">';

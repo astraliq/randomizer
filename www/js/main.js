@@ -577,11 +577,47 @@ class Films {
 let film = new Films();
 mainFilmLink.addEventListener('click', e => { film.getRndFilm() });
 
-//if (categoryName.text() === 'Фильм') {
-//	nextRandom.addEventListener('click', e => { film.getRndFilm() });
-//};
+class Mailing {
+    constructor() {
+		this.emailAdd;
+    }
 
+	_postJson(url, data) {
+		return $.post({
+            url: url,
+            data: data,
+            success: function (data) {
+                data = JSON.parse(data);
+                if (data.result !== "OK") {
+                    console.log('ERROR_ADD_EMAIL');
+                }
+            }
+        })
+	}
 
+    sendEmail() {
+		this.emailAdd = this.filter.years;
+		
+		let sendData = {
+			apiMethod: 'addEmailToMailing',
+			postData: {
+				email: this.emailAdd,
+			}
+		};
+		this._getJson(`/index.php`, sendData)
+			.then(data => {
+				data = JSON.parse(data);
+				if (data.result === "OK") {
+					console.log('Email add to mailing!');
+				} else {
+					console.log('ERROR_ADD_EMAIL');
+				}
+			});
+    }
+};
+let mailing = new Mailing();
+let mainFilmLink = document.querySelector('.button-send');
+mainFilmLink.addEventListener('click', e => { film.getRndFilm() });
 
 
 

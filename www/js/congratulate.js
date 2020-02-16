@@ -32,12 +32,10 @@ const renderFirst = `
             bottom: 0;
             left: 0;
             background: rgba(0, 0, 0, 0.6);           
-            z-index: 0; 
-            background-color: #000; 
-            filter: opacity(0.5);
+            z-index: 0;            
         }
         .modal_congr {
-            min-width: 650px;
+            min-width: 730px;
             position: relative;
             margin: 10% auto;
             padding: 5px 20px 13px 20px;
@@ -187,41 +185,45 @@ const renderGo = `
         </div>       
 `;
 
-//грузим модуль в дивы
-let congratulateLink = document.querySelector('.data-title-link');
-let congratulateLinkMain = document.querySelector('.congratulate_main_lnk');
+// //грузим модуль в дивы
+// let congratulateLink = document.querySelector('.data-title-link');
 
-runProgr(congratulateLinkMain);
+
+let congratulateLinkMain = document.querySelector('.congratulate_main_lnk');
+congratulateLinkMain.addEventListener('click', function () {
+    congratulate.runProgr();
+});
+
 // runProgr(congratulateLinkMain);
 
 //грузим модуль Первая загрузка со случайным поздравлением
-function runProgr(event) {
-    let mainSection = document.querySelector('.main-block');//вставляем блок целиком с подблоками   
-    event.addEventListener('click', function () {
-        mainSection.innerHTML = `${renderMenu} ${renderFirst} 
-        <div class="other-cat">
-        Кроме фильмов наш генератор выдаёт варианты из
-        <a href="#" class="link-in-text">других категорий</a>,
-        например, &laquo;
-        <a href="#" class="link-in-text" onclick="film.getRndFilm()">Фильмы</a>&raquo;
-    </div>
-        `;
+// function runProgr() {
+//     let mainSection = document.querySelector('.main-block');//вставляем блок целиком с подблоками   
+//     // event.addEventListener('click', function () {
+//     mainSection.innerHTML = `${renderMenu} ${renderFirst} 
+//         <div class="other-cat">
+//         Кроме фильмов наш генератор выдаёт варианты из
+//         <a href="#" class="link-in-text">других категорий</a>,
+//         например, &laquo;
+//         <a href="#" class="link-in-text" onclick="film.getRndFilm()">Фильмы</a>&raquo;
+//     </div>
+//         `;
 
-        //Изменим цвет фона для совего блока
-        let colorMain = document.querySelector('.main-block');
-        colorMain.classList.add('main-color-2');
-        colorMain.classList.remove('main-color-1');
-        colorMain.classList.remove('main-color-3');
-        colorMain.classList.remove('main-color-4');
-        colorMain.classList.remove('main-color-5');
-        colorMain.classList.remove('main-color-6');
-        colorMain.classList.remove('main-color-7');
+//     //Изменим цвет фона для совего блока
+//     let colorMain = document.querySelector('.main-block');
+//     colorMain.classList.add('main-color-2');
+//     colorMain.classList.remove('main-color-1');
+//     colorMain.classList.remove('main-color-3');
+//     colorMain.classList.remove('main-color-4');
+//     colorMain.classList.remove('main-color-5');
+//     colorMain.classList.remove('main-color-6');
+//     colorMain.classList.remove('main-color-7');
 
-        // setTimeout(firstRnd, 500);//время задержки, что бы успел выполниться callback у запроса 
-        firstRnd();
+//     // setTimeout(firstRnd, 500);//время задержки, что бы успел выполниться callback у запроса 
+//     firstRnd();
 
-    });
-};
+//     // });
+// };
 
 //грузим модуль с фильтром выбора поздравлений
 function rendGo() {
@@ -271,6 +273,33 @@ class Congratulate {
     constructor() {
         this.data = [];
         this.alreadyViewedIds = [];//массив повторов
+    }
+    //грузим модуль Первая загрузка со случайным поздравлением
+    runProgr() {
+        let mainSection = document.querySelector('.main-block');//вставляем блок целиком с подблоками   
+        // event.addEventListener('click', function () {
+        mainSection.innerHTML = `${renderMenu} ${renderFirst} 
+        <div class="other-cat">
+        Кроме фильмов наш генератор выдаёт варианты из
+        <a href="#" class="link-in-text">других категорий</a>,
+        например, &laquo;
+        <a href="#" class="link-in-text" onclick="film.getRndFilm()">Фильмы</a>&raquo;
+    </div>
+        `;
+
+        //Изменим цвет фона для совего блока
+        let colorMain = document.querySelector('.main-block');
+        colorMain.classList.add('main-color-2');
+        colorMain.classList.remove('main-color-1');
+        colorMain.classList.remove('main-color-3');
+        colorMain.classList.remove('main-color-4');
+        colorMain.classList.remove('main-color-5');
+        colorMain.classList.remove('main-color-6');
+        colorMain.classList.remove('main-color-7');
+
+        // setTimeout(firstRnd, 500);//время задержки, что бы успел выполниться callback у запроса 
+        firstRnd();
+        // });
     }
 
     //слушаем нажатие - выбор пола, затемняем не активные кнопки
@@ -464,3 +493,6 @@ class Congratulate {
 }
 
 let congratulate = new Congratulate();
+
+
+

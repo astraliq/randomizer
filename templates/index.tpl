@@ -12,7 +12,9 @@
             {%if content.categoryTitle == 'Фильм' %}           
                 {% include 'film_block.tpl' %}              
             {% elseif content.categoryTitle == 'Цитата' %}                      
-                {% include 'quote_block.tpl' %}                        
+                {% include 'quote_block.tpl' %}
+            {% elseif content.categoryTitle == 'Поздравление' %}                      
+                {% include 'congr_block.tpl' %}                            
             {% endif %}
                  
             {% include 'see_now.tpl' %}

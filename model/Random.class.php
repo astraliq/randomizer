@@ -5,6 +5,7 @@ class Random extends Model {
 	public $browseNowTable = 'browse_now';
 	public $film;
 	public $quote;
+	public $congratulate;
 	// имена ключей должны быть одинаковыми
 	public $categories = [
 		'Фильм' => [
@@ -35,7 +36,7 @@ class Random extends Model {
 		'Поздравление' => [
 			'tpl' => 'see_now_congratulate.tpl',
 			'case' => 'поздравлений',
-			'function' => '',
+			'function' => "congratulate.runProgr()",
 		],
 	];
 
@@ -43,6 +44,7 @@ class Random extends Model {
 		parent::__construct();
 		$this->film = new RndFilm();
 		$this->quote = new RndQuote();
+		$this->congratulate = new RndCongratulate();
     }
 
 	public function getRandomData($categoryTitle) {
@@ -71,6 +73,9 @@ class Random extends Model {
 		    case "Цитата":
 		        $result = $this->quote->getRandomQuote('');
 		        break;
+		    case "Поздравление":
+		        $result = $this->congratulate->getRandomCongratulate('','');
+		        break;
 		}
 		// print_r($result);
   //       exit();
@@ -80,7 +85,7 @@ class Random extends Model {
 	public function getRandomCategory() {
 		$categories = $this->dataBase->uniSelect($this->categoriesTable, []);
 		// $randomCategory = $categories[array_rand($categories, 1)];
-		$list = ['Фильм', 'Цитата'];
+		$list = ['Фильм', 'Цитата', 'Поздравление'];
 		$randomCategory = $list[array_rand($list, 1)];
 		return $randomCategory;
 	}
@@ -116,6 +121,13 @@ class Random extends Model {
 					];
 					$browse = $this->dataBase->uniSelectLast($this->browseNowTable, $object, 'id');
 					$data['quoteData'] = $this->quote->getQuoteById($browse['random_id']);
+					break;
+				case 'Поздравление':
+					$object = [
+						'category_id' => 2
+					];
+					$browse = $this->dataBase->uniSelectLast($this->browseNowTable, $object, 'id');
+					$data['congrData'] = $this->congratulate->getCongrById($browse['random_id']);
 					break;
 				default:
 					// code...

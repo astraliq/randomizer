@@ -38,10 +38,16 @@ class RndCongratulate extends Model {
 		$congratulates = $this->dataBase->getRows($sql, null);
 		$randomCongr = $congratulates[array_rand($congratulates, 1)];
 		$catId = $this->history->getCategoryId('Поздравление');
-		$addToGenHistory = $this->history->addRandomToGeneralHistory($catId, $randomFilm['randomCongr']);
+		$addToGenHistory = $this->history->addRandomToGeneralHistory($catId, $randomCongr['id']);
 		return $randomCongr;
 	}
 
+	public function getCongrById($id) {
+		$sql = "SELECT congr.`id`, who.`who_title` as who, theme.`theme_title_ru` as theme, theme.`theme_title_en` as theme_en, congr.`congratulate` FROM `$this->congratulateTable` as congr LEFT JOIN `$this->congratulateWho` as who ON congr.`who_id` = who.id LEFT JOIN `$this->congratulateTheme` as theme ON congr.`theme_id` = theme.id WHERE congr.`id` = $id";
+		$film = $this->dataBase->getRow($sql, null);
+		
+		return $film;
+	}
 }
 ?>
 

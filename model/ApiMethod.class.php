@@ -26,6 +26,7 @@ class ApiMethod {
 	public $rndCongratulate;
 	public $history;
 	public $randomType;
+	public $mailing;
 
     public function __construct($method) {
         $this->method = $method;
@@ -36,6 +37,7 @@ class ApiMethod {
         $this->rndCongratulate = new RndCongratulate();
         $this->history = new History();
         $this->randomType = new Random();
+        $this->mailing = new Mailing();
     }
 
 	//Функция вывода ошибки
@@ -268,6 +270,20 @@ class ApiMethod {
 			$this->error('Ошибка чтения из БД');
 		}
 	}
-}
+
+	public function addEmailToMailing() {
+		
+		$email = $_POST['postData']['email'] ?? '';
+
+		$add = $this->mailing->addMailToDB($email);
+		if ($add) {
+			$data['result'] = "OK";
+			$this->success($data);
+		} else {
+			$this->error('Ошибка чтения из БД');
+		}
+	}
+
+};
 
 ?>

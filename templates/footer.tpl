@@ -23,7 +23,7 @@
                 <p class="email-send">
                     Подпишись на рассылку и получай подборку из 10 случайностей себе на почту раз в неделю.
                 </p>
-                <form action="#" method="post">
+                <form>
                     <input type="email" class="email-input" placeholder="info@randomizer.me">
                     <button class="button-send">Подписаться</button>
                 </form>
