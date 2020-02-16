@@ -615,6 +615,7 @@ class Mailing {
 		let msg = errorMsg ? errorMsg : standartMsg;
 		$('.mail_check_msg').text(msg);
 		$('.mail_check_err').show();
+		
 	}
 	
 	hideErr() {
@@ -626,7 +627,9 @@ class Mailing {
 		let check = email.match(/.+@./i);
 		if (check === null) {
 			this.changeStyleErr();
-			this.showErr();
+			if (email !== '') {
+				this.showErr();
+			}
 			return false;
 		} else {
 			this.changeStyleDefault();
@@ -705,7 +708,9 @@ mailingLink.addEventListener('click', e => {
 mailingInput.addEventListener('blur', e => { 
 	mailing.checkEmail();
 });
-
+document.querySelector('main').addEventListener('click', e => { 
+	mailing.hideErr();
+});
 
 
 

@@ -94,10 +94,10 @@ class SendMailSmtp extends Model {
                 throw new Exception('Error of command sending: MAIL FROM');
             }
             
-			$mailTo = ltrim($mailTo, '<');
-			$mailTo = rtrim($mailTo, '>');
-            $email_to_array = explode(',', $mailTo);
-                foreach($email_to_array as $key => $email) {
+			// $mailTo = ltrim($mailTo, '<');
+			// $mailTo = rtrim($mailTo, '>');
+            // $email_to_array = explode(',', $mailTo);
+                foreach($mailTo as $key => $email) {
                 $emails = ltrim($email, '');
                 fputs($socket, "RCPT TO: <$emails>\r\n");
                 if (!$this->_parseServer($socket, "250")) {

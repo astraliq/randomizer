@@ -12,21 +12,16 @@ class Mailing extends Model {
     }
 
     public function getMailsEW() {
-    	$mails = $this->dataBase->uniSelect($this->mailingTable, ['send_ew'=>1]);
+    	$mails = $this->dataBase->uniSelectAll($this->mailingTable, ['send_ew'=>1,'confirm'=>1]);
     	return $mails;
     }
 
 	public function sendMailsEW($message) {
 		$mailsData = $this->getMailsEW();
-		if (is_array($mailsData[0])) {
-			$mailsArr = array();
-			foreach ($mailsData as $element) {
-				$mailsArr[] = $element['email'];
-			};
-		} else {
-			$mailsArr = $mailsData['email'];
-		}
-		
+		$mailsArr = array();
+		foreach ($mailsData as $element) {
+			$mailsArr[] = $element['email'];
+		};
 		// заголовок письма
 		$headers= "MIME-Version: 1.0\r\n";
 		$headers .= "Content-type: text/html; charset=utf-8\r\n"; // кодировка письма

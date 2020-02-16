@@ -114,6 +114,13 @@ class Random extends Model {
 					];
 					$browse = $this->dataBase->uniSelectLast($this->browseNowTable, $object, 'id');
 					$data['filmData'] = $this->film->getFilmById($browse['random_id']);
+					$cats = $this->film->getFilmCategories($browse['random_id']);
+					$object = array();
+					foreach ($cats as $element) {
+						$object[] = [$element['categories']];
+					};
+					$data['filmData']['categories'] = $object;
+					
 					break;
 				case 'Цитата':
 					$object = [
@@ -137,6 +144,33 @@ class Random extends Model {
 		return $data;
 	}
 
+
+	public function getRandomDataByCats($usedCategories) {
+		$data;
+		foreach ($usedCategories as $cat) {
+			switch ($cat) {
+				case 'Фильм':
+					$data['filmData'] = $this->film->getRandomFilm([0],[0],[0]);
+					$cats = $this->film->getFilmCategories($data['filmData']['id']);
+					$object = array();
+					foreach ($cats as $element) {
+							$object[] = $element['categories'];
+					};
+					$data['filmData']['categories'] = $object;
+					break;
+				case 'Цитата':
+					$data['quoteData'] = $this->quote->getRandomQuote('');
+					break;
+				case 'Поздравление':
+					$data['congrData'] = $this->congratulate->getRandomCongratulate('','');
+					break;
+				default:
+					// code...
+					break;
+			}
+		}
+		return $data;
+	}
 }
 
 ?>

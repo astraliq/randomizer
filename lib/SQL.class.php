@@ -80,6 +80,21 @@
 			};
 		}
 
+		public function uniSelectAll($table, $whereObj) {
+			$sets = array();
+			foreach ($whereObj as $key => $value) {
+				$sets[] = "`$key` = :$key";
+				if ($value === NULL) {
+					$whereObj[$key] = 'NULL';
+				}
+			};
+			$sets_s = implode(' AND ',$sets);
+
+			$query = "SELECT * FROM `$table` WHERE $sets_s";
+
+			return self::getRows($query, $whereObj);
+		}
+
 		public function uniSelectLast($table, $whereObj, $order) {
 			if ($whereObj) {
 				$sets = array();
