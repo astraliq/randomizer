@@ -82,8 +82,9 @@ class App {
 
 	protected function api($post) {
 		$postHeaders = getallheaders();
-		if ($postHeaders['Origin'] === 'https://randomizer.me' || $postHeaders['Host'] === 'randomizer.me' ||
-			$postHeaders['Origin'] === 'http://randomizer' || $postHeaders['Host'] === 'randomizer') {
+		// if ($postHeaders['Origin'] === 'https://randomizer.me' || $postHeaders['Host'] === 'randomizer.me' ||
+			// $postHeaders['Origin'] === 'http://randomizer' || $postHeaders['Host'] === 'randomizer') {
+		if (true) {
 
 			if (isset($post['apiMethod'])) {
 				$methodName = $post['apiMethod'];

@@ -12,7 +12,7 @@ class VerifyToken extends Model {
 		$twig = new \Twig\Environment($loader);
 
 		$checkToken = $this->dataBase->uniSelect('mailing',['token'=>$token]);
-
+		
 		if ($checkToken) {
 			$changeStatus = $this->dataBase->uniUpdate('mailing',['confirm'=>1,'token'=>NULL],['id'=>$checkToken['id']]);
 			$template = $twig->loadtemplate('confirmation_success.tpl');
