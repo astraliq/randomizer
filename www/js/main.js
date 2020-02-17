@@ -359,10 +359,43 @@ document.querySelector('main').addEventListener('click', e => {
 	mailing.hideErr();
 });
 
+function changeStatus(typeModul, typeDesc) {
+    let textMore = document.getElementById(typeModul);
+    let descLength = document.getElementById(typeDesc).textContent.length;
+    let className = document.getElementById(typeDesc);    
 
+    if (descLength > 350) {textMore.innerHTML = 'Больше описания';}
 
+    else {
+        textMore.innerHTML = '';
+        className.style.height = 'auto';
+    }
+    
+    textMore.innerHTML = '';
 
+};
 
+let snLabels = {
+	'art': 'artdesc',
+	'congr': 'congr_text',
+	'movie': 'moviedesc'
+};
+
+function checkLengthSeeNowText (objectSN) {
+	let textMore,desc;
+	for (let prop in objectSN) {
+	  	textMore = document.getElementById(prop);
+		desc = document.getElementById(objectSN[prop]);
+		if (desc === null || textMore === null) {
+			continue;
+		}
+		if (desc.textContent.length < 330) {
+			textMore.innerHTML = '';
+		}
+	}
+}
+
+checkLengthSeeNowText(snLabels);
 
 
 

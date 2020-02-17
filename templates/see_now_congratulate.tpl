@@ -1,10 +1,15 @@
 <div class="see-now-main-data">
-    <div class="data-title">
-        <a class="data-title-link" onclick="congratulate.runProgr()">Поздравление</a>
-    </div>
-    <div class="data-desc-1">
-    	<p class="data-person">{{ content.browseNowData.congrData.who }}</p>
-        <p class="art-text">{{ content.browseNowData.congrData.congratulate }}</p>
-        <p class="data-person">Тема: {{ content.browseNowData.congrData.theme }}</p>
+    <div class="see-now-cat"><a href="#" class="see-now-cat-link">Поздравление</a></div>
+    <div class="data-desc">
+        <div class="see-now-text">
+            <p class="cong-cat">Тема: 
+            	<a href="#" class="cong-cat-link">{{ content.browseNowData.congrData.theme }}</a>.
+            	<br>
+            	<a href="#" class="cong-cat-link">{{ content.browseNowData.congrData.who }}</a>
+            </p>
+            <p class="congr-text" id="congr_text">{{ content.browseNowData.congrData.congratulate }}</p>
+            <label for="button-cg" onclick="changeStatus('congr', 'congr_text')" id="congr">Больше описания</label>
+            <input type="checkbox" id="button-cg">
+        </div>
     </div>
 </div>
