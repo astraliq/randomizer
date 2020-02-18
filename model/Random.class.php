@@ -71,7 +71,7 @@ class Random extends Model {
 		        ];
 		        break;
 		    case "Цитата":
-		        $result = $this->quote->getRandomQuote('');
+		        $result = $this->quote->getRandomQuote('','');
 		        break;
 		    case "Поздравление":
 		        $result = $this->congratulate->getRandomCongratulate('','');
@@ -131,7 +131,7 @@ class Random extends Model {
 					break;
 				case 'Поздравление':
 					$object = [
-						'category_id' => 2
+						'category_id' => 8
 					];
 					$browse = $this->dataBase->uniSelectLast($this->browseNowTable, $object, 'id');
 					$data['congrData'] = $this->congratulate->getCongrById($browse['random_id']);

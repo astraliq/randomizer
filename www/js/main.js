@@ -15,26 +15,36 @@ class BrowseNow {
     }
 	
 	_getCategoryHTML(catName) {
-		let html;
+		let html, label;
+		let limitText = 350;
 		switch (catName) {
 			case 'Фильм':
 				this.browseNowData.filmData.main_img = this.browseNowData.filmData.main_img === null ? 'stub.jpg' : this.browseNowData.filmData.main_img;
+				label = `<label for="button-m" onclick="changeStatus('movie', 'moviedesc')" id="movie">Больше описания</label>
+							<input type="checkbox" id="button-m">`
 				html = `
 				<div class="see-now-main-data">
-					<div class="data-title">
-						<a class="data-title-link" onclick="film.getRndFilm()">Фильм</a>
+					<div class="see-now-cat">
+						<a class="see-now-cat-link" onclick="film.getRndFilm()">Фильм</a>
 					</div>
-					<div class="data-desc-2">
+					<div class="see-now-desc">
 						<div class="see-now-img">
 							<img src="img/films/${this.browseNowData.filmData.main_img}" width="100" alt="Фильм &laquo;${ this.browseNowData.filmData.title_ru }&raquo;" title="${ this.browseNowData.filmData.title_ru }">
 						</div>
 						<div class="see-now-text">
-							<p class="art-title">${ this.browseNowData.filmData.title_ru }</p>
-							<p class="art-title">${ this.browseNowData.filmData.year }, ${ this.browseNowData.filmData.country }, ${ this.browseNowData.filmData.duration } мин.</p>
-							<p class="art-text">${ this.browseNowData.filmData.description_ru }</p>
+							<p class="see-now-subtitle">${ this.browseNowData.filmData.title_ru }
+								<br>${ this.browseNowData.filmData.year }, ${ this.browseNowData.filmData.country }, ${ this.browseNowData.filmData.duration } мин.</p>
+							<div class="see-now-wrapper">
+							${ this.browseNowData.filmData.description_ru.length > limitText ? label : ''}
+							<label for="button-m" onclick="changeStatus('movie', 'moviedesc')" id="movie">Больше описания</label>
+							<input type="checkbox" id="button-m">
+
+						   <p class="movie-text" id="moviedesc">${ this.browseNowData.filmData.description_ru }</p>
+							</div>
 						</div>
 					</div>
-				</div>`;
+				</div>
+				`;
 			break;
 			case 'Цитата':
 				this.browseNowData.quoteData.picture = this.browseNowData.quoteData.picture === null ? 'img/quoters/stub.jpg' : this.browseNowData.quoteData.picture;
@@ -42,37 +52,35 @@ class BrowseNow {
 				this.browseNowData.quoteData.authorInfo = (this.browseNowData.quoteData.authorInfo === null) ? "" : this.browseNowData.quoteData.authorInfo;
 				html = `
 				<div class="see-now-main-data">
-					<div class="data-title">
-						<a class="data-title-link" onclick="quote.init()">Цитата</a>
+					<div class="see-now-cat">
+						<a class="see-now-cat-link" onclick="quote.init()">Цитата</a>
 					</div>
-					<div class="data-desc-2">
-						<div class="see-now-img">
-							<img src="${this.browseNowData.quoteData.picture}" width="100" alt="Автор" title="Автор">
-						</div>
-						<div class="see-now-text">
-							<p class="art-title">
-								${this.browseNowData.quoteData.author}    
-							</p>
-							<p class="art-text">${this.browseNowData.quoteData.text}</p>
-						</div>
-					</div>
-				</div>`;
+					<p class="data-text"><span class="quote-left-aquo">&laquo;${this.browseNowData.quoteData.text}&raquo;</span></p>
+					<p class="quote-person">${this.browseNowData.quoteData.author}</p>
+				</div>
+				`;
 			break;
 			case 'Произведение искусства':
 				html = `
 				<div class="see-now-main-data">
-					<div class="data-title">
-						<a href="#" class="data-title-link">Произведение искусства</a>
+					<div class="see-now-cat">
+						<a href="#" class="see-now-cat-link">Произведение искусства</a>
 					</div>
-					<div class="data-desc-2">
+					<div class="see-now-desc">
 						<div class="see-now-img">
 							<img src="img/arts/img_art_001.png" width="100">
 						</div>
 						<div class="see-now-text">
-							<p class="art-title">Крик, Эдвард Мунк, 1893г.</p>
-							<p class="art-text">Центральная фигура картины изображает фигуру человека, который обхватил руками лицо и широко раскрыл рот.
-							Эта фигура очень примитивизирована, поэтому некоторые видят в ней некое бесполое существо, скелет, мумию или даже эмбриона.
-							С помощью волнообразных линий художник изобразил звук крика, но непонятно, кричит ли это человек или же он в страхе и отчаянии от услышанного «крика природы», который разносится повсюду.</p>
+							<p class="see-now-subtitle">Крик, Эдвард Мунк, 1893г.</p>
+							<div class="see-now-wrapper">
+								<label for="button-a" onclick="changeStatus('art', 'artdesc')" id="art">Больше описания</label>
+								<input type="checkbox" id="button-a">
+								<p class="art-text" id="artdesc">
+									Центральная фигура картины изображает фигуру человека, который обхватил руками лицо и широко раскрыл рот.
+									Эта фигура очень примитивизирована, поэтому некоторые видят в ней некое бесполое существо, скелет, мумию или даже эмбриона.
+									С помощью волнообразных линий художник изобразил звук крика, но непонятно, кричит ли это человек или же он в страхе и отчаянии от услышанного «крика природы», который разносится повсюду.
+								</p>
+							</div>
 						</div>
 					</div>
 				</div>`;
@@ -84,26 +92,30 @@ class BrowseNow {
 						<a href="#" class="data-title-link">Слово на иностранном языке</a>
 					</div>
 					<div class="data-desc-1">
-						<p class="art-text">guerra [ˈɡwɛrra] - война</p>
+						<p class="data-text">guerra [ˈɡwɛrra] - война</p>
 						<p class="data-person">Например: Проиграть войну – perdere la guerra.</p>
 					</div>
 				</div>`;
 			break;
 			case 'Поздравление':
+				label = `<label for="button-cg" onclick="changeStatus('congr', 'congr_text')" id="congr">Больше описания</label>
+							<input type="checkbox" id="button-cg">`
 				html = `
 				<div class="see-now-main-data">
-					<div class="data-title">
-						<a href="#" class="data-title-link">Поздравление</a>
+					<div class="see-now-cat"><a class="see-now-cat-link" onclick="congratulate.runProgr()">Поздравление</a></div>
+					<div class="data-desc">
+						<div class="see-now-text">
+							<p class="cong-cat">Тема: 
+								<a href="#" class="cong-cat-link">${this.browseNowData.congrData.theme}</a>.
+								<br>
+								<a href="#" class="cong-cat-link">${this.browseNowData.congrData.who}</a>
+							</p>
+							<p class="congr-text" id="congr_text">${this.browseNowData.congrData.congratulate}</p>
+							${ this.browseNowData.congrData.congratulate.length > limitText ? label : ''}
+						</div>
 					</div>
-					<div class="data-desc-1">
-						<p class="data-person">Для него.</p>
-						<p class="art-text">Под президентское посланье
-				 И яркий грохот за окном
-				 Позволь озвучить пожеланье
-				 Богатства, счастья, солнца в дом!</p>
-						<p class="data-person">Тема: Новый Год</p>
-					</div>
-				</div>`;
+				</div>
+				`;
 			break;
 			case 'Подарок':
 				html = `
@@ -158,6 +170,7 @@ class BrowseNow {
 					this.html = this._getCategoryHTML(data.browseFirst);
 					this.html += this._getCategoryHTML(data.browseSecond);
 					this.html += this._getCategoryHTML(data.browseThird);
+					this.html += this._getCategoryHTML(data.browseFourth);
 					this._render(this.html);
 				} else {
 					console.log('ERROR_GET_BROWSEDATA');
@@ -359,6 +372,7 @@ document.querySelector('main').addEventListener('click', e => {
 	mailing.hideErr();
 });
 
+
 function changeStatus(typeModul, typeDesc) {
     let textMore = document.getElementById(typeModul);
     let descLength = document.getElementById(typeDesc).textContent.length;
@@ -389,7 +403,7 @@ function checkLengthSeeNowText (objectSN) {
 		if (desc === null || textMore === null) {
 			continue;
 		}
-		if (desc.textContent.length < 330) {
+		if (desc.textContent.length < 350) {
 			textMore.innerHTML = '';
 		}
 	}

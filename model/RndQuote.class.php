@@ -11,14 +11,25 @@ class RndQuote extends Model {
 		$this->history = new History();
     }
 
-	public function getRandomQuote($filters) {
-
-		if (empty($filters)) {
-			$sql = "SELECT q.`id`, `text`, `author_title` as author, `category_title` as categories, author.`authorInfo`, q.`img` as picture FROM `$this->quoteTable` as q LEFT JOIN `$this->quoteCategories` as cat ON q.`category_id` = cat.id LEFT JOIN `$this->quoteAuthors` as author ON q.`author_id` = author.id LIMIT 10000";
+	public function getRandomQuote($categories, $authors) {
+		
+		if ($categories === '') {
+			$filterCat = "";
 		} else {
-			$idCategories = implode(", ", $filters);
-			$sql = "SELECT q.`id`, `text`, `author_title` as author, `category_title` as categories, author.`authorInfo`, q.`img` as picture  FROM `$this->quoteTable` as q LEFT JOIN `$this->quoteCategories` as cat ON q.`category_id` = cat.id LEFT JOIN `$this->quoteAuthors` as author ON q.`author_id` = author.id WHERE cat.id IN ($idCategories)";
+			$categories = implode(', ', $categories);
+			$filterCat = " q.`category_id` IN ($categories)";
 		}
+		
+		if ($authors === '') {
+			$filterAuthors = "";
+		} else {
+			$authors = implode(', ', $authors);
+			$filterAuthors = ($categories !== '') ? " AND q.`author_id` IN ($authors)" : '';
+		}
+
+		$where = (($categories !== '') || ($authors !== '')) ? ' WHERE ' : '';
+
+		$sql = "SELECT q.`id`, `text`, `author_title` as author, `category_title` as categories, author.`authorInfo`, q.`img` as picture FROM `$this->quoteTable` as q LEFT JOIN `$this->quoteCategories` as cat ON q.`category_id` = cat.id LEFT JOIN `$this->quoteAuthors` as author ON q.`author_id` = author.id" . $where . $filterCat . $filterAuthors;
 
 		$quotes = $this->dataBase->getRows($sql, null);
 		$randomQuote = $quotes[array_rand($quotes, 1)];

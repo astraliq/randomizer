@@ -167,9 +167,10 @@ class ApiMethod {
 
 	public function getRndQuote() {
 		
-		$filters = $_POST['postData']['filters'] ?? '';
+		$authors = $_POST['postData']['authors'] ?? '';
+		$categories = $_POST['postData']['categories'] ?? '';
 		$alreadyViewedIds = $_POST['postData']['alreadyViewedIds'] ?? '';
-		$quote = $this->rndQuote->getRandomQuote($filters);
+		$quote = $this->rndQuote->getRandomQuote($categories, $authors);
 		$currentCategory = 'Цитата';
 		$otherCat = $this->randomType->getRndBrowseNowCat([$currentCategory]);
 		$otherCatData = $this->randomType->categories[$otherCat];
@@ -214,11 +215,13 @@ class ApiMethod {
 		$browseFirst = $this->randomType->getRndBrowseNowCat([$catTitle]);
         $browseSecond = $this->randomType->getRndBrowseNowCat([$catTitle, $browseFirst]);
         $browseThird = $this->randomType->getRndBrowseNowCat([$catTitle, $browseFirst, $browseSecond]);
-        $browseNowData = $this->randomType->getBrowseNowData([$browseFirst, $browseSecond, $browseThird]);
+        $browseFourth = $this->randomType->getRndBrowseNowCat([$catTitle, $browseFirst, $browseSecond, $browseThird]);
+        $browseNowData = $this->randomType->getBrowseNowData([$browseFirst, $browseSecond, $browseThird, $browseThird]);
 		if ($browseThird) {
 			$data['browseFirst'] = $browseFirst;
 			$data['browseSecond'] = $browseSecond;
 			$data['browseThird'] = $browseThird;
+			$data['browseFourth'] = $browseFourth;
 			$data['browseNowData'] = $browseNowData;
 			$data['result'] = "OK";
 			$this->success($data);

@@ -247,7 +247,7 @@ function rendGo() {
 //первое случайное поздравление и также вывод "следующее поздравление"
 function firstRnd() {
     let firstNumber = Math.floor(Math.random() * 92);
-    console.log(firstNumber);
+//    console.log(firstNumber);
     findings.id = firstNumber;
 
     let sendData = {
@@ -266,7 +266,7 @@ function firstRnd() {
             congratulate.renderText(findings.congrRnd);
         });
 
-    console.log(findings);
+//    console.log(findings);
 }
 
 class Congratulate {
