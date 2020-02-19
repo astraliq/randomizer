@@ -24,7 +24,7 @@ class RndQuote extends Model {
 			$filterAuthors = "";
 		} else {
 			$authors = implode(', ', $authors);
-			$filterAuthors = ($categories !== '') ? " AND q.`author_id` IN ($authors)" : '';
+			$filterAuthors = ($categories !== '') ? " AND q.`author_id` IN ($authors)" : " q.`author_id` IN ($authors)";
 		}
 
 		$where = (($categories !== '') || ($authors !== '')) ? ' WHERE ' : '';

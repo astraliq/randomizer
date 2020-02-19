@@ -22,6 +22,7 @@ class ApiMethod {
 	public $method;
 	public $rndFilm;
 	public $rndQuote;
+	public $rndNumber;
 	public $userModel;
 	public $rndCongratulate;
 	public $history;
@@ -33,6 +34,7 @@ class ApiMethod {
         $this->dataBase = SQL::getInstance();
         $this->rndFilm = new RndFilm();
         $this->rndQuote = new RndQuote();
+        $this->rndNumber = new RndNumber();
         $this->userModel = new UserModel();
         $this->rndCongratulate = new RndCongratulate();
         $this->history = new History();
@@ -192,16 +194,34 @@ class ApiMethod {
 	}
 
 	public function getRndCongratulate() {
-		
 		$who = $_POST['postData']['who'] ?? '';
 		$theme = $_POST['postData']['theme'] ?? '';
 		$alreadyViewedIds = $_POST['postData']['alreadyViewedIds'] ?? '';
 		$congr = $this->rndCongratulate->getRandomCongratulate($who, $theme);
-		// print_r($_POST['postData']);
-		// exit();
 		if ($congr) {
 			$data['rnd'] = $congr;
 			$data['result'] = "OK";
+			$this->success($data);
+		} else {
+			$this->error('Ошибка чтения из БД');
+		}
+	}
+
+	public function getNumberInfo() {
+		$number = $_POST['postData']['number'] ?? '';
+		$info = $this->rndNumber->getNumberInfo($number);
+		$otherCat = $this->randomType->getRndBrowseNowCat([$currentCategory]);
+		$currentCategory = 'Число';
+		$otherCat = $this->randomType->getRndBrowseNowCat([$currentCategory]);
+		$otherCatData = $this->randomType->categories[$otherCat];
+		if ($info) {
+			$data['info'] = $info;
+			$data['result'] = "OK";
+			$data['otherCat'] = [
+				'nameCase' => $this->randomType->categories[$currentCategory]['case'],
+				'function' => $otherCatData['function'],
+				'name' => $otherCat,
+			];
 			$this->success($data);
 		} else {
 			$this->error('Ошибка чтения из БД');

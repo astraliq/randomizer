@@ -1,6 +1,6 @@
 "use strict"
 
-let filmsLink = document.querySelector('.data-title-link');
+//let filmsLink = document.querySelector('.data-title-link');
 let mainFilmLink = document.querySelector('.film_main_lnk');
 let nextRandom = document.querySelector('.next-random');
 let categoryName = $('.cat-sel');

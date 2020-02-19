@@ -38,6 +38,11 @@ class Random extends Model {
 			'case' => 'поздравлений',
 			'function' => "congratulate.runProgr()",
 		],
+		'Число' => [
+			'tpl' => 'empty.tpl',
+			'case' => 'генератора случайных чисел',
+			'function' => "",
+		]
 	];
 
 	public function __construct() {
@@ -85,7 +90,7 @@ class Random extends Model {
 	public function getRandomCategory() {
 		$categories = $this->dataBase->uniSelect($this->categoriesTable, []);
 		// $randomCategory = $categories[array_rand($categories, 1)];
-		$list = ['Фильм', 'Цитата', 'Поздравление'];
+		$list = ['Фильм', 'Цитата', 'Поздравление', 'Число'];
 		$randomCategory = $list[array_rand($list, 1)];
 		return $randomCategory;
 	}

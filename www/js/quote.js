@@ -24,8 +24,8 @@ class Quote {
     }
 
     getRndQuote() {
-        this.authors = this.filterQuote.filters.authors;
         this.categories = this.filterQuote.filters.categories;
+        this.authors = this.filterQuote.filters.authors;
 
         return $.post({
             url: '/index.php',
@@ -62,7 +62,20 @@ class Quote {
         //закрывает окно с фильрами
         this.filterQuote.closeQuoteFilter();
         //по идее должен отправять на сервер новый запрос но уже с фильтрами и рендерить на их основании новую цитату
+
         this.init();
+
+        for (let i = 0; i < this.filterQuote.quotecheckboxCat.length; i++) {
+            if (this.filterQuote.quotecheckboxCat[i].checked == true) {
+                this.filterQuote.quotecheckboxCat[i].checked = false
+            }
+        }
+
+        for (let i = 0; i < this.filterQuote.quotecheckboxAutor.length; i++) {
+            if (this.filterQuote.quotecheckboxAutor[i].checked == true) {
+                this.filterQuote.quotecheckboxAutor[i].checked = false
+            }
+        }
     }
 
     //идет по коллекции чекбоксов и если они чекнуты пушит из дата атрибута айди
@@ -77,7 +90,8 @@ class Quote {
         //идет по коллекции чекбоксов по авторам
         for (let i = 0; i < this.filterQuote.quotecheckboxAutor.length; i++) {
             if (this.filterQuote.quotecheckboxAutor[i].checked == true) {
-                this.filterQuote.filters.author = [...this.filterQuote.filters.author, this.filterQuote.quotecheckboxAutor[i].dataset.id]
+                this.filterQuote.filters.authors = [...this.filterQuote.filters.authors, this.filterQuote.quotecheckboxAutor[i].dataset.id]
+
             }
         }
 
@@ -103,6 +117,13 @@ class Quote {
                 this._getNextQuote();
                 this._putAlreadyViewedIds(fakeAPI);
             });
+
+        // //после отправки на сервер сформированный массив с фильтрами его нужно отчистить
+
+        for (let key in this.filterQuote.filters) {
+            this.filterQuote.filters[key] = []
+        }
+        console.log(this.filterQuote.filters);
     }
 
     _render(quote) {
@@ -143,31 +164,24 @@ class Quote {
 }
 
 class FilterQuote {
-    constructor(quote) {
-        this.quote = quote;
+    constructor() {
         this.filters = {
-            'author': [],
+            'authors': [],
             'categories': []
         };
-
         this.quotecheckboxAutor = document.querySelectorAll('.quotecheckboxAutor');
         this.quotecheckboxCat = document.querySelectorAll('.quotecheckboxCat');
+
     }
 
     setFilersCallBack(quote_filter_open) {
         let modalDialogQuot = document.querySelector('.modalDialogQuot');
-		if (quote_filter_open !== null) {
-			quote_filter_open.addEventListener('click', () => {
-				//после отправки на сервер сформированный массив с фильтрами его нужно отчистить
-				for (let key in this.filters) {
-					this.filters[key] = []
-				}
-	//            console.log(this.filters);
-				modalDialogQuot.style.display = 'block';
 
-			})
-		}
-        
+        quote_filter_open.addEventListener('click', () => {
+            modalDialogQuot.style.display = 'block';
+
+        })
+
     }
 
     openQuoteFilter(e) {
@@ -211,9 +225,8 @@ class FilterQuote {
 
 }
 
-let quote_filter_open = document.querySelector('.quote_filter_open');
+
 let filterQuote = new FilterQuote();
 let quote = new Quote(filterQuote);
-quote.filterQuote.setFilersCallBack(quote_filter_open);
 quoteLink.addEventListener('click', e => { quote.init() });
 quoteLinkMain.addEventListener('click', e => { quote.init() });

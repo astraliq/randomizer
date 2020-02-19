@@ -14,7 +14,7 @@
                     <li class="checkbox"><input type="checkbox" id="film-check7" value="7" data-id="18"><label for="film-check7">Фантастика</label></li>
                     <li class="checkbox"><input type="checkbox" id="film-check8" value="8" data-id="15"><label for="film-check8">Мультфильм</label></li>
                     <li class="checkbox"><input type="checkbox" id="film-check9" value="9" data-id="4"><label for="film-check9">Драма</label></li>
-                    <li class="checkbox"><input type="checkbox" id="film-check10" value="10" data-id="20"><label for="film-check10">Аниме</label></li>
+                    <li class="checkbox"><input type="checkbox" id="film-check10" value="10" data-id="31"><label for="film-check10">Аниме</label></li>
                     <li class="checkbox"><input type="checkbox" id="film-check11" value="11" data-id="22"><label for="film-check11">Приключения</label></li>
                 </ul>
         </div>
