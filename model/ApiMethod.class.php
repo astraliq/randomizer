@@ -23,6 +23,7 @@ class ApiMethod {
 	public $rndFilm;
 	public $rndQuote;
 	public $rndNumber;
+	public $rndWord;
 	public $userModel;
 	public $rndCongratulate;
 	public $history;
@@ -35,6 +36,7 @@ class ApiMethod {
         $this->rndFilm = new RndFilm();
         $this->rndQuote = new RndQuote();
         $this->rndNumber = new RndNumber();
+        $this->rndWord = new RndWord();
         $this->userModel = new UserModel();
         $this->rndCongratulate = new RndCongratulate();
         $this->history = new History();
@@ -206,6 +208,31 @@ class ApiMethod {
 			$this->error('Ошибка чтения из БД');
 		}
 	}
+
+	public function getRndWord() {
+		
+		$language = $_POST['postData']['language'] ?? '';
+		$word = $this->rndWord->getRandomWord($language);
+		$currentCategory = 'Интересное слово';
+		$otherCat = $this->randomType->getRndBrowseNowCat([$currentCategory]);
+		$otherCatData = $this->randomType->categories[$otherCat];
+
+		// print_r($_POST['postData']);
+		// exit();
+		if ($word) {
+			$data['rnd'] = $word;
+			$data['otherCat'] = [
+				'nameCase' => $this->randomType->categories[$currentCategory]['case'],
+				'function' => $otherCatData['function'],
+				'name' => $otherCat,
+			];
+			$data['result'] = "OK";
+			$this->success($data);
+		} else {
+			$this->error('Ошибка чтения из БД');
+		}
+	}
+
 
 	public function getNumberInfo() {
 		$number = $_POST['postData']['number'] ?? '';

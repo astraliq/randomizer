@@ -13,6 +13,7 @@
                         <li class="nav-item"><a class="nav-item-link quote_main_lnk">Цитаты</a></li>
                         <li class="nav-item"><a class="nav-item-link number_main_lnk">Случайное число</a></li>
                         <li class="nav-item"><a class="nav-item-link congratulate_main_lnk">Поздравление</a></li>
+                        <li class="nav-item"><a class="nav-item-link words_main_lnk">Интересное слово</a></li>
                         <li class="nav-item"><a class="nav-item-link">Ещё</a></li>
                     </ul>
                 </nav>

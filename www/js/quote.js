@@ -1,7 +1,7 @@
 "use strict"
 
 let mainBlock = document.querySelector('#main_rnd_block');
-let quoteLink = document.querySelector('.data-title-link');
+//let quoteLink = document.querySelector('.data-title-link');
 let quoteLinkMain = document.querySelector('.quote_main_lnk');
 
 
@@ -228,5 +228,5 @@ class FilterQuote {
 
 let filterQuote = new FilterQuote();
 let quote = new Quote(filterQuote);
-quoteLink.addEventListener('click', e => { quote.init() });
+//quoteLink.addEventListener('click', e => { quote.init() });
 quoteLinkMain.addEventListener('click', e => { quote.init() });

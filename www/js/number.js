@@ -82,7 +82,7 @@ class Numbers {
 		$('.main-block-menu').empty();
 		$('.main-block-menu').prepend(`
 			<div>
-				Cлучайность из категории:<span class="cat-sel">Генератор случайных чисел</span>
+				Cлучайность из категории:<span class="cat-sel">Случайное число</span>
 			</div>
 		`);
 		$('.main-block-data').empty();
@@ -109,12 +109,15 @@ class Numbers {
 					</div>
 				</div>
 		`);
-		this.otherCat.render({name: 'Фильм', function: 'film.getRndFilm()', nameCase: 'генератора случайных чисел'});
+		this.otherCat.render({name: 'Фильм', function: 'film.getRndFilm()', nameCase: 'случайных чисел'});
 		document.querySelector('.button-rand').addEventListener('click', e => { number.getRandomInt() });
     }
 };
 let number = new Numbers();
-numberMainLink.addEventListener('click', e => { number.render() });
+numberMainLink.addEventListener('click', e => { 
+	number.render();
+	number.getRandomInt();
+});
 if (nextNumber !== null) {
 	nextNumber.addEventListener('click', e => { number.getRandomInt() });
 }

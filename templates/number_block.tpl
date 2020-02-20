@@ -1,18 +1,27 @@
 <section class="main-block main-color-5">
     <div class="main-block-menu">
         <div>
-            Cлучайность из категории:<span class="cat-sel">Генератор случайных чисел</span>
+            Cлучайность из категории:<span class="cat-sel">Случайное число</span>
         </div>
     </div>
 
     <div class="main-block-data">
         <div class="main-block-data-primary">
             <div class="main-block-data-number_info">
-                <span class="spravka"></span><br>
-                <p class="data-info" id="fact"><span class="sel-numb"></span></p>
+                {% set info = '' %} 
+                {% set number = '' %} 
+                {% set tire = '' %}
+                {%if content.randomData.info is not null %}           
+                    {% set info = 'Справка:' %} 
+                    {% set number = content.randomData.number %}
+                    {% set tire = ' &#151; ' %}                                  
+                {% endif %}
+                <span class="spravka"> {{ info }} </span><br>
+                <p class="data-info" id="fact"><span class="sel-numb">{{ number }}</span>{{ tire|raw }} {{ content.randomData.info }}</p>
+
                 </div>
             <div class="random-data">
-                <p class="main-number" id="answer"></p>
+                <p class="main-number" id="answer">{{ content.randomData.number }}</p>
                 <div class="random-form">
                     <div>
                         <div>

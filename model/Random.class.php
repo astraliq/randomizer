@@ -28,9 +28,9 @@ class Random extends Model {
 			'case' => 'произведений искусств',
 			'function' => '',
 		],
-		'Слово на иностранном языке' => [
+		'Интересное слово' => [
 			'tpl' => 'see_now_foreign_word.tpl',
-			'case' => 'иностранных слов',
+			'case' => 'интересных слов',
 			'function' => '',
 		],
 		'Поздравление' => [
@@ -40,8 +40,8 @@ class Random extends Model {
 		],
 		'Число' => [
 			'tpl' => 'empty.tpl',
-			'case' => 'генератора случайных чисел',
-			'function' => "",
+			'case' => 'случайных чисел',
+			'function' => '',
 		]
 	];
 
@@ -49,6 +49,8 @@ class Random extends Model {
 		parent::__construct();
 		$this->film = new RndFilm();
 		$this->quote = new RndQuote();
+		$this->word = new RndWord();
+		$this->number = new RndNumber();
 		$this->congratulate = new RndCongratulate();
     }
 
@@ -78,6 +80,17 @@ class Random extends Model {
 		    case "Цитата":
 		        $result = $this->quote->getRandomQuote('','');
 		        break;
+		    case "Интересное слово":
+		        $result = $this->word->getRandomWord(['']);
+		        break;
+		    case "Число":
+		    	$rand = rand(0, 50);
+		        $info = $this->number->getNumberInfo($rand);
+		        $result = [
+		        	'number' => $rand,
+		        	'info' => $info['info'],
+		        ];
+		        break;
 		    case "Поздравление":
 		        $result = $this->congratulate->getRandomCongratulate('','');
 		        break;
@@ -90,7 +103,8 @@ class Random extends Model {
 	public function getRandomCategory() {
 		$categories = $this->dataBase->uniSelect($this->categoriesTable, []);
 		// $randomCategory = $categories[array_rand($categories, 1)];
-		$list = ['Фильм', 'Цитата', 'Поздравление', 'Число'];
+		$list = ['Фильм', 'Цитата', 'Поздравление', 'Число', 'Интересное слово'];
+		$list = ['Число'];
 		$randomCategory = $list[array_rand($list, 1)];
 		return $randomCategory;
 	}
@@ -101,7 +115,7 @@ class Random extends Model {
 			$check = 0;
 			$randCat = array_rand($this->categories, 1);
 			foreach ($usedCategories as $cat) {
-				if ($randCat === $cat) {
+				if ($randCat === $cat || $randCat === 'Число') {
 					$check = 1;
 				};
 			}
@@ -141,6 +155,13 @@ class Random extends Model {
 					$browse = $this->dataBase->uniSelectLast($this->browseNowTable, $object, 'id');
 					$data['congrData'] = $this->congratulate->getCongrById($browse['random_id']);
 					break;
+				case 'Интересное слово':
+					$object = [
+						'category_id' => 10
+					];
+					$browse = $this->dataBase->uniSelectLast($this->browseNowTable, $object, 'id');
+					$data['wordData'] = $this->word->getWordById($browse['random_id']);
+					break;
 				default:
 					// code...
 					break;
@@ -168,6 +189,9 @@ class Random extends Model {
 					break;
 				case 'Поздравление':
 					$data['congrData'] = $this->congratulate->getRandomCongratulate('','');
+					break;
+				case 'Интересное слово':
+					$data['wordData'] = $this->word->getRandomWord(['']);
 					break;
 				default:
 					// code...

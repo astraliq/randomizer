@@ -85,17 +85,19 @@ class BrowseNow {
 					</div>
 				</div>`;
 			break;
-			case 'Слово на иностранном языке':
+			case 'Интересное слово':
 				html = `
 				<div class="see-now-main-data">
-					<div class="data-title">
-						<a href="#" class="data-title-link">Слово на иностранном языке</a>
+					<div class="see-now-cat">
+						<a class="see-now-cat-link" onclick="words.init();">Интересное слово</a>
 					</div>
 					<div class="data-desc-1">
-						<p class="data-text">guerra [ˈɡwɛrra] - война</p>
-						<p class="data-person">Например: Проиграть войну – perdere la guerra.</p>
+						<h1>Слово: ${this.browseNowData.wordData.word}</h1>
+						<h3>Язык: ${this.browseNowData.wordData.language}</h3>
+						<p class="art-text"><span style="font-size: 24px">Значение: </span> ${this.browseNowData.wordData.meaning}</p>
 					</div>
-				</div>`;
+				</div>
+				`;
 			break;
 			case 'Поздравление':
 				label = `<label for="button-cg" onclick="changeStatus('congr', 'congr_text')" id="congr">Больше описания</label>
@@ -121,7 +123,7 @@ class BrowseNow {
 				html = `
 				<div class="see-now-main-data">
 					<div class="data-title">
-						<a href="#" class="data-title-link">Подарки</a>
+						<a class="data-title-link">Подарки</a>
 					</div>
 					<div class="data-desc-2">
 						<div class="see-now-img">
