@@ -414,8 +414,17 @@ function checkLengthSeeNowText (objectSN) {
 checkLengthSeeNowText(snLabels);
 
 
-
-
+//let listenCall;
+//listenCall('send', function () {
+//
+//    // запрос получил ответ
+//    if (this.readyState == 4) {
+//
+//        console.log('Запрос успешно перехвачен!');
+//        
+//    }
+//
+//}, xmlHttpRequest);
 
 
 
