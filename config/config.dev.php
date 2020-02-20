@@ -16,6 +16,9 @@ $config['path_templates'] = $config['path_root'] . '/../templates';
 $config['path_logs'] = $config['path_root'] . '/../logs';
 $config['sitename'] = 'randomizer';
 
+$config['mail'] = 'randomizer';
+$config['mail_pass'] = '123456';
+$config['mail_name'] = 'randomizer';
 
 // $config['mainMenu'] = [
 // 	[
