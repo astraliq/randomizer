@@ -15,18 +15,21 @@ class RndWord extends Model {
 		if ($language[0] === '') {
 			$filterLang = "";
 		} else {
-			$language = implode(', ', $language);
-			$lang_ids;
-			$filterLang = " WHERE lang.`language_title` IN ($language)";
+			$language = implode("', '", $language);
+			$filterLang = " WHERE lang.`language_title` IN ('$language')";
 		}
 		
 		$sql = "SELECT w.`id`, w.`word`, w.`meaning`, lang.`language_title` as language FROM `$this->wordTable` as w LEFT JOIN `$this->wordLang` as lang ON w.`language_id` = lang.id" . $filterLang;
 
 		$words = $this->dataBase->getRows($sql, null);
-		$randomWord = $words[array_rand($words, 1)];
-
-		$catId = $this->history->getCategoryId('Интересное слово');
-		$addToGenHistory = $this->history->addRandomToGeneralHistory($catId, $randomWord['id']);
+		if ($words) {
+			$randomWord = $words[array_rand($words, 1)];
+			$catId = $this->history->getCategoryId('Интересное слово');
+			$addToGenHistory = $this->history->addRandomToGeneralHistory($catId, $randomWord['id']);
+		} else {
+			$randomWord = null;
+		}
+		
 		return $randomWord;
 	}
 
@@ -41,4 +44,3 @@ class RndWord extends Model {
 
 }
 ?>
-

@@ -16,9 +16,14 @@
 			$dsn = Config::get('db_driver') . ':host='. Config::get('db_host') . ';dbname=' . Config::get('db_base');
 			$user = Config::get('db_user');
 			$pass = Config::get('db_pass');
-			$this->dataBase = new PDO($dsn, $user, $pass);
-			$this->dataBase->exec('SET NAMES UTF8');
-			$this->dataBase->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+			try {
+				$this->dataBase = new PDO($dsn, $user, $pass);
+				$this->dataBase->exec('SET NAMES UTF8');
+				$this->dataBase->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+			} catch (PDOException $e) {
+			    echo 'Ошибка: ' . $e->getMessage();
+			    exit();
+			}
 		}
 
 		/*
@@ -31,6 +36,10 @@
 		public function execQuery($sql,$args) {
 			$stmt = $this->dataBase->prepare($sql);
 			$stmt->execute($args);
+			if ($stmt->errorCode() != PDO::ERR_NONE) {
+                $info = $stmt->errorInfo();
+                // exit($info[2]);
+            }
 			return $stmt;
 		}
 

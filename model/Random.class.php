@@ -31,7 +31,7 @@ class Random extends Model {
 		'Интересное слово' => [
 			'tpl' => 'see_now_foreign_word.tpl',
 			'case' => 'интересных слов',
-			'function' => '',
+			'function' => 'words.init()',
 		],
 		'Поздравление' => [
 			'tpl' => 'see_now_congratulate.tpl',

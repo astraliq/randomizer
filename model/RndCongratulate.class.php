@@ -36,9 +36,15 @@ class RndCongratulate extends Model {
 		}
 
 		$congratulates = $this->dataBase->getRows($sql, null);
-		$randomCongr = $congratulates[array_rand($congratulates, 1)];
-		$catId = $this->history->getCategoryId('Поздравление');
-		$addToGenHistory = $this->history->addRandomToGeneralHistory($catId, $randomCongr['id']);
+
+		if ($congratulates) {
+			$randomCongr = $congratulates[array_rand($congratulates, 1)];
+			$catId = $this->history->getCategoryId('Поздравление');
+			$addToGenHistory = $this->history->addRandomToGeneralHistory($catId, $randomCongr['id']);
+		} else {
+			$randomCongr = null;
+		}
+		
 		return $randomCongr;
 	}
 
@@ -50,4 +56,3 @@ class RndCongratulate extends Model {
 	}
 }
 ?>
-

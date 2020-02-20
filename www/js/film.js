@@ -266,7 +266,6 @@ class Films {
             data: data,
             success: function (data) {
                 //data приходят те данные, который прислал на сервер
-                data = JSON.parse(data);
                 if (data.result !== "OK") {
                     console.log('ERROR_GET_DATA_');
                 }
@@ -306,7 +305,6 @@ class Films {
 		};
 		this._getJson(`/index.php`, sendData)
 			.then(data => {
-				data = JSON.parse(data);
 				if (data.result === "OK") {
 					let film = data.rnd;
 					let film_cats = data.categories.map(function(elem) {

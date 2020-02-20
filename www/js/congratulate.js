@@ -260,7 +260,6 @@ function firstRnd() {
     // запрос случайного поздравления по id номеру
     congratulate._getRndCongratulate(`/index.php`, sendData)
         .then(data => {
-            data = JSON.parse(data);
             findings.id = data.rnd.id;
             findings.congrRnd = data.rnd.congratulate;
             congratulate.renderText(findings.congrRnd);
@@ -439,7 +438,6 @@ class Congratulate {
         //запрос по критерию отбора (who, theme) 
         congratulate._getRndCongratulate(`/index.php`, sendData)
             .then(data => {
-                data = JSON.parse(data);
                 if (data.result === "OK") {
                     congratulate.data = data.rnd;
                     console.log(congratulate.data);
@@ -477,7 +475,6 @@ class Congratulate {
             url: url,
             data: jdata,
             success: function (data) {
-                data = JSON.parse(data);
                 if (data.result !== "OK") {
                     console.log("ERROR_GET_CONGRATULATE");
                 }

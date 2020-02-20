@@ -71,7 +71,7 @@ function colorWords(color) {
 
 let interestingWords = {
     id: 0,
-    language: ['французский', 'немецкий', 'финский', 'испанский', 'голландский', 'чешский', 'шведский', 'луба, группа банту', 'китайский', 'арабский', 'японский', 'персидский', 'лингала, группа банту', 'язык острова Киривина, Новая Гвинея', 'идиш', 'язык майя Южной Мексики и Гондураса'],
+    language: [],//'французский', 'немецкий', 'финский', 'испанский', 'голландский', 'чешский', 'шведский', 'луба, группа банту', 'китайский', 'арабский', 'японский', 'персидский', 'лингала, группа банту', 'язык острова Киривина, Новая Гвинея', 'идиш', 'язык майя Южной Мексики и Гондураса'
     word: "",
     meaning: ""
 };
@@ -163,33 +163,33 @@ class FiltrWords {
     _goRandomWords() {
         //проверяем содержимое массива языков = ВСЕ или длина массива = 0
         if (interestingWords.language.includes('все') || interestingWords.language.length == 0) {
-            interestingWords.language = ['французский', 'немецкий', 'финский', 'испанский', 'голландский', 'чешский', 'шведский', 'луба, группа банту', 'китайский', 'арабский', 'японский', 'персидский', 'лингала, группа банту', 'язык острова Киривина, Новая Гвинея', 'идиш', 'язык майя Южной Мексики и Гондураса'];
+            interestingWords.language = [];//'французский', 'немецкий', 'финский', 'испанский', 'голландский', 'чешский', 'шведский', 'луба, группа банту', 'китайский', 'арабский', 'японский', 'персидский', 'лингала, группа банту', 'язык острова Киривина, Новая Гвинея', 'идиш', 'язык майя Южной Мексики и Гондураса'
             console.log('new start');
         }
         console.log('old run');
         console.log(interestingWords.language);
 
-        this.randomWords();
+        // this.randomWords();
+        words.init();
     }
 
-    //рандомное значение по фильтру языков
-    randomWords() {
-        let i;
+    // //рандомное значение по фильтру языков
+    // randomWords() {
+    //     let i;
 
-        do {
-            i = words.rndWords();
-            if (interestingWords.language.includes(words.data[i].language)) {
-                interestingWords.id = words.data[i].id
-                // interestingWords.language = words.data[i].language;
-                interestingWords.word = words.data[i].word;
-                interestingWords.meaning = words.data[i].meaning;
-                this._renderTextWordFilter(words.data[i].word, words.data[i].language, words.data[i].meaning);
-            }
-            // if (interestingWords.language.includes('все')) words.init();
-        } while (!interestingWords.language.includes(words.data[i].language));
-        this._offModalAll();
-
-    }
+    //     do {
+    //         i = words.rndWords();
+    //         if (interestingWords.language.includes(words.data[i].language)) {
+    //             interestingWords.id = words.data[i].id
+    //             // interestingWords.language = words.data[i].language;
+    //             interestingWords.word = words.data[i].word;
+    //             interestingWords.meaning = words.data[i].meaning;
+    //             this._renderTextWordFilter(words.data[i].word, words.data[i].language, words.data[i].meaning);
+    //         }
+    //         // if (interestingWords.language.includes('все')) words.init();
+    //     } while (!interestingWords.language.includes(words.data[i].language));
+    //     this._offModalAll();
+    // }
 
     //выключение модального окна
     _offModalAll() {
@@ -251,60 +251,60 @@ class Words {
     }
 
     _getJson(url, data) {
-		return $.post({
+        return $.post({
             url: url,
             data: data,
             success: function (data) {
                 //data приходят те данные, который прислал на сервер
-                data = JSON.parse(data);
                 if (data.result !== "OK") {
                     console.log('ERROR_GET_DATA_');
                 }
             }
         })
-	}
-
-    //получаем случайное значение
-    rndWords() {
-        return Math.floor(Math.random() * words.data.length);
     }
 
-    //по случайному ID выбираем слово
-    choiceOfWords() {
-        interestingWords.id = this.rndWords();
-        console.log(interestingWords.id);
-        for (let i = 0; i < words.data.length; i++) {
-            if (interestingWords.id == this.data[i].id) {
-                // interestingWords.language = this.data[i].language;
-                interestingWords.word = this.data[i].word;
-                interestingWords.meaning = this.data[i].meaning;
-                filterWords._renderTextWordFilter(this.data[i].word, this.data[i].language, this.data[i].meaning);
-            }
-        };
-    }
+    // //получаем случайное значение
+    // rndWords() {
+    //     return Math.floor(Math.random() * words.data.length);
+    // }
+
+    // //по случайному ID выбираем слово
+    // choiceOfWords() {
+    //     interestingWords.id = this.rndWords();
+    //     console.log(interestingWords.id);
+    //     for (let i = 0; i < words.data.length; i++) {
+    //         if (interestingWords.id == this.data[i].id) {
+    //             // interestingWords.language = this.data[i].language;
+    //             interestingWords.word = this.data[i].word;
+    //             interestingWords.meaning = this.data[i].meaning;
+    //             filterWords._renderTextWordFilter(this.data[i].word, this.data[i].language, this.data[i].meaning);
+    //         }
+    //     };
+    // }
 
     init() {
-		
-		let sendData = {
-			apiMethod: 'getRndWord',
-			postData: {
-				language: this.years,
-			}
-		};
-		
+
+        let sendData = {
+            apiMethod: 'getRndWord',
+            postData: {
+                language: interestingWords.language,
+            }
+        };
+
         this.runProgrWords();
-		this._getJson(`/index.php`, sendData)
-			.then(data => {
-				data = JSON.parse(data);
-				if (data.result === "OK") {
-					
-					filterWords._renderTextWordFilter(data.rnd.word, data.rnd.language, data.rnd.meaning);
-					this.otherCat.render(data.otherCat);
-					this.browseNow.getBrowseNowData('Интересное слово');
-				} else {
-					console.log('ERROR_GET_FILM');
-				}
-			});
+        this._getJson(`/index.php`, sendData)
+            .then(data => {
+                if (data.result === "OK") {
+
+                    console.log(data.rnd);
+                    filterWords._renderTextWordFilter(data.rnd.word, data.rnd.language, data.rnd.meaning);
+                    this.otherCat.render(data.otherCat);
+                    this.browseNow.getBrowseNowData('Интересное слово');
+
+                } else {
+                    console.log('ERROR_GET_FILM');
+                }
+            });
     }
 
 }//конец класса

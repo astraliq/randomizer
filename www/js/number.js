@@ -17,7 +17,6 @@ class Numbers {
             data: data,
             success: function (data) {
                 //data приходят те данные, который прислал на сервер
-                data = JSON.parse(data);
             }
         })
 	}
@@ -59,7 +58,6 @@ class Numbers {
 		};
 		this._getJson(`/index.php`, sendData)
 			.then(data => {
-				data = JSON.parse(data);
 				if (data.result === "OK") {
 					this._renderNumber(answer[0], data.info.info);
 					this.otherCat.render(data.otherCat);

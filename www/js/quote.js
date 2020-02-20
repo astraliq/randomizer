@@ -1,7 +1,6 @@
 "use strict"
 
 let mainBlock = document.querySelector('#main_rnd_block');
-//let quoteLink = document.querySelector('.data-title-link');
 let quoteLinkMain = document.querySelector('.quote_main_lnk');
 
 
@@ -38,7 +37,6 @@ class Quote {
                 }
             },
             success: function (data) {
-                data = JSON.parse(data);
                 if (data.result !== "OK") {
                     console.log('ERROR_GET_QUOTE');
                 }
@@ -64,18 +62,6 @@ class Quote {
         //по идее должен отправять на сервер новый запрос но уже с фильтрами и рендерить на их основании новую цитату
 
         this.init();
-
-        for (let i = 0; i < this.filterQuote.quotecheckboxCat.length; i++) {
-            if (this.filterQuote.quotecheckboxCat[i].checked == true) {
-                this.filterQuote.quotecheckboxCat[i].checked = false
-            }
-        }
-
-        for (let i = 0; i < this.filterQuote.quotecheckboxAutor.length; i++) {
-            if (this.filterQuote.quotecheckboxAutor[i].checked == true) {
-                this.filterQuote.quotecheckboxAutor[i].checked = false
-            }
-        }
     }
 
     //идет по коллекции чекбоксов и если они чекнуты пушит из дата атрибута айди
@@ -103,7 +89,6 @@ class Quote {
     init() {
         this.getRndQuote()
             .then(data => {
-                data = JSON.parse(data);
                 fakeAPI.id = data.rnd.id;
                 fakeAPI.text = data.rnd.text;
                 fakeAPI.author = data.rnd.author;
@@ -117,13 +102,7 @@ class Quote {
                 this._getNextQuote();
                 this._putAlreadyViewedIds(fakeAPI);
             });
-
-        // //после отправки на сервер сформированный массив с фильтрами его нужно отчистить
-
-        for (let key in this.filterQuote.filters) {
-            this.filterQuote.filters[key] = []
-        }
-        console.log(this.filterQuote.filters);
+ 
     }
 
     _render(quote) {
@@ -228,5 +207,4 @@ class FilterQuote {
 
 let filterQuote = new FilterQuote();
 let quote = new Quote(filterQuote);
-//quoteLink.addEventListener('click', e => { quote.init() });
 quoteLinkMain.addEventListener('click', e => { quote.init() });

@@ -45,8 +45,8 @@ class ApiMethod {
     }
 
 	//Функция вывода ошибки
-	private static function error($error_text) {
-		// header('Content-Type: application/json; charset=utf-8');
+	private static function error($error_text, $code = 404) {
+		http_response_code($code);
 		echo json_encode([
 			'error' => true,
 			'error_text' => $error_text,
@@ -58,7 +58,7 @@ class ApiMethod {
 
 	//Функция успешного ответа
 	private static function success($data = true) {
-		// header('Content-Type: application/json; charset=utf-8');
+		header('Content-Type: application/json; charset=utf-8');
 		echo json_encode($data, JSON_UNESCAPED_UNICODE);
 		exit();
 
@@ -151,8 +151,6 @@ class ApiMethod {
 		$otherCat = $this->randomType->getRndBrowseNowCat([$currentCategory]);
 		$otherCatData = $this->randomType->categories[$otherCat];
 
-		// print_r($_POST['postData']);
-		// exit();
 		if ($film && $otherCat) {
 			$data['rnd'] = $film;
 			$data['categories'] = $categories;
@@ -165,7 +163,9 @@ class ApiMethod {
 			
 			$this->success($data);
 		} else {
-			$this->error('Ошибка чтения из БД');
+			if (is_null($film)) {
+				$this->error('Ошибка чтения из БД', 404);
+			}
 		}
 	}
 
@@ -191,7 +191,7 @@ class ApiMethod {
 			$data['result'] = "OK";
 			$this->success($data);
 		} else {
-			$this->error('Ошибка чтения из БД');
+			$this->error('Ошибка чтения из БД',404);
 		}
 	}
 
@@ -251,7 +251,7 @@ class ApiMethod {
 			];
 			$this->success($data);
 		} else {
-			$this->error('Ошибка чтения из БД');
+			$this->error('Ошибка чтения из БД',200);
 		}
 	}
 

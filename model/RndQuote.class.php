@@ -32,9 +32,15 @@ class RndQuote extends Model {
 		$sql = "SELECT q.`id`, `text`, `author_title` as author, `category_title` as categories, author.`authorInfo`, q.`img` as picture FROM `$this->quoteTable` as q LEFT JOIN `$this->quoteCategories` as cat ON q.`category_id` = cat.id LEFT JOIN `$this->quoteAuthors` as author ON q.`author_id` = author.id" . $where . $filterCat . $filterAuthors;
 
 		$quotes = $this->dataBase->getRows($sql, null);
-		$randomQuote = $quotes[array_rand($quotes, 1)];
-		$catId = $this->history->getCategoryId('Цитата');
-		$addToGenHistory = $this->history->addRandomToGeneralHistory($catId, $randomQuote['id']);
+
+		if ($quotes) {
+			$randomQuote = $quotes[array_rand($quotes, 1)];
+			$catId = $this->history->getCategoryId('Цитата');
+			$addToGenHistory = $this->history->addRandomToGeneralHistory($catId, $randomQuote['id']);
+		} else {
+			$randomQuote = null;
+		}
+		
 		return $randomQuote;
 	}
 
@@ -49,4 +55,3 @@ class RndQuote extends Model {
 
 }
 ?>
-

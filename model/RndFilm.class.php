@@ -63,12 +63,17 @@ class RndFilm extends Model {
 		// 	$idFilms[$k]= $film['id'];
 		// 	$k++;
 		// }
-		// print_r($idFilms);
+		// print_r($films);
 		// exit();
 
-		$randomFilm = $films[array_rand($films, 1)];
-		$catId = $this->history->getCategoryId('Фильм');
-		$addToGenHistory = $this->history->addRandomToGeneralHistory($catId, $randomFilm['id']);
+		if (!empty($films)) {
+			$randomFilm = $films[array_rand($films, 1)];
+			$catId = $this->history->getCategoryId('Фильм');
+			$addToGenHistory = $this->history->addRandomToGeneralHistory($catId, $randomFilm['id']);
+		} else {
+			$randomFilm = null;
+		}
+		
 		return $randomFilm;
 	}
 
@@ -182,4 +187,3 @@ class RndFilm extends Model {
 }
 
 ?>
-

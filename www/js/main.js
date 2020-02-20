@@ -149,7 +149,6 @@ class BrowseNow {
             data: data,
             success: function (data) {
                 //data приходят те данные, который прислал на сервер
-                data = JSON.parse(data);
                 if (data.result !== "OK") {
                     console.log('ERROR_GET_DATA');
                 }
@@ -166,7 +165,6 @@ class BrowseNow {
 		};
 		this._getJson(`/index.php`, sendData)
 			.then(data => {
-				data = JSON.parse(data);
 				if (data.result === "OK") {
 					this.browseNowData = data.browseNowData;
 					this.html = this._getCategoryHTML(data.browseFirst);
@@ -197,7 +195,6 @@ class OtherCategory {
             data: data,
             success: function (data) {
                 //data приходят те данные, который прислал на сервер
-                data = JSON.parse(data);
                 if (data.result !== "OK") {
                     console.log('ERROR_GET_DATA');
                 }
@@ -214,7 +211,6 @@ class OtherCategory {
 		};
 		return this._getJson(`/index.php`, sendData)
 			.then(data => {
-				data = JSON.parse(data);
 				if (data.result === "OK") {
 					this.data.name = data.otherCatName;
 					this.data.nameCase = data.case;
@@ -248,7 +244,6 @@ class Mailing {
             url: url,
             data: data,
             success: function (data) {
-                data = JSON.parse(data);
                 if (data.result !== "OK") {
                     console.log('ERROR_ADD_EMAIL');
                 }
@@ -338,7 +333,6 @@ class Mailing {
 		};
 		this._postJson(`/index.php`, sendData)
 			.then(data => {
-				data = JSON.parse(data);
 				if (data.result === 'OK' && data.sendConfirm === 'OK') {
 					this.changeStyleDefault();
 					this.clearInput();
@@ -414,9 +408,25 @@ function checkLengthSeeNowText (objectSN) {
 checkLengthSeeNowText(snLabels);
 
 
-//let listenCall;
-//listenCall('send', function () {
+//function listenCall (method, callback, obj) {
+//    if (typeof method !== "string" || typeof callback !== "function") return;
+//        
+//    obj = obj || window;
+//            
+//    (function(objMethod) {
 //
+//        obj[method] = function() {
+//            try {
+//                callback.apply(obj, arguments);
+//            } catch (e) {}
+//                
+//            return objMethod.apply(obj, arguments);
+//        };
+//    
+//    })(obj[method]);
+//}
+
+//listenCall('send', function () {
 //    // запрос получил ответ
 //    if (this.readyState == 4) {
 //
@@ -424,12 +434,58 @@ checkLengthSeeNowText(snLabels);
 //        
 //    }
 //
-//}, xmlHttpRequest);
+//}, XMLHttpRequest);
 
 
+function addXMLRequestCallback(callback) {
+    let oldSend;
+    if (XMLHttpRequest.callbacks) {
+        XMLHttpRequest.callbacks.push(callback);
+    } else {
+        XMLHttpRequest.callbacks = [callback];
+        oldSend = XMLHttpRequest.prototype.send;
+        XMLHttpRequest.prototype.send = function(data) {
+			let i;
+            for (i = 0; i < XMLHttpRequest.callbacks.length; i++) {
+                XMLHttpRequest.callbacks[i](this);
+            }
+            oldSend.apply(this, arguments);
+        }
+    }
+}
 
+let to1,to2;
+function showEndWindow() {
+	clearTimeout(to1);
+	clearTimeout(to2);
+	let del = $('.end_stub_container').remove();
+	$('main').append(`
+		<div class="end_stub_container fade-in-bck">
+			<div class="end_stub">
+				<h2 class="end_stub_head">Вы просмотрели все случайности из данной категории.</h2>
+				<p class="end_stub_head_text">Попробуйте изменить фильтр или выбрать другую категорию случайностей.</p>
+			</div>
+		</div>
+	`);
+	to1 = setTimeout(function () {
+		$('.end_stub_container').removeClass('fade-in-bck');
+		$('.end_stub_container').addClass('fade-out-bck');
+		to2 = setTimeout(function () {
+			$('.end_stub_container').remove();
+		}, 1000);
+	}, 3500);
 
+}
 
+addXMLRequestCallback(function(xhr) {
+	xhr.onreadystatechange = function () {
+		if (xhr.readyState === 4) {
+			if (xhr.status === 404) {
+				showEndWindow();
+			}
+		}
+	};
+});
 
 
 //Функция AJAX получения рандомного фильма
@@ -453,7 +509,6 @@ checkLengthSeeNowText(snLabels);
 //		success: function (data) {
 //			//data приходят те данные, который прислал на сервер
 //			
-//			data = JSON.parse(data);
 //			if (data.result === "OK") {
 //				let film = data.rnd;
 //				let film_cats = data.categories.map(function(elem) {
