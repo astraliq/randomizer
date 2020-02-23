@@ -11,7 +11,7 @@
     <div class="main-block-data">
         <div class="main-block-data-primary">
             <div class="main-block-data-pic">
-                {% set img = 'img/quoters/stub.jpg' %} 
+                {% set img = 'img/quoters/person-error.png' %} 
                 {%if content.randomData.picture is not null %}           
                     {% set img = content.randomData.picture %}                                   
                 {% endif %}

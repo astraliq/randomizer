@@ -182,7 +182,15 @@ main {
 	margin: 0 0 0 -15px;
 }
 
-.qoutes-title {
+.quote-person, .cong-cat {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  color: #000;
+  font-family: "roboto";
+  font-size: 18px;
+  font-weight: 400; }
+
+.quotes-title {
 	margin: 50px 0 0 0;
 	padding: 0 0 0 0;
 	color: #000;
@@ -999,14 +1007,14 @@ ul {
 .cong-cat {
 	margin: 0 0 0 0;
 	padding: 0 0 0 0;
-	color: $color-main;
-	font-family: $font-main;
-	font-size: 20px;
+	color: #000;
+	font-family: "roboto";
+	font-size: 17px;
 	font-weight: 400;
 }
 
 .cong-cat-link {
-	color: $color-main;
+	color: #000;
 	text-decoration: underline;
 }
 
@@ -1029,6 +1037,7 @@ ul {
 	font-weight: 700;
 }
 
+.word-text,
 .art-text,
 .congr-text,
 .movie-text,
@@ -1043,6 +1052,12 @@ ul {
 	overflow: hidden;
 	order: 0;
 }
+
+.word-text {
+	height: 130px;
+}
+
+
 
 .see-now-wrapper {
 	display: flex;
@@ -1068,6 +1083,14 @@ input[type="checkbox"]:checked + .movie-text {
 }
 
 input[type="checkbox"]:checked + .quote-text {
+	height: auto;
+}
+
+input[type="checkbox"]:checked + .word-text {
+	height: auto;
+}
+
+input[type="checkbox"]:checked + .congr-text {
 	height: auto;
 }
 

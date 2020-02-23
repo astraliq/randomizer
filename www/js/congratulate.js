@@ -72,7 +72,7 @@ const renderFirst = `
         `;
 
 const renderMenu = ` <div class="main-block-menu">
-                        <div>Cлучайность из категории:<span class="cat-sel">Поздравления</span></div>
+                        <div>Cлучайность из категории:<span class="cat-sel">Поздравление</span></div>
                         <div>
                             <span class="cat-settings" onclick="rendGo();" style="cursor: pointer;">Настроить фильтр</span>
                             <span class="next-random" onclick="firstRnd();" style="cursor: pointer;">Следующее поздравление</span>
@@ -236,7 +236,12 @@ function rendGo() {
     let mainBlock = document.querySelector('.modal_text');//было - .main-block-data    
     let mainBlockMenu = document.querySelector('.main-block-menu');//место вставки строки
     mainBlock.innerHTML = renderGo;
-    mainBlockMenu.innerHTML = renderMenu;
+    mainBlockMenu.innerHTML = `<div>Cлучайность из категории:<span class="cat-sel">Поздравление</span></div>
+                                <div>
+                                    <span class="cat-settings" onclick="rendGo();" style="cursor: pointer;">Настроить фильтр</span>
+                                    <span class="next-random" onclick="firstRnd();" style="cursor: pointer;">Следующее поздравление</span>
+                                </div>
+    `;
     congratulate.btnCross(); // отключение по кресту
     congratulate.btnShadow(); // отключение по тени
     congratulate.init();
@@ -247,7 +252,7 @@ function rendGo() {
 //первое случайное поздравление и также вывод "следующее поздравление"
 function firstRnd() {
     let firstNumber = Math.floor(Math.random() * 92);
-//    console.log(firstNumber);
+    //    console.log(firstNumber);
     findings.id = firstNumber;
 
     let sendData = {
@@ -265,7 +270,7 @@ function firstRnd() {
             congratulate.renderText(findings.congrRnd);
         });
 
-//    console.log(findings);
+    //    console.log(findings);
 }
 
 class Congratulate {
@@ -279,7 +284,7 @@ class Congratulate {
         // event.addEventListener('click', function () {
         mainSection.innerHTML = `${renderMenu} ${renderFirst} 
         <div class="other-cat">
-        Кроме фильмов наш генератор выдаёт варианты из
+        Кроме поздравлений наш генератор выдаёт варианты из
         <a href="#" class="link-in-text">других категорий</a>,
         например, &laquo;
         <a href="#" class="link-in-text" onclick="film.getRndFilm()">Фильмы</a>&raquo;

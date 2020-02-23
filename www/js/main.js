@@ -388,7 +388,8 @@ function changeStatus(typeModul, typeDesc) {
 let snLabels = {
 	'art': 'artdesc',
 	'congr': 'congr_text',
-	'movie': 'moviedesc'
+	'movie': 'moviedesc',
+	'word': 'word_desc'
 };
 
 function checkLengthSeeNowText (objectSN) {

@@ -18,11 +18,11 @@ class Random extends Model {
 			'case' => 'цитат',
 			'function' => 'quote.init()',
 		],
-		'Подарок' => [
-			'tpl' => 'see_now_gift.tpl',
-			'case' => 'подарков',
-			'function' => '',
-		],
+		// 'Подарок' => [
+		// 	'tpl' => 'see_now_gift.tpl',
+		// 	'case' => 'подарков',
+		// 	'function' => '',
+		// ],
 		'Произведение искусства' => [
 			'tpl' => 'see_now_artwork.tpl',
 			'case' => 'произведений искусств',

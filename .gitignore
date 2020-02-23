@@ -7,3 +7,4 @@ model/cookie.txt
 www/js/parser.js
 config/config.default.php
 controller/KinoController.class.php
+/images/

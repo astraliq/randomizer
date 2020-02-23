@@ -310,8 +310,11 @@ class Films {
 					let film_cats = data.categories.map(function(elem) {
 						return elem.categories;
 					});
-					film.main_img = film.main_img === null ? 'stub.jpg' : film.main_img;
-					this._render(film,film_cats);
+					film.main_img = film.main_img === null ? 'film-error.png' : film.main_img;
+					film.actors = film.actors ? film.actors : 'нет данных';
+					film.genres = film.genres ? film.genres : 'нет данных';
+					film.info = [film.year,...film_cats.splice(0, 4),film.country,film.duration];
+					this._render(film);
 					this.otherCat.render(data.otherCat);
 					this._updateLinkFilm();
 					this._putAlreadyViewedIds(film);
@@ -323,7 +326,7 @@ class Films {
 			});
     }
 	
-	_render(film,filmCategories) {	
+	_render(film) {	
 		document.querySelector('.main-block').className = 'main-block main-color-1';
 		$('.main-block-menu').empty();
 		$('.main-block-menu').prepend(`
@@ -343,7 +346,7 @@ class Films {
                         <p class="main-data-title">
 							<span class="left-aquo">«${film.title_ru}»</span>
 						</p>
-                        <p class="film-info">${film.year}, ${filmCategories.splice(0, 3).join(', ')}, ${film.country}, ${film.duration} мин.</p>
+                        <p class="film-info">${film.info.join(', ')} мин.</p>
                         <p class="film-desc">${film.description_ru}</p>
                         <p class="film-desc"><b>В главных ролях:</b> ${film.actors}</p>
                         <p class="film-desc"><b>Режиссёр:</b> ${film.genres}</p>

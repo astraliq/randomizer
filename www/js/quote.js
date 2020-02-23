@@ -95,7 +95,7 @@ class Quote {
                 fakeAPI.authorInfo = data.rnd.authorInfo;
                 fakeAPI.catgegories = data.rnd.categories;
                 fakeAPI.picture = data.rnd.picture;
-                fakeAPI.picture = fakeAPI.picture === null ? 'img/quoters/stub.jpg' : fakeAPI.picture;
+                fakeAPI.picture = fakeAPI.picture === null ? 'img/quoters/person-error.png' : fakeAPI.picture;
                 fakeAPI.author = (fakeAPI.author === null) ? "" : fakeAPI.author;
                 fakeAPI.authorInfo = (fakeAPI.authorInfo === null) ? "" : fakeAPI.authorInfo;
                 this._render(fakeAPI);

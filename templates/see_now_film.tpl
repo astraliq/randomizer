@@ -14,9 +14,9 @@
             <p class="see-now-subtitle">{{ content.browseNowData.filmData.title_ru }}
                 <br>{{ content.browseNowData.filmData.year }}, {{ content.browseNowData.filmData.country }}, {{ content.browseNowData.filmData.duration }} мин.</p>
             <div class="see-now-wrapper">
-            <label for="button-m" onclick="changeStatus('movie', 'moviedesc')" id="movie">Больше описания</label>
-            <input type="checkbox" id="button-m">
-           <p class="movie-text" id="moviedesc">{{ content.browseNowData.filmData.description_ru }}</p>
+                <label for="button-m" onclick="changeStatus('movie', 'moviedesc')" id="movie">Больше описания</label>
+                <input type="checkbox" id="button-m">
+                <p class="movie-text" id="moviedesc">{{ content.browseNowData.filmData.description_ru }}</p>
             </div>
         </div>
     </div>
