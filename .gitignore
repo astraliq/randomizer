@@ -1,8 +1,10 @@
 
 config/config.default.php
 config/config.dev1.php
+config/config.prod.php
 /www/img/films/
 model/cookie.txt
 www/js/parser.js
 config/config.default.php
 controller/KinoController.class.php
+images/
