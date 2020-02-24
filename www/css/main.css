@@ -1276,3 +1276,7 @@ label:hover {
   }
 }
 
+.quote-pic,
+.film-pic {
+	object-fit: cover;
+}

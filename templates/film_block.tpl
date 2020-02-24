@@ -11,11 +11,11 @@
             <div class="main-block-data">
                 <div class="main-block-data-primary">
                     <div class="main-block-data-pic">
-                    	{% set img = 'film-error.png' %} 
+                    	{% set img = 'img/films/film-error.png' %} 
 						{%if content.randomData.data.main_img is not null %}           
-					        {% set img = content.randomData.data.main_img %}                                   
+					        {% set img = '' %}                                   
 					    {% endif %}
-                        <img src="img/films/{{img}}" width="276" alt="Фильм &laquo;{{ content.randomData.data.title_ru }}&raquo;" title="{{ content.randomData.data.title_ru }}">
+                        <img class="film-pic" src="{{ img }}" width="276" alt="Фильм &laquo;{{ content.randomData.data.title_ru }}&raquo;" title="{{ content.randomData.data.title_ru }}" data-c="m" data-i="{{content.randomData.data.main_img}}">
                     </div>
                     <div class="main-block-data-text">
                         <p class="main-data-title">

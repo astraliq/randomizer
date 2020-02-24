@@ -6,14 +6,14 @@
 //    console.log('not loaded yet');
 //};
 //
-
+let links = document.querySelectorAll('.footer-more-link');
 
 class BrowseNow {
-    constructor() {
+	constructor() {
 		this.html = '';
 		this.browseNowData = [];
-    }
-	
+	}
+
 	_getCategoryHTML(catName) {
 		let html, label;
 		let limitText = 350;
@@ -45,7 +45,7 @@ class BrowseNow {
 					</div>
 				</div>
 				`;
-			break;
+				break;
 			case 'Цитата':
 				this.browseNowData.quoteData.picture = this.browseNowData.quoteData.picture === null ? 'img/quoters/stub.jpg' : this.browseNowData.quoteData.picture;
 				this.browseNowData.quoteData.author = (this.browseNowData.quoteData.author === null) ? "" : this.browseNowData.quoteData.author;
@@ -59,7 +59,7 @@ class BrowseNow {
 					<p class="quote-person">${this.browseNowData.quoteData.author}</p>
 				</div>
 				`;
-			break;
+				break;
 			case 'Произведение искусства':
 				html = `
 				<div class="see-now-main-data">
@@ -84,7 +84,7 @@ class BrowseNow {
 						</div>
 					</div>
 				</div>`;
-			break;
+				break;
 			case 'Интересное слово':
 				html = `
 				<div class="see-now-main-data">
@@ -98,7 +98,7 @@ class BrowseNow {
 					</div>
 				</div>
 				`;
-			break;
+				break;
 			case 'Поздравление':
 				label = `<label for="button-cg" onclick="changeStatus('congr', 'congr_text')" id="congr">Больше описания</label>
 							<input type="checkbox" id="button-cg">`
@@ -118,7 +118,7 @@ class BrowseNow {
 					</div>
 				</div>
 				`;
-			break;
+				break;
 			case 'Подарок':
 				html = `
 				<div class="see-now-main-data">
@@ -136,26 +136,26 @@ class BrowseNow {
 						</div>
 					</div>
 				</div>`;
-			break;
+				break;
 			default:
 				html = ``;
 		}
 		return html;
 	}
-	
+
 	_getJson(url, data) {
 		return $.post({
-            url: url,
-            data: data,
-            success: function (data) {
-                //data приходят те данные, который прислал на сервер
-                if (data.result !== "OK") {
-                    console.log('ERROR_GET_DATA');
-                }
-            }
-        })
+			url: url,
+			data: data,
+			success: function (data) {
+				//data приходят те данные, который прислал на сервер
+				if (data.result !== "OK") {
+					console.log('ERROR_GET_DATA');
+				}
+			}
+		})
 	}
-	
+
 	getBrowseNowData(currentCategory) {
 		let sendData = {
 			apiMethod: 'getBrowseNowData',
@@ -176,32 +176,32 @@ class BrowseNow {
 					console.log('ERROR_GET_BROWSEDATA');
 				}
 			});
-    }
-	
-	_render(browseNowHTML) {	
+	}
+
+	_render(browseNowHTML) {
 		$('.see-now-main').empty();
 		$('.see-now-main').prepend(browseNowHTML);
-    }
+	}
 }
 
 class OtherCategory {
 	constructor() {
 		this.data;
 	}
-	
+
 	_getJson(url, data) {
 		return $.post({
-            url: url,
-            data: data,
-            success: function (data) {
-                //data приходят те данные, который прислал на сервер
-                if (data.result !== "OK") {
-                    console.log('ERROR_GET_DATA');
-                }
-            }
-        })
+			url: url,
+			data: data,
+			success: function (data) {
+				//data приходят те данные, который прислал на сервер
+				if (data.result !== "OK") {
+					console.log('ERROR_GET_DATA');
+				}
+			}
+		})
 	}
-	
+
 	getOtherCatData(currentCat) {
 		let sendData = {
 			apiMethod: 'getOtherCatData',
@@ -216,11 +216,11 @@ class OtherCategory {
 					this.data.nameCase = data.case;
 					this.data.function = data.function;
 				} else {
-					
+
 				}
 			});
-    }
-	
+	}
+
 	render(data) {
 		$('.other-cat').empty();
 		$('.other-cat').prepend(`
@@ -229,54 +229,54 @@ class OtherCategory {
 				например, &laquo;<a class="link-in-text" onclick="${data.function}">${data.name}</a>&raquo;
 		`);
 	}
-	
+
 }
 
 
 class Mailing {
-    constructor() {
+	constructor() {
 		this.emailAdd;
 		this.emailInput = document.querySelector('#email-mailing');
-    }
+	}
 
 	_postJson(url, data) {
 		return $.post({
-            url: url,
-            data: data,
-            success: function (data) {
-                if (data.result !== "OK") {
-                    console.log('ERROR_ADD_EMAIL');
-                }
-            }
-        })
+			url: url,
+			data: data,
+			success: function (data) {
+				if (data.result !== "OK") {
+					console.log('ERROR_ADD_EMAIL');
+				}
+			}
+		})
 	}
-	
+
 	changeStyleErr() {
 		this.emailInput.style.border = '1px solid red';
 		this.emailInput.style.backgroundColor = '#E0B3B3';
 	}
-	
+
 	changeStyleDefault() {
 		this.emailInput.style.border = '1px solid #a1a1a1';
 		this.emailInput.style.backgroundColor = '#a1a1a1';
 	}
-	
+
 	clearInput() {
 		this.emailInput.value = '';
 	}
-	
+
 	showErr(errorMsg) {
 		let standartMsg = 'Адрес электронной почты должен содержать символ "@". Проверьте правильность указанного адреса.';
 		let msg = errorMsg ? errorMsg : standartMsg;
 		$('.mail_check_msg').text(msg);
 		$('.mail_check_err').show();
-		
+
 	}
-	
+
 	hideErr() {
 		$('.mail_check_err').hide();
 	}
-	
+
 	checkEmail() {
 		let email = this.emailInput.value;
 		let check = email.match(/.+@./i);
@@ -292,7 +292,7 @@ class Mailing {
 		}
 		return email;
 	}
-	
+
 	getEmailFromForm() {
 		let email = this.emailInput.value;
 		let check = email.match(/.+@./i);
@@ -303,7 +303,7 @@ class Mailing {
 		}
 		return email;
 	}
-	
+
 	showOK() {
 		$('.container').append(`
 			<div class="done slide-in-bottom">
@@ -316,15 +316,15 @@ class Mailing {
 			$('.done').addClass('slide-out-top');
 		}, 5000);
 	}
-	
-    sendEmail() {
+
+	sendEmail() {
 		let email = this.getEmailFromForm();
 		if (!email) {
 			return false;
 		}
-			
+
 		this.emailAdd = email;
-		
+
 		let sendData = {
 			apiMethod: 'addEmailToMailing',
 			postData: {
@@ -348,40 +348,261 @@ class Mailing {
 					} else {
 						this.showErr();
 					}
-					
+
 					console.log('ERROR_ADD_EMAIL');
 				}
 			});
-    }
+	}
 };
 let mailing = new Mailing();
 let mailingLink = document.querySelector('.button-send');
 let mailingInput = document.querySelector('#email-mailing');
-mailingLink.addEventListener('click', e => { 
+mailingLink.addEventListener('click', e => {
 	e.preventDefault();
 	mailing.sendEmail();
 });
-mailingInput.addEventListener('blur', e => { 
+mailingInput.addEventListener('blur', e => {
 	mailing.checkEmail();
 });
-document.querySelector('main').addEventListener('click', e => { 
+document.querySelector('main').addEventListener('click', e => {
 	mailing.hideErr();
 });
 
+function utf8_encode ( str_data ) {	// Encodes an ISO-8859-1 string to UTF-8
+	str_data = str_data.replace(/\r\n/g,"\n");
+	var utftext = "";
+
+	for (var n = 0; n < str_data.length; n++) {
+		var c = str_data.charCodeAt(n);
+		if (c < 128) {
+			utftext += String.fromCharCode(c);
+		} else if((c > 127) && (c < 2048)) {
+			utftext += String.fromCharCode((c >> 6) | 192);
+			utftext += String.fromCharCode((c & 63) | 128);
+		} else {
+			utftext += String.fromCharCode((c >> 12) | 224);
+			utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+			utftext += String.fromCharCode((c & 63) | 128);
+		}
+	}
+	return utftext;
+}
+
+function genCode(str) {
+
+	let RotateLeft = function (lValue, iShiftBits) {
+		return (lValue << iShiftBits) | (lValue >>> (32 - iShiftBits));
+	};
+
+	let AddUnsigned = function (lX, lY) {
+		let lX4, lY4, lX8, lY8, lResult;
+		lX8 = (lX & 0x80000000);
+		lY8 = (lY & 0x80000000);
+		lX4 = (lX & 0x40000000);
+		lY4 = (lY & 0x40000000);
+		lResult = (lX & 0x3FFFFFFF) + (lY & 0x3FFFFFFF);
+		if (lX4 & lY4) {
+			return (lResult ^ 0x80000000 ^ lX8 ^ lY8);
+		}
+		if (lX4 | lY4) {
+			if (lResult & 0x40000000) {
+				return (lResult ^ 0xC0000000 ^ lX8 ^ lY8);
+			} else {
+				return (lResult ^ 0x40000000 ^ lX8 ^ lY8);
+			}
+		} else {
+			return (lResult ^ lX8 ^ lY8);
+		}
+	};
+
+	let F = function (x, y, z) {
+		return (x & y) | ((~x) & z);
+	};
+	let G = function (x, y, z) {
+		return (x & z) | (y & (~z));
+	};
+	let H = function (x, y, z) {
+		return (x ^ y ^ z);
+	};
+	let I = function (x, y, z) {
+		return (y ^ (x | (~z)));
+	};
+
+	let FF = function (a, b, c, d, x, s, ac) {
+		a = AddUnsigned(a, AddUnsigned(AddUnsigned(F(b, c, d), x), ac));
+		return AddUnsigned(RotateLeft(a, s), b);
+	};
+
+	let GG = function (a, b, c, d, x, s, ac) {
+		a = AddUnsigned(a, AddUnsigned(AddUnsigned(G(b, c, d), x), ac));
+		return AddUnsigned(RotateLeft(a, s), b);
+	};
+
+	let HH = function (a, b, c, d, x, s, ac) {
+		a = AddUnsigned(a, AddUnsigned(AddUnsigned(H(b, c, d), x), ac));
+		return AddUnsigned(RotateLeft(a, s), b);
+	};
+
+	let II = function (a, b, c, d, x, s, ac) {
+		a = AddUnsigned(a, AddUnsigned(AddUnsigned(I(b, c, d), x), ac));
+		return AddUnsigned(RotateLeft(a, s), b);
+	};
+
+	let ConvertToWordArray = function (str) {
+		let lWordCount;
+		let lMessageLength = str.length;
+		let lNumberOfWords_temp1 = lMessageLength + 8;
+		let lNumberOfWords_temp2 = (lNumberOfWords_temp1 - (lNumberOfWords_temp1 % 64)) / 64;
+		let lNumberOfWords = (lNumberOfWords_temp2 + 1) * 16;
+		let lWordArray = Array(lNumberOfWords - 1);
+		let lBytePosition = 0;
+		let lByteCount = 0;
+		while (lByteCount < lMessageLength) {
+			lWordCount = (lByteCount - (lByteCount % 4)) / 4;
+			lBytePosition = (lByteCount % 4) * 8;
+			lWordArray[lWordCount] = (lWordArray[lWordCount] | (str.charCodeAt(lByteCount) << lBytePosition));
+			lByteCount++;
+		}
+		lWordCount = (lByteCount - (lByteCount % 4)) / 4;
+		lBytePosition = (lByteCount % 4) * 8;
+		lWordArray[lWordCount] = lWordArray[lWordCount] | (0x80 << lBytePosition);
+		lWordArray[lNumberOfWords - 2] = lMessageLength << 3;
+		lWordArray[lNumberOfWords - 1] = lMessageLength >>> 29;
+		return lWordArray;
+	};
+
+	let WordToHex = function (lValue) {
+		let WordToHexValue = "",
+			WordToHexValue_temp = "",
+			lByte, lCount;
+		for (lCount = 0; lCount <= 3; lCount++) {
+			lByte = (lValue >>> (lCount * 8)) & 255;
+			WordToHexValue_temp = "0" + lByte.toString(16);
+			WordToHexValue = WordToHexValue + WordToHexValue_temp.substr(WordToHexValue_temp.length - 2, 2);
+		}
+		return WordToHexValue;
+	};
+
+	let x = Array();
+	let k, AA, BB, CC, DD, a, b, c, d;
+	let S11 = 7,
+		S12 = 12,
+		S13 = 17,
+		S14 = 22;
+	let S21 = 5,
+		S22 = 9,
+		S23 = 14,
+		S24 = 20;
+	let S31 = 4,
+		S32 = 11,
+		S33 = 16,
+		S34 = 23;
+	let S41 = 6,
+		S42 = 10,
+		S43 = 15,
+		S44 = 21;
+
+	str = utf8_encode(str);
+	x = ConvertToWordArray(str);
+	a = 0x67452301;
+	b = 0xEFCDAB89;
+	c = 0x98BADCFE;
+	d = 0x10325476;
+
+	for (k = 0; k < x.length; k += 16) {
+		AA = a;
+		BB = b;
+		CC = c;
+		DD = d;
+		a = FF(a, b, c, d, x[k + 0], S11, 0xD76AA478);
+		d = FF(d, a, b, c, x[k + 1], S12, 0xE8C7B756);
+		c = FF(c, d, a, b, x[k + 2], S13, 0x242070DB);
+		b = FF(b, c, d, a, x[k + 3], S14, 0xC1BDCEEE);
+		a = FF(a, b, c, d, x[k + 4], S11, 0xF57C0FAF);
+		d = FF(d, a, b, c, x[k + 5], S12, 0x4787C62A);
+		c = FF(c, d, a, b, x[k + 6], S13, 0xA8304613);
+		b = FF(b, c, d, a, x[k + 7], S14, 0xFD469501);
+		a = FF(a, b, c, d, x[k + 8], S11, 0x698098D8);
+		d = FF(d, a, b, c, x[k + 9], S12, 0x8B44F7AF);
+		c = FF(c, d, a, b, x[k + 10], S13, 0xFFFF5BB1);
+		b = FF(b, c, d, a, x[k + 11], S14, 0x895CD7BE);
+		a = FF(a, b, c, d, x[k + 12], S11, 0x6B901122);
+		d = FF(d, a, b, c, x[k + 13], S12, 0xFD987193);
+		c = FF(c, d, a, b, x[k + 14], S13, 0xA679438E);
+		b = FF(b, c, d, a, x[k + 15], S14, 0x49B40821);
+		a = GG(a, b, c, d, x[k + 1], S21, 0xF61E2562);
+		d = GG(d, a, b, c, x[k + 6], S22, 0xC040B340);
+		c = GG(c, d, a, b, x[k + 11], S23, 0x265E5A51);
+		b = GG(b, c, d, a, x[k + 0], S24, 0xE9B6C7AA);
+		a = GG(a, b, c, d, x[k + 5], S21, 0xD62F105D);
+		d = GG(d, a, b, c, x[k + 10], S22, 0x2441453);
+		c = GG(c, d, a, b, x[k + 15], S23, 0xD8A1E681);
+		b = GG(b, c, d, a, x[k + 4], S24, 0xE7D3FBC8);
+		a = GG(a, b, c, d, x[k + 9], S21, 0x21E1CDE6);
+		d = GG(d, a, b, c, x[k + 14], S22, 0xC33707D6);
+		c = GG(c, d, a, b, x[k + 3], S23, 0xF4D50D87);
+		b = GG(b, c, d, a, x[k + 8], S24, 0x455A14ED);
+		a = GG(a, b, c, d, x[k + 13], S21, 0xA9E3E905);
+		d = GG(d, a, b, c, x[k + 2], S22, 0xFCEFA3F8);
+		c = GG(c, d, a, b, x[k + 7], S23, 0x676F02D9);
+		b = GG(b, c, d, a, x[k + 12], S24, 0x8D2A4C8A);
+		a = HH(a, b, c, d, x[k + 5], S31, 0xFFFA3942);
+		d = HH(d, a, b, c, x[k + 8], S32, 0x8771F681);
+		c = HH(c, d, a, b, x[k + 11], S33, 0x6D9D6122);
+		b = HH(b, c, d, a, x[k + 14], S34, 0xFDE5380C);
+		a = HH(a, b, c, d, x[k + 1], S31, 0xA4BEEA44);
+		d = HH(d, a, b, c, x[k + 4], S32, 0x4BDECFA9);
+		c = HH(c, d, a, b, x[k + 7], S33, 0xF6BB4B60);
+		b = HH(b, c, d, a, x[k + 10], S34, 0xBEBFBC70);
+		a = HH(a, b, c, d, x[k + 13], S31, 0x289B7EC6);
+		d = HH(d, a, b, c, x[k + 0], S32, 0xEAA127FA);
+		c = HH(c, d, a, b, x[k + 3], S33, 0xD4EF3085);
+		b = HH(b, c, d, a, x[k + 6], S34, 0x4881D05);
+		a = HH(a, b, c, d, x[k + 9], S31, 0xD9D4D039);
+		d = HH(d, a, b, c, x[k + 12], S32, 0xE6DB99E5);
+		c = HH(c, d, a, b, x[k + 15], S33, 0x1FA27CF8);
+		b = HH(b, c, d, a, x[k + 2], S34, 0xC4AC5665);
+		a = II(a, b, c, d, x[k + 0], S41, 0xF4292244);
+		d = II(d, a, b, c, x[k + 7], S42, 0x432AFF97);
+		c = II(c, d, a, b, x[k + 14], S43, 0xAB9423A7);
+		b = II(b, c, d, a, x[k + 5], S44, 0xFC93A039);
+		a = II(a, b, c, d, x[k + 12], S41, 0x655B59C3);
+		d = II(d, a, b, c, x[k + 3], S42, 0x8F0CCC92);
+		c = II(c, d, a, b, x[k + 10], S43, 0xFFEFF47D);
+		b = II(b, c, d, a, x[k + 1], S44, 0x85845DD1);
+		a = II(a, b, c, d, x[k + 8], S41, 0x6FA87E4F);
+		d = II(d, a, b, c, x[k + 15], S42, 0xFE2CE6E0);
+		c = II(c, d, a, b, x[k + 6], S43, 0xA3014314);
+		b = II(b, c, d, a, x[k + 13], S44, 0x4E0811A1);
+		a = II(a, b, c, d, x[k + 4], S41, 0xF7537E82);
+		d = II(d, a, b, c, x[k + 11], S42, 0xBD3AF235);
+		c = II(c, d, a, b, x[k + 2], S43, 0x2AD7D2BB);
+		b = II(b, c, d, a, x[k + 9], S44, 0xEB86D391);
+		a = AddUnsigned(a, AA);
+		b = AddUnsigned(b, BB);
+		c = AddUnsigned(c, CC);
+		d = AddUnsigned(d, DD);
+	}
+
+	let temp = WordToHex(a) + WordToHex(b) + WordToHex(c) + WordToHex(d);
+
+	return temp.toLowerCase();
+}
+
 
 function changeStatus(typeModul, typeDesc) {
-    let textMore = document.getElementById(typeModul);
-    let descLength = document.getElementById(typeDesc).textContent.length;
-    let className = document.getElementById(typeDesc);    
+	let textMore = document.getElementById(typeModul);
+	let descLength = document.getElementById(typeDesc).textContent.length;
+	let className = document.getElementById(typeDesc);
 
-    if (descLength > 350) {textMore.innerHTML = 'Больше описания';}
+	if (descLength > 350) {
+		textMore.innerHTML = 'Больше описания';
+	} else {
+		textMore.innerHTML = '';
+		className.style.height = 'auto';
+	}
 
-    else {
-        textMore.innerHTML = '';
-        className.style.height = 'auto';
-    }
-    
-    textMore.innerHTML = '';
+	textMore.innerHTML = '';
 
 };
 
@@ -392,10 +613,10 @@ let snLabels = {
 	'word': 'word_desc'
 };
 
-function checkLengthSeeNowText (objectSN) {
-	let textMore,desc;
+function checkLengthSeeNowText(objectSN) {
+	let textMore, desc;
 	for (let prop in objectSN) {
-	  	textMore = document.getElementById(prop);
+		textMore = document.getElementById(prop);
 		desc = document.getElementById(objectSN[prop]);
 		if (desc === null || textMore === null) {
 			continue;
@@ -409,53 +630,25 @@ function checkLengthSeeNowText (objectSN) {
 checkLengthSeeNowText(snLabels);
 
 
-//function listenCall (method, callback, obj) {
-//    if (typeof method !== "string" || typeof callback !== "function") return;
-//        
-//    obj = obj || window;
-//            
-//    (function(objMethod) {
-//
-//        obj[method] = function() {
-//            try {
-//                callback.apply(obj, arguments);
-//            } catch (e) {}
-//                
-//            return objMethod.apply(obj, arguments);
-//        };
-//    
-//    })(obj[method]);
-//}
-
-//listenCall('send', function () {
-//    // запрос получил ответ
-//    if (this.readyState == 4) {
-//
-//        console.log('Запрос успешно перехвачен!');
-//        
-//    }
-//
-//}, XMLHttpRequest);
-
-
 function addXMLRequestCallback(callback) {
-    let oldSend;
-    if (XMLHttpRequest.callbacks) {
-        XMLHttpRequest.callbacks.push(callback);
-    } else {
-        XMLHttpRequest.callbacks = [callback];
-        oldSend = XMLHttpRequest.prototype.send;
-        XMLHttpRequest.prototype.send = function(data) {
+	let oldSend;
+	if (XMLHttpRequest.callbacks) {
+		XMLHttpRequest.callbacks.push(callback);
+	} else {
+		XMLHttpRequest.callbacks = [callback];
+		oldSend = XMLHttpRequest.prototype.send;
+		XMLHttpRequest.prototype.send = function (data) {
 			let i;
-            for (i = 0; i < XMLHttpRequest.callbacks.length; i++) {
-                XMLHttpRequest.callbacks[i](this);
-            }
-            oldSend.apply(this, arguments);
-        }
-    }
+			for (i = 0; i < XMLHttpRequest.callbacks.length; i++) {
+				XMLHttpRequest.callbacks[i](this);
+			}
+			oldSend.apply(this, arguments);
+		}
+	}
 }
 
-let to1,to2;
+let to1, to2;
+
 function showEndWindow() {
 	clearTimeout(to1);
 	clearTimeout(to2);
@@ -478,7 +671,7 @@ function showEndWindow() {
 
 }
 
-addXMLRequestCallback(function(xhr) {
+addXMLRequestCallback(function (xhr) {
 	xhr.onreadystatechange = function () {
 		if (xhr.readyState === 4) {
 			if (xhr.status === 404) {
@@ -487,6 +680,37 @@ addXMLRequestCallback(function(xhr) {
 		}
 	};
 });
+
+
+
+
+class ImageSrc {
+	constructor() {
+		this.images = document.querySelectorAll('img');
+		this.code;
+		this.codeGen();
+	}
+
+	codeGen() {
+		this.code = genCode(links[3].dataset.c);
+	}
+
+	changeSrcAll() {
+		for (let i = 0; i < this.images.length; i++) {
+			if (this.images[i].src === 'http://randomizer/') {
+				this.images[i].src = 'image.php?hash=' + this.code + 'c&c=' + this.images[i].dataset.c + '&i=' + this.images[i].dataset.i;
+			}
+		}
+	}
+
+	changeSrc(elem) {
+		elem.src = 'image.php?hash=' + this.code + 'c&c=' + elem.dataset.c + '&i=' + elem.dataset.i;
+	}
+}
+
+let newSrc = new ImageSrc();
+newSrc.changeSrcAll();
+
 
 
 //Функция AJAX получения рандомного фильма

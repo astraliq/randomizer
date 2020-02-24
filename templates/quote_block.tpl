@@ -13,9 +13,9 @@
             <div class="main-block-data-pic">
                 {% set img = 'img/quoters/person-error.png' %} 
                 {%if content.randomData.picture is not null %}           
-                    {% set img = content.randomData.picture %}                                   
+                    {% set img = '' %}                                   
                 {% endif %}
-                    <img src="{{img}}" width="276" >
+                    <img class="quote-pic" src="{{img}}" width="276" data-c="q" data-i="{{content.randomData.picture}}">
             </div>
             <div class="main-block-data-text">
                 <p class="main-data-title"><span class="left-aquo">&laquo;{{content.randomData.text}}&raquo;</span></p>

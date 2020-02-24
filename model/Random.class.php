@@ -61,7 +61,7 @@ class Random extends Model {
 		    	$years = [
 			    		0 => [
 			    			'min' => 1900,
-				    		'max' => 2030,
+				    		'max' => 1950,
 				    	]
 			    ];
 		        $film = $this->film->getRandomFilm($years,[0],[0]);
@@ -104,6 +104,7 @@ class Random extends Model {
 		$categories = $this->dataBase->uniSelect($this->categoriesTable, []);
 		// $randomCategory = $categories[array_rand($categories, 1)];
 		$list = ['Фильм', 'Цитата', 'Поздравление', 'Число', 'Интересное слово'];
+		$list = ['Фильм', 'Цитата'];
 		$randomCategory = $list[array_rand($list, 1)];
 		return $randomCategory;
 	}

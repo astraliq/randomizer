@@ -3,9 +3,9 @@
     <div class="data-desc">
         <div class="see-now-text">
             <p class="cong-cat">Тема: 
-            	<a href="#" class="cong-cat-link">{{ content.browseNowData.congrData.theme }}</a>.
+            	<a class="cong-cat-link">{{ content.browseNowData.congrData.theme }}</a>.
             	<br>
-            	<a href="#" class="cong-cat-link">{{ content.browseNowData.congrData.who }}</a>
+            	<a class="cong-cat-link">{{ content.browseNowData.congrData.who }}</a>
             </p>
             <p class="congr-text" id="congr_text">{{ content.browseNowData.congrData.congratulate }}</p>
             <label for="button-cg" onclick="changeStatus('congr', 'congr_text')" id="congr">Больше описания</label>

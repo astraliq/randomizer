@@ -4,11 +4,11 @@
     </div>
     <div class="see-now-desc">
         <div class="see-now-img">
-            {% set img = 'stub.jpg' %} 
+            {% set img = 'img/films/film-error.png' %} 
             {%if content.browseNowData.filmData.main_img != '' %}           
-                {% set img = content.browseNowData.filmData.main_img %}                                   
+                {% set img = '' %}                                   
             {% endif %}
-            <img src="img/films/{{img}}" width="100" alt="Фильм &laquo;{{ content.browseNowData.filmData.title_ru }}&raquo;" title="{{ content.browseNowData.filmData.title_ru }}">
+            <img src="{{img}}" width="100" alt="Фильм &laquo;{{ content.browseNowData.filmData.title_ru }}&raquo;" title="{{ content.browseNowData.filmData.title_ru }}" data-c="m" data-i="{{content.browseNowData.filmData.main_img}}">
         </div>
         <div class="see-now-text">
             <p class="see-now-subtitle">{{ content.browseNowData.filmData.title_ru }}
