@@ -340,7 +340,7 @@ class Films {
 		$('.main-block-data').prepend(`
                 <div class="main-block-data-primary">
                     <div class="main-block-data-pic">
-                        <img src="img/films/${film.main_img}" width="276" alt="Фильм &laquo;${film.title_ru}&raquo;" title="${film.title_ru}">
+                        <img class="film-pic" src="" width="276" alt="Фильм &laquo;${film.title_ru}&raquo;" title="${film.title_ru}" data-c="m" data-i="${film.main_img}">
                     </div>
                     <div class="main-block-data-text">
                         <p class="main-data-title">
@@ -353,6 +353,7 @@ class Films {
                     </div>
                 </div>
 		`);
+		newSrc.changeSrc(document.querySelector('.film-pic'));
     }
 };
 let film = new Films();

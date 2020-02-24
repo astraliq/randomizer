@@ -95,7 +95,7 @@ class Quote {
                 fakeAPI.authorInfo = data.rnd.authorInfo;
                 fakeAPI.catgegories = data.rnd.categories;
                 fakeAPI.picture = data.rnd.picture;
-                fakeAPI.picture = fakeAPI.picture === null ? 'img/quoters/person-error.png' : fakeAPI.picture;
+                fakeAPI.picture = fakeAPI.picture === null ? 'person-error.png' : fakeAPI.picture;
                 fakeAPI.author = (fakeAPI.author === null) ? "" : fakeAPI.author;
                 fakeAPI.authorInfo = (fakeAPI.authorInfo === null) ? "" : fakeAPI.authorInfo;
                 this._render(fakeAPI);
@@ -121,7 +121,7 @@ class Quote {
 		<div class="main-block-data">
 			<div class="main-block-data-primary">
 				<div class="main-block-data-pic">
-						<img src="${quote.picture}" width="276" alt="${quote.author}" title="${quote.author}">
+						<img class="quote-pic" src="" width="276" alt="${quote.author}" title="${quote.author}" data-c="q" data-i="${quote.picture}">
 				</div>
 				<div class="main-block-data-text">
 					<p class="main-data-title"><span class="left-aquo">&laquo;${quote.text}&raquo;</span></p>
@@ -133,7 +133,7 @@ class Quote {
 		<div class="other-cat">Кроме цитат наш генератор выдаёт варианты из <a href="#" class="link-in-text">других категорий</a>, например, &laquo;<a href="#" class="link-in-text" onclick="film.getRndFilm()">Фильмы</a>&raquo;
 		</div>
         `);
-
+		newSrc.changeSrc(document.querySelector('.quote-pic'));
         let quote_filter_open = document.querySelector('.quote_filter_open');
 
         this.filterQuote.setFilersCallBack(quote_filter_open);

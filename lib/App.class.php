@@ -19,7 +19,7 @@ class App {
 	//http://site.ru/index.php?path=news/edit/5
 	protected function web($url) {
 		$newGen = new SomeGenerator();
-		$_SESSION['id'] = 2;
+		$_SESSION['h'] = $newGen->genHash(strtotime('now'));
 		// if (empty($_SESSION['referrer'])) {
 		//     $_SESSION['referrer'] = $_SERVER['REQUEST_URI'];
 		//     $_SESSION['request'] = $_SERVER['REQUEST_URI'];

@@ -248,6 +248,8 @@ main {
 	padding: 0 10%;
 	display: flex;
 	flex-direction: column;
+	min-height: 560px;
+	justify-content: flex-start;
 }
 
 .main-block-menu {
@@ -277,6 +279,7 @@ main {
 .main-block-data-pic {
 	margin: 0 0 0 0;
 	padding: 0 0 0 0;
+	width: 276px;
 }
 
 .main-block-data-text {
@@ -365,6 +368,7 @@ main {
 }
 
 .other-cat {
+	margin: auto 0 0 0;
 	padding: 0 0 30px 0;
 	color: #000;
 	font-family: "roboto";

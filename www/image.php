@@ -2,7 +2,7 @@
 require ("../autoload.php");
 session_start();
 
-$hash = $_SESSION['h'] . 'c';
+$hash = md5($_SESSION['h']) . 'c';
 
 if (empty($_GET['hash']) || $_GET['hash'] != $hash || empty($_GET['c']) || empty($_GET['i'])) {
     http_response_code(400);

@@ -29,7 +29,7 @@ class BrowseNow {
 					</div>
 					<div class="see-now-desc">
 						<div class="see-now-img">
-							<img src="img/films/${this.browseNowData.filmData.main_img}" width="100" alt="Фильм &laquo;${ this.browseNowData.filmData.title_ru }&raquo;" title="${ this.browseNowData.filmData.title_ru }">
+							<img class="see_now-film-pic" src="" width="100" alt="Фильм &laquo;${ this.browseNowData.filmData.title_ru }&raquo;" title="${ this.browseNowData.filmData.title_ru }" data-c="m" data-i="${this.browseNowData.filmData.main_img}">
 						</div>
 						<div class="see-now-text">
 							<p class="see-now-subtitle">${ this.browseNowData.filmData.title_ru }
@@ -683,7 +683,6 @@ addXMLRequestCallback(function (xhr) {
 
 
 
-
 class ImageSrc {
 	constructor() {
 		this.images = document.querySelectorAll('img');
@@ -697,14 +696,14 @@ class ImageSrc {
 
 	changeSrcAll() {
 		for (let i = 0; i < this.images.length; i++) {
-			if (this.images[i].src === 'http://randomizer/') {
-				this.images[i].src = 'image.php?hash=' + this.code + 'c&c=' + this.images[i].dataset.c + '&i=' + this.images[i].dataset.i;
+			if (this.images[i].src === document.location.href) {
+				this.images[i].src = 'image.php?hash='+this.code+'c&c='+this.images[i].dataset.c+'&i='+this.images[i].dataset.i;
 			}
 		}
 	}
 
 	changeSrc(elem) {
-		elem.src = 'image.php?hash=' + this.code + 'c&c=' + elem.dataset.c + '&i=' + elem.dataset.i;
+		elem.src = 'image.php?hash='+this.code+'c&c='+elem.dataset.c+'&i='+elem.dataset.i;
 	}
 }
 

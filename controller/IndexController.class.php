@@ -24,8 +24,7 @@ class IndexController extends Controller {
         $browseFourth = $this->randomType->getRndBrowseNowCat([$catTitle, $browseFirst, $browseSecond, $browseThird]);
         $browseNowData = $this->randomType->getBrowseNowData([$browseFirst, $browseSecond, $browseThird, $browseFourth]);
         $otherCategory = $this->randomType->getRndBrowseNowCat([$catTitle]);
-
-
+        $hash = $_SESSION['h'];
         $arrayContent = [
             'categoryTitle' => $catTitle,
             'randomData' =>  $randomData,
@@ -37,6 +36,7 @@ class IndexController extends Controller {
             'categoryCase' => $this->randomType->categories[$catTitle]['case'],
             'otherCategory' => $otherCategory,
             'otherCatParams' => $this->randomType->categories[$otherCategory],
+            'hash' => $hash
         ];
         return $arrayContent;
 	}

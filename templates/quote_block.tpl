@@ -15,7 +15,7 @@
                 {%if content.randomData.picture is not null %}           
                     {% set img = '' %}                                   
                 {% endif %}
-                    <img class="quote-pic" src="{{img}}" width="276" data-c="q" data-i="{{content.randomData.picture}}">
+                    <img class="quote-pic" src="{{img}}" alt="{{content.randomData.author}}" title="{{content.randomData.author}}" width="276" data-c="q" data-i="{{content.randomData.picture}}">
             </div>
             <div class="main-block-data-text">
                 <p class="main-data-title"><span class="left-aquo">&laquo;{{content.randomData.text}}&raquo;</span></p>

@@ -22,12 +22,12 @@
             <p class="filtr-title">Год создания</p>
                 <ul>
                     <li class="checkbox"><input type="checkbox" id="film-check12" value="0" data-id="0"><label for="film-check12">Любой год</label></li>
-                    <li class="checkbox"><input type="checkbox" id="film-check13" value="1" data-id="1"><label for="film-check13">2015 &#151; 2020</label></li>
-                    <li class="checkbox"><input type="checkbox" id="film-check14" value="2" data-id="2"><label for="film-check14">2010 &#151; 2015</label></li>
-                    <li class="checkbox"><input type="checkbox" id="film-check15" value="3" data-id="3"><label for="film-check15">2000 &#151; 2010</label></li>
-                    <li class="checkbox"><input type="checkbox" id="film-check16" value="4" data-id="4"><label for="film-check16">1990 &#151; 2000</label></li>
-                    <li class="checkbox"><input type="checkbox" id="film-check17" value="5" data-id="5"><label for="film-check17">1980 &#151; 1990</label></li>
-                    <li class="checkbox"><input type="checkbox" id="film-check18" value="6" data-id="6"><label for="film-check18">1970 &#151; 1980</label></li>
+                    <li class="checkbox"><input type="checkbox" id="film-check13" value="1" data-id="1"><label for="film-check13">2015 &#8211; 2020</label></li>
+                    <li class="checkbox"><input type="checkbox" id="film-check14" value="2" data-id="2"><label for="film-check14">2010 &#8211; 2015</label></li>
+                    <li class="checkbox"><input type="checkbox" id="film-check15" value="3" data-id="3"><label for="film-check15">2000 &#8211; 2010</label></li>
+                    <li class="checkbox"><input type="checkbox" id="film-check16" value="4" data-id="4"><label for="film-check16">1990 &#8211; 2000</label></li>
+                    <li class="checkbox"><input type="checkbox" id="film-check17" value="5" data-id="5"><label for="film-check17">1980 &#8211; 1990</label></li>
+                    <li class="checkbox"><input type="checkbox" id="film-check18" value="6" data-id="6"><label for="film-check18">1970 &#8211; 1980</label></li>
                     <li class="checkbox"><input type="checkbox" id="film-check19" value="7" data-id="7"><label for="film-check19">До 1970</label></li>
                 </ul>
         </div>
