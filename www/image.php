@@ -9,8 +9,6 @@ if (empty($_GET['hash']) || $_GET['hash'] != $hash || empty($_GET['c']) || empty
 	exit();
 }
 
-//UPDATE `films` SET `main_img`=REPLACE(`main_img`, 'iphone360_', '') WHERE `main_img` LIKE 'iphone%'
-//UPDATE `quotes` SET `img`=REPLACE(`img`, 'img/quoters/', '') WHERE `img` LIKE 'img%'
 // print_r($_SESSION);
 // exit();
 
