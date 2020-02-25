@@ -12,7 +12,7 @@
     <div class="footer-main-blocks">
         <a class="all-category">Все категории</a>
         <a href="https://vk.com/randomizeroftheday" class="footer-more-link">Группа Вконтакте</a>
-        <a href="https://zen.yandex.ru/id/5dfaa6cb2beb4900b1cb87bd" class="footer-more-link">Яндекс.Дзен</a>
+        <a href="https://www.instagram.com/randomizer.me/" class="footer-more-link">Instagram</a>
         <a href="https://tele.gg/randomizerme" class="footer-more-link" data-c="{{content.hash}}">Телеграм&#151;канал</a>
         <p class="email-send">
             Подпишись на рассылку и получай подборку из 7 случайностей себе на почту раз в неделю.

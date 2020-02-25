@@ -693,7 +693,7 @@ main {
 	padding: 10px 20px;
 	background-color: #ebbd2f;
 	color: #000;
-	width: 150px;
+	width: 160px;
 	text-align: center;
 	overflow: hidden;
 	transition: .3s;
@@ -717,6 +717,10 @@ main {
 
 .button-send-big {
 	width: 200px;
+}
+
+#quote-filter .button-send {
+	width: 180px;
 }
 
 .textarea {

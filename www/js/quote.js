@@ -124,7 +124,7 @@ class Quote {
 						<img class="quote-pic" src="" width="276" alt="${quote.author}" title="${quote.author}" data-c="q" data-i="${quote.picture}">
 				</div>
 				<div class="main-block-data-text">
-					<p class="main-data-title"><span class="left-aquo">&laquo;${quote.text}&raquo;</span></p>
+					<p class="main-data-title"><span class="left-aquo">&laquo;${quote.text}&raquo;.</span></p>
 					<p class="qoutes-title">${quote.author}</p>
 					<p class="poet-desc">${quote.authorInfo}</p>
 				</div>
