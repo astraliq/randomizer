@@ -4,7 +4,7 @@
             Cлучайность из категории:<span class="cat-sel">{{ content.categoryTitle }}</span>
         </div>
         <div>
-            <span class="cat-settings quote_filter_open">Настроить фильтр</span>
+            <span class="cat-settings" id="quote_filter_open">Настроить фильтр</span>
             <span class="next-random" onclick="quote.init()">Следующая цитата</span>
         </div>
     </div>

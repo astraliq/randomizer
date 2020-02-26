@@ -34,6 +34,6 @@
                     <li class="checkbox"><input type="checkbox" class="quotecheckboxCat" id="quote-check36" value="4" data-id="1"><label for="quote-check36">Из фильмов</label></li>
                 </ul>
         </div>
-        <button class="button-send" onclick="quote.setFilters()">Показать цитату</button>
+        <button class="button-send" id="button-filter-quote" onclick="quote.setFilters()">Показать цитату</button>
     </div>
 </div>

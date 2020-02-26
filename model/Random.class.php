@@ -104,7 +104,6 @@ class Random extends Model {
 		$categories = $this->dataBase->uniSelect($this->categoriesTable, []);
 		// $randomCategory = $categories[array_rand($categories, 1)];
 		$list = ['Фильм', 'Цитата', 'Поздравление', 'Число', 'Интересное слово'];
-		$list = ['Фильм', 'Цитата'];
 		$randomCategory = $list[array_rand($list, 1)];
 		return $randomCategory;
 	}

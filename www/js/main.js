@@ -89,7 +89,7 @@ class BrowseNow {
 				html = `
 				<div class="see-now-main-data">
 					<div class="see-now-cat">
-						<a class="see-now-cat-link" onclick="words.init();">Интересное слово</a>
+						<a class="see-now-cat-link" onclick="words.init()">Интересное слово</a>
 					</div>
 					<div class="data-desc-1">
 						<h1>Слово: ${this.browseNowData.wordData.word}</h1>

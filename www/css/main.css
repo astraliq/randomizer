@@ -1288,3 +1288,12 @@ label:hover {
 .film-pic {
 	object-fit: cover;
 }
+
+
+#button-filter-quote {
+	background-color: #e7578a;
+}
+
+#quote-filter-close:hover {
+	background-color: #e7578a;
+}

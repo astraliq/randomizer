@@ -44,6 +44,6 @@
                     <li class="checkbox"><input type="checkbox" id="film-check27" value="7" data-id="23"><label for="film-check27">СССР</label></li>
                 </ul>
         </div>
-        <button class="button-send" onclick="film.setFilters()">Найти фильм</button>
+        <button class="button-send" id="button-filter-film" onclick="film.setFilters()">Найти фильм</button>
     </div>
 </div>

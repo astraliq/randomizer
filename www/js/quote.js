@@ -66,22 +66,21 @@ class Quote {
 
     //идет по коллекции чекбоксов и если они чекнуты пушит из дата атрибута айди
     setSelectedFilters() {
+		this.filterQuote.filters.categories = [];
         //идет по коллекции чекбоксов по категориям
         for (let i = 0; i < this.filterQuote.quotecheckboxCat.length; i++) {
             if (this.filterQuote.quotecheckboxCat[i].checked == true) {
-                this.filterQuote.filters.categories = [...this.filterQuote.filters.categories, this.filterQuote.quotecheckboxCat[i].dataset.id]
+                this.filterQuote.filters.categories.push(this.filterQuote.quotecheckboxCat[i].dataset.id);
             }
         }
-
+		this.filterQuote.filters.authors = [];
         //идет по коллекции чекбоксов по авторам
         for (let i = 0; i < this.filterQuote.quotecheckboxAutor.length; i++) {
             if (this.filterQuote.quotecheckboxAutor[i].checked == true) {
-                this.filterQuote.filters.authors = [...this.filterQuote.filters.authors, this.filterQuote.quotecheckboxAutor[i].dataset.id]
-
+                this.filterQuote.filters.authors.push(this.filterQuote.quotecheckboxAutor[i].dataset.id);
             }
         }
-
-        console.log(this.filterQuote.filters);
+//        console.log(this.filterQuote.filters);
         //эта функция формирует объект из фильтров
     }
 
@@ -114,7 +113,7 @@ class Quote {
 				Cлучайность из категории:<span class="cat-sel">Цитата</span>
 			</div>
 			<div>
-				<span class="cat-settings quote_filter_open">Настроить фильтр</span>
+				<span class="cat-settings" id="quote_filter_open">Настроить фильтр</span>
 				<span class="next-random">Следующая цитата</span>
 			</div>
 		</div>
@@ -130,14 +129,12 @@ class Quote {
 				</div>
 			</div>
 		</div>
-		<div class="other-cat">Кроме цитат наш генератор выдаёт варианты из <a href="#" class="link-in-text">других категорий</a>, например, &laquo;<a href="#" class="link-in-text" onclick="film.getRndFilm()">Фильмы</a>&raquo;
+		<div class="other-cat">Кроме цитат наш генератор выдаёт варианты из <a class="link-in-text">других категорий</a>, например, &laquo;<a href="#" class="link-in-text" onclick="film.getRndFilm()">Фильмы</a>&raquo;
 		</div>
         `);
 		newSrc.changeSrc(document.querySelector('.quote-pic'));
-        let quote_filter_open = document.querySelector('.quote_filter_open');
-
-        this.filterQuote.setFilersCallBack(quote_filter_open);
-
+      	this.filterQuote.updateLinkQuoteFilterOpen();
+        this.filterQuote.updateLinkQuoteFilterClose();
     }
 
 }
@@ -184,7 +181,7 @@ class FilterQuote {
     }
 
     updateLinkQuoteFilterOpen() {
-        $('.main-block-menu').on('click', '#quote-filter-close', (e) => { this.openQuoteFilter(e) });
+        $('.main-block-menu').on('click', '#quote_filter_open', (e) => { this.openQuoteFilter(e) });
     }
     // обновление события закрытия окна на крестик
     updateLinkQuoteFilterClose() {
