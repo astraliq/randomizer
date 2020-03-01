@@ -671,9 +671,59 @@ function showEndWindow() {
 
 }
 
+class ReqLimit {
+	constructor(limitTime) {
+		// определитель возможности следующего запроса, 0 - запрос проходит, 1 - запрос блокируется.
+		this.limit = 0;
+		this.time = limitTime;
+		this.to1;
+		this.to2;
+	}
+
+	checkReqLimits() {
+		if (this.limit === 1) {
+			this._renderErr();
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	_renderErr() {
+		clearTimeout(this.to1);
+		let del = $('.end_stub_container').remove();
+		$('main').append(`
+			<div class="end_stub_container fade-in-bck">
+				<div class="end_stub">
+					<h2 class="end_stub_head">Воу, воу полегче...</h2>
+					<p class="end_stub_head_text">Вы даже не успели прочитать.</p>
+				</div>
+			</div>
+		`);
+		this.to1 = setTimeout(function () {
+			$('.end_stub_container').removeClass('fade-in-bck');
+			$('.end_stub_container').addClass('fade-out-bck');
+//			this.to2 = setTimeout(function () {
+//				$('.end_stub_container').remove();
+//			}, 2000);
+		}, 1500);
+	}
+}
+
+// создаем объект класса проверки литмита времени запросов с указанием времени таймайта
+let reqLimit = new ReqLimit(1000);
+
+let to3;
 addXMLRequestCallback(function (xhr) {
 	xhr.onreadystatechange = function () {
 		if (xhr.readyState === 4) {
+			if (xhr.status === 200) {
+				clearTimeout(to3);
+				reqLimit.limit = 1;
+				to3 = setTimeout(function () {
+					reqLimit.limit = 0;
+				}, reqLimit.time);
+			}
 			if (xhr.status === 404) {
 				showEndWindow();
 			}
@@ -709,6 +759,10 @@ class ImageSrc {
 
 let newSrc = new ImageSrc();
 newSrc.changeSrcAll();
+
+
+
+
 
 
 

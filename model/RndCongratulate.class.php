@@ -4,6 +4,7 @@ class RndCongratulate extends Model {
 	public $congratulateTable = 'congratulate';
 	public $congratulateWho = 'congratulate_who';
 	public $congratulateTheme = 'congratulate_theme';
+	public $congratulateTypes = 'congratulate_types';
 	public $history;
 
 	public function __construct() {
@@ -53,6 +54,89 @@ class RndCongratulate extends Model {
 		$film = $this->dataBase->getRow($sql, null);
 		
 		return $film;
+	}
+
+	public function addCongratulates($congrs, $type, $who, $themeId) {
+		$whoData = $this->dataBase->uniSelect('congratulate_who',['who_title'=>$who]);
+		$whoId = $whoData['id'];
+		if (!$whoData) {
+			$addWho = $this->dataBase->uniInsert('congratulate_who',['who_title'=>$who]);
+			if ($addWho) {
+				$whoId = $this->dataBase->getLastInsertId();
+			}
+		}
+
+		$typeData = $this->dataBase->uniSelect('congratulate_types',['type_title'=>$type]);
+		$typeId = $typeData['id'];
+		if (!$typeData) {
+			$addType = $this->dataBase->uniInsert('congratulate_types',['type_title'=>$type]);
+			if ($addType) {
+				$typeId = $this->dataBase->getLastInsertId();
+			}
+		}
+		$checkTypeTheme = $this->dataBase->uniSelect('congr_theme2types&who',['types_id'=>$typeId, 'who_id'=>$whoId, 'theme_id'=>$themeId]);
+		if (!$checkTypeTheme) {
+			$addTypeTheme = $this->dataBase->uniInsert('congr_theme2types&who',['types_id'=>$typeId, 'who_id'=>$whoId, 'theme_id'=>$themeId]);
+		}
+
+		for ($i=0; $i < count($congrs); $i++) { 
+			if ($congrs[$i] != '') {
+				$check = $this->dataBase->uniSelect($this->congratulateTable,['congratulate'=>$congrs[$i]]);
+				if (!$check) {
+					$object = [
+						'who_id' => $whoId,
+						'theme_id' => $themeId,
+						'congratulate' => $congrs[$i],
+					];
+					$result = $this->dataBase->uniInsert($this->congratulateTable, $object);
+					$congrId = $this->dataBase->getLastInsertId();
+					$result = $this->dataBase->uniInsert('congratulate2type', ['congr_id'=>$congrId,'type_id'=>$typeId]);
+				} else{
+					$congrId = $check['id'];
+					$checkType = $this->dataBase->uniSelect('congratulate2type',['congr_id'=>$congrId,'type_id'=>$typeId]);
+					if (!$checkType) {
+						$result = $this->dataBase->uniInsert('congratulate2type', ['congr_id'=>$congrId,'type_id'=>$typeId]);
+					} else {
+						$result = false;
+					}
+				}
+			} else {
+				$result = false;
+			}
+		}
+		
+		return $result;
+	}
+
+	public function addCongratulates2($types, $link, $whoId, $themeId) {
+
+		for ($i=0; $i < count($types); $i++) { 
+			$typeData = $this->dataBase->uniSelect('congratulate_types',['type_title'=>$types[$i]]);
+			$typeId = $typeData['id'];
+			if (!$typeData) {
+				$addType = $this->dataBase->uniInsert('congratulate_types',['type_title'=>$types[$i]]);
+				if ($addType) {
+					$typeId = $this->dataBase->getLastInsertId();
+				}
+			}
+			$checkTypeTheme = $this->dataBase->uniSelect('congr_theme2types&who',[
+				'types_id'=>$typeId, 
+				'who_id'=>$whoId, 
+				'theme_id'=>$themeId
+			]);
+			if (!$checkTypeTheme) {
+				$result = $this->dataBase->uniInsert('congr_theme2types&who',[
+					'types_id'=>$typeId, 
+					'link'=>$link[$i], 
+					'who_id'=>$whoId, 
+					'theme_id'=>$themeId
+				]);
+			} else {
+				$result = false;
+			}
+		}
+		
+		return $result;
 	}
 }
 ?>

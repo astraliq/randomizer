@@ -3,7 +3,7 @@
             <div class="main-block-menu">
                 <div>Cлучайность из категории:<span class="cat-sel">{{ content.categoryTitle }}</span></div>
                 <div>
-                    <span class="cat-settings" id="film-filter-open">Настроить фильтр</span>
+                    <span class="cat-settings" onclick="rendGo()">Настроить фильтр</span>
                     <span class="next-random" onclick="congratulate.runProgr()">Следующее поздравление</span>
                 </div>
             </div>
@@ -14,7 +14,7 @@
                         <!-- <p class="main-data-title">
 							<span class="left-aquo">«{{ content.randomData.data.title_ru }}»</span>
 						</p> -->
-                        <p class="film-desc">{{ content.randomData.congratulate }}</p>
+                        <p class="film-desc">{{ content.randomData.congratulate|raw }}</p>
                     </div>
                 </div>
             </div>

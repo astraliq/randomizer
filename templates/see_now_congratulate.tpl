@@ -7,9 +7,11 @@
             	<br>
             	<a class="cong-cat-link">{{ content.browseNowData.congrData.who }}</a>
             </p>
-            <p class="congr-text" id="congr_text">{{ content.browseNowData.congrData.congratulate }}</p>
-            <label for="button-cg" onclick="changeStatus('congr', 'congr_text')" id="congr">Больше описания</label>
-            <input type="checkbox" id="button-cg">
+            <div class="see-now-wrapper">
+                <label for="button-cg" onclick="changeStatus('congr', 'congr_text')" id="congr">Больше описания</label>
+                <input type="checkbox" id="button-cg">
+                <p class="congr-text" id="congr_text">{{ content.browseNowData.congrData.congratulate|raw }}</p>
+            </div>
         </div>
     </div>
 </div>

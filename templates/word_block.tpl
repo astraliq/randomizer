@@ -2,7 +2,7 @@
     <div class="main-block-menu">
         <div>Cлучайность из категории:<span class="cat-sel">Интересное слово</span></div>
         <div>
-            <span class="cat-settings" onclick="filterWords.init();" style="cursor: pointer;">Настроить фильтр</span>
+            <span class="cat-settings" onclick="filterWords.init()">Настроить фильтр</span>
             <span class="next-random" onclick="filterWords._goRandomWords();" style="cursor: pointer;">Следующее слово</span>
         </div>
     </div>

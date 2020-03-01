@@ -160,6 +160,8 @@ class ApiMethod {
 				'name' => $otherCat,
 			];
 			$data['result'] = "OK";
+
+			$_SESSION['films'][] = $film['id'];
 			
 			$this->success($data);
 		} else {
@@ -308,6 +310,35 @@ class ApiMethod {
 		}
 	}
 
+	public function addParserDataPozdravok() {
+		
+		$congrs = $_POST['postData']['congrs'] ?? '';
+		$type = $_POST['postData']['type'] ?? '';
+		$who = $_POST['postData']['who'] ?? '';
+		$whoId = 31;
+		$themeId = 2;
+        $res = $this->rndCongratulate->addCongratulates($congrs, $type, $who, $themeId);
+		if ($res) {
+			$data['result'] = "OK";
+			$this->success($data);
+		} else {
+			$this->error('Ошибка записи в БД',200);
+		}
+	}
+	public function addParserDataPozdravok2() {
+		
+		$link = $_POST['postData']['link'] ?? '';
+		$types = $_POST['postData']['types'] ?? '';
+		$whoId = 20;
+		$themeId = 2;
+        $res = $this->rndCongratulate->addCongratulates2($types, $link, $whoId, $themeId);
+		if ($res) {
+			$data['result'] = "OK";
+			$this->success($data);
+		} else {
+			$this->error('Ошибка записи в БД',200);
+		}
+	}
 	public function addFilmsIds() {
 		
 		$filmsIds = $_POST['postData']['film'] ?? '';

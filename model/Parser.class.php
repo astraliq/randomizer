@@ -161,6 +161,9 @@ class Parser
 
                 $arError = false;
 
+                // изменение кодировки
+                $sContent = iconv('windows-1251', 'utf-8', $sContent);
+
                 if ($sContent === false) {
                     $arData = false;
 

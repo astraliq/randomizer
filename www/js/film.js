@@ -303,18 +303,23 @@ class Films {
 				countries: this.countries
 			}
 		};
+		
+		if (!reqLimit.checkReqLimits()) {
+			return;
+		}
+		
 		this._getJson(`/index.php`, sendData)
 			.then(data => {
 				if (data.result === "OK") {
-					let film = data.rnd;
+					this.film = data.rnd;
 					let film_cats = data.categories.map(function(elem) {
 						return elem.categories;
 					});
-					film.main_img = film.main_img === null ? 'film-error.png' : film.main_img;
-					film.actors = film.actors ? film.actors : 'нет данных';
-					film.genres = film.genres ? film.genres : 'нет данных';
-					film.info = [film.year,...film_cats.splice(0, 4),film.country,film.duration];
-					this._render(film);
+					this.film.main_img = this.film.main_img === null ? 'film-error.png' : this.film.main_img;
+					this.film.actors = this.film.actors ? this.film.actors : 'нет данных';
+					this.film.genres = this.film.genres ? this.film.genres : 'нет данных';
+					this.film.info = [this.film.year,...film_cats.splice(0, 4),this.film.country,this.film.duration];
+					this._render(this.film);
 					this.otherCat.render(data.otherCat);
 					this._updateLinkFilm();
 					this._putAlreadyViewedIds(film);
@@ -323,7 +328,15 @@ class Films {
 				} else {
 					console.log('ERROR_GET_FILM');
 				}
-			});
+			})
+			.catch(error => {
+//			console.log(this.film);
+				if (document.querySelector('.cat-sel').innerText !== 'Фильм') {
+					this._render(this.film);
+					this._updateLinkFilm();
+					this.filter.updateLinkFilmFilterOpen();
+				}
+			  });
     }
 	
 	_render(film) {	
