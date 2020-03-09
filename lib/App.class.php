@@ -20,6 +20,7 @@ class App {
 	protected function web($url) {
 		$newGen = new SomeGenerator();
 		$_SESSION['h'] = $newGen->genHash(strtotime('now'));
+
 		// if (empty($_SESSION['referrer'])) {
 		//     $_SESSION['referrer'] = $_SERVER['REQUEST_URI'];
 		//     $_SESSION['request'] = $_SERVER['REQUEST_URI'];
@@ -49,6 +50,7 @@ class App {
 		} else {
 			$_GET['page'] = 'Index';	
 		}	
+		$_SESSION['vk_token'] = $_SESSION['vk_token'] ?? $_SESSION['vk_token'];
 		//$_GET['page']='Index';	
 		/*парсинг строки*/	
 		/*поиск контролера*/

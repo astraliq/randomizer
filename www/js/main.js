@@ -16,7 +16,7 @@ class BrowseNow {
 
 	_getCategoryHTML(catName) {
 		let html, label;
-		let limitText = 350;
+		let limitText = 340;
 		switch (catName) {
 			case 'Фильм':
 				this.browseNowData.filmData.main_img = this.browseNowData.filmData.main_img === null ? 'stub.jpg' : this.browseNowData.filmData.main_img;
@@ -222,6 +222,7 @@ class OtherCategory {
 	}
 
 	render(data) {
+		$('.other-cat').removeClass('vk-other_cat');
 		$('.other-cat').empty();
 		$('.other-cat').prepend(`
 				Кроме ${data.nameCase} наш генератор выдаёт варианты из
@@ -606,6 +607,8 @@ function changeStatus(typeModul, typeDesc) {
 
 };
 
+
+// 
 let snLabels = {
 	'art': 'artdesc',
 	'congr': 'congr_text',
@@ -621,7 +624,11 @@ function checkLengthSeeNowText(objectSN) {
 		if (desc === null || textMore === null) {
 			continue;
 		}
-		if (desc.textContent.length < 350) {
+		if (objectSN[prop] === 'word_desc' && desc.textContent.length < 260) {
+			textMore.innerHTML = '';
+			continue;
+		}
+		if (desc.textContent.length < 340) {
 			textMore.innerHTML = '';
 		}
 	}
@@ -629,6 +636,39 @@ function checkLengthSeeNowText(objectSN) {
 
 checkLengthSeeNowText(snLabels);
 
+class RandomizerError {
+	constructor() {
+		this.to1;
+		this.to2;
+	}
+
+	showError(header,errText) {
+		clearTimeout(this.to1);
+		clearTimeout(this.to2);
+		this.hideError();
+		$('main').append(`
+			<div class="end_stub_container fade-in-bck">
+				<div class="end_stub">
+					<h2 class="end_stub_head">${header}</h2>
+					<p class="end_stub_head_text">${errText}</p>
+				</div>
+			</div>
+		`);
+		this.to1 = setTimeout(function () {
+			$('.end_stub_container').removeClass('fade-in-bck');
+			$('.end_stub_container').addClass('fade-out-bck');
+			this.to2 = setTimeout(function () {
+				$('.end_stub_container').remove();
+			}, 1000);
+		}, 3500);
+	}
+
+	hideError() {
+		$('.end_stub_container').remove();
+	}
+}
+
+let reqError = new RandomizerError();
 
 function addXMLRequestCallback(callback) {
 	let oldSend;
@@ -645,30 +685,6 @@ function addXMLRequestCallback(callback) {
 			oldSend.apply(this, arguments);
 		}
 	}
-}
-
-let to1, to2;
-
-function showEndWindow() {
-	clearTimeout(to1);
-	clearTimeout(to2);
-	let del = $('.end_stub_container').remove();
-	$('main').append(`
-		<div class="end_stub_container fade-in-bck">
-			<div class="end_stub">
-				<h2 class="end_stub_head">Вы просмотрели все случайности из данной категории.</h2>
-				<p class="end_stub_head_text">Попробуйте изменить фильтр или выбрать другую категорию случайностей.</p>
-			</div>
-		</div>
-	`);
-	to1 = setTimeout(function () {
-		$('.end_stub_container').removeClass('fade-in-bck');
-		$('.end_stub_container').addClass('fade-out-bck');
-		to2 = setTimeout(function () {
-			$('.end_stub_container').remove();
-		}, 1000);
-	}, 3500);
-
 }
 
 class ReqLimit {
@@ -725,7 +741,7 @@ addXMLRequestCallback(function (xhr) {
 				}, reqLimit.time);
 			}
 			if (xhr.status === 404) {
-				showEndWindow();
+				reqError.showError('Вы просмотрели все случайности из данной категории.','Попробуйте изменить фильтр или выбрать другую категорию случайностей.')
 			}
 		}
 	};
@@ -746,7 +762,7 @@ class ImageSrc {
 
 	changeSrcAll() {
 		for (let i = 0; i < this.images.length; i++) {
-			if (this.images[i].src === document.location.href) {
+			if (this.images[i].src === document.location.href.split('#')[0]) {
 				this.images[i].src = 'image.php?hash='+this.code+'c&c='+this.images[i].dataset.c+'&i='+this.images[i].dataset.i;
 			}
 		}

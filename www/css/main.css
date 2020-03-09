@@ -240,8 +240,9 @@ main {
 }
 
 .main-color-7 {
-	background-color: #5157ad;
+	background-color: #336699;
 }
+
 
 .main-block {
 	margin: 0 auto;
@@ -288,6 +289,15 @@ main {
 	min-height: 400px;
 }
 
+.cat-title {
+	width: 100%;
+	text-align: center;
+	font-family: "roboto";
+	font-size: 25px;
+	font-weight: 400;
+	line-height: 22px;
+	color: #FFFFFF;
+}
 .cat-sel {
 	margin: 0 0 0 0;
 	padding: 0 65px 0 5px;
@@ -686,6 +696,7 @@ main {
 	color: transparent;
 }
 
+.button-vk,
 .button-send,
 .button-send-2,
 .button-send-big {
@@ -702,6 +713,7 @@ main {
 	outline: none;
 }
 
+.button-vk:hover,
 .button-send:hover,
 .button-send-2:hover,
 .button-send-big:hover {
@@ -718,6 +730,7 @@ main {
 .button-send-big {
 	width: 200px;
 }
+
 
 #quote-filter .button-send {
 	width: 180px;
@@ -1298,3 +1311,99 @@ label:hover {
 #quote-filter-close:hover {
 	background-color: #e7578a;
 }
+
+.main-block-vk {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	flex-wrap: wrap;
+	margin: 0 50px 0 0;
+}
+
+.vk_block-get_token {
+	color: #FFFFFF;
+	display: block;
+}
+
+.vk_block-post {
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	padding-left: 20px;
+	outline: none;
+	height: 45px;
+	width: 500px;
+	background-color: #ffffff;
+	color: black;
+	border: 1px solid #a1a1a1;
+	font-size: 14px;
+	line-height: 22px;
+	margin: 5px 0 5px 0;
+	box-sizing: border-box;
+}
+
+.button-vk {
+	width: 320px;
+	background-color: #6699CC;
+	color: #ffffff;
+}
+
+#vk-settings {
+	color:#ffffff;
+	
+}
+
+.block-vk-repost_list {
+	width: 100%;
+	color: #ffffff;
+}
+
+.progress_block {
+	height: 30px;
+	width: 320px;
+	box-sizing: border-box;
+	border: 1px black solid;
+	padding: 2px;
+	margin: 10px 0 10px 0;
+}
+
+.progress_block-line {
+	background-color: whitesmoke;
+	height: 100%;
+	width: 0%;
+}
+
+.progress_block-procent {
+	text-align: center;
+	color: black;
+	font-size: 12px;
+	line-height: 25px;
+	margin: 0;
+}
+
+.block-vk-current_winner {
+	color: #ffffff;
+}
+
+.winner-link {
+	outline: none;
+	text-decoration: none;
+	color: #ffffff;
+	display: block;
+}
+
+.vk-other_cat {
+	color: #ffffff;	
+}
+
+.vk-other_cat .link-in-text {
+	color: #ffffff;	
+}
+
+
+
+

@@ -223,6 +223,8 @@ class FiltrWords {
 class Words {
     constructor() {
         this.data = [];
+		this.browseNow = new BrowseNow();
+		this.otherCat = new OtherCategory();
         this.alreadyViewedIds = [];//массив повторов
     }
 

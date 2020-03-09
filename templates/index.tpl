@@ -11,16 +11,18 @@
     	{% include 'header.tpl' %}
         <main>
             {% if content.categoryTitle == 'Фильм' %}           
-                {% include 'film_block.tpl' %}              
+                {% include 'block_film.tpl' %}              
             {% elseif content.categoryTitle == 'Цитата' %}                      
-                {% include 'quote_block.tpl' %}
+                {% include 'block_quote.tpl' %}
             {% elseif content.categoryTitle == 'Поздравление' %}                      
-                {% include 'congr_block.tpl' %}                            
+                {% include 'block_congr.tpl' %}                            
             {% elseif content.categoryTitle == 'Число' %}                      
-                {% include 'number_block.tpl' %}                            
+                {% include 'block_number.tpl' %}                            
             {% elseif content.categoryTitle == 'Интересное слово' %}                      
-                {% include 'word_block.tpl' %}                            
-            {% endif %}
+                {% include 'block_word.tpl' %}                            
+            {% elseif content.categoryTitle == 'Определение победителя в ВК по лайкам и репостам' %}                      
+                {% include 'block_vk.tpl' %}                            
+            {% endif %}            
             {% include 'see_now.tpl' %}
         </main>
         {% include 'footer.tpl' %}
@@ -38,6 +40,7 @@
     <script defer src="js/congratulate.js"></script>
     <script defer src="js/number.js"></script>
     <script defer src="js/words.js"></script>
+    <script defer src="js/vk_module.js"></script>
 	<script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 </body>
 </html>
