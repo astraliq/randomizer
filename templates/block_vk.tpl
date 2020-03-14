@@ -20,11 +20,11 @@
                 <div>
                     <div class="div-ul">
                         <p class="filtr-title filter-title-vk">Способ определения победителя</p>
-                            <input type="radio" name="vk-radio_set" id="vk-set_like" checked>
+                            <input type="radio" name="vk-radio_set" class="vk_radio_input" id="vk-set_like" data-type="like" checked>
                             <label for="vk-set_like">По лайкам</label>
-                            <input type="radio" name="vk-radio_set" id="vk-set_repost">
+                            <input type="radio" name="vk-radio_set" class="vk_radio_input" id="vk-set_repost" data-type="repost">
                             <label for="vk-set_repost">По репостам</label>
-                            <input type="radio" name="vk-radio_set" id="vk-set_repost_like">
+                            <input type="radio" name="vk-radio_set" class="vk_radio_input" id="vk-set_repost_like" data-type="repost&like">
                             <label for="vk-set_repost_like">По репостам с учетом лайков</label>
                     </div>
                     <div class="div-ul">
@@ -39,22 +39,22 @@
                                     <label for="vk-check14">Участник должен сделать репост</label>
                                 </li> -->
                                 <li class="checkbox checkbox-vk">
-                                    <input type="checkbox" id="vk-check12" value="0">
-                                    <label for="vk-check12">Репост должен быть закреплен (на первом месте) на стене участника</label>
+                                    <input type="checkbox" class="vk-filter_data" id="vk-repost_first" value="0">
+                                    <label for="vk-repost_first">Репост должен быть закреплен (на первом месте) на стене участника</label>
                                 </li>
                                 <li class="checkbox checkbox-vk">
-                                    <input type="checkbox" id="vk-check16" value="4">
-                                    <label for="vk-check16">Участник должен быть подписан на сообщество</label>
+                                    <input type="checkbox" class="vk-filter_data" id="vk-subscribe" value="4">
+                                    <label for="vk-subscribe">Участник должен быть подписан на сообщество</label>
                                 </li>
                             </ul>
                     </div>
                     <div class="div-ul">
                         <p class="filtr-title filter-title-vk">Дополнительные настройки</p>
-                        <input type="number" id="vk-check20" value="1">
-                        <label for="vk-check20">Количество победителей</label>
+                        <input type="number" class="vk-filter_data" id="vk-winner_count" value="1" min="1" max="20">
+                        <label for="vk-winner_count">Количество победителей</label>
                         <br>
-                        <input type="text" id="vk-check15" placeholder="Не имеет значения">
-                        <label for="vk-check15">Город победителя</label>
+                        <input type="text" class="vk-filter_data" id="vk-winner_country" placeholder="Не имеет значения">
+                        <label for="vk-winner_country">Город победителя</label>
                     </div>
                 </div>
             </div>

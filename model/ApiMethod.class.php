@@ -384,6 +384,20 @@ class ApiMethod {
 		}
 	}
 
+	public function vkAuthSet() {
+		$vkAuth = $_POST['postData']['vkAuth'] ?? '';
+		if ($vkAuth === 1) {
+			try {
+				$_SESSION['vkAuth'] = 1;
+				$data['result'] = "OK";
+				$this->success($data);
+			} catch (Exception $e) {
+				$this->error('Ошибка сесии');
+			}
+			
+		}
+	}
+
 };
 
 ?>

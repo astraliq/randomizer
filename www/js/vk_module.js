@@ -1,5 +1,56 @@
 "use strict"
 
+class VKFilter {
+	constructor() {
+		this.filterInput = document.querySelectorAll('.vk_radio_input');
+		this.repostFirstInput = document.getElementById('vk-repost_first');
+		this.subscribeInput = document.getElementById('vk-subscribe');
+		this.countInput = document.getElementById('vk-winner_count');
+		this.countryInput = document.getElementById('vk-winner_country');
+		this.method;
+		this.filter = {
+			repostFirst: 0,
+			subscribe: 0
+		};
+        this.country;
+        this.count;
+		this.getFilterValues();
+	}
+	
+	init() {
+		this.filterInput.forEach( (el) => {
+			el.addEventListener('click', e => {this.getFilterValues()});
+		})
+		this.repostFirstInput.addEventListener('click', e => {this.getFilterValues()});
+		this.subscribeInput.addEventListener('click', e => {this.getFilterValues()});
+		this.countInput.addEventListener('click', e => {this.getFilterValues()});
+		this.countryInput.addEventListener('click', e => {this.getFilterValues()});
+	}
+	
+	getFilterValues() {
+		// способ определение победителя
+		this.filterInput.forEach( (el) => {
+			if (el.checked) {
+				this.method = el.dataset.type;
+			}
+		});
+		console.log(this.method);
+		// настройки фильтра
+		this.filter.repostFirst = (this.repostFirstInput.checked) ? 1 : 0;
+		this.filter.subscribe = (this.subscribeInput.checked) ? 1 : 0;
+		console.log(this.filter);
+		
+		// количество участников и город победителя
+		this.count = this.countInput.value;
+		this.country = this.countryInput.value;
+		console.log('this.count:', this.count);
+		console.log('this.country:', this.country);
+	}
+	
+}
+
+
+
 class VKAPI {
 	constructor() {
 		this.token;
@@ -7,6 +58,8 @@ class VKAPI {
 		this.urlHashParams;
 		this.rndWin = new RandomWinner();
 		this.eventHandler;
+		this.likeUsers = [];
+		this.repostUsers = [];
 		this.input;
 		this.regExp1 = /(^https?:\/\/)vk\.com\/((wall)|(.+\?w=wall))-?[0-9]+_[0-9]+/gi;
 		this.regExp2 = /vk\.com\/((wall)|(.+\?w=wall))/gi;
@@ -14,10 +67,23 @@ class VKAPI {
 		VK.init({
 			apiId: 7347408
 		});
-	}
+		this.vkFilter = new VKFilter();
+		this.vkFilter.init();
+		}
 
 	_getJson(url, data) {
 		return $.get({
+			url: url,
+			data: data,
+			dataType: 'jsonp',
+			success: function (data) {
+
+			}
+		})
+	}
+
+	_postJson(url, data) {
+		return $.post({
 			url: url,
 			data: data,
 			dataType: 'jsonp',
@@ -60,31 +126,6 @@ class VKAPI {
 		}
 	}
 
-	init() {
-		if (this.urlParams.path === 'index/vk') {
-			this.input = document.querySelector('.vk_block-post');
-			if (this.getUrlHashParams()) {
-				let state = this.urlHashParams.state.split(',');
-				console.log(state);
-				if (state[1] === 'getReposts' && state[0] !== 'undefined') {
-					let link;
-					switch (state[2]) {
-						case 'group':
-							link = 'https://vk.com/group?w=wall';
-							break;
-						case 'wall':
-							link = 'https://vk.com/wall';
-							break;
-						default:
-							link = 'https://vk.com/';
-					}
-					this.input.value = link + state[0];
-					this.getReposts();
-				}
-			}
-		}
-	}
-
 	showErrAddress(errorMsg) {
 		let standartMsg = 'Ссылка должна быть вида https://vk.com/wall-34877171_395385 или https://vk.com/group?w=wall-34877171_395385';
 		let msg = errorMsg ? errorMsg : standartMsg;
@@ -103,7 +144,8 @@ class VKAPI {
 		return true;
 	}
 
-	getAuth() {
+	init() {
+		this.input = document.querySelector('.vk_block-post');
 		// проверка правильности ссылки
 		let link = this.input.value;
 		if (!this.checkVKWallHref(link)) {
@@ -113,127 +155,182 @@ class VKAPI {
 			$('.main-block-vk-err_msg').hide();
 		}
 
-		//		VK.Auth.revokeGrants(function () {
-		//			console.log('сессия убита');
+		//		VK.Auth.logout(function () {
+		//			console.log('сессия VK убита');
 		//		});
-
-		VK.Auth.login(function (response) {
-			if (response.session) {
-				/* Пользователь успешно авторизовался */
-				console.log('огонь, авторизации прошла');
-				vkMod.getReposts();
-				if (response.settings) {
-					/* Выбранные настройки доступа пользователя, если они были запрошены */
-				}
+		let sendData = {
+			apiMethod: 'vkAuthSet',
+			postData: {
+				vkAuth: 1,
+			}
+		};
+		VK.Auth.getLoginStatus(function (response) {
+			console.log(response);
+			if (response.session && response.status === 'connected') {
+				vkMod.startGettingWinner();
 			} else {
-				/* Пользователь нажал кнопку Отмена в окне авторизации */
-				console.log('авторизации нет');
+				VK.Auth.login(function (response) {
+					if (response.session) {
+						/* Пользователь успешно авторизовался */
+						console.log('огонь, авторизация прошла');
+						vkMod._getJson(`/index.php`, sendData)
+							.then(data => {
+								if (data.result === "OK") {
+									console.log('vk auth in session');
+								}
+							})
+						vkMod.startGettingWinner();
+					} else {
+						/* Пользователь нажал кнопку Отмена в окне авторизации */
+						console.log('авторизации нет');
+					}
+				});
 			}
 		});
+
 	}
 
-	async getReposts() {
+	async startGettingWinner() {
 		let link = this.input.value; // адрес введенный пользователем
-
-		//		if (!this.getUrlHashParams()) {
-		//			document.location.href = `https://oauth.vk.com/authorize?client_id=7347408&display=page&redirect_uri=http://127.0.0.rand/index.php?path=index/vk&scope=groups&response_type=token&v=5.103&state=${link.split(link.match(this.regExp2)[0])[1]},getReposts,${link.match(this.regExp3)[0]}`;
-		//			return false;
-		//		}
 
 		this.rndWin.winnersIds = [];
 		let ids = link.split(link.match(this.regExp2)[0])[1].split('_');
-		//		console.log(ids);
 
 		let progress = 0; // процент выполнения загрузки
 		let offset = 0;
 		let count = 1000;
 		let totalCount = count;
-		let err = 0;
-
-		//		let getPostsHref = `https://api.vk.com/method/wall.getReposts?v=5.52&owner_id=${ids[0]}&post_id=${ids[1]}&access_token=${this.urlHashParams.access_token}`;
-		//
-		//		let getWallByIdHref = `https://api.vk.com/method/wall.getById?v=5.52&posts=${ids[0]}_${ids[1]}&access_token=${this.urlHashParams.access_token}`;
-		//
-		//		let getLikesHref;
+		
+		let err;
 
 		this.clearRenderBlock();
 		this._renderProgress();
 
-		console.log(ids);
-		//		VK.Api.call('likes.getList', {
-		//			type: 'post',
-		//			owner_id: ids[0],
-		//			item_id: ids[1],
-		//			filter: 'like',
-		//			extended: 0,
-		//			offset: offset,
-		//			count: count,
-		//			v: "5.52"
-		//		}, function (data) {
-		//			if (data.response) {
-		//				console.log(data);
-		//			}
-		//		});
-
-		while (err === 0) {
-			//			getLikesHref = `https://api.vk.com/method/likes.getList?v=5.52&type=post&owner_id=${ids[0]}&item_id=${ids[1]}&filter=likes&extended=0&offset=${offset}&count=${count}&access_token=${this.urlHashParams.access_token}`;
-
-			await VK.Api.call('likes.getList', {
-				type: 'post',
-				owner_id: ids[0],
-				item_id: ids[1],
-				filter: 'like',
-				extended: 0,
-				offset: offset,
-				count: count,
-				v: "5.52"
-			}, function (data) {
-				if (data.response) {
-					//					console.log(data);
-
-					vkMod.rndWin.winnersIds = [...vkMod.rndWin.winnersIds, ...data.response.items];
-					totalCount = data.response.count;
-					progress = vkMod.rndWin.winnersIds.length * 100 / totalCount;
-					progress = (progress > 100) ? 100 : progress;
-					document.querySelector('.progress_block-procent').innerText = Math.round(progress) + '%';
-					document.querySelector('.progress_block-line').style.width = Math.round(progress) + '%';
-					err = (data.response.items.length == 0) ? 1 : 0;
-				}
-			});
-
-
-			//			await this._getJson(getPostsHref, {})
-			//				.then(data => {
-			//					console.log(data);
-			//
-			//					this.rndWin.winnersIds = [...this.rndWin.winnersIds, ...data.response.items];
-			//					totalCount = data.response.count;
-			//					progress = this.rndWin.winnersIds.length * 100 / totalCount;
-			//					progress = 100;
-			//					progress = (progress > 100) ? 100 : progress;
-			//					document.querySelector('.progress_block-procent').innerText = Math.round(progress) + '%';
-			//					document.querySelector('.progress_block-line').style.width = Math.round(progress) + '%';
-			//					err = (data.response.items.length == 0) ? 1 : 0;
-			//					err = 1;
-			//				})
-			//				.catch(error => {
-			//					totalCount = 0;
-			//					err = 1;
-			//					console.log(error);
-			//				});
-
-			//			console.log(this.rndWin.winnersIds);
-
-			await new Promise((resolve, reject) => setTimeout(resolve, 333));
-			offset = offset + count;
-
+		let stage = 1;
+		
+		let type = 0;
+		switch (this.vkFilter.method) {
+			case 'like':
+				type = 1;
+			break;
+			case 'repost':
+				type = 2;
+			break;
+			case 'repost&like':
+				type = 3;
+			break;
+			default:
+				type = 1;
 		}
+		
+		if (this.vkFilter.filter.repostFirst === 1) {
+			stage++;
+		}
+		if (this.vkFilter.filter.subscribe === 1) {
+			stage++;
+		}
+		if (this.vkFilter.country !== '') {
+			stage++;
+		}
+		
+		
+		// filter: likes    ->   учитывает только лайки
+		// filter: copies   ->   учитывает только репосты
+		
+		if (type === 2 || type === 3) {
+			err = 0;
+			offset = 0;
+			count = 1000;
+			while (err === 0) {
+				await VK.Api.call('likes.getList', {
+					type: 'post',
+					owner_id: ids[0],
+					item_id: ids[1],
+					filter: 'copies',
+					friends_only: 0,
+					extended: 0,
+					offset: offset,
+					count: count,
+					v: "5.52"
+				}, function (data) {
+					if (data.response) {
+						console.log(data);
 
+						vkMod.repostUsers = [...vkMod.repostUsers, ...data.response.items];
+						totalCount = data.response.count;
+						progress = vkMod.repostUsers.length * 100 / totalCount;
+						progress = (progress > 100) ? 100 : progress;
+						document.querySelector('.progress_block-procent').innerText = Math.round(progress) + '%';
+						document.querySelector('.progress_block-line').style.width = Math.round(progress) + '%';
+						err = (data.response.items.length == 0) ? 1 : 0;
+					}
+				});
+
+				await new Promise((resolve, reject) => setTimeout(resolve, 333));
+				offset = offset + count;
+
+			}
+			if (type === 2) {
+				this.rndWin.winnersIds = this.repostUsers;
+			}
+		}
+		
+		if (type === 1 || type === 3) {
+			err = 0;
+			offset = 0;
+			count = 1000;
+			while (err === 0) {
+				await VK.Api.call('likes.getList', {
+					type: 'post',
+					owner_id: ids[0],
+					item_id: ids[1],
+					filter: 'likes',
+					friends_only: 0,
+					extended: 0,
+					offset: offset,
+					count: count,
+					v: "5.52"
+				}, function (data) {
+					if (data.response) {
+						console.log(data);
+
+						vkMod.likeUsers = [...vkMod.likeUsers, ...data.response.items];
+						totalCount = data.response.count;
+						progress = vkMod.likeUsers.length * 100 / totalCount;
+						progress = (progress > 100) ? 100 : progress;
+						document.querySelector('.progress_block-procent').innerText = Math.round(progress) + '%';
+						document.querySelector('.progress_block-line').style.width = Math.round(progress) + '%';
+						err = (data.response.items.length == 0) ? 1 : 0;
+					}
+				});
+
+				await new Promise((resolve, reject) => setTimeout(resolve, 333));
+				offset = offset + count;
+
+			}
+			if (type === 1) {
+				this.rndWin.winnersIds = this.likeUsers;
+			}
+		}
+		
+		if (type === 3) {
+			this.repostUsers.forEach( (el) => {
+				if (this.likeUsers.includes(el, 0)) {
+					this.rndWin.winnersIds.push(el);
+				}
+			})
+		}
+		
+		
 		// удаляем дубликаты id из массива
-		this.rndWin.winnersIds = Array.from(new Set(this.rndWin.winnersIds))
+		this.rndWin.winnersIds = Array.from(new Set(this.rndWin.winnersIds));
 		this._render(this.rndWin.winnersIds, this.rndWin.winnersIds.length);
-
-
+		console.log('this.rndWin.winnersIds:', this.rndWin.winnersIds);
+		
+		if (this.vkFilter.country !== '') {
+			// запрос данных пользователей
+		}
+		
 		let btnGetWin = document.getElementById('vk_get_winner');
 		if (btnGetWin != null) {
 			btnGetWin.removeEventListener('click', this.eventHandler);
@@ -247,27 +344,28 @@ class VKAPI {
 	async _initGetRndWinner() {
 		let winnerId, winner;
 		winnerId = this.rndWin.getRandomWinner();
-		winner = await this.getUserById(winnerId);
-		this._renderWinner(winner)
+		winner = await this.getUsersByIds(winnerId);
+		this._renderWinner(winner);
 	}
 
-	async getUserById(id) {
-		let user;
+	async getUsersByIds(ids) {
+		let users;
+		let user_ids = Array.isArray(ids) ? ids.join(',') : ids;
 		let promise = new Promise(function (resolve, reject) {
 			VK.Api.call('users.get', {
 				type: 'post',
-				user_ids: id,
+				user_ids: user_ids,
 				fields: 'bdate,city,country,has_photo,home_town,online,photo_100,photo_200_orig,sex,universities',
 				v: "5.52"
 			}, function (data) {
 				resolve(data);
 			})
 		})
-		
+
 		await promise.then(data => {
-			user = data.response[0];
+			users = data.response[0];
 		});
-		return user;
+		return users;
 	}
 
 	changeBlockStyle() {
@@ -296,7 +394,7 @@ class VKAPI {
 		$('.block-vk-repost_list').remove();
 		$('.main-block-vk').append(`
                 <div class="block-vk-repost_list">
-					<p>Загружено ${count} участников. Повторяющиеся участники удалены.</p>
+					<p>Загружено ${count} участников.</p>
 					<button class="button-vk" id="vk_get_winner">Выбрать случайного победителя</button>
 				</div>
 		`);
@@ -364,9 +462,9 @@ class RandomWinner {
 
 let btnGetReposts = document.getElementById('vk_get_participants');
 let vkMod = new VKAPI();
-vkMod.init();
+
 if (btnGetReposts != null) {
 	btnGetReposts.addEventListener('click', e => {
-		vkMod.getAuth();
+		vkMod.init();
 	});
 }
