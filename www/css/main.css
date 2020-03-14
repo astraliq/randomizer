@@ -267,7 +267,6 @@ main {
 .main-block-data {
 	margin: 0 auto;
 	padding: 0 0 0 0;
-	width: 100%;
 }
 
 .main-block-data-primary {
@@ -1313,6 +1312,7 @@ label:hover {
 }
 
 .main-block-vk {
+	position: relative;
 	display: -webkit-flex;
 	display: -moz-flex;
 	display: -ms-flex;
@@ -1385,10 +1385,6 @@ label:hover {
 	margin: 0;
 }
 
-.block-vk-current_winner {
-	color: #ffffff;
-}
-
 .winner-link {
 	outline: none;
 	text-decoration: none;
@@ -1398,12 +1394,100 @@ label:hover {
 
 .vk-other_cat {
 	color: #ffffff;	
+	width: 100%;
+	margin: 30px 0 0 0;
 }
 
 .vk-other_cat .link-in-text {
 	color: #ffffff;	
 }
 
+.vk-filter p {
+	color: #ffffff;
+}
+.vk-filter  {
+	color: #ffffff;
+	width: 50%;	
+	margin: 0 0 0 0;
+}
 
+.vk_block {
+	justify-content: center;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	flex-direction: row;
+}
 
+.vk_block .main-block-menu {
+	width: 100%;
+}
 
+.block-vk-get_winner_block {
+	width: 100%;	
+}
+
+.block-vk-current_winner {
+	color: #ffffff;
+}
+
+.filter-title-vk {
+	width: 500px;
+}
+
+.checkbox-vk {
+	width: 100%;
+}
+
+.main-block-data-vk {
+	width: 50%;
+	margin: 0 0 0 0;
+}
+
+.main-block-vk-err_msg {
+	width: max-content;
+	position: absolute;
+	height: 45px;
+	background-color: whitesmoke;
+	border-radius: 5px;
+	left: -80px;
+	top: -50px;
+	z-index: 99999;
+	-webkit-transition: opacity 400ms ease-in;
+	-moz-transition: opacity 400ms ease-in;
+	transition: opacity 400ms ease-in;
+	display: none;
+}
+
+.main-block-vk-err_msg:before {
+	content: "";
+	display: block;
+	border: 15px solid transparent;
+	border-top: 12px solid whitesmoke;
+	position: absolute;
+	top: 45px;
+	left: 100px;
+	z-index: 5;
+}
+
+.main-block-vk-err_text {
+	width: 100%;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	line-height: 35px;
+	margin: 0;
+	padding: 5px;
+}
+
+.main-block-vk-err_text:before {
+	display: inline-block;
+	text-align: center;
+	line-height: 18px;
+	background-color: yellow;
+	border: 2px red solid;
+	width: 13px;
+	padding: 0;
+	margin: 0 5px 0 0;
+	content: '\0021';
+	border-radius: 5px;
+	font-weight: 700;
+}

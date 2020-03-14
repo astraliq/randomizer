@@ -56,9 +56,9 @@ const firstWord = `
 
 //первый запуск по классу и по функции onclick
 let wordsLinkMain = document.querySelector('.words_main_lnk');
-wordsLinkMain.addEventListener('click', function () {
-    words.init();
-});
+//wordsLinkMain.addEventListener('click', function () {
+//    words.init();
+//});
 
 //Изменим цвет фона для совего блока 1...7
 function colorWords(color) {

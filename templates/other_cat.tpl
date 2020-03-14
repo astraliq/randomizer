@@ -1,6 +1,6 @@
 {% set secondClass = '' %} 
 {% if content.categoryTitle == 'Определение победителя в ВК по лайкам и репостам' %}           
-    {% set secondClass = 'vk-other_cat' %}              
+    {% set secondClass = 'vk-other_cat' %}            
 {% endif %}  
 <div class="other-cat {{ secondClass }}">
     Кроме {{ content.categoryCase }} наш генератор выдаёт варианты из

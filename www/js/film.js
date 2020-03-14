@@ -370,7 +370,7 @@ class Films {
     }
 };
 let film = new Films();
-mainFilmLink.addEventListener('click', e => { film.getRndFilm() });
+//mainFilmLink.addEventListener('click', e => { film.getRndFilm() });
 
 
 

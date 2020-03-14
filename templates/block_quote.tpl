@@ -10,7 +10,7 @@
     </div>
     <div class="main-block-data">
         <div class="main-block-data-primary">
-            <div class="main-block-data-pic">
+            <div class="main-block-data-pic" width="276">
                 {% set img = 'img/quoters/person-error.png' %} 
                 {%if content.randomData.picture is not null %}           
                     {% set img = '' %}                                   

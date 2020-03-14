@@ -116,10 +116,10 @@ class Numbers {
     }
 };
 let number = new Numbers();
-numberMainLink.addEventListener('click', e => { 
-	number.render();
-	number.getRandomInt();
-});
+//numberMainLink.addEventListener('click', e => { 
+//	number.render();
+//	number.getRandomInt();
+//});
 if (nextNumber !== null) {
 	nextNumber.addEventListener('click', e => { number.getRandomInt() });
 }
