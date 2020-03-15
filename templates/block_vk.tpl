@@ -3,7 +3,6 @@
                 <h1 style="display: none;">Розыгрыш вконтакте</h1>
                 <div class="cat-title">Определение победителя вконтакте по лайкам и репостам</div>
             </div>
-
             <div class="main-block-data main-block-data-vk">
                 <div class="main-block-data-primary">
                     <div class="main-block-vk">
@@ -30,22 +29,18 @@
                     <div class="div-ul">
                         <p class="filtr-title filter-title-vk">Фильтр</p>
                             <ul>
-                                <!-- <li class="checkbox checkbox-vk">
-                                    <input type="checkbox" id="vk-check13" value="1">
-                                    <label for="vk-check13">Участник должен поставить лайк</label>
-                                </li>
                                 <li class="checkbox checkbox-vk">
-                                    <input type="checkbox" id="vk-check14" value="2">
-                                    <label for="vk-check14">Участник должен сделать репост</label>
-                                </li> -->
-                                <li class="checkbox checkbox-vk">
-                                    <input type="checkbox" class="vk-filter_data" id="vk-repost_first" value="0">
-                                    <label for="vk-repost_first">Репост должен быть закреплен (на первом месте) на стене участника</label>
+                                    <input type="checkbox" class="vk-filter_data" id="vk-repeat_winners" checked="checked">
+                                    <label for="vk-repeat_winners">Исключать повторный выбор победителей.</label>
                                 </li>
                                 <li class="checkbox checkbox-vk">
                                     <input type="checkbox" class="vk-filter_data" id="vk-subscribe" value="4">
                                     <label for="vk-subscribe">Участник должен быть подписан на сообщество</label>
                                 </li>
+                               <!--  <li class="checkbox checkbox-vk">
+                                    <input type="checkbox" class="vk-filter_data" id="vk-repost_first" value="0">
+                                    <label for="vk-repost_first">Репост должен быть закреплен (на первом месте) на стене участника</label>
+                                </li> -->
                             </ul>
                     </div>
                     <div class="div-ul">
@@ -55,6 +50,7 @@
                         <br>
                         <input type="text" class="vk-filter_data" id="vk-winner_country" placeholder="Не имеет значения">
                         <label for="vk-winner_country">Город победителя</label>
+                        
                     </div>
                 </div>
             </div>
