@@ -668,7 +668,7 @@ class RandomizerError {
 	}
 }
 
-let reqError = new RandomizerError();
+let rndzError = new RandomizerError();
 
 function addXMLRequestCallback(callback) {
 	let oldSend;
@@ -741,7 +741,7 @@ addXMLRequestCallback(function (xhr) {
 				}, reqLimit.time);
 			}
 			if (xhr.status === 404) {
-				reqError.showError('Вы просмотрели все случайности из данной категории.','Попробуйте изменить фильтр или выбрать другую категорию случайностей.')
+				rndzError.showError('Вы просмотрели все случайности из данной категории.','Попробуйте изменить фильтр или выбрать другую категорию случайностей.')
 			}
 		}
 	};
