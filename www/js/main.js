@@ -25,7 +25,7 @@ class BrowseNow {
 				html = `
 				<div class="see-now-main-data">
 					<div class="see-now-cat">
-						<a class="see-now-cat-link" onclick="film.getRndFilm()">Фильм</a>
+						<a class="see-now-cat-link" href="/film">Фильм</a>
 					</div>
 					<div class="see-now-desc">
 						<div class="see-now-img">
@@ -53,7 +53,7 @@ class BrowseNow {
 				html = `
 				<div class="see-now-main-data">
 					<div class="see-now-cat">
-						<a class="see-now-cat-link" onclick="quote.init()">Цитата</a>
+						<a class="see-now-cat-link" href="/quote">Цитата</a>
 					</div>
 					<p class="data-text"><span class="quote-left-aquo">&laquo;${this.browseNowData.quoteData.text}&raquo;</span></p>
 					<p class="quote-person">${this.browseNowData.quoteData.author}</p>
@@ -89,7 +89,7 @@ class BrowseNow {
 				html = `
 				<div class="see-now-main-data">
 					<div class="see-now-cat">
-						<a class="see-now-cat-link" onclick="words.init()">Интересное слово</a>
+						<a class="see-now-cat-link" href="/word">Интересное слово</a>
 					</div>
 					<div class="data-desc-1">
 						<h1>Слово: ${this.browseNowData.wordData.word}</h1>
@@ -104,7 +104,7 @@ class BrowseNow {
 							<input type="checkbox" id="button-cg">`
 				html = `
 				<div class="see-now-main-data">
-					<div class="see-now-cat"><a class="see-now-cat-link" onclick="congratulate.runProgr()">Поздравление</a></div>
+					<div class="see-now-cat"><a class="see-now-cat-link" href="/congratulate">Поздравление</a></div>
 					<div class="data-desc">
 						<div class="see-now-text">
 							<p class="cong-cat">Тема: 
@@ -123,7 +123,7 @@ class BrowseNow {
 				html = `
 				<div class="see-now-main-data">
 					<div class="data-title">
-						<a class="data-title-link">Подарки</a>
+						<a class="data-title-link" href="/gift">Подарки</a>
 					</div>
 					<div class="data-desc-2">
 						<div class="see-now-img">
@@ -227,7 +227,7 @@ class OtherCategory {
 		$('.other-cat').prepend(`
 				Кроме ${data.nameCase} наш генератор выдаёт варианты из
 				<a class="link-in-text">других категорий</a>,
-				например, &laquo;<a class="link-in-text" onclick="${data.function}">${data.name}</a>&raquo;
+				например, &laquo;<a class="link-in-text" href="/${data.function}">${data.name}</a>&raquo;
 		`);
 	}
 

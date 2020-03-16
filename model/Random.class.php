@@ -11,12 +11,12 @@ class Random extends Model {
 		'Фильм' => [
 			'tpl' => 'see_now_film.tpl',
 			'case' => 'фильмов',
-			'function' => 'film.getRndFilm()',
+			'function' => 'film',
 		],
 		'Цитата' => [
 			'tpl' => 'see_now_quote.tpl',
 			'case' => 'цитат',
-			'function' => 'quote.init()',
+			'function' => 'quote',
 		],
 		// 'Подарок' => [
 		// 	'tpl' => 'see_now_gift.tpl',
@@ -31,17 +31,17 @@ class Random extends Model {
 		'Интересное слово' => [
 			'tpl' => 'see_now_foreign_word.tpl',
 			'case' => 'интересных слов',
-			'function' => 'words.init()',
+			'function' => 'word',
 		],
 		'Поздравление' => [
 			'tpl' => 'see_now_congratulate.tpl',
 			'case' => 'поздравлений',
-			'function' => "congratulate.runProgr()",
+			'function' => "congratulate",
 		],
 		'Число' => [
 			'tpl' => 'empty.tpl',
 			'case' => 'случайных чисел',
-			'function' => '',
+			'function' => 'number',
 		]
 	];
 

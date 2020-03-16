@@ -1,0 +1,11 @@
+RewriteEngine On
+
+RewriteRule /image.php$ image.php [L]
+RewriteRule /img/(.+)$ img/$1 [L]
+RewriteRule /css/(.+)$ css/$1 [L]
+RewriteRule /fonts/(.+)$ fonts/$1 [L]
+RewriteRule /js/(.+).js$ js/$1.js [L]
+RewriteRule ^([a-z]+)$ index.php?path=index/$1 [L]
+RewriteRule ^([a-z]+)/(\w+)$ index.php?path=index/$1&id=$2 [L]
+RewriteRule /confirmation.php$ confirmation.php [L]
+RewriteRule /sendmailing.php$ sendmailing.php [L]
