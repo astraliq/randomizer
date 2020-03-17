@@ -1,6 +1,6 @@
 <div class="see-now-main-data">
     <div class="see-now-cat">
-        <a class="see-now-cat-link" onclick="words.init();">Интересное слово</a>
+        <a class="see-now-cat-link" href="/word">Интересное слово</a>
     </div>
     <div class="see-now-text">
     	<h1>Слово: {{ content.browseNowData.wordData.word }}</h1>

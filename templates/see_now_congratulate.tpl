@@ -1,5 +1,5 @@
 <div class="see-now-main-data">
-    <div class="see-now-cat"><a class="see-now-cat-link" onclick="congratulate.runProgr()">Поздравление</a></div>
+    <div class="see-now-cat"><a class="see-now-cat-link" href="/congratulate">Поздравление</a></div>
     <div class="data-desc">
         <div class="see-now-text">
             <p class="cong-cat">Тема: 

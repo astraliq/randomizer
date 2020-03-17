@@ -1,6 +1,6 @@
 <div class="see-now-main-data">
     <div class="data-title">
-        <a href="#" class="data-title-link">Подарки</a>
+        <a href="/gift" class="data-title-link">Подарки</a>
     </div>
     <div class="data-desc-2">
         <div class="see-now-img">

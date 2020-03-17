@@ -287,7 +287,7 @@ class Congratulate {
         Кроме поздравлений наш генератор выдаёт варианты из
         <a href="#" class="link-in-text">других категорий</a>,
         например, &laquo;
-        <a href="#" class="link-in-text" onclick="film.getRndFilm()">Фильмы</a>&raquo;
+        <a href="#" class="link-in-text" href="/film">Фильм</a>&raquo;
     </div>
         `;
 
