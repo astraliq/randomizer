@@ -172,6 +172,7 @@ class BrowseNow {
 					this.html += this._getCategoryHTML(data.browseThird);
 					this.html += this._getCategoryHTML(data.browseFourth);
 					this._render(this.html);
+					newSrc.changeSrc(document.querySelector('.see_now-film-pic'));
 				} else {
 					console.log('ERROR_GET_BROWSEDATA');
 				}
