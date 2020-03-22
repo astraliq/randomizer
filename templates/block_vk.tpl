@@ -1,6 +1,7 @@
     <section class="main-block main-color-7 vk_block">
             <div class="main-block-menu">
-                <h1 style="display: none;">Розыгрыш вконтакте</h1>
+                <h1 class="hidden-title">Розыгрыш вконтакте</h1>
+                <h1 class="hidden-title">Определение победителя вконтакте по лайкам и репостам</h1>
                 <div class="cat-title">Определение победителя вконтакте по лайкам и репостам</div>
             </div>
             <div class="main-block-data main-block-data-vk">
@@ -31,11 +32,15 @@
                             <ul>
                                 <li class="checkbox checkbox-vk">
                                     <input type="checkbox" class="vk-filter_data" id="vk-repeat_winners" checked="checked">
-                                    <label for="vk-repeat_winners">Исключать повторный выбор победителей.</label>
+                                    <label class="vk-label" for="vk-repeat_winners">Исключать повторный выбор победителей.</label>
+                                    <img class="symbol-help" src="img/znak-question.png" height="20"></img>
+                                    <div class="vk-help vk-repeat_winners-help"><p>Если выбрано, исключает ранее выбранных победителей и производит выбор победителей из оставшихся участников, которые еще ни разу не были выбраны победителями.</p></div>
                                 </li>
                                 <li class="checkbox checkbox-vk">
                                     <input type="checkbox" class="vk-filter_data" id="vk-subscribe" value="4">
-                                    <label for="vk-subscribe">Участник должен быть подписан на сообщество</label>
+                                    <label class="vk-label" for="vk-subscribe">Участник должен быть подписан на сообщество</label>
+                                    <img class="symbol-help" src="img/znak-question.png" height="20"></img>
+                                    <div class="vk-help vk-subscribe-help"><p>При выборе данного фильтра загрузка происходит только тех участников, которые были подписаны на сообщество, создавшее пост.</p></div>
                                 </li>
                                <!--  <li class="checkbox checkbox-vk">
                                     <input type="checkbox" class="vk-filter_data" id="vk-repost_first" value="0">
@@ -45,12 +50,18 @@
                     </div>
                     <div class="div-ul">
                         <p class="filtr-title filter-title-vk">Дополнительные настройки</p>
-                        <input type="number" class="vk-filter_data" id="vk-winner_count" value="1" min="1" max="20">
-                        <label for="vk-winner_count">Количество победителей</label>
-                        <br>
-                        <input type="text" class="vk-filter_data" id="vk-winner_country" placeholder="Не имеет значения">
-                        <label for="vk-winner_country">Город победителя</label>
-                        
+                        <div class="vk-ul">
+                            <input type="number" class="vk-filter_data" id="vk-winner_count" value="1" min="1" max="20">
+                            <label class="vk-label" for="vk-winner_count">Количество победителей</label>
+                            <img class="symbol-help" src="img/znak-question.png" height="20"></img>
+                            <div class="vk-help vk-winner_count-help"><p>Данный параметр позволяет единовременно выбрать до 20 победителей.</p></div>
+                        </div>
+                        <div class="vk-ul">
+                            <input type="text" class="vk-filter_data" id="vk-winner_country" placeholder="Не имеет значения">
+                            <label class="vk-label" for="vk-winner_country">Город победителя</label>
+                            <img class="symbol-help" src="img/znak-question.png" height="20"></img>
+                            <div class="vk-help vk-winner_country-help"><p>При указании города загрузка происходит только тех участников, у которых указан в профиле выбранный город.</p></div>
+                        </div>
                     </div>
                 </div>
             </div>

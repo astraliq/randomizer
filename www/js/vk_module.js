@@ -164,9 +164,9 @@ class VKAPI {
 			$('.main-block-vk-err_msg').hide();
 		}
 
-		//		VK.Auth.logout(function () {
-		//			console.log('сессия VK убита');
-		//		});
+//				VK.Auth.logout(function () {
+//					console.log('сессия VK убита');
+//				});
 		let sendData = {
 			apiMethod: 'vkAuthSet',
 			postData: {
@@ -287,6 +287,10 @@ class VKAPI {
 				offset = offset + count;
 
 			}
+			if (this.repostUsers.length === 0) {
+				rndzError.showError('Ошибка','Не удалось загрузить участников, возможно у вас нет доступа к репостам записи.');
+				return;
+			}
 			if (type === 2) {
 				this.rndWin.winnersIds = this.repostUsers;
 			}
@@ -391,7 +395,10 @@ class VKAPI {
 			this.rndWin.winnersIds = [];
 			this.rndWin.winnersIds = tempArr;
 		}
-
+		
+		// завершаем прогресс ста процентами
+		vkMod._setProgress(100);
+		
 		// удаляем дубликаты id из массива
 		this.rndWin.winnersIds = Array.from(new Set(this.rndWin.winnersIds));
 

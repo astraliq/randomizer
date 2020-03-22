@@ -15,7 +15,7 @@
                         <li class="nav-item"><a href="/congratulate" class="nav-item-link congratulate_main_lnk" title="Случайное поздравление">Поздравление</a></li>
                         <li class="nav-item"><a href="/word" class="nav-item-link words_main_lnk" title="Случайное слово">Интересное слово</a></li>
                         <li class="nav-item"><a href="/vk" class="nav-item-link vk_main_lnk" title="Определение победителя по лайкам и репостам вконтакте">Randomize VK</a></li>
-                        <li class="nav-item"><a class="nav-item-link">Ещё</a></li>
+                        <!-- <li class="nav-item"><a class="nav-item-link">Ещё</a></li> -->
                     </ul>
                 </nav>
             </div>

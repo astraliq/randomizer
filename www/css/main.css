@@ -843,7 +843,7 @@ ul {
 	width: 14px;
 	outline: 1px solid #939598;
 	position: absolute;
-	top: 0;
+	top: 7px;
 	left: 0;
 }
 
@@ -1426,6 +1426,12 @@ label:hover {
 
 .checkbox-vk {
 	width: 100%;
+	position: relative;
+}
+
+
+.vk-ul {
+	position: relative;
 }
 
 .main-block-data-vk {
@@ -1533,6 +1539,62 @@ label:hover {
 	margin: 5px 0 5px 0;
 	box-sizing: border-box;
 }
+
+.hidden-title {
+	display: none;
+}
+
+.vk-label {
+	
+}
+
+.symbol-help { 
+	height: 20px;
+	display: inline-block;
+	margin: 0 5px;
+}
+
+.vk-help {
+	display: none;
+    position: absolute;
+    height: 34px;
+	padding: 0 5px;
+	position: absolute;
+	color: black;
+	font-size: 12px;
+	top: -35px;
+	left: 10px;
+	background-color: #ffffff;
+	border-radius: 3px;
+}
+
+.vk-help p {
+	color: black;
+	font-size: 12px;
+	margin: 0;
+	font-weight: 300;
+}
+
+.vk-help:before {
+	content: "";
+    display: block;
+    border: 8px solid transparent;
+    border-top: 6px solid whitesmoke;
+    position: absolute;
+    top: 34px;
+    left: 35px;
+    z-index: 5;
+}
+
+.symbol-help:hover + .vk-help { 
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+    align-items: center;
+}
+
 
 @media only screen and (min-width: 951px) and (max-width: 1215px) {
 	.see-now-main-data:nth-last-child(1) {

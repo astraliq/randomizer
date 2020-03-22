@@ -1,5 +1,6 @@
 	<section class="main-block main-color-2">
-
+            <h1 class="hidden-title">Случайное поздравление</h1>
+            <h1 class="hidden-title">Рандомное поздравление</h1>
             <div class="main-block-menu">
                 <div>Cлучайность из категории:<span class="cat-sel">{{ content.categoryTitle }}</span></div>
                 <div>

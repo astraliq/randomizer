@@ -1,4 +1,6 @@
 <section class="main-block main-color-5">
+    <h1 class="hidden-title">Случайное число</h1>
+    <h1 class="hidden-title">Рандомное число</h1>
     <div class="main-block-menu">
         <div>
             Cлучайность из категории:<span class="cat-sel">Случайное число</span>

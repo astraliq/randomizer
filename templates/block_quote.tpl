@@ -1,4 +1,6 @@
 <section class="main-block main-color-4">
+    <h1 class="hidden-title">Случайная цитата из фильма</h1>
+    <h1 class="hidden-title">Рандомная цитата великих людей</h1>
     <div class="main-block-menu">
         <div>
             Cлучайность из категории:<span class="cat-sel">{{ content.categoryTitle }}</span>
