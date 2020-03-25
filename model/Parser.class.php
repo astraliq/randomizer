@@ -154,15 +154,19 @@ class Parser
                     curl_setopt($rCh, CURLOPT_POSTFIELDS, $sPost);
                 }
 
+                
+
                 curl_setopt($rCh, CURLINFO_HEADER_OUT, true);
                 curl_setopt($rCh,CURLOPT_ENCODING, '');
+                // curl_setopt($rCh, CURLOPT_ENCODING , 'br');
                 $sContent = curl_exec($rCh);
                 $arInfo = curl_getinfo($rCh);
 
                 $arError = false;
 
                 // изменение кодировки
-                $sContent = iconv('windows-1251', 'utf-8', $sContent);
+                // $sContent = iconv('windows-1251', 'utf-8', $sContent);
+                // $sContent = iconv('utf-8', 'utf-8', $sContent);
 
                 if ($sContent === false) {
                     $arData = false;

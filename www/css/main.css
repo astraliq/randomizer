@@ -178,6 +178,30 @@ main {
 	font-weight: 400;
 }
 
+.main-data-title-quote {
+	position: relative;
+	margin: 0 -37px 0 0;
+/*	line-height: 40px;*/
+}
+
+.main-data-title-quote:before {
+/*	position: absolute;*/
+	content: "«";
+	font-size: 60px;
+    top: -9px;
+    left: -30px;
+	margin: 0 0 0 -35px;
+}
+
+.main-data-title:after {
+	position: absolute;
+/*	display: contents;*/
+	bottom: 40px;
+	margin: 0 0 0 8px;
+    line-height: 0;
+	content: "»";
+	font-size: 60px;
+}
 .left-aquo {
 	margin: 0 0 0 -15px;
 }
@@ -268,6 +292,7 @@ main {
 .main-block-data {
 	margin: 0 auto;
 	padding: 0 0 0 0;
+	width: 100%;
 }
 
 .main-block-data-primary {

@@ -38,7 +38,7 @@
 			$stmt->execute($args);
 			if ($stmt->errorCode() != PDO::ERR_NONE) {
                 $info = $stmt->errorInfo();
-                // exit($info[2]);
+                exit($info[2]);
             }
 			return $stmt;
 		}

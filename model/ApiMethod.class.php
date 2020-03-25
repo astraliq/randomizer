@@ -339,6 +339,34 @@ class ApiMethod {
 			$this->error('Ошибка записи в БД',200);
 		}
 	}
+
+	public function addParserDataSocratify() {
+		
+		$authors = $_POST['postData']['authors'] ?? '';
+
+        $res = $this->rndQuote->addAuthor($authors);
+		if ($res) {
+			$data['result'] = "OK";
+			$this->success($data);
+		} else {
+			$this->error('Ошибка записи в БД',200);
+		}
+	}
+
+	public function addParserQuoteSocratify() {
+		
+		$author = $_POST['postData']['author'] ?? '';
+		$quotes = $_POST['postData']['quotes'] ?? '';
+
+        $res = $this->rndQuote->addQuotes($author, $quotes);
+		if ($res) {
+			$data['result'] = "OK";
+			$this->success($data);
+		} else {
+			$this->error('Ошибка записи в БД',200);
+		}
+	}
+
 	public function addFilmsIds() {
 		
 		$filmsIds = $_POST['postData']['film'] ?? '';

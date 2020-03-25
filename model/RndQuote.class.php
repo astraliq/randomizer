@@ -52,6 +52,39 @@ class RndQuote extends Model {
 		return $quote;
 	}
 
+	public function addAuthor($authors) {
+		$columns = ['author_title','href'];
 
+		foreach ($authors as $author) {
+			$object = [
+				'author_title' => $author['title'],
+				'href' => $author['href'],
+			];
+			$result = $this->dataBase->uniInsert($this->quoteAuthors, $object);
+		};
+		
+		return $result;
+
+	}
+
+	public function addQuotes($author, $quotes) {
+		$columns = ['text','author_id','href'];
+
+		$ifExist = $this->dataBase->uniSelect($this->quoteAuthors, ['author_title'=>$author]);
+		// print_r($ifExist);
+		// exit();
+		$object = array();
+		if ($ifExist) {
+			$authorID = $ifExist['id'];
+			foreach ($quotes as $quote) {
+				$object[] = [$quote['text'],$authorID,$quote['href']];
+			}
+			$result = $this->dataBase->uniInsertArray($this->quoteTable, $columns, $object);
+		};
+			
+		
+		return $result;
+
+	}
 }
 ?>

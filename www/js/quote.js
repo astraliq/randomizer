@@ -123,7 +123,7 @@ class Quote {
 						<img class="quote-pic" src="" width="276" alt="${quote.author}" title="${quote.author}" data-c="q" data-i="${quote.picture}">
 				</div>
 				<div class="main-block-data-text">
-					<p class="main-data-title"><span class="left-aquo">&laquo;${quote.text}&raquo;.</span></p>
+					<p class="main-data-title main-data-title-quote">${quote.text}</p>
 					<p class="qoutes-title">${quote.author}</p>
 					<p class="poet-desc">${quote.authorInfo}</p>
 				</div>
@@ -132,6 +132,7 @@ class Quote {
 		<div class="other-cat">Кроме цитат наш генератор выдаёт варианты из <a class="link-in-text">других категорий</a>, например, &laquo;<a href="#" class="link-in-text" onclick="film.getRndFilm()">Фильмы</a>&raquo;
 		</div>
         `);
+		//  <span class="left-aquo">&laquo;   &raquo;</span>
 		newSrc.changeSrc(document.querySelector('.quote-pic'));
       	this.filterQuote.updateLinkQuoteFilterOpen();
         this.filterQuote.updateLinkQuoteFilterClose();
@@ -204,4 +205,4 @@ class FilterQuote {
 
 let filterQuote = new FilterQuote();
 let quote = new Quote(filterQuote);
-quoteLinkMain.addEventListener('click', e => { quote.init() });
+//quoteLinkMain.addEventListener('click', e => { quote.init() });
