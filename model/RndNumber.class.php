@@ -20,6 +20,19 @@ class RndNumber extends Model {
 		return $randomInfo;
 	}
 
+	public function addNumbers($numbers) {
+
+		$columns = ['number', 'info'];
+		$object = array();
+		foreach ($numbers as $number) {
+			$object[] = [$number['number'],$number['text']];
+			
+		};
+		$result = $this->dataBase->uniInsertArray($this->table, $columns, $object);
+		
+		return $result;
+	}
+
 }
 
 ?>

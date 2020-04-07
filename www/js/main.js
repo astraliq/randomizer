@@ -614,7 +614,8 @@ let snLabels = {
 	'art': 'artdesc',
 	'congr': 'congr_text',
 	'movie': 'moviedesc',
-	'word': 'word_desc'
+	'word': 'word_desc',
+	'quote': 'quote_desc'
 };
 
 function checkLengthSeeNowText(objectSN) {
@@ -632,6 +633,7 @@ function checkLengthSeeNowText(objectSN) {
 		if (desc.textContent.length < 340) {
 			textMore.innerHTML = '';
 		}
+		
 	}
 }
 
@@ -778,7 +780,20 @@ let newSrc = new ImageSrc();
 newSrc.changeSrcAll();
 
 
+let modalMore = document.getElementById('myModal');
 
+let btn = document.getElementById('modal-btn');
+
+btn.onclick = function () {
+    modalMore.style.display = 'block';
+}
+
+window.onclick = function (event) {
+	console.log(event);
+    if (event.target == modalMore) {
+        modalMore.style.display = 'none';
+    }
+}
 
 
 

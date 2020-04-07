@@ -28,7 +28,7 @@
         {% include 'footer.tpl' %}
         {% include 'film_filter.tpl' %}
         {% include 'quote_filter.tpl' %}
-        
+        {% include 'modal_more.tpl' %}
     </div>
 
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous" async></script>

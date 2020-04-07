@@ -367,6 +367,20 @@ class ApiMethod {
 		}
 	}
 
+	public function addParserNumbers() {
+		
+		$numbers = $_POST['postData']['numbers'] ?? '';
+
+        $res = $this->rndNumber->addNumbers($numbers);
+		if ($res) {
+			$data['result'] = "OK";
+			$this->success($data);
+		} else {
+			$this->error('Ошибка записи в БД',200);
+		}
+	}
+
+
 	public function addFilmsIds() {
 		
 		$filmsIds = $_POST['postData']['film'] ?? '';

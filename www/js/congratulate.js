@@ -189,10 +189,10 @@ const renderGo = `
 // let congratulateLink = document.querySelector('.data-title-link');
 
 
-let congratulateLinkMain = document.querySelector('.congratulate_main_lnk');
-congratulateLinkMain.addEventListener('click', function () {
-    congratulate.runProgr();
-});
+//let congratulateLinkMain = document.querySelector('.congratulate_main_lnk');
+//congratulateLinkMain.addEventListener('click', function () {
+//    congratulate.runProgr();
+//});
 
 // runProgr(congratulateLinkMain);
 
