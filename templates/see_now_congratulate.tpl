@@ -2,7 +2,7 @@
     <div class="see-now-cat"><a class="see-now-cat-link" href="/congratulate">Поздравление</a></div>
     <div class="data-desc">
         <div class="see-now-text">
-            <p class="cong-cat">Тема: 
+            <p class="cong-cat see_now-cong-cat">Тема: 
             	<a class="cong-cat-link">{{ content.browseNowData.congrData.theme }}</a>.
             	<br>
             	<a class="cong-cat-link">{{ content.browseNowData.congrData.who }}</a>

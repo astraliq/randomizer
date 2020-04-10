@@ -1634,6 +1634,15 @@ label:hover {
 	align-items: center;
 }
 
+.see_now-cong-cat {
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	color: #000;
+	font-family: "roboto";
+	font-size: 14px;
+	font-weight: 400;
+}
+
 /* ------------------------ modal-window ------------------------ */
 .modalMore {
 	display: none;
@@ -1656,7 +1665,7 @@ label:hover {
 	margin: 5.5% 61%;
 	padding: 20px;
 	border: 1px solid #888;
-	min-width: 15%;
+	width: 13%;
 	-webkit-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75);
 	-moz-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75);
 	box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75);
@@ -1686,15 +1695,17 @@ label:hover {
 }
 
 .categories-list-column ul li a {
-	text-decoration: none;
+	/* padding: 0 0 10px 0; */
+	font-family: "Arial";
+	text-decoration: underline;
+	font-size: 14px;
+	cursor: pointer;
 	color: #000;
-	font-family: "roboto";
-	font-size: 18px;
-	font-weight: 400;
 }
 
 .categories-list-column ul li a:hover {
-	text-shadow: 2px 1px 3px #0D0B17;
+	color: #ccc;
+	text-decoration: none;
 }
 
 /* ------------------------ modal-window-end ------------------------ */
