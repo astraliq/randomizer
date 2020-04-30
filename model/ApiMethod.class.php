@@ -211,6 +211,20 @@ class ApiMethod {
 		}
 	}
 
+	public function getCongrFilters() {
+		$themeId = $_POST['postData']['themeId'] ?? '';
+		$whoId = $_POST['postData']['whoId'] ?? '';
+		$typeId = $_POST['postData']['typeId'] ?? '';
+		$filter = $this->rndCongratulate->getFIlters($themeId, $whoId, $typeId);
+		if ($filter) {
+			$data['filter'] = $filter;
+			$data['result'] = "OK";
+			$this->success($data);
+		} else {
+			$this->error('Ошибка чтения из БД');
+		}
+	}
+
 	public function getRndWord() {
 		
 		$language = $_POST['postData']['language'] ?? '';

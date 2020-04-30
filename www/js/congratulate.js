@@ -486,8 +486,43 @@ class Congratulate {
             }
         })
     }
-
-
+	
+	_getJson(url, data) {
+		return $.post({
+            url: url,
+            data: data,
+            success: function (data) {
+                if (data.result !== "OK") {
+                    console.log('ERROR_GET_DATA_');
+                }
+            }
+        })
+	}
+	
+	getFilter(themeId, whoId, typeId) {
+		let sendData = {
+			apiMethod: 'getCongrFilters',
+			postData: {
+				themeId: themeId,
+				whoId: whoId,
+				typeId: typeId
+			}
+		};
+		
+		this._getJson(`/index.php`, sendData)
+			.then(data => {
+				if (data.result === "OK") {
+					console.log('filter:', data.filter);
+				} else {
+					console.log('ERROR_GET_FILTERS');
+				}
+			})
+			.catch(error => {
+			console.log('error_get_filters');
+			  });
+	}
+	
+	
     init() {
         this.congratulateSomeone();
         this.subjectCongratulations();

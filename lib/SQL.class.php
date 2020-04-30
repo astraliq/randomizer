@@ -89,6 +89,28 @@
 			};
 		}
 
+		public function uniSelectUnique($table, $columns, $whereObj) {
+			if ($whereObj) {
+				$sets = array();
+				foreach ($whereObj as $key => $value) {
+					$sets[] = "`$key` = :$key";
+					if ($value === NULL) {
+						$whereObj[$key] = 'NULL';
+					}
+				};
+				$sets_s = implode(' AND ', $sets);
+				$columns_s = implode('`, `', $columns);
+
+				$query = "SELECT DISTINCT `$columns_s` FROM `$table` WHERE $sets_s";
+
+				return self::getRows($query, $whereObj);
+			} else {
+				$query = "SELECT DISTINCT `$columns_s` FROM `$table`";
+
+				return self::getRows($query,null);
+			};
+		}
+
 		public function uniSelectAll($table, $whereObj) {
 			$sets = array();
 			foreach ($whereObj as $key => $value) {
