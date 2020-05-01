@@ -54,12 +54,12 @@ class RndCongratulate extends Model {
 		}
 
 		if ($themeId && !$typeId && $whoId) {
-			$sql = "SELECT congr.`id`, who.`who_title` as who, congr.`congratulate` , theme.`theme_title_ru` as theme, theme.`theme_title_en` as theme_en, types.`type_title` as type FROM `$this->congratulateTable` as congr LEFT JOIN `$this->congratulateWho` as who ON congr.`who_id` = who.id LEFT JOIN `$this->congratulateTheme` as theme ON congr.`theme_id` = theme.id WHERE congr.`theme_id` = $themeId AND congr.`who_id` = $whoId";
+			$sql = "SELECT congr.`id`, who.`who_title` as who, congr.`congratulate` , theme.`theme_title_ru` as theme, theme.`theme_title_en` as theme_en, types.`type_title` as type FROM `$this->congratulateTable` as congr LEFT JOIN `$this->congratulateWho` as who ON congr.`who_id` = who.id LEFT JOIN `$this->congratulateTheme` as theme ON congr.`theme_id` = theme.id LEFT JOIN `$this->congratulateTypes` as types ON congr.`type_id` = types.id WHERE congr.`theme_id` = $themeId AND congr.`who_id` = $whoId";
 			return $sql;
 		}
 
 		if ($themeId && $typeId && $whoId) {
-			$sql = "SELECT congr.`id`, who.`who_title` as who, congr.`congratulate` , theme.`theme_title_ru` as theme, theme.`theme_title_en` as theme_en, FROM `$this->congratulateTable` as congr LEFT JOIN `$this->congratulateWho` as who ON congr.`who_id` = who.id LEFT JOIN `$this->congratulateTheme` as theme ON congr.`theme_id` = theme.id LEFT JOIN `$this->congratulateTypes` as types ON congr.`type_id` = types.id WHERE congr.`theme_id` = $themeId AND congr.`who_id` = $whoId AND congr.`type_id` = $typeId";
+			$sql = "SELECT congr.`id`, who.`who_title` as who, congr.`congratulate` , theme.`theme_title_ru` as theme, theme.`theme_title_en` as theme_en, types.`type_title` as type FROM `$this->congratulateTable` as congr LEFT JOIN `$this->congratulateWho` as who ON congr.`who_id` = who.id LEFT JOIN `$this->congratulateTheme` as theme ON congr.`theme_id` = theme.id LEFT JOIN `$this->congratulateTypes` as types ON congr.`type_id` = types.id WHERE congr.`theme_id` = $themeId AND congr.`who_id` = $whoId AND congr.`type_id` = $typeId";
 			return $sql;
 		}
 		

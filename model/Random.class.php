@@ -92,7 +92,7 @@ class Random extends Model {
 		        ];
 		        break;
 		    case "Поздравление":
-		        $result = $this->congratulate->getRandomCongratulate('','');
+		        $result = $this->congratulate->getRandomCongratulate(null,null,null);
 		        break;
 		}
 		// print_r($result);
@@ -187,7 +187,7 @@ class Random extends Model {
 					$data['quoteData'] = $this->quote->getRandomQuote('');
 					break;
 				case 'Поздравление':
-					$data['congrData'] = $this->congratulate->getRandomCongratulate('','');
+					$data['congrData'] = $this->congratulate->getRandomCongratulate(null,null,null);
 					break;
 				case 'Интересное слово':
 					$data['wordData'] = $this->word->getRandomWord(['']);

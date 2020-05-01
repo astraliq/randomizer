@@ -208,4 +208,5 @@ class IndexController extends Controller {
         ];
         return $arrayContent;
     }
+
 }

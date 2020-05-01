@@ -254,13 +254,18 @@ function firstRnd() {
     let firstNumber = Math.floor(Math.random() * 92);
     //    console.log(firstNumber);
     findings.id = firstNumber;
-
+	let themeId, whoId, typeId;
     let sendData = {
         apiMethod: 'getRndCongratulate',
-        postData: {
-            who: findings.who,
-            theme: findings.congratulate
-        }
+//        postData: {
+//            who: findings.who,
+//            theme: findings.congratulate
+//        }
+		postData: {
+			themeId: themeId,
+			whoId: 9,
+			typeId: typeId
+		}
     };
     // запрос случайного поздравления по id номеру
     congratulate._getRndCongratulate(`/index.php`, sendData)
@@ -434,10 +439,10 @@ class Congratulate {
         let sendData = {
             apiMethod: 'getRndCongratulate',
             postData: {
-                who: findings.who,
-                theme: findings.congratulate,
-                alreadyViewedIds: congratulate.alreadyViewedIds
-            }
+				themeId: 2,
+				whoId: 9,
+				typeId: typeId
+			}
         };
 
         //запрос по критерию отбора (who, theme) 
