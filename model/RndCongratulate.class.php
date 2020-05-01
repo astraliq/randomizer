@@ -12,31 +12,13 @@ class RndCongratulate extends Model {
 		$this->history = new History();
     }
 
-	public function getRandomCongratulate($who, $theme) {
+	public function getRandomCongratulate($themeId, $whoId, $typeId) {
 
-		if (empty($who) and empty($theme)) {
-			$sql = "SELECT congr.`id`, who.`who_title` as who, theme.`theme_title_ru` as theme, theme.`theme_title_en` as theme_en, congr.`congratulate` FROM `$this->congratulateTable` as congr LEFT JOIN `$this->congratulateWho` as who ON congr.`who_id` = who.id LEFT JOIN `$this->congratulateTheme` as theme ON congr.`theme_id` = theme.id LIMIT 10000";
-		} else {
-			if (!empty($who)) {
-				// $whoIds = implode("', '", $who);
-				// $whoSql = "who.who_title IN ('$whoIds')";
-				$whoSql = "who.who_title = '$who'";
-			} else {
-				$whoSql = '';
-			};
-			$and = (!empty($who) and !empty($theme)) ? ' AND ' : '';
-			if (!empty($theme)) {
-				// $themeIds = implode("', '", $theme);
-				// $themeSql = "theme.theme_title_ru IN ('$themeIds')";
-				$themeSql = "theme.theme_title_ru = '$theme'";
-			} else {
-				$themeSql = '';
-			};
-
-			$sql = "SELECT congr.`id`, who.`who_title` as who, theme.`theme_title_ru` as theme, theme.`theme_title_en` as theme_en, congr.`congratulate` FROM `$this->congratulateTable` as congr LEFT JOIN `$this->congratulateWho` as who ON congr.`who_id` = who.id LEFT JOIN `$this->congratulateTheme` as theme ON congr.`theme_id` = theme.id WHERE " . $whoSql . $and . $themeSql;
-		}
-
-		$congratulates = $this->dataBase->getRows($sql, null);
+		$themeId = (int) $themeId;
+		$whoId = (int) $whoId;
+		$typeId = (int) $typeId;
+		
+		$congratulates = $this->dataBase->getRows($this->getSql($themeId, $whoId, $typeId), null);
 
 		if ($congratulates) {
 			$randomCongr = $congratulates[array_rand($congratulates, 1)];
@@ -47,6 +29,41 @@ class RndCongratulate extends Model {
 		}
 		
 		return $randomCongr;
+	}
+
+	private function getSql($themeId, $whoId, $typeId) {
+
+		if (!$themeId && !$whoId && !$typeId) {
+			$sql = "SELECT congr.`id`, congr.`congratulate` FROM `$this->congratulateTable` as congr LIMIT 10000";
+			return $sql;
+		}
+
+		if (!$whoId && !$typeId && $themeId) {
+			$sql = "SELECT congr.`id`, theme.`theme_title_ru` as theme, theme.`theme_title_en` as theme_en, congr.`congratulate` FROM `$this->congratulateTable` as congr LEFT JOIN `$this->congratulateTheme` as theme ON congr.`theme_id` = theme.id WHERE congr.`theme_id` = $themeId";
+			return $sql;
+		}
+
+		if (!$themeId && !$typeId && $whoId) {
+			$sql = "SELECT congr.`id`, who.`who_title` as who, congr.`congratulate` FROM `$this->congratulateTable` as congr LEFT JOIN `$this->congratulateWho` as who ON congr.`who_id` = who.id WHERE congr.`who_id` = $whoId";
+			return $sql;
+		}
+
+		if ($themeId && !$typeId && !$whoId) {
+			$sql = "SELECT congr.`id`, congr.`congratulate`, theme.`theme_title_ru` as theme, theme.`theme_title_en` as theme_en FROM `$this->congratulateTable` as congr LEFT JOIN `$this->congratulateTheme` as theme ON congr.`theme_id` = theme.id WHERE congr.`theme_id` = $themeId";
+			return $sql;
+		}
+
+		if ($themeId && !$typeId && $whoId) {
+			$sql = "SELECT congr.`id`, who.`who_title` as who, congr.`congratulate` , theme.`theme_title_ru` as theme, theme.`theme_title_en` as theme_en, types.`type_title` as type FROM `$this->congratulateTable` as congr LEFT JOIN `$this->congratulateWho` as who ON congr.`who_id` = who.id LEFT JOIN `$this->congratulateTheme` as theme ON congr.`theme_id` = theme.id WHERE congr.`theme_id` = $themeId AND congr.`who_id` = $whoId";
+			return $sql;
+		}
+
+		if ($themeId && $typeId && $whoId) {
+			$sql = "SELECT congr.`id`, who.`who_title` as who, congr.`congratulate` , theme.`theme_title_ru` as theme, theme.`theme_title_en` as theme_en, FROM `$this->congratulateTable` as congr LEFT JOIN `$this->congratulateWho` as who ON congr.`who_id` = who.id LEFT JOIN `$this->congratulateTheme` as theme ON congr.`theme_id` = theme.id LEFT JOIN `$this->congratulateTypes` as types ON congr.`type_id` = types.id WHERE congr.`theme_id` = $themeId AND congr.`who_id` = $whoId AND congr.`type_id` = $typeId";
+			return $sql;
+		}
+		
+		return false;
 	}
 
 	public function getCongrById($id) {
@@ -146,7 +163,7 @@ class RndCongratulate extends Model {
 		$typeId = (int) $typeId;
 
 		if (!$themeId) {
-			$sql = "SELECT * FROM `$this->congratulateTheme`";
+			$sql = "SELECT `id`, `theme_title_ru`, `theme_title_en` FROM `$this->congratulateTheme` WHERE `active` = 1";
 			$themes = $this->dataBase->getRows($sql, null);
 			return $themes;
 		}

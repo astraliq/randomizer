@@ -198,10 +198,10 @@ class ApiMethod {
 	}
 
 	public function getRndCongratulate() {
-		$who = $_POST['postData']['who'] ?? '';
-		$theme = $_POST['postData']['theme'] ?? '';
-		$alreadyViewedIds = $_POST['postData']['alreadyViewedIds'] ?? '';
-		$congr = $this->rndCongratulate->getRandomCongratulate($who, $theme);
+		$themeId = $_POST['postData']['themeId'] ?? '';
+		$whoId = $_POST['postData']['whoId'] ?? '';
+		$typeId = $_POST['postData']['typeId'] ?? '';
+		$congr = $this->rndCongratulate->getRandomCongratulate($themeId, $whoId, $typeId);
 		if ($congr) {
 			$data['rnd'] = $congr;
 			$data['result'] = "OK";
