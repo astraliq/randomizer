@@ -17,6 +17,9 @@
 					        {% set img = '' %}                                   
 					    {% endif %}
                         <img class="film-pic" src="{{ img }}" width="276" alt="Фильм &laquo;{{ content.randomData.data.title_ru }}&raquo;" title="{{ content.randomData.data.title_ru }}" data-c="m" data-i="{{content.randomData.data.main_img}}">
+                        {% if content.randomData.data.rating != 0 %}           
+                            {% include 'block_rating.tpl' %}                                        
+                        {% endif %}            
                     </div>
                     <div class="main-block-data-text">
                         <p class="main-data-title">

@@ -263,7 +263,7 @@ function firstRnd() {
 //        }
 		postData: {
 			themeId: themeId,
-			whoId: 9,
+			whoId: whoId,
 			typeId: typeId
 		}
     };
