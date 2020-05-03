@@ -318,13 +318,14 @@ class Films {
 					this.film.main_img = this.film.main_img === null ? 'film-error.png' : this.film.main_img;
 					this.film.actors = this.film.actors ? this.film.actors : 'нет данных';
 					this.film.genres = this.film.genres ? this.film.genres : 'нет данных';
+					this.film.rating = this.film.rating > 0 ? this.film.rating : 'нет данных';
 					this.film.info = [this.film.year,...film_cats.splice(0, 4),this.film.country,this.film.duration];
 					this._render(this.film);
 					this.otherCat.render(data.otherCat);
 					this._updateLinkFilm();
 					this._putAlreadyViewedIds(film);
 					this.filter.updateLinkFilmFilterOpen();
-					this.browseNow.getBrowseNowData('Фильм');
+//					this.browseNow.getBrowseNowData('Фильм');
 				} else {
 					console.log('ERROR_GET_FILM');
 				}
@@ -360,6 +361,7 @@ class Films {
 							<span class="left-aquo">«${film.title_ru}»</span>
 						</p>
                         <p class="film-info">${film.info.join(', ')} мин.</p>
+						<p class="film-desc"><b>Рейтинг Кинопоиска:</b> ${film.rating}</p>
                         <p class="film-desc">${film.description_ru}</p>
                         <p class="film-desc"><b>В главных ролях:</b> ${film.actors}</p>
                         <p class="film-desc"><b>Режиссёр:</b> ${film.genres}</p>
@@ -373,14 +375,14 @@ class Films {
 //					<img class="film-rating_block" src="img/rate_block.png" width="100" alt="rating" title="${film.rating}">
 //					<span class="film-rating">${film.rating}</span>`;
 //			}
-		let filmImg = document.querySelector('.film-pic');
-		filmImg.onload = function() {
-			if (film.rating > 0) {
-				document.querySelector('.main-block-data-pic').innerHTML += `
-					<img class="film-rating_block" src="img/rate_block.png" width="100" alt="rating" title="${film.rating}">
-					<span class="film-rating">${film.rating}</span>`;
-			}
-		}
+//		let filmImg = document.querySelector('.film-pic');
+//		filmImg.onload = function() {
+//			if (film.rating > 0) {
+//				document.querySelector('.main-block-data-pic').innerHTML += `
+//					<img class="film-rating_block" src="img/rate_block.png" width="100" alt="rating" title="${film.rating}">
+//					<span class="film-rating">${film.rating}</span>`;
+//			}
+//		}
 		
     }
 };

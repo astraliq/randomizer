@@ -285,7 +285,9 @@ class Words {
     // }
 
     init() {
-
+		if (!reqLimit.checkReqLimits()) {
+			return;
+		}
         let sendData = {
             apiMethod: 'getRndWord',
             postData: {

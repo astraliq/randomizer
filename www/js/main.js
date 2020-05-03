@@ -730,7 +730,7 @@ class ReqLimit {
 }
 
 // создаем объект класса проверки литмита времени запросов с указанием времени таймайта
-let reqLimit = new ReqLimit(600);
+let reqLimit = new ReqLimit(500);
 
 let to3;
 addXMLRequestCallback(function (xhr) {

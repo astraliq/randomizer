@@ -16,10 +16,7 @@
 						{%if content.randomData.data.main_img is not null %}           
 					        {% set img = '' %}                                   
 					    {% endif %}
-                        <img class="film-pic" src="{{ img }}" width="276" height="380" alt="Фильм &laquo;{{ content.randomData.data.title_ru }}&raquo;" title="{{ content.randomData.data.title_ru }}" data-c="m" data-i="{{content.randomData.data.main_img}}">
-                        {% if content.randomData.data.rating != 0 %}           
-                            {% include 'block_rating.tpl' %}                                        
-                        {% endif %}            
+                        <img class="film-pic" src="{{ img }}" width="276" height="380" alt="Фильм &laquo;{{ content.randomData.data.title_ru }}&raquo;" title="{{ content.randomData.data.title_ru }}" data-c="m" data-i="{{content.randomData.data.main_img}}">      
                     </div>
                     <div class="main-block-data-text">
                         <p class="main-data-title">
@@ -30,6 +27,13 @@
                             {{ content.randomData.categories|join(', ') }}, 
                         {% endif %}
                         {{ content.randomData.data.country }}, {{ content.randomData.data.duration }} мин.</p>
+                        <p class="film-desc"><b>Рейтинг Кинопоиска: </b>
+                        {% if content.randomData.data.rating == 0 %}           
+                                нет данных
+                            {% else %}
+                                 {{ content.randomData.data.rating }}
+                            {% endif %}
+                        </p>
                         <p class="film-desc">{{ content.randomData.data.description_ru }}</p>
                         <p class="film-desc"><b>В главных ролях:</b>
                             {% if not content.randomData.data.actors %}           

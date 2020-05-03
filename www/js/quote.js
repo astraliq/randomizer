@@ -86,6 +86,10 @@ class Quote {
 
 
     init() {
+		if (!reqLimit.checkReqLimits()) {
+			return;
+		}
+		
         this.getRndQuote()
             .then(data => {
                 fakeAPI.id = data.rnd.id;
