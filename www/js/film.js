@@ -353,7 +353,7 @@ class Films {
 		$('.main-block-data').prepend(`
                 <div class="main-block-data-primary">
                     <div class="main-block-data-pic">
-                        <img class="film-pic" src="" width="276" alt="Фильм &laquo;${film.title_ru}&raquo;" title="${film.title_ru}" data-c="m" data-i="${film.main_img}">
+                        <img class="film-pic" src="" width="276" height="380" alt="Фильм &laquo;${film.title_ru}&raquo;" title="${film.title_ru}" data-c="m" data-i="${film.main_img}">
                     </div>
                     <div class="main-block-data-text">
                         <p class="main-data-title">
@@ -367,6 +367,21 @@ class Films {
                 </div>
 		`);
 		newSrc.changeSrc(document.querySelector('.film-pic'));
+		
+//		if (film.rating > 0) {
+//				document.querySelector('.main-block-data-pic').innerHTML += `
+//					<img class="film-rating_block" src="img/rate_block.png" width="100" alt="rating" title="${film.rating}">
+//					<span class="film-rating">${film.rating}</span>`;
+//			}
+		let filmImg = document.querySelector('.film-pic');
+		filmImg.onload = function() {
+			if (film.rating > 0) {
+				document.querySelector('.main-block-data-pic').innerHTML += `
+					<img class="film-rating_block" src="img/rate_block.png" width="100" alt="rating" title="${film.rating}">
+					<span class="film-rating">${film.rating}</span>`;
+			}
+		}
+		
     }
 };
 let film = new Films();
