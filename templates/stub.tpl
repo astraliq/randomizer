@@ -1,4 +1,6 @@
 {{ content.html }}
+<p class="congr_who">{{ content.who }}</p>
+<p class="congr_type">{{ content.type }}</p>
 <!-- <!DOCTYPE html>
 <html lang="ru">
 <head>

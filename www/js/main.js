@@ -789,7 +789,7 @@ btn.onclick = function () {
 }
 
 window.onclick = function (event) {
-	console.log(event);
+//	console.log(event);
     if (event.target == modalMore) {
         modalMore.style.display = 'none';
     }

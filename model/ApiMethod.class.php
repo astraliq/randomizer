@@ -329,8 +329,7 @@ class ApiMethod {
 		$congrs = $_POST['postData']['congrs'] ?? '';
 		$type = $_POST['postData']['type'] ?? '';
 		$who = $_POST['postData']['who'] ?? '';
-		$whoId = 31;
-		$themeId = 2;
+		$themeId = 6;
         $res = $this->rndCongratulate->addCongratulates($congrs, $type, $who, $themeId);
 		if ($res) {
 			$data['result'] = "OK";
@@ -341,11 +340,12 @@ class ApiMethod {
 	}
 	public function addParserDataPozdravok2() {
 		
-		$link = $_POST['postData']['link'] ?? '';
-		$types = $_POST['postData']['types'] ?? '';
-		$whoId = 20;
-		$themeId = 2;
-        $res = $this->rndCongratulate->addCongratulates2($types, $link, $whoId, $themeId);
+		$links = $_POST['postData']['typesLinks'] ?? '';
+		$notes = $_POST['postData']['notes'] ?? '';
+		$who = $_POST['postData']['who'] ?? '';
+		// $whoId = 20;
+		// $themeId = 2;
+        $res = $this->rndCongratulate->addLinks($links, $notes, $who);
 		if ($res) {
 			$data['result'] = "OK";
 			$this->success($data);

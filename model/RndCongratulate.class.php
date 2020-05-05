@@ -101,22 +101,13 @@ class RndCongratulate extends Model {
 				$check = $this->dataBase->uniSelect($this->congratulateTable,['congratulate'=>$congrs[$i]]);
 				if (!$check) {
 					$object = [
+						'type_id'=>$typeId,
 						'who_id' => $whoId,
 						'theme_id' => $themeId,
 						'congratulate' => $congrs[$i],
 					];
 					$result = $this->dataBase->uniInsert($this->congratulateTable, $object);
-					$congrId = $this->dataBase->getLastInsertId();
-					$result = $this->dataBase->uniInsert('congratulate2type', ['congr_id'=>$congrId,'type_id'=>$typeId]);
-				} else{
-					$congrId = $check['id'];
-					$checkType = $this->dataBase->uniSelect('congratulate2type',['congr_id'=>$congrId,'type_id'=>$typeId]);
-					if (!$checkType) {
-						$result = $this->dataBase->uniInsert('congratulate2type', ['congr_id'=>$congrId,'type_id'=>$typeId]);
-					} else {
-						$result = false;
-					}
-				}
+				} 
 			} else {
 				$result = false;
 			}
@@ -152,6 +143,18 @@ class RndCongratulate extends Model {
 				$result = false;
 			}
 		}
+		
+		return $result;
+	}
+
+	public function addLinks($links, $notes, $who) {
+
+		$columns = ['type_link','type','who_title'];
+		$object = array();
+		for ($i=0; $i < count($links); $i++) { 
+			$object[] = [$links[$i], $notes[$i], $who];
+		}
+		$result = $this->dataBase->uniInsertArray('c_links_types', $columns, $object);
 		
 		return $result;
 	}
