@@ -1,7 +1,7 @@
     <section class="main-block main-color-7 vk_block">
             <div class="main-block-menu">
                 <h1 class="hidden-title">Розыгрыш вконтакте</h1>
-                <h1 class="hidden-title">Определение победителя вконтакте по лайкам и репостам</h1>
+                <h2 class="hidden-title">Определение победителя вконтакте по лайкам и репостам</h2>
                 <div class="cat-title">Определение победителя вконтакте по лайкам и репостам</div>
             </div>
             <div class="main-block-data main-block-data-vk">

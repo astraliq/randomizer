@@ -1,6 +1,6 @@
     <section class="main-block main-color-1">
             <h1 class="hidden-title">Случайный фильм</h1>
-            <h1 class="hidden-title">Рандомный фильм по жанрам, по годам</h1>
+            <h2 class="hidden-title">Рандомный фильм по жанрам, по годам</h2>
             <div class="main-block-menu">
                 <div>Cлучайность из категории:<span class="cat-sel">{{ content.categoryTitle }}</span></div>
                 <div>

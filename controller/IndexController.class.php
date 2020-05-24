@@ -15,8 +15,8 @@ class IndexController extends Controller {
 
 	public function index($data) {
         $this->mainTitle .= '';
-        // $catTitle = $this->randomType->getRandomCategory()['category_title'];
-        $catTitle = $this->randomType->getRandomCategory();
+        // $catTitle = $this->randomType->getRandomCategory();
+        $catTitle = 'Число';
         $randomData = $this->randomType->getRandomData($catTitle);
         $browseFirst = $this->randomType->getRndBrowseNowCat([$catTitle]);
         $browseSecond = $this->randomType->getRndBrowseNowCat([$catTitle, $browseFirst]);

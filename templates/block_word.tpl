@@ -1,6 +1,6 @@
 <section class="main-block main-color-3">
     <h1 class="hidden-title">Случайное слово на иностранном языке</h1>
-    <h1 class="hidden-title">Рандомное слово на иностранном языке</h1>
+    <h2 class="hidden-title">Рандомное слово на иностранном языке</h2>
     <div class="main-block-menu">
         <div>Cлучайность из категории:<span class="cat-sel">Интересное слово</span></div>
         <div>
