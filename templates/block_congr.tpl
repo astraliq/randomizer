@@ -10,12 +10,12 @@
             </div>
 
             <div class="main-block-data">
-                <div class="main-block-data-primary">
+                <div class="main-block-data-primary congratulate-block-data-primary">
                     <div class="main-block-data-text">
                         <!-- <p class="main-data-title">
 							<span class="left-aquo">«{{ content.randomData.data.title_ru }}»</span>
 						</p> -->
-                        <p class="film-desc">{{ content.randomData.congratulate|raw }}</p>
+                        <p class="film-desc congratulate-text">{{ content.randomData.congratulate|raw }}</p>
                     </div>
                 </div>
             </div>

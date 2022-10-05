@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>RANDOMIZER</title>
-    <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/randnumb.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
     <div class="container">

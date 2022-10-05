@@ -475,7 +475,7 @@ class Congratulate {
     //рендер поздравления
     renderText(congratulateText) {
         let position = document.querySelector('.main-block-data-text');
-        congratulateText = `<p class="film-desc">${congratulateText}</p>`;
+        congratulateText = `<p class="film-desc congratulate-text">${congratulateText}</p>`;
         position.innerHTML = congratulateText;
     }
 

@@ -4,18 +4,16 @@ session_start();
 
 $hash = md5($_SESSION['h']) . 'c';
 
-if (empty($_GET['hash']) || $_GET['hash'] != $hash || empty($_GET['c']) || empty($_GET['i'])) {
-    http_response_code(400);
-	exit();
-}
-
-// print_r($_SESSION);
-// exit();
+//if (empty($_GET['hash']) || $_GET['hash'] != $hash || empty($_GET['c']) || empty($_GET['i'])) {
+//    http_response_code(400);
+//	exit();
+//}
 
 $postHeaders = getallheaders();
 // print_r($postHeaders);
+// exit();
 
-// if ($postHeaders['Host'] === 'randomizer.me' && ($postHeaders['Origin'] === 'https://randomizer.me' || $postHeaders['Origin'] === 'http://randomizer.me') && $postHeaders['X-Requested-With'] === 'XMLHttpRequest'&& 
+// if ($postHeaders['Host'] === 'randomizer.me' && ($postHeaders['Origin'] === 'https://randomizer.me' || $postHeaders['Origin'] === 'http://randomizer.me') && $postHeaders['X-Requested-With'] === 'XMLHttpRequest'&&
 // 	($postHeaders['Referer'] === 'https://randomizer.me/index.php' || $postHeaders['Referer'] === 'https://randomizer.me/' || 
 // 	$postHeaders['Referer'] === 'http://randomizer.me/index.php' || $postHeaders['Referer'] === 'http://randomizer.me/') && 
 // 	$postHeaders['User-Agent']) {

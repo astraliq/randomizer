@@ -177,7 +177,8 @@ class FilterQuote {
         modalWindow.css('left', winW / 2 - modalWindow.width() / 2);
         //эффект перехода
         modalWindow.fadeIn(1);
-
+		
+		// закрытие окна при клике вне окна
         $(document).mouseup(function (e) { // событие клика по веб-документу
             if (!modalWindow.is(e.target) && modalWindow.has(e.target).length === 0) { // если клик был не по нашему блоку и не по его дочерним элементам 
                 modalWindow.fadeOut(1); // скрываем его
