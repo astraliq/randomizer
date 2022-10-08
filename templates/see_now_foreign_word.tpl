@@ -8,7 +8,7 @@
         <div class="see-now-wrapper">
 	        <label for="button-w" onclick="changeStatus('word', 'word_desc')" id="word">Больше описания</label>
 	        <input type="checkbox" id="button-w">
-	        <p class="word-text" id="word_desc"><span style="font-size: 18px">Значение: </span> {{ content.browseNowData.wordData.meaning }}</p>
+	        <p class="word-text" id="word_desc"><span>Значение: </span> {{ content.browseNowData.wordData.meaning }}</p>
 	    </div>
     </div>
 </div>

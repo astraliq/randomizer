@@ -1,6 +1,6 @@
 <div id="film-filter" class="modalDialog">
     <div>
-        <a href="#close" title="Close" class="close" id="film-filter-close">X</a>
+        <a href="#close" title="Close" class="close" id="film-filter-close">+</a>
         <div class="div-ul">
             <p class="filtr-title">Жанры</p>
                 <ul>

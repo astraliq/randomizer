@@ -1,6 +1,6 @@
 <div id="quote-filter" class="modalDialog modalDialogQuot">
     <div>
-        <a href="#close" title="Close" class="close" id="quote-filter-close">X</a>
+        <a href="#close" title="Close" class="close" id="quote-filter-close">+</a>
         <div class="div-ul">
             <p class="quote-title">Автор</p>
                 <ul>

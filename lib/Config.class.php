@@ -18,10 +18,10 @@ class Config {
             $configProd = $configDir . 'config.prod.php';
             $configDev = $configDir . 'config.dev.php';
             $configDefault = $configDir . 'config.default.php';
-            if (is_file($configProd)) {
-                require_once $configProd;
-            } else if (is_file($configDev)) {
+            if (is_file($configDev)) {
                 require_once $configDev;
+            } else if (is_file($configProd)) {
+                require_once $configProd;
             } else if (is_file($configDefault)) {
                 require_once $configDefault;
             } else {

@@ -272,7 +272,7 @@ class VKAPI {
 					extended: 0,
 					offset: offset,
 					count: count,
-					v: "5.52"
+					v: "5.81"
 				}, function (data) {
 					if (data.response) {
 						vkMod.repostUsers = [...vkMod.repostUsers, ...data.response.items];
@@ -311,14 +311,14 @@ class VKAPI {
 					extended: 0,
 					offset: offset,
 					count: count,
-					v: "5.52"
+					v: "5.81"
 				}, function (data) {
 					if (data.response) {
 						vkMod.likeUsers = [...vkMod.likeUsers, ...data.response.items];
 						totalCount = data.response.count;
 						progress = (vkMod.likeUsers.length / totalCount) * 100 * (1 / stages) + ((stage - 1) / stages) * 100;
 						vkMod._setProgress(progress);
-						err = (data.response.items.length == 0) ? 1 : 0;
+						err = (data.response.items.length === 0) ? 1 : 0;
 					}
 				});
 
@@ -464,7 +464,7 @@ class VKAPI {
 				type: 'post',
 				user_ids: user_ids,
 				fields: 'bdate,city,country,has_photo,home_town,online,photo_100,photo_200_orig,sex,universities',
-				v: "5.52"
+				v: "5.81"
 			}, function (data) {
 				resolve(data);
 			})
@@ -488,7 +488,7 @@ class VKAPI {
 				group_id: groupId,
 				user_ids: user_ids,
 				extended: 0,
-				v: "5.52"
+				v: "5.81"
 			}, function (data) {
 				resolve(data);
 			})
@@ -515,7 +515,7 @@ class VKAPI {
 			VK.Api.call('groups.getById', {
 				group_id: groupId,
 				fields: 'name,screen_name,members_count,type',
-				v: "5.52"
+				v: "5.81"
 			}, function (data) {
 				resolve(data);
 			})

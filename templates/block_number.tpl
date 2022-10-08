@@ -25,12 +25,12 @@
             <div class="random-data">
                 <p class="main-number" id="answer">{{ content.randomData.number }}</p>
                 <div class="random-form">
-                    <div>
-                        <div>
+                    <div class="random-form-input">
+                        <div class="random-form-input-range">
                             <input type="text" class="random-numb" placeholder="Число от" id="first" value="0">
                             <input type="text" class="random-numb" placeholder="Число до" id="second" value="100">
                         </div>
-                        <div>
+                        <div class="random-form-input-count">
                             <input type="text" class="count-rand" placeholder="Кол–во случайных чисел" id="qty" value="1">
                         </div>
                         <button class="button-rand">RANDOMIZE!</button>
