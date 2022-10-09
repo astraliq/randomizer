@@ -295,7 +295,7 @@ main {
   color: #000;
   font-family: "roboto";
   font-size: 35px;
-  font-weight: 400;
+  font-weight: 600;
 }
 .main-data-title-quote {
   position: relative;
@@ -928,6 +928,7 @@ main {
   -moz-box-shadow: 1px 1px 3px #000;
   -webkit-box-shadow: 1px 1px 3px #000;
   box-shadow: 1px 1px 3px #000;
+  transform: rotate(45deg);
 }
 .close:hover {
   background: #ebbd2f;
@@ -1216,10 +1217,12 @@ label:hover {
 }
 .end_stub_container {
   position: absolute;
-  top: 130px;
-  left: 30%;
+  top: 70px;
+  left: 0;
+  right: 0;
   height: 250px;
   width: 40%;
+  margin: 0 auto;
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 50px;
 }
@@ -1916,7 +1919,6 @@ label:hover {
     -moz-border-radius: 40px;
     border-radius: 40px;
     font-size: 70px;
-    transform: rotate(45deg);
   }
   .modalDialog .div-ul p {
     width: 100%;
@@ -1931,6 +1933,11 @@ label:hover {
   .modalDialog label:after {
     width: 30px;
     height: 30px;
+  }
+  .modalDialog input[type=checkbox]:checked + label:after {
+    width: 30px;
+    height: 30px;
+    box-sizing: border-box;
   }
   .modalDialog .checkbox {
     width: 25%;
@@ -1952,7 +1959,7 @@ label:hover {
     line-height: 45px;
   }
   .main-data-title {
-    font-size: 36px;
+    font-size: 40px;
   }
   .film-info {
     font-size: 36px;
@@ -2006,5 +2013,15 @@ label:hover {
     position: absolute;
     top: 80px;
     left: 45px;
+  }
+  .end_stub_container {
+    height: 450px;
+    width: 90%;
+  }
+  .end_stub_head {
+    font-size: 43px;
+  }
+  .end_stub_head_text {
+    font-size: 35px;
   }
 }

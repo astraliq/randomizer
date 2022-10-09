@@ -64,7 +64,13 @@ class Random extends Model {
 				    		'max' => 1950,
 				    	]
 			    ];
-		        $film = $this->film->getRandomFilm($years,[0],[0]);
+		    	$rating = [
+			    		0 => [
+			    			'min' => 0,
+				    		'max' => 10,
+				    	]
+			    ];
+		        $film = $this->film->getRandomFilm($years,[0],[0],$rating);
 		        $getCategories = $this->film->getFilmCategories($film['id']);
 		        $categories = [];
 		        $k = 0;
@@ -175,7 +181,13 @@ class Random extends Model {
 		foreach ($usedCategories as $cat) {
 			switch ($cat) {
 				case 'Фильм':
-					$data['filmData'] = $this->film->getRandomFilm([0],[0],[0]);
+                    $rating = [
+                        0 => [
+                            'min' => 0,
+                            'max' => 10,
+                        ]
+                    ];
+					$data['filmData'] = $this->film->getRandomFilm([0],[0],[0],$rating);
 					$cats = $this->film->getFilmCategories($data['filmData']['id']);
 					$object = array();
 					foreach ($cats as $element) {

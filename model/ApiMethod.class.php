@@ -145,8 +145,12 @@ class ApiMethod {
 		$years = $_POST['postData']['years'] ?? [0];
 		$countries = $_POST['postData']['countries'] ?? [0];
 		$categories = $_POST['postData']['categories'] ?? [0];
-		$film = $this->rndFilm->getRandomFilm($years, $categories, $countries);
-		$categories = $this->rndFilm->getFilmCategories($film['id']);
+		$rating = $_POST['postData']['rating'] ?? [];
+
+		$film = $this->rndFilm->getRandomFilm($years, $categories, $countries, $rating);
+        if ($film['id']) {
+            $categories = $this->rndFilm->getFilmCategories($film['id']);
+        }
 		$currentCategory = 'Фильм';
 		$otherCat = $this->randomType->getRndBrowseNowCat([$currentCategory]);
 		$otherCatData = $this->randomType->categories[$otherCat];

@@ -42,6 +42,7 @@ class App {
 
 		/*парсинг строки*/
 		$url= explode("/",$url);
+
 		if (!empty($url[0])) {
 			$_GET['page']=$url[0];//часть имени контроллера
 			if (isset($url[1])) {
@@ -56,7 +57,8 @@ class App {
 			}				
 		} else {
 			$_GET['page'] = 'Index';	
-		}	
+		}
+
 		$_SESSION['vk_token'] = $_SESSION['vk_token'] ?? $_SESSION['vk_token'];
 		//$_GET['page']='Index';	
 		/*парсинг строки*/	

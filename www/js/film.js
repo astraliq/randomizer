@@ -6,11 +6,12 @@ let categoryName = $('.cat-sel');
 
 class FilmsFilter {
     constructor() {
-		this.maxCountFilters = 28; // максимальное количество фильтров + 1
+		this.maxCountFilters = 50; // максимальное количество фильтров + 1
 		this.idName = '#film-check';
 		this.years = [];
         this.countries = [];
         this.categories = [];
+        this.rating = [];
 		this.filters = {
 			'ids': [],
 			'value': [],
@@ -33,10 +34,11 @@ class FilmsFilter {
 		this.setDefCategories();
 		this.setDefYears();
 		this.setDefCountries();
+		this.setDefRating();
 	}
 	// установить начальное значения фильтров по категориям
 	setDefCategories() {
-		for (let i = 0; i < 12; i++) {
+		for (let i = 0; i < 19; i++) {
 			this._checkFilter(i, false);
 		}
 		this._checkFilter(0, true);
@@ -44,19 +46,26 @@ class FilmsFilter {
 	}
 	// установить начальное значения фильтров по годам
 	setDefYears() {
-		for (let i = 12; i < 20; i++) {
+		for (let i = 20; i < 29; i++) {
 			this._checkFilter(i, false);
 		}
-		this._checkFilter(12, true);
+		this._checkFilter(20, true);
 		this.years = [0];
 	}
 	// установить начальное значения фильтров по странам
 	setDefCountries() {
-		for (let i = 20; i < 28; i++) {
+		for (let i = 30; i < 39; i++) {
 			this._checkFilter(i, false);
 		}
-		this._checkFilter(20, true);
+		this._checkFilter(30, true);
 		this.countries = [0];
+	}
+	// выключить фильтр по рейнтингу
+	setDefRating() {
+		for (let i = 40; i < 49; i++) {
+			this._checkFilter(i, false);
+		}
+		this.rating = [];
 	}
 
 	// получить период лет в зависимости от data-id элемента
@@ -105,6 +114,12 @@ class FilmsFilter {
 					max: 1970
 				};
 			break;
+			case 8:
+				period = {
+					min: 2020,
+					max: 2022
+				};
+			break;
 			default:
 				period = {
 					min: 1900,
@@ -113,35 +128,93 @@ class FilmsFilter {
 		}
 		return period;
 	}
+
+	// получить интервал рейтинга в зависимости от data-id элемента
+	getRatingInt(dataId) {
+		let interval;
+		switch (dataId) {
+			case 0:
+				interval = {
+					min: 0,
+					max: 5
+				};
+			break;
+			case 1:
+				interval = {
+					min: 5,
+					max: 6
+				};
+			break;
+			case 2:
+				interval = {
+					min: 6,
+					max: 7
+				};
+			break;
+			case 3:
+				interval = {
+					min: 7,
+					max: 8
+				};
+			break;
+			case 4:
+				interval = {
+					min: 8,
+					max: 9
+				};
+			break;
+			case 5:
+				interval = {
+					min: 9,
+					max: 10
+				};
+			break;
+			default:
+				interval = {
+					min: 0,
+					max: 10
+				};
+		}
+		return interval;
+	}
 	// записать значения фильтров в свойства по видам с id номерами из базы
 	setSelectedFilters() {
 		this.years = [];
         this.countries = [];
         this.categories = [];
+        this.rating = [];
 		let counter = 0;
-		for (let i = 0; i < 12; i++) {
+		for (let i = 0; i < 19; i++) {
 			if (this.getFilterValue(i)) {
 				this.categories[counter] = this.filters.filterId[i];
 				counter++;
 			}
 		}
 		counter = 0;
-		for (let i = 12; i < 20; i++) {
+		for (let i = 20; i < 29; i++) {
 			if (this.getFilterValue(i)) {
 				this.years[counter] = this.getYearsPeriod(this.filters.filterId[i]);
 				counter++;
 			}
 		}
 		counter = 0;
-		for (let i = 20; i < 28; i++) {
+		for (let i = 30; i < 39; i++) {
 			if (this.getFilterValue(i)) {
 				this.countries[counter] = this.filters.filterId[i];
+				counter++;
+			}
+		}
+		counter = 0;
+		for (let i = 40; i < 50; i++) {
+			if (this.getFilterValue(i)) {
+				this.rating[counter] = this.getRatingInt(this.filters.filterId[i]);
 				counter++;
 			}
 		}
 //		console.log(this.categories);
 //		console.log(this.years);
 //		console.log(this.countries);
+// 		console.log(this.rating);
 	}
 	
 	// установить значение фильтра по id
@@ -181,7 +254,7 @@ class FilmsFilter {
 			this._checkFilter(elementId, false);
 		}
 	}
-	// установка фильтров и запись занчений в свойства
+	// установка фильтров и запись значений в свойства
 	_updateCheckboxes(event) {
 		let re = /film-check/gi;
 		let idNum = event.target.id.replace(re, '');
@@ -190,9 +263,9 @@ class FilmsFilter {
 		} else {
 			this._checkFilter(idNum, true);
 		}
-		this._clearIfSelectedBy(0, 12, idNum);
-		this._clearIfSelectedBy(12, 20, idNum);
-		this._clearIfSelectedBy(20, 28, idNum);
+		this._clearIfSelectedBy(0, 19, idNum);
+		this._clearIfSelectedBy(20, 29, idNum);
+		this._clearIfSelectedBy(30, 39, idNum);
 //		console.log(idNum);
 //		console.log(this.filters);
 	}
@@ -287,7 +360,6 @@ class Films {
 	setFilters() {
 		this.filter.setSelectedFilters();
 		this.filter.closeFilmFilter();
-		
 		this.getRndFilm();
 	}
 	
@@ -295,13 +367,15 @@ class Films {
 		this.years = this.filter.years;
         this.countries = this.filter.countries;
         this.categories = this.filter.categories;
-		
+        this.rating = this.filter.rating;
+
 		let sendData = {
 			apiMethod: 'getRndFilm',
 			postData: {
 				years: this.years,
 				categories: this.categories,
-				countries: this.countries
+				countries: this.countries,
+				rating: this.rating
 			}
 		};
 		
@@ -342,7 +416,7 @@ class Films {
     }
 	
 	_render(film) {
-		console.log('запуск');
+		// console.log('запуск');
 		document.querySelector('.main-block').className = 'main-block main-color-1';
 		$('.main-block-menu').empty();
 		$('.main-block-menu').prepend(`
