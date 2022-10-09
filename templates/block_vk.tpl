@@ -20,12 +20,21 @@
                 <div>
                     <div class="div-ul">
                         <p class="filtr-title filter-title-vk">Способ определения победителя</p>
-                            <input type="radio" name="vk-radio_set" class="vk_radio_input" id="vk-set_like" data-type="like" checked>
-                            <label for="vk-set_like">По лайкам</label>
-                            <input type="radio" name="vk-radio_set" class="vk_radio_input" id="vk-set_repost" data-type="repost">
-                            <label for="vk-set_repost">По репостам</label>
-                            <input type="radio" name="vk-radio_set" class="vk_radio_input" id="vk-set_repost_like" data-type="repost&like">
-                            <label for="vk-set_repost_like">По репостам с учетом лайков</label>
+                        <ul>
+                            <li>
+                                <input type="radio" name="vk-radio_set" class="vk_radio_input" id="vk-set_like" data-type="like" checked>
+                                <label for="vk-set_like">По лайкам</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="vk-radio_set" class="vk_radio_input" id="vk-set_repost" data-type="repost">
+                                <label for="vk-set_repost">По репостам</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="vk-radio_set" class="vk_radio_input" id="vk-set_repost_like" data-type="repost&like">
+                                <label for="vk-set_repost_like">По репостам с учетом лайков</label>
+                            </li>
+                        </ul>
+
                     </div>
                     <div class="div-ul">
                         <p class="filtr-title filter-title-vk">Фильтр</p>
