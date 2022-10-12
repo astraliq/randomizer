@@ -963,6 +963,10 @@ ul {
   background-color: #ebbd2f;
   box-sizing: border-box;
 }
+.checkbox input[type=checkbox]:checked + label:after {
+  height: 14px;
+  width: 14px;
+}
 .checkbox label:after {
   content: '';
   display: block;
@@ -1847,6 +1851,10 @@ label:hover {
     width: 100%;
     font-size: 29px;
     margin: 0 0 0 35px;
+  }
+  .vk-filter .div-ul input[type=checkbox]:checked + label:after {
+    width: 26px;
+    height: 26px;
   }
   .vk-filter .div-ul label {
     font-size: 26px;

@@ -7,6 +7,7 @@ $config['db_charset'] = 'UTF-8';
 $config['db_driver'] = 'mysql';
 
 $config['path_root'] = __DIR__;
+$config['path_root_project'] = $config['path_root'] . '/..';
 $config['path_public'] = $config['path_root'] . '/../www';
 $config['path_model'] = $config['path_root'] . '/../model';
 $config['path_controller'] = $config['path_root'] . '/../controller';

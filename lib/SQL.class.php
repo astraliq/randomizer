@@ -33,12 +33,16 @@
 	    private function __wakeup() {}
 	    private function __clone() {}
 
-		public function execQuery($sql,$args) {
+        /**
+         * @throws Exception
+         */
+        public function execQuery($sql, $args) {
 			$stmt = $this->dataBase->prepare($sql);
 			$stmt->execute($args);
 			if ($stmt->errorCode() != PDO::ERR_NONE) {
                 $info = $stmt->errorInfo();
-                exit($info[2]);
+                throw new Exception($info[2]);
+//                exit($info[2]);
             }
 			return $stmt;
 		}

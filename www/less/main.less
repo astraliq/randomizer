@@ -993,6 +993,10 @@ ul {
 			}
 		}
 	}
+	input[type=checkbox]:checked + label:after {
+		height: 14px;
+		width: 14px;
+	}
 	label {
 		&:after {
 			content: '';
@@ -1907,6 +1911,10 @@ label {
 				width: 100%;
 				font-size: 29px;
 				margin: 0 0 0 35px;
+			}
+			input[type=checkbox]:checked + label:after {
+				width: 26px;
+				height: 26px;
 			}	
 			label {
 				font-size: 26px;

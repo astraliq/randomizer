@@ -1,0 +1,316 @@
+2022-10-12 20:01:12 Страница: 13
+2022-10-12 20:02:24 Страница: 14
+2022-10-12 20:02:52 Страница: 15
+2022-10-12 20:04:08 Страница: 16
+2022-10-12 20:10:59 Страница: 16
+2022-10-12 20:11:14 Страница: 17
+2022-10-12 20:12:08 Страница: 16
+2022-10-12 20:12:25 Страница: 17
+2022-10-12 20:12:47 Страница: 18
+2022-10-12 20:13:03 Страница: 19
+2022-10-12 20:13:21 Страница: 20
+2022-10-12 20:13:38 Страница: 21
+2022-10-12 20:13:54 Страница: 22
+2022-10-12 20:14:11 Страница: 23
+2022-10-12 20:14:30 Страница: 24
+2022-10-12 20:14:51 Страница: 25
+2022-10-12 20:15:13 Страница: 26
+2022-10-12 20:15:32 Страница: 27
+2022-10-12 20:15:57 Страница: 28
+2022-10-12 20:16:24 Страница: 29
+2022-10-12 20:16:41 Страница: 30
+2022-10-12 20:24:40 Страница: 30
+2022-10-12 20:24:56 Страница: 30
+2022-10-12 20:25:18 Страница: 30
+2022-10-12 20:25:43 Страница: 30
+2022-10-12 20:26:11 Страница: 30
+2022-10-12 20:26:21 Страница: 30
+2022-10-12 20:26:46 Страница: 30
+2022-10-12 20:27:16 Страница: 30
+2022-10-12 20:27:50 Страница: 30
+2022-10-12 20:28:09 Страница: 30
+2022-10-12 20:29:07 Страница: 30
+2022-10-12 20:33:45 Страница: 30
+2022-10-12 20:36:53 Страница: 30
+2022-10-12 20:36:54 Ошибка: 
+2022-10-12 20:37:47 Страница: 30
+2022-10-12 20:37:47 Ошибка: 
+2022-10-12 20:41:41 Страница: 30
+2022-10-12 20:42:12 Страница: 30
+2022-10-12 20:42:25 Страница: 30
+2022-10-12 20:42:26 Ошибка: Exception: Duplicate entry '1379498.jpg' for key 'films.main_img' in /media/sf_Repos/randomizer/lib/SQL.class.php:44
+Stack trace:
+#0 /media/sf_Repos/randomizer/lib/SQL.class.php(63): SQL->execQuery()
+#1 /media/sf_Repos/randomizer/lib/SQL.class.php(211): SQL->insert()
+#2 /media/sf_Repos/randomizer/model/RndFilm.class.php(158): SQL->uniInsert()
+#3 /media/sf_Repos/randomizer/controller/ParseController.class.php(238): RndFilm->addFilmToDB()
+#4 /media/sf_Repos/randomizer/lib/App.class.php(75): ParseController->kinoapi()
+#5 /media/sf_Repos/randomizer/lib/App.class.php(15): App->web()
+#6 /media/sf_Repos/randomizer/App.php(5): App->init()
+#7 /media/sf_Repos/randomizer/www/index.php(3): include_once('/media/sf_Repos...')
+#8 {main}
+2022-10-12 20:42:26 Ошибка: Exception: Duplicate entry '1380497.jpg' for key 'films.main_img' in /media/sf_Repos/randomizer/lib/SQL.class.php:44
+Stack trace:
+#0 /media/sf_Repos/randomizer/lib/SQL.class.php(63): SQL->execQuery()
+#1 /media/sf_Repos/randomizer/lib/SQL.class.php(211): SQL->insert()
+#2 /media/sf_Repos/randomizer/model/RndFilm.class.php(158): SQL->uniInsert()
+#3 /media/sf_Repos/randomizer/controller/ParseController.class.php(238): RndFilm->addFilmToDB()
+#4 /media/sf_Repos/randomizer/lib/App.class.php(75): ParseController->kinoapi()
+#5 /media/sf_Repos/randomizer/lib/App.class.php(15): App->web()
+#6 /media/sf_Repos/randomizer/App.php(5): App->init()
+#7 /media/sf_Repos/randomizer/www/index.php(3): include_once('/media/sf_Repos...')
+#8 {main}
+2022-10-12 20:42:26 Ошибка: Exception: Duplicate entry '1214358.jpg' for key 'films.main_img' in /media/sf_Repos/randomizer/lib/SQL.class.php:44
+Stack trace:
+#0 /media/sf_Repos/randomizer/lib/SQL.class.php(63): SQL->execQuery()
+#1 /media/sf_Repos/randomizer/lib/SQL.class.php(211): SQL->insert()
+#2 /media/sf_Repos/randomizer/model/RndFilm.class.php(158): SQL->uniInsert()
+#3 /media/sf_Repos/randomizer/controller/ParseController.class.php(238): RndFilm->addFilmToDB()
+#4 /media/sf_Repos/randomizer/lib/App.class.php(75): ParseController->kinoapi()
+#5 /media/sf_Repos/randomizer/lib/App.class.php(15): App->web()
+#6 /media/sf_Repos/randomizer/App.php(5): App->init()
+#7 /media/sf_Repos/randomizer/www/index.php(3): include_once('/media/sf_Repos...')
+#8 {main}
+2022-10-12 20:42:26 Ошибка: Exception: Duplicate entry '1311540.jpg' for key 'films.main_img' in /media/sf_Repos/randomizer/lib/SQL.class.php:44
+Stack trace:
+#0 /media/sf_Repos/randomizer/lib/SQL.class.php(63): SQL->execQuery()
+#1 /media/sf_Repos/randomizer/lib/SQL.class.php(211): SQL->insert()
+#2 /media/sf_Repos/randomizer/model/RndFilm.class.php(158): SQL->uniInsert()
+#3 /media/sf_Repos/randomizer/controller/ParseController.class.php(238): RndFilm->addFilmToDB()
+#4 /media/sf_Repos/randomizer/lib/App.class.php(75): ParseController->kinoapi()
+#5 /media/sf_Repos/randomizer/lib/App.class.php(15): App->web()
+#6 /media/sf_Repos/randomizer/App.php(5): App->init()
+#7 /media/sf_Repos/randomizer/www/index.php(3): include_once('/media/sf_Repos...')
+#8 {main}
+2022-10-12 20:42:27 Ошибка: Exception: Duplicate entry '1246571.jpg' for key 'films.main_img' in /media/sf_Repos/randomizer/lib/SQL.class.php:44
+Stack trace:
+#0 /media/sf_Repos/randomizer/lib/SQL.class.php(63): SQL->execQuery()
+#1 /media/sf_Repos/randomizer/lib/SQL.class.php(211): SQL->insert()
+#2 /media/sf_Repos/randomizer/model/RndFilm.class.php(158): SQL->uniInsert()
+#3 /media/sf_Repos/randomizer/controller/ParseController.class.php(238): RndFilm->addFilmToDB()
+#4 /media/sf_Repos/randomizer/lib/App.class.php(75): ParseController->kinoapi()
+#5 /media/sf_Repos/randomizer/lib/App.class.php(15): App->web()
+#6 /media/sf_Repos/randomizer/App.php(5): App->init()
+#7 /media/sf_Repos/randomizer/www/index.php(3): include_once('/media/sf_Repos...')
+#8 {main}
+2022-10-12 20:42:27 Ошибка: Exception: Duplicate entry '1260643.jpg' for key 'films.main_img' in /media/sf_Repos/randomizer/lib/SQL.class.php:44
+Stack trace:
+#0 /media/sf_Repos/randomizer/lib/SQL.class.php(63): SQL->execQuery()
+#1 /media/sf_Repos/randomizer/lib/SQL.class.php(211): SQL->insert()
+#2 /media/sf_Repos/randomizer/model/RndFilm.class.php(158): SQL->uniInsert()
+#3 /media/sf_Repos/randomizer/controller/ParseController.class.php(238): RndFilm->addFilmToDB()
+#4 /media/sf_Repos/randomizer/lib/App.class.php(75): ParseController->kinoapi()
+#5 /media/sf_Repos/randomizer/lib/App.class.php(15): App->web()
+#6 /media/sf_Repos/randomizer/App.php(5): App->init()
+#7 /media/sf_Repos/randomizer/www/index.php(3): include_once('/media/sf_Repos...')
+#8 {main}
+2022-10-12 20:42:27 Ошибка: Exception: Duplicate entry '1366214.jpg' for key 'films.main_img' in /media/sf_Repos/randomizer/lib/SQL.class.php:44
+Stack trace:
+#0 /media/sf_Repos/randomizer/lib/SQL.class.php(63): SQL->execQuery()
+#1 /media/sf_Repos/randomizer/lib/SQL.class.php(211): SQL->insert()
+#2 /media/sf_Repos/randomizer/model/RndFilm.class.php(158): SQL->uniInsert()
+#3 /media/sf_Repos/randomizer/controller/ParseController.class.php(238): RndFilm->addFilmToDB()
+#4 /media/sf_Repos/randomizer/lib/App.class.php(75): ParseController->kinoapi()
+#5 /media/sf_Repos/randomizer/lib/App.class.php(15): App->web()
+#6 /media/sf_Repos/randomizer/App.php(5): App->init()
+#7 /media/sf_Repos/randomizer/www/index.php(3): include_once('/media/sf_Repos...')
+#8 {main}
+2022-10-12 20:42:28 Ошибка: Exception: Duplicate entry '1291531.jpg' for key 'films.main_img' in /media/sf_Repos/randomizer/lib/SQL.class.php:44
+Stack trace:
+#0 /media/sf_Repos/randomizer/lib/SQL.class.php(63): SQL->execQuery()
+#1 /media/sf_Repos/randomizer/lib/SQL.class.php(211): SQL->insert()
+#2 /media/sf_Repos/randomizer/model/RndFilm.class.php(158): SQL->uniInsert()
+#3 /media/sf_Repos/randomizer/controller/ParseController.class.php(238): RndFilm->addFilmToDB()
+#4 /media/sf_Repos/randomizer/lib/App.class.php(75): ParseController->kinoapi()
+#5 /media/sf_Repos/randomizer/lib/App.class.php(15): App->web()
+#6 /media/sf_Repos/randomizer/App.php(5): App->init()
+#7 /media/sf_Repos/randomizer/www/index.php(3): include_once('/media/sf_Repos...')
+#8 {main}
+2022-10-12 20:42:29 Ошибка: Exception: Duplicate entry '1375706.jpg' for key 'films.main_img' in /media/sf_Repos/randomizer/lib/SQL.class.php:44
+Stack trace:
+#0 /media/sf_Repos/randomizer/lib/SQL.class.php(63): SQL->execQuery()
+#1 /media/sf_Repos/randomizer/lib/SQL.class.php(211): SQL->insert()
+#2 /media/sf_Repos/randomizer/model/RndFilm.class.php(158): SQL->uniInsert()
+#3 /media/sf_Repos/randomizer/controller/ParseController.class.php(238): RndFilm->addFilmToDB()
+#4 /media/sf_Repos/randomizer/lib/App.class.php(75): ParseController->kinoapi()
+#5 /media/sf_Repos/randomizer/lib/App.class.php(15): App->web()
+#6 /media/sf_Repos/randomizer/App.php(5): App->init()
+#7 /media/sf_Repos/randomizer/www/index.php(3): include_once('/media/sf_Repos...')
+#8 {main}
+2022-10-12 20:42:30 Ошибка: Exception: Duplicate entry '1108606.jpg' for key 'films.main_img' in /media/sf_Repos/randomizer/lib/SQL.class.php:44
+Stack trace:
+#0 /media/sf_Repos/randomizer/lib/SQL.class.php(63): SQL->execQuery()
+#1 /media/sf_Repos/randomizer/lib/SQL.class.php(211): SQL->insert()
+#2 /media/sf_Repos/randomizer/model/RndFilm.class.php(158): SQL->uniInsert()
+#3 /media/sf_Repos/randomizer/controller/ParseController.class.php(238): RndFilm->addFilmToDB()
+#4 /media/sf_Repos/randomizer/lib/App.class.php(75): ParseController->kinoapi()
+#5 /media/sf_Repos/randomizer/lib/App.class.php(15): App->web()
+#6 /media/sf_Repos/randomizer/App.php(5): App->init()
+#7 /media/sf_Repos/randomizer/www/index.php(3): include_once('/media/sf_Repos...')
+#8 {main}
+2022-10-12 20:42:30 Ошибка: Exception: Duplicate entry '1312868.jpg' for key 'films.main_img' in /media/sf_Repos/randomizer/lib/SQL.class.php:44
+Stack trace:
+#0 /media/sf_Repos/randomizer/lib/SQL.class.php(63): SQL->execQuery()
+#1 /media/sf_Repos/randomizer/lib/SQL.class.php(211): SQL->insert()
+#2 /media/sf_Repos/randomizer/model/RndFilm.class.php(158): SQL->uniInsert()
+#3 /media/sf_Repos/randomizer/controller/ParseController.class.php(238): RndFilm->addFilmToDB()
+#4 /media/sf_Repos/randomizer/lib/App.class.php(75): ParseController->kinoapi()
+#5 /media/sf_Repos/randomizer/lib/App.class.php(15): App->web()
+#6 /media/sf_Repos/randomizer/App.php(5): App->init()
+#7 /media/sf_Repos/randomizer/www/index.php(3): include_once('/media/sf_Repos...')
+#8 {main}
+2022-10-12 20:42:31 Ошибка: Exception: Duplicate entry '841205.jpg' for key 'films.main_img' in /media/sf_Repos/randomizer/lib/SQL.class.php:44
+Stack trace:
+#0 /media/sf_Repos/randomizer/lib/SQL.class.php(63): SQL->execQuery()
+#1 /media/sf_Repos/randomizer/lib/SQL.class.php(211): SQL->insert()
+#2 /media/sf_Repos/randomizer/model/RndFilm.class.php(158): SQL->uniInsert()
+#3 /media/sf_Repos/randomizer/controller/ParseController.class.php(238): RndFilm->addFilmToDB()
+#4 /media/sf_Repos/randomizer/lib/App.class.php(75): ParseController->kinoapi()
+#5 /media/sf_Repos/randomizer/lib/App.class.php(15): App->web()
+#6 /media/sf_Repos/randomizer/App.php(5): App->init()
+#7 /media/sf_Repos/randomizer/www/index.php(3): include_once('/media/sf_Repos...')
+#8 {main}
+2022-10-12 20:42:31 Ошибка: Exception: Duplicate entry '1347753.jpg' for key 'films.main_img' in /media/sf_Repos/randomizer/lib/SQL.class.php:44
+Stack trace:
+#0 /media/sf_Repos/randomizer/lib/SQL.class.php(63): SQL->execQuery()
+#1 /media/sf_Repos/randomizer/lib/SQL.class.php(211): SQL->insert()
+#2 /media/sf_Repos/randomizer/model/RndFilm.class.php(158): SQL->uniInsert()
+#3 /media/sf_Repos/randomizer/controller/ParseController.class.php(238): RndFilm->addFilmToDB()
+#4 /media/sf_Repos/randomizer/lib/App.class.php(75): ParseController->kinoapi()
+#5 /media/sf_Repos/randomizer/lib/App.class.php(15): App->web()
+#6 /media/sf_Repos/randomizer/App.php(5): App->init()
+#7 /media/sf_Repos/randomizer/www/index.php(3): include_once('/media/sf_Repos...')
+#8 {main}
+2022-10-12 20:42:32 Ошибка: Exception: Duplicate entry '1143043.jpg' for key 'films.main_img' in /media/sf_Repos/randomizer/lib/SQL.class.php:44
+Stack trace:
+#0 /media/sf_Repos/randomizer/lib/SQL.class.php(63): SQL->execQuery()
+#1 /media/sf_Repos/randomizer/lib/SQL.class.php(211): SQL->insert()
+#2 /media/sf_Repos/randomizer/model/RndFilm.class.php(158): SQL->uniInsert()
+#3 /media/sf_Repos/randomizer/controller/ParseController.class.php(238): RndFilm->addFilmToDB()
+#4 /media/sf_Repos/randomizer/lib/App.class.php(75): ParseController->kinoapi()
+#5 /media/sf_Repos/randomizer/lib/App.class.php(15): App->web()
+#6 /media/sf_Repos/randomizer/App.php(5): App->init()
+#7 /media/sf_Repos/randomizer/www/index.php(3): include_once('/media/sf_Repos...')
+#8 {main}
+2022-10-12 20:42:32 Ошибка: Exception: Duplicate entry '1356618.jpg' for key 'films.main_img' in /media/sf_Repos/randomizer/lib/SQL.class.php:44
+Stack trace:
+#0 /media/sf_Repos/randomizer/lib/SQL.class.php(63): SQL->execQuery()
+#1 /media/sf_Repos/randomizer/lib/SQL.class.php(211): SQL->insert()
+#2 /media/sf_Repos/randomizer/model/RndFilm.class.php(158): SQL->uniInsert()
+#3 /media/sf_Repos/randomizer/controller/ParseController.class.php(238): RndFilm->addFilmToDB()
+#4 /media/sf_Repos/randomizer/lib/App.class.php(75): ParseController->kinoapi()
+#5 /media/sf_Repos/randomizer/lib/App.class.php(15): App->web()
+#6 /media/sf_Repos/randomizer/App.php(5): App->init()
+#7 /media/sf_Repos/randomizer/www/index.php(3): include_once('/media/sf_Repos...')
+#8 {main}
+2022-10-12 20:42:32 Ошибка: Exception: Duplicate entry '1137764.jpg' for key 'films.main_img' in /media/sf_Repos/randomizer/lib/SQL.class.php:44
+Stack trace:
+#0 /media/sf_Repos/randomizer/lib/SQL.class.php(63): SQL->execQuery()
+#1 /media/sf_Repos/randomizer/lib/SQL.class.php(211): SQL->insert()
+#2 /media/sf_Repos/randomizer/model/RndFilm.class.php(158): SQL->uniInsert()
+#3 /media/sf_Repos/randomizer/controller/ParseController.class.php(238): RndFilm->addFilmToDB()
+#4 /media/sf_Repos/randomizer/lib/App.class.php(75): ParseController->kinoapi()
+#5 /media/sf_Repos/randomizer/lib/App.class.php(15): App->web()
+#6 /media/sf_Repos/randomizer/App.php(5): App->init()
+#7 /media/sf_Repos/randomizer/www/index.php(3): include_once('/media/sf_Repos...')
+#8 {main}
+2022-10-12 20:42:33 Ошибка: Exception: Duplicate entry '1256891.jpg' for key 'films.main_img' in /media/sf_Repos/randomizer/lib/SQL.class.php:44
+Stack trace:
+#0 /media/sf_Repos/randomizer/lib/SQL.class.php(63): SQL->execQuery()
+#1 /media/sf_Repos/randomizer/lib/SQL.class.php(211): SQL->insert()
+#2 /media/sf_Repos/randomizer/model/RndFilm.class.php(158): SQL->uniInsert()
+#3 /media/sf_Repos/randomizer/controller/ParseController.class.php(238): RndFilm->addFilmToDB()
+#4 /media/sf_Repos/randomizer/lib/App.class.php(75): ParseController->kinoapi()
+#5 /media/sf_Repos/randomizer/lib/App.class.php(15): App->web()
+#6 /media/sf_Repos/randomizer/App.php(5): App->init()
+#7 /media/sf_Repos/randomizer/www/index.php(3): include_once('/media/sf_Repos...')
+#8 {main}
+2022-10-12 20:42:33 Ошибка: Exception: Duplicate entry '933208.jpg' for key 'films.main_img' in /media/sf_Repos/randomizer/lib/SQL.class.php:44
+Stack trace:
+#0 /media/sf_Repos/randomizer/lib/SQL.class.php(63): SQL->execQuery()
+#1 /media/sf_Repos/randomizer/lib/SQL.class.php(211): SQL->insert()
+#2 /media/sf_Repos/randomizer/model/RndFilm.class.php(158): SQL->uniInsert()
+#3 /media/sf_Repos/randomizer/controller/ParseController.class.php(238): RndFilm->addFilmToDB()
+#4 /media/sf_Repos/randomizer/lib/App.class.php(75): ParseController->kinoapi()
+#5 /media/sf_Repos/randomizer/lib/App.class.php(15): App->web()
+#6 /media/sf_Repos/randomizer/App.php(5): App->init()
+#7 /media/sf_Repos/randomizer/www/index.php(3): include_once('/media/sf_Repos...')
+#8 {main}
+2022-10-12 20:42:42 Страница: 31
+2022-10-12 20:42:59 Страница: 32
+2022-10-12 20:43:17 Страница: 33
+2022-10-12 20:43:36 Страница: 34
+2022-10-12 20:44:02 Страница: 35
+2022-10-12 20:44:21 Страница: 36
+2022-10-12 20:44:38 Страница: 37
+2022-10-12 20:44:57 Страница: 38
+2022-10-12 20:45:16 Страница: 39
+2022-10-12 20:45:37 Страница: 40
+2022-10-12 20:45:57 Страница: 41
+2022-10-12 20:46:23 Страница: 42
+2022-10-12 20:46:47 Страница: 43 -------------------------
+2022-10-12 20:46:52 Страница: 44
+2022-10-12 20:46:55 Страница: 45
+2022-10-12 20:47:00 Страница: 46
+2022-10-12 20:47:04 Страница: 47
+2022-10-12 20:47:06 Страница: 48
+2022-10-12 20:47:10 Страница: 49
+2022-10-12 20:47:15 Страница: 50
+2022-10-12 20:47:18 Страница: 51
+2022-10-12 20:47:22 Страница: 52
+2022-10-12 20:47:26 Страница: 53
+2022-10-12 20:47:31 Страница: 54
+2022-10-12 20:47:34 Страница: 55
+2022-10-12 20:47:37 Страница: 56
+2022-10-12 20:47:39 Страница: 57
+2022-10-12 20:47:43 Страница: 58
+2022-10-12 20:47:45 Страница: 59
+2022-10-12 20:47:50 Страница: 60
+2022-10-12 20:47:53 Страница: 61
+2022-10-12 20:47:55 Страница: 62
+2022-10-12 20:47:58 Страница: 63
+2022-10-12 20:48:02 Страница: 64
+2022-10-12 20:48:07 Страница: 65
+2022-10-12 20:48:09 Страница: 66
+2022-10-12 20:48:13 Страница: 67
+2022-10-12 20:48:17 Страница: 68
+2022-10-12 20:48:22 Страница: 69
+2022-10-12 20:48:25 Страница: 70
+2022-10-12 20:48:29 Страница: 71
+2022-10-12 20:48:33 Страница: 72
+2022-10-12 20:48:37 Страница: 73
+2022-10-12 20:48:40 Страница: 74
+2022-10-12 20:48:42 Страница: 75
+2022-10-12 20:48:46 Страница: 76
+2022-10-12 20:48:49 Страница: 77
+2022-10-12 20:48:53 Страница: 78
+2022-10-12 20:48:56 Страница: 79
+2022-10-12 20:49:01 Страница: 80
+2022-10-12 20:49:05 Страница: 81
+2022-10-12 20:49:07 Страница: 82
+2022-10-12 20:49:12 Страница: 83
+2022-10-12 20:49:15 Страница: 84
+2022-10-12 20:49:19 Страница: 85
+2022-10-12 20:49:23 Страница: 86
+2022-10-12 20:49:28 Страница: 87
+2022-10-12 20:49:31 Страница: 88
+2022-10-12 20:49:34 Страница: 89
+2022-10-12 20:49:39 Страница: 90
+2022-10-12 20:49:43 Страница: 91
+2022-10-12 20:49:48 Страница: 92
+2022-10-12 20:49:52 Страница: 93
+2022-10-12 20:49:56 Страница: 94
+2022-10-12 20:50:00 Страница: 95
+2022-10-12 20:50:03 Страница: 96
+2022-10-12 20:50:05 Страница: 97
+2022-10-12 20:50:07 Страница: 98
+2022-10-12 20:50:12 Страница: 99
+2022-10-12 20:50:15 Страница: 100
+2022-10-12 20:59:20 Страница: 1
+2022-10-12 20:59:51 Страница: 1
+2022-10-12 21:03:36 Страница: 1
+2022-10-12 21:07:57 Страница: 1
+2022-10-12 21:09:32 Страница: 1
+2022-10-12 21:09:33 Вы сделали более 200 запросов за сутки. Лимиты будут обновлены в 00: 00. Чтобы получить больше лимитов и личный токен, напишите в telegram @mdwit
+2022-10-12 21:11:00 Страница: 43
+2022-10-12 21:11:10 Страница: 43
