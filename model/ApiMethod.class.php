@@ -412,6 +412,34 @@ class ApiMethod {
 		}
 	}
 
+	public function updateFilmId() {
+
+        $film = $_POST['postData']['film'] ?? '';
+
+		$add = $this->rndFilm->updateFilm($film);
+		if ($add) {
+			$data['result'] = "OK";
+			$this->success($data);
+		} else {
+			$this->error('Ошибка записи в БД');
+		}
+	}
+
+	public function getNextFilmId() {
+
+        $prevFilmId = $_POST['postData']['curFilmId'] ?? '';
+
+		$get = $this->rndFilm->getNextFilmId($prevFilmId);
+		if ($get) {
+			$data['result'] = "OK";
+			$data['next_kp_id'] = $get['kp_id'];
+			$data['next_id'] = $get['id'];
+			$this->success($data);
+		} else {
+			$this->error('Ошибка чтения БД');
+		}
+	}
+
 	public function addEmailToMailing() {
 		
 		$email = $_POST['postData']['email'] ?? '';

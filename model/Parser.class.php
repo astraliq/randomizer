@@ -116,49 +116,52 @@ class Parser
 
                 $rCh = curl_init();
                 curl_setopt($rCh, CURLOPT_URL, $sUrl);
-                curl_setopt($rCh, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($rCh, CURLOPT_FOLLOWLOCATION, true);
-                curl_setopt($rCh, CURLOPT_USERAGENT, $sUserAgent);
-                curl_setopt($rCh, CURLOPT_TIMEOUT, $iTimeout);
-                curl_setopt($rCh, CURLOPT_CONNECTTIMEOUT, $iConnectTimeout);
+                curl_setopt($rCh, CURLOPT_RETURNTRANSFER, true); // для возврата результата в виде строки, вместо прямого вывода в браузер
+                curl_setopt($rCh, CURLOPT_FOLLOWLOCATION, true); // true для следования любому заголовку "Location: ", отправленному сервером в своём ответе.
+                curl_setopt($rCh, CURLOPT_USERAGENT, $sUserAgent); // Содержимое заголовка "User-Agent: ", посылаемого в HTTP-запросе.
+                curl_setopt($rCh, CURLOPT_TIMEOUT, $iTimeout); // Максимально позволенное количество секунд для выполнения cURL-функций.
+                curl_setopt($rCh, CURLOPT_CONNECTTIMEOUT, $iConnectTimeout); // Количество секунд ожидания при попытке соединения. Используйте 0 для бесконечного ожидания.
 
                 if ($bHead) {
-                    curl_setopt($rCh, CURLOPT_HEADER, true);
-                    curl_setopt($rCh, CURLOPT_NOBODY, true);
+                    curl_setopt($rCh, CURLOPT_HEADER, true); // true для включения заголовков в вывод.
+                    curl_setopt($rCh, CURLOPT_NOBODY, true); // true для исключения тела ответа из вывода. Метод запроса устанавливается в HEAD. Смена этого параметра в false не меняет его обратно в GET.
                 }
 
                 if (strpos($sUrl, "https") !== false) {
-                    curl_setopt($rCh, CURLOPT_SSL_VERIFYHOST, true);
-                    curl_setopt($rCh, CURLOPT_SSL_VERIFYPEER, true);
+                    curl_setopt($rCh, CURLOPT_SSL_VERIFYHOST, true); // Используйте 2, чтобы убедиться, что поле общего имени или поле альтернативного имени субъекта в сертификате узла SSL соответствует указанному имени хоста.
+                    curl_setopt($rCh, CURLOPT_SSL_VERIFYPEER, true); // false для остановки cURL от проверки сертификата узла сети.
                 }
 
                 if ($sCookieFile) {
-                    curl_setopt($rCh, CURLOPT_COOKIEJAR, __DIR__ . "/" . $sCookieFile);
-                    curl_setopt($rCh, CURLOPT_COOKIEFILE, __DIR__ . "/" . $sCookieFile);
+                    curl_setopt($rCh, CURLOPT_COOKIEJAR, __DIR__ . "/" . $sCookieFile); // Имя файла, в котором будут сохранены все внутренние cookies текущей передачи после закрытия дескриптора, например, после вызова curl_close.
+                    curl_setopt($rCh, CURLOPT_COOKIEFILE, __DIR__ . "/" . $sCookieFile); // Имя файла, содержащего cookies. Данный файл должен быть в формате Netscape или просто заголовками HTTP, записанными в файл.
 
                     if ($bCookieSession) {
-                        curl_setopt($rCh, CURLOPT_COOKIESESSION, true);
+                        curl_setopt($rCh, CURLOPT_COOKIESESSION, true); // true для указания текущему сеансу начать новую "сессию" cookies.
                     }
                 }
 
                 if ($sProxyIp && $iProxyPort && $sProxyType) {
-                    curl_setopt($rCh, CURLOPT_PROXY, $sProxyIp . ":" . $iProxyPort);
-                    curl_setopt($rCh, CURLOPT_PROXYTYPE, $sProxyType);
+                    curl_setopt($rCh, CURLOPT_PROXY, $sProxyIp . ":" . $iProxyPort); // HTTP-прокси, через который будут направляться запросы.
+                    curl_setopt($rCh, CURLOPT_PROXYTYPE, $sProxyType); // Либо CURLPROXY_HTTP (по умолчанию), либо CURLPROXY_SOCKS4, CURLPROXY_SOCKS5, CURLPROXY_SOCKS4A или CURLPROXY_SOCKS5_HOSTNAME.
                 }
 
                 if ($arHeaders) {
+                    // Массив устанавливаемых HTTP-заголовков, в формате array('Content-type: text/plain', 'Content-length: 100')
                     curl_setopt($rCh, CURLOPT_HTTPHEADER, $arHeaders);
                 }
                 
                 if ($sPost) {
+                    // Все данные, передаваемые в HTTP POST-запросе. Этот параметр может быть передан как в качестве url-закодированной строки, наподобие 'para1=val1&para2=val2&...', так и в виде массива, ключами которого будут имена полей, а значениями - их содержимое.
                     curl_setopt($rCh, CURLOPT_POSTFIELDS, $sPost);
                 }
 
-                
-
-                curl_setopt($rCh, CURLINFO_HEADER_OUT, true);
+                curl_setopt($rCh, CURLINFO_HEADER_OUT, true); // true для отслеживания строки запроса дескриптора.
+                //Содержимое заголовка "Accept-Encoding: ". Это позволяет декодировать запрос. Поддерживаемыми кодировками являются "identity", "deflate" и "gzip". Если передана пустая строка, "", посылается заголовок, содержащий все поддерживаемые типы кодировок.
                 curl_setopt($rCh,CURLOPT_ENCODING, '');
                 // curl_setopt($rCh, CURLOPT_ENCODING , 'br');
+
+
                 $sContent = curl_exec($rCh);
                 $arInfo = curl_getinfo($rCh);
 

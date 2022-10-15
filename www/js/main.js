@@ -861,7 +861,7 @@ window.onclick = function (event) {
 //						<p class="film-info">${film.year}, ${film_cats.splice(0, 3).join(', ')}, ${film.country}</p>
 //						<p class="film-desc">${film.description_ru}</p>
 //						<p class="film-desc"><b>В главных ролях:</b> ${film.actors}</p>
-//						<p class="film-desc"><b>Режиссёр:</b> ${film.genres}</p>
+//						<p class="film-desc"><b>Режиссёр:</b> ${film.director}</p>
 //
 //                    </div>
 //				`);

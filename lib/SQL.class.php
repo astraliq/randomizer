@@ -235,7 +235,7 @@
 			foreach ($object as $key => $value) {
 				$sets[] = "`$key` = :$key";
 				if ($value === NULL) {
-					$object[$key]='NULL';
+					$object[$key]= PDO::PARAM_NULL;
 				}
 			};
 			 
@@ -246,12 +246,13 @@
 			foreach ($whereObj as $key => $value) {
 				$wheres[] = "`$key` = :$key";
 				if ($value === NULL) {
-					$whereObj[$key] = 'NULL';
+					$whereObj[$key] = PDO::PARAM_NULL;
 				}
 			};
 			$wheres_s = implode(' AND ', $wheres);
 
 			$query = "UPDATE `$table` SET $sets_s WHERE $wheres_s";
+
 			$superObject = array_merge($object, $whereObj);
 			return self::update($query, $superObject);
 		}

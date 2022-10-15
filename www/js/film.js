@@ -392,7 +392,7 @@ class Films {
 					});
 					this.film.main_img = this.film.main_img === null ? 'film-error.png' : this.film.main_img;
 					this.film.actors = this.film.actors ? this.film.actors : 'нет данных';
-					this.film.genres = this.film.genres ? this.film.genres : 'нет данных';
+					this.film.director = this.film.director ? this.film.director : 'нет данных';
 					this.film.rating = this.film.rating > 0 ? this.film.rating : 'нет данных';
 					this.film.info = [this.film.year,...film_cats.splice(0, 4),this.film.country,this.film.duration];
 					this._render(this.film);
@@ -440,7 +440,7 @@ class Films {
 						<p class="film-desc"><b>Рейтинг Кинопоиска:</b> ${film.rating}</p>
                         <p class="film-desc">${film.description_ru}</p>
                         <p class="film-desc"><b>В главных ролях:</b> ${film.actors}</p>
-                        <p class="film-desc"><b>Режиссёр:</b> ${film.genres}</p>
+                        <p class="film-desc"><b>Режиссёр:</b> ${film.director}</p>
                     </div>
                 </div>
 		`);
