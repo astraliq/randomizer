@@ -106,6 +106,7 @@ class Parser
                 $bCookieSession = !empty($arParams["cookie"]["session"]) ? $arParams["cookie"]["session"] : false;
                 $sProxyIp = !empty($arParams["proxy"]["ip"]) ? $arParams["proxy"]["ip"] : false;
                 $iProxyPort = !empty($arParams["proxy"]["port"]) ? $arParams["proxy"]["port"] : false;
+                $iProxyPwd = !empty($arParams["proxy"]["pwd"]) ? $arParams["proxy"]["pwd"] : false;
                 $sProxyType = !empty($arParams["proxy"]["type"]) ? $arParams["proxy"]["type"] : false;
                 $arHeaders = !empty($arParams["headers"]) ? $arParams["headers"] : false;
                 $sPost = !empty($arParams["post"]) ? $arParams["post"] : false;
@@ -143,6 +144,7 @@ class Parser
 
                 if ($sProxyIp && $iProxyPort && $sProxyType) {
                     curl_setopt($rCh, CURLOPT_PROXY, $sProxyIp . ":" . $iProxyPort); // HTTP-прокси, через который будут направляться запросы.
+                    curl_setopt($rCh, CURLOPT_PROXYUSERPWD, $sProxyIp . ":" . $iProxyPwd); // HTTP-прокси, через который будут направляться запросы.
                     curl_setopt($rCh, CURLOPT_PROXYTYPE, $sProxyType); // Либо CURLPROXY_HTTP (по умолчанию), либо CURLPROXY_SOCKS4, CURLPROXY_SOCKS5, CURLPROXY_SOCKS4A или CURLPROXY_SOCKS5_HOSTNAME.
                 }
 

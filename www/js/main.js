@@ -619,7 +619,7 @@ function changeStatus(typeModul, typeDesc) {
     let descLength = document.getElementById(typeDesc).textContent.length;
     let className = document.getElementById(typeDesc);
 
-    if (descLength > 350) {
+    if (descLength < 350) {
         textMore.innerHTML = 'Больше описания';
     } else {
         textMore.innerHTML = '';
@@ -720,32 +720,16 @@ class ReqLimit {
 
     checkReqLimits() {
         if (this.limit === 1) {
-            this._renderErr();
+            rndzError.showError(
+                'Воу, воу полегче...',
+                'Вы даже не успели прочитать.'
+            );
             return false;
         } else {
             return true;
         }
     }
 
-    _renderErr() {
-        clearTimeout(this.to1);
-        let del = $('.end_stub_container').remove();
-        $('main').append(`
-			<div class="end_stub_container fade-in-bck">
-				<div class="end_stub">
-					<h2 class="end_stub_head">Воу, воу полегче...</h2>
-					<p class="end_stub_head_text">Вы даже не успели прочитать.</p>
-				</div>
-			</div>
-		`);
-        this.to1 = setTimeout(function () {
-            $('.end_stub_container').removeClass('fade-in-bck');
-            $('.end_stub_container').addClass('fade-out-bck');
-            //			this.to2 = setTimeout(function () {
-            //				$('.end_stub_container').remove();
-            //			}, 2000);
-        }, 1500);
-    }
 }
 
 // создаем объект класса проверки литмита времени запросов с указанием времени таймайта

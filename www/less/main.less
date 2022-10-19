@@ -300,22 +300,25 @@ main {
 .main-data-title-quote {
 	position: relative;
 	margin: 0 -37px 0 0;
+	text-align: justify;
 	&:before {
 		content: "«";
+		position: relative;
 		font-size: 60px;
-		top: -9px;
-		left: -30px;
+		top: 3px;
+		left: 2px;
 		margin: 0 0 0 -35px;
 	}
 	&:after {
-		position: absolute;
-		display: contents;
-		bottom: 40px;
-		margin: 0 0 0 8px;
+		position: relative;
+		bottom: -4px;
 		line-height: 0;
 		content: "»";
 		font-size: 60px;
 	}
+}
+.qoutes-title{
+	text-align: right;
 }
 .left-aquo {
 	margin: 0 0 0 -15px;
@@ -519,6 +522,7 @@ main {
 	font-size: 18px;
 	font-weight: 400;
 	line-height: 26px;
+	text-align: justify;
 }
 .film-rating_block {
 	position: absolute;
@@ -581,9 +585,20 @@ main {
 	justify-content: space-between;
 }
 .see-now-main-data {
-	margin: 0 0 0 0;
+	margin: 0 10px;
 	padding: 0 0 0 0;
 	width: 400px;
+	border-right: 2px solid;
+    border-image: linear-gradient(
+      to bottom, rgba(0, 0, 0, 0),
+      darkgrey, 
+      rgba(0, 0, 0, 0)
+    ) 1 100%;
+
+    &:last-child {
+    	border:none;
+    }
+
 }
 .see-now-text {
 	margin: 0 0 0 0;
@@ -699,6 +714,7 @@ main {
 	height: 200px;
 	overflow: hidden;
 	order: 0;
+	text-align: justify;
 }
 .footer-main {
 	min-height: 400px;
@@ -1132,6 +1148,7 @@ ul {
 	overflow: hidden;
 	order: 0;
 	height: 130px;
+	text-align: justify;
 }
 .congr-text {
 	margin: 0 0 0 0;
@@ -1165,12 +1182,16 @@ ul {
 	height: 200px;
 	overflow: hidden;
 	order: 0;
+	text-align: justify;
 }
 .see-now-wrapper {
 	display: flex;
 	flex-direction: column;
-	align-items: flex-end;
+	align-items: center;
 	justify-content: center;
+	& label {
+		align-self: end;
+	}
 }
 .xpand-button {
 	order: 1;
@@ -1386,12 +1407,15 @@ label {
 	}
 }
 .vk-filter {
-	p {
-		color: #ffffff;
-	}
 	color: #ffffff;
 	width: 50%;
 	margin: 0 0 0 0;
+	p {
+		color: #ffffff;
+	}
+	li {
+		list-style-type: none;
+	}
 }
 .vk_block {
 	justify-content: center;

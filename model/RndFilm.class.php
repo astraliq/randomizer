@@ -102,7 +102,7 @@ class RndFilm extends Model
 
     public function getNextFilmId($prevId)
     {
-        $sql = "SELECT `id`, `title_ru`, `kp_id`  FROM `$this->filmsTable` WHERE `id` >= $prevId ORDER BY `id` ASC LIMIT 2";
+        $sql = "SELECT `id`, `title_ru`, `kp_id`  FROM `$this->filmsTable` WHERE `id` >= $prevId AND `rating` > 5 ORDER BY `id` ASC LIMIT 2";
         $nextFilm = $this->dataBase->getRows($sql, null)[1];
         return $nextFilm;
     }
@@ -237,13 +237,16 @@ class RndFilm extends Model
 //                    'title_en' => $film['title_en'],
 //                    'description_ru' => $film['description_ru'],
                     'main_category_id' => $film['category_id'][0],
-                    'country_id' => $film['country_id'][0],
 //                    'main_img' => $film['main_img'],
                     'year' => $film['year'],
                     'actors' => implode(', ', $film['actors']),
                     'director' => implode(', ', $film['director']),
                     'kp_id' => $film['kp_id'],
                 ];
+                if ($film['country_id']) {
+                    $object['country_id'] = $film['country_id'][0];
+                }
+
                 if ($film['rating'] !== '') {
                     $object['rating'] = $film['rating'];
                 }
@@ -267,12 +270,16 @@ class RndFilm extends Model
                 }
                 $result = $this->dataBase->uniInsertArray($this->filmsCategories, $columns, $object);
 
-                $columns = ['film_id', 'country_id'];
-                $object = array();
-                foreach ($film['country_id'] as $element) {
-                    $object[] = [$lastID['id'], $element];
-                };
-                $result = $this->dataBase->uniInsertArray($this->filmsCountries, $columns, $object);
+
+                if ($film['country_id']) {
+                    $columns = ['film_id', 'country_id'];
+                    $object = array();
+                    foreach ($film['country_id'] as $element) {
+                        $object[] = [$lastID['id'], $element];
+                    };
+                    $result = $this->dataBase->uniInsertArray($this->filmsCountries, $columns, $object);
+                }
+
             } else {
                 $result = false;
             }

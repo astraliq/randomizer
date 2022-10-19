@@ -1,0 +1,117 @@
+2022-10-19 18:43:53 Страница: 0, ID: 12429, KP_ID: 1306638
+2022-10-19 18:43:54 Ошибка: Exception: Incorrect date value: '0' for column 'premier_date' at row 10388 in /media/sf_Repos/randomizer/lib/SQL.class.php:44
+Stack trace:
+#0 /media/sf_Repos/randomizer/lib/SQL.class.php(68): SQL->execQuery()
+#1 /media/sf_Repos/randomizer/lib/SQL.class.php(257): SQL->update()
+#2 /media/sf_Repos/randomizer/model/RndFilm.class.php(263): SQL->uniUpdate()
+#3 /media/sf_Repos/randomizer/controller/ParseController.class.php(376): RndFilm->updateFilm()
+#4 /media/sf_Repos/randomizer/lib/App.class.php(75): ParseController->kinoapifilm()
+#5 /media/sf_Repos/randomizer/lib/App.class.php(15): App->web()
+#6 /media/sf_Repos/randomizer/App.php(5): App->init()
+#7 /media/sf_Repos/randomizer/www/index.php(3): include_once('/media/sf_Repos...')
+#8 {main}
+2022-10-19 18:43:54 Страница: 1, ID: 12431, KP_ID: 1368294
+2022-10-19 18:43:54 Ошибка: Exception: Incorrect date value: '0' for column 'premier_date' at row 10390 in /media/sf_Repos/randomizer/lib/SQL.class.php:44
+Stack trace:
+#0 /media/sf_Repos/randomizer/lib/SQL.class.php(68): SQL->execQuery()
+#1 /media/sf_Repos/randomizer/lib/SQL.class.php(257): SQL->update()
+#2 /media/sf_Repos/randomizer/model/RndFilm.class.php(263): SQL->uniUpdate()
+#3 /media/sf_Repos/randomizer/controller/ParseController.class.php(376): RndFilm->updateFilm()
+#4 /media/sf_Repos/randomizer/lib/App.class.php(75): ParseController->kinoapifilm()
+#5 /media/sf_Repos/randomizer/lib/App.class.php(15): App->web()
+#6 /media/sf_Repos/randomizer/App.php(5): App->init()
+#7 /media/sf_Repos/randomizer/www/index.php(3): include_once('/media/sf_Repos...')
+#8 {main}
+2022-10-19 18:43:54 Страница: 2, ID: , KP_ID: 
+2022-10-19 18:45:07 Страница: 0, ID: 12429, KP_ID: 1306638
+2022-10-19 18:59:30 Страница: 0, ID: 12429, KP_ID: 1306638
+2022-10-19 18:59:33 Ошибка: Exception: Incorrect date value: '0' for column 'premier_date' at row 10388 in /media/sf_Repos/randomizer/lib/SQL.class.php:44
+Stack trace:
+#0 /media/sf_Repos/randomizer/lib/SQL.class.php(68): SQL->execQuery()
+#1 /media/sf_Repos/randomizer/lib/SQL.class.php(257): SQL->update()
+#2 /media/sf_Repos/randomizer/model/RndFilm.class.php(263): SQL->uniUpdate()
+#3 /media/sf_Repos/randomizer/controller/ParseController.class.php(364): RndFilm->updateFilm()
+#4 /media/sf_Repos/randomizer/lib/App.class.php(75): ParseController->kinoapifilm()
+#5 /media/sf_Repos/randomizer/lib/App.class.php(15): App->web()
+#6 /media/sf_Repos/randomizer/App.php(5): App->init()
+#7 /media/sf_Repos/randomizer/www/index.php(3): include_once('/media/sf_Repos...')
+#8 {main}
+2022-10-19 18:59:33 Страница: 1, ID: 12431, KP_ID: 1368294
+2022-10-19 18:59:33 Ошибка: Exception: Incorrect date value: '0' for column 'premier_date' at row 10390 in /media/sf_Repos/randomizer/lib/SQL.class.php:44
+Stack trace:
+#0 /media/sf_Repos/randomizer/lib/SQL.class.php(68): SQL->execQuery()
+#1 /media/sf_Repos/randomizer/lib/SQL.class.php(257): SQL->update()
+#2 /media/sf_Repos/randomizer/model/RndFilm.class.php(263): SQL->uniUpdate()
+#3 /media/sf_Repos/randomizer/controller/ParseController.class.php(364): RndFilm->updateFilm()
+#4 /media/sf_Repos/randomizer/lib/App.class.php(75): ParseController->kinoapifilm()
+#5 /media/sf_Repos/randomizer/lib/App.class.php(15): App->web()
+#6 /media/sf_Repos/randomizer/App.php(5): App->init()
+#7 /media/sf_Repos/randomizer/www/index.php(3): include_once('/media/sf_Repos...')
+#8 {main}
+2022-10-19 18:59:33 Страница: 2, ID: , KP_ID: 
+2022-10-19 19:00:34 Страница: 0, ID: 12429, KP_ID: 1306638
+2022-10-19 19:00:40 Страница: 0, ID: 12429, KP_ID: 1306638
+2022-10-19 19:03:49 Страница: 0, ID: 12429, KP_ID: 1306638
+2022-10-19 19:03:50 Страница: 1, ID: 12431, KP_ID: 1368294
+2022-10-19 19:03:50 Страница: 2, ID: , KP_ID: 
+2022-10-19 19:07:01 Страница: 0, ID: 12429, KP_ID: 1306638
+2022-10-19 19:11:55 Страница: 0, ID: 12429, KP_ID: 1306638
+2022-10-19 19:11:56 Страница: 1, ID: 12431, KP_ID: 1368294
+2022-10-19 19:11:56 Страница: 2, ID: 12432, KP_ID: 1344413
+2022-10-19 19:11:57 Страница: 3, ID: 12434, KP_ID: 1346489
+2022-10-19 19:11:57 Страница: 4, ID: 12437, KP_ID: 1236733
+2022-10-19 19:11:58 Страница: 5, ID: 12439, KP_ID: 1218697
+2022-10-19 19:11:59 Страница: 6, ID: 12440, KP_ID: 1172670
+2022-10-19 19:12:00 Страница: 7, ID: 12442, KP_ID: 1199085
+2022-10-19 19:12:01 Страница: 8, ID: 12444, KP_ID: 1324140
+2022-10-19 19:12:02 Страница: 9, ID: 12446, KP_ID: 1343926
+2022-10-19 19:12:03 Страница: 10, ID: 12448, KP_ID: 1108664
+2022-10-19 19:12:03 Страница: 11, ID: 12451, KP_ID: 1244932
+2022-10-19 19:12:04 Страница: 12, ID: 12452, KP_ID: 1328603
+2022-10-19 19:12:05 Страница: 13, ID: 12453, KP_ID: 1309166
+2022-10-19 19:12:06 Страница: 14, ID: 12454, KP_ID: 1334632
+2022-10-19 19:12:06 Ошибка: Exception: Column 'country_id' cannot be null in /media/sf_Repos/randomizer/lib/SQL.class.php:44
+Stack trace:
+#0 /media/sf_Repos/randomizer/lib/SQL.class.php(63): SQL->execQuery()
+#1 /media/sf_Repos/randomizer/lib/SQL.class.php(228): SQL->insert()
+#2 /media/sf_Repos/randomizer/model/RndFilm.class.php(280): SQL->uniInsertArray()
+#3 /media/sf_Repos/randomizer/controller/ParseController.class.php(369): RndFilm->updateFilm()
+#4 /media/sf_Repos/randomizer/lib/App.class.php(75): ParseController->kinoapifilm()
+#5 /media/sf_Repos/randomizer/lib/App.class.php(15): App->web()
+#6 /media/sf_Repos/randomizer/App.php(5): App->init()
+#7 /media/sf_Repos/randomizer/www/index.php(3): include_once('/media/sf_Repos...')
+#8 {main}
+2022-10-19 19:12:06 Страница: 15, ID: 12455, KP_ID: 1236337
+2022-10-19 19:12:08 Страница: 16, ID: 12456, KP_ID: 1265557
+2022-10-19 19:12:08 Страница: 17, ID: 12458, KP_ID: 1331496
+2022-10-19 19:12:09 Страница: 18, ID: 12460, KP_ID: 1338430
+2022-10-19 19:12:09 Страница: 19, ID: 12461, KP_ID: 1263580
+2022-10-19 19:12:10 Страница: 20, ID: 12463, KP_ID: 1224438
+2022-10-19 19:12:11 Страница: 21, ID: 12464, KP_ID: 1368311
+2022-10-19 19:12:11 Страница: 22, ID: 12466, KP_ID: 1244460
+2022-10-19 19:12:12 Страница: 23, ID: 12470, KP_ID: 1379498
+2022-10-19 19:12:12 Страница: 24, ID: 12472, KP_ID: 1214358
+2022-10-19 19:12:13 Страница: 25, ID: 12473, KP_ID: 1311540
+2022-10-19 19:12:15 Страница: 26, ID: 12474, KP_ID: 1246571
+2022-10-19 19:12:15 Страница: 27, ID: 12475, KP_ID: 1260643
+2022-10-19 19:12:16 Страница: 28, ID: 12477, KP_ID: 1291531
+2022-10-19 19:12:16 Страница: 29, ID: 12479, KP_ID: 1108606
+2022-10-19 19:12:17 Страница: 30, ID: 12482, KP_ID: 1347753
+2022-10-19 19:12:18 Страница: 31, ID: 12486, KP_ID: 1256891
+2022-10-19 19:12:18 Страница: 32, ID: 12516, KP_ID: 1265095
+2022-10-19 19:12:19 Страница: 33, ID: 12519, KP_ID: 1290383
+2022-10-19 19:12:20 Страница: 34, ID: 12520, KP_ID: 1174430
+2022-10-19 19:12:22 Страница: 35, ID: 12521, KP_ID: 1235421
+2022-10-19 19:12:22 Страница: 36, ID: 12522, KP_ID: 1289785
+2022-10-19 19:12:23 Страница: 37, ID: 12523, KP_ID: 1312758
+2022-10-19 19:12:23 Страница: 38, ID: 12524, KP_ID: 1345655
+2022-10-19 19:12:24 Страница: 39, ID: 12525, KP_ID: 1328282
+2022-10-19 19:12:25 Страница: 40, ID: 12526, KP_ID: 1330544
+2022-10-19 19:12:25 Страница: 41, ID: 12528, KP_ID: 1292938
+2022-10-19 19:12:26 Страница: 42, ID: 12529, KP_ID: 1189131
+2022-10-19 19:12:26 Страница: 43, ID: 12530, KP_ID: 1006259
+2022-10-19 19:12:27 Страница: 44, ID: 12533, KP_ID: 1239981
+2022-10-19 19:12:28 Страница: 45, ID: 12534, KP_ID: 1313205
+2022-10-19 19:12:28 Страница: 46, ID: 12535, KP_ID: 1293338
+2022-10-19 19:12:29 Страница: 47, ID: 12536, KP_ID: 1229709
+2022-10-19 19:12:29 Вы сделали более 200 запросов за сутки. Лимиты будут обновлены в 00: 00. Чтобы получить больше лимитов и личный токен, напишите в telegram @mdwit
