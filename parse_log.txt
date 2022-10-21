@@ -115,3 +115,255 @@ Stack trace:
 2022-10-19 19:12:28 Страница: 46, ID: 12535, KP_ID: 1293338
 2022-10-19 19:12:29 Страница: 47, ID: 12536, KP_ID: 1229709
 2022-10-19 19:12:29 Вы сделали более 200 запросов за сутки. Лимиты будут обновлены в 00: 00. Чтобы получить больше лимитов и личный токен, напишите в telegram @mdwit
+2022-10-21 21:00:14 Страница: 0, ID: 12536, KP_ID: 1229709
+2022-10-21 21:00:19 Страница: 1, ID: 12538, KP_ID: 1206431
+2022-10-21 21:00:20 Страница: 2, ID: 12539, KP_ID: 774797
+2022-10-21 21:00:21 Страница: 3, ID: 12542, KP_ID: 1371086
+2022-10-21 21:00:21 Страница: 4, ID: 12543, KP_ID: 1263727
+2022-10-21 21:00:22 Ошибка: Exception: Column 'country_id' cannot be null in /media/sf_Repos/randomizer/lib/SQL.class.php:44
+Stack trace:
+#0 /media/sf_Repos/randomizer/lib/SQL.class.php(63): SQL->execQuery()
+#1 /media/sf_Repos/randomizer/lib/SQL.class.php(228): SQL->insert()
+#2 /media/sf_Repos/randomizer/model/RndFilm.class.php(280): SQL->uniInsertArray()
+#3 /media/sf_Repos/randomizer/controller/ParseController.class.php(369): RndFilm->updateFilm()
+#4 /media/sf_Repos/randomizer/lib/App.class.php(75): ParseController->kinoapifilm()
+#5 /media/sf_Repos/randomizer/lib/App.class.php(15): App->web()
+#6 /media/sf_Repos/randomizer/App.php(5): App->init()
+#7 /media/sf_Repos/randomizer/www/index.php(3): include_once('/media/sf_Repos...')
+#8 {main}
+2022-10-21 21:00:22 Страница: 5, ID: 12546, KP_ID: 1374535
+2022-10-21 21:00:23 Страница: 6, ID: 12547, KP_ID: 1242008
+2022-10-21 21:00:23 Страница: 0, ID: 12536, KP_ID: 1229709
+2022-10-21 21:00:24 Страница: 1, ID: 12538, KP_ID: 1206431
+2022-10-21 21:00:24 Страница: 2, ID: 12539, KP_ID: 774797
+2022-10-21 21:00:25 Страница: 3, ID: 12542, KP_ID: 1371086
+2022-10-21 21:00:25 Страница: 4, ID: 12543, KP_ID: 1263727
+2022-10-21 21:00:26 Ошибка: Exception: Column 'country_id' cannot be null in /media/sf_Repos/randomizer/lib/SQL.class.php:44
+Stack trace:
+#0 /media/sf_Repos/randomizer/lib/SQL.class.php(63): SQL->execQuery()
+#1 /media/sf_Repos/randomizer/lib/SQL.class.php(228): SQL->insert()
+#2 /media/sf_Repos/randomizer/model/RndFilm.class.php(280): SQL->uniInsertArray()
+#3 /media/sf_Repos/randomizer/controller/ParseController.class.php(369): RndFilm->updateFilm()
+#4 /media/sf_Repos/randomizer/lib/App.class.php(75): ParseController->kinoapifilm()
+#5 /media/sf_Repos/randomizer/lib/App.class.php(15): App->web()
+#6 /media/sf_Repos/randomizer/App.php(5): App->init()
+#7 /media/sf_Repos/randomizer/www/index.php(3): include_once('/media/sf_Repos...')
+#8 {main}
+2022-10-21 21:00:26 Страница: 5, ID: 12546, KP_ID: 1374535
+2022-10-21 21:00:26 Страница: 6, ID: 12547, KP_ID: 1242008
+2022-10-21 21:00:27 Страница: 7, ID: 12548, KP_ID: 1066440
+2022-10-21 21:00:27 Страница: 8, ID: 12551, KP_ID: 1313590
+2022-10-21 21:00:28 Страница: 9, ID: 12553, KP_ID: 1179554
+2022-10-21 21:00:29 Страница: 10, ID: 12555, KP_ID: 1388586
+2022-10-21 21:00:29 Страница: 11, ID: 12559, KP_ID: 1335598
+2022-10-21 21:00:30 Страница: 12, ID: 12563, KP_ID: 1320378
+2022-10-21 21:00:30 Страница: 13, ID: 12569, KP_ID: 673871
+2022-10-21 21:00:31 Страница: 14, ID: 12570, KP_ID: 1270677
+2022-10-21 21:00:33 Страница: 15, ID: 12572, KP_ID: 1178279
+2022-10-21 21:00:33 Страница: 16, ID: 12573, KP_ID: 1355265
+2022-10-21 21:00:34 Страница: 17, ID: 12574, KP_ID: 1364796
+2022-10-21 21:00:35 Страница: 18, ID: 12576, KP_ID: 1005370
+2022-10-21 21:00:35 Страница: 19, ID: 12577, KP_ID: 1262090
+2022-10-21 21:00:36 Страница: 20, ID: 12579, KP_ID: 1339669
+2022-10-21 21:00:36 Страница: 21, ID: 12581, KP_ID: 607318
+2022-10-21 21:00:37 Страница: 22, ID: 12584, KP_ID: 1188597
+2022-10-21 21:00:38 Страница: 23, ID: 12585, KP_ID: 1189814
+2022-10-21 21:00:38 Страница: 24, ID: 12587, KP_ID: 1345615
+2022-10-21 21:00:40 Страница: 25, ID: 12588, KP_ID: 1266030
+2022-10-21 21:00:40 Страница: 26, ID: 12592, KP_ID: 1272697
+2022-10-21 21:00:41 Страница: 27, ID: 12595, KP_ID: 1346504
+2022-10-21 21:00:42 Страница: 28, ID: 12596, KP_ID: 843685
+2022-10-21 21:00:43 Страница: 29, ID: 12597, KP_ID: 1189441
+2022-10-21 21:00:43 Страница: 30, ID: 12599, KP_ID: 1100969
+2022-10-21 21:00:44 Страница: 31, ID: 12602, KP_ID: 1204966
+2022-10-21 21:00:45 Страница: 32, ID: 12603, KP_ID: 1238532
+2022-10-21 21:00:46 Страница: 33, ID: 12608, KP_ID: 1265480
+2022-10-21 21:00:47 Страница: 34, ID: 12609, KP_ID: 1370483
+2022-10-21 21:00:48 Страница: 35, ID: 12610, KP_ID: 1292296
+2022-10-21 21:00:48 Страница: 36, ID: 12612, KP_ID: 1197818
+2022-10-21 21:00:49 Страница: 37, ID: 12614, KP_ID: 1217828
+2022-10-21 21:00:50 Страница: 38, ID: 12615, KP_ID: 1249181
+2022-10-21 21:00:51 Страница: 39, ID: 12616, KP_ID: 1354115
+2022-10-21 21:00:52 Страница: 40, ID: 12617, KP_ID: 1372274
+2022-10-21 21:00:52 Страница: 41, ID: 12619, KP_ID: 1108685
+2022-10-21 21:00:54 Страница: 42, ID: 12620, KP_ID: 1357356
+2022-10-21 21:00:56 Страница: 43, ID: 12623, KP_ID: 1387204
+2022-10-21 21:00:57 Страница: 44, ID: 12625, KP_ID: 1339191
+2022-10-21 21:00:57 Страница: 45, ID: 12626, KP_ID: 1263794
+2022-10-21 21:00:58 Страница: 46, ID: 12630, KP_ID: 1311031
+2022-10-21 21:00:58 Страница: 47, ID: 12635, KP_ID: 1325207
+2022-10-21 21:00:59 Страница: 48, ID: 12638, KP_ID: 1263607
+2022-10-21 21:01:00 Страница: 49, ID: 12640, KP_ID: 1330171
+2022-10-21 21:01:01 Страница: 50, ID: 12641, KP_ID: 1253157
+2022-10-21 21:01:02 Страница: 51, ID: 12642, KP_ID: 1263931
+2022-10-21 21:01:02 Страница: 52, ID: 12644, KP_ID: 1309526
+2022-10-21 21:01:04 Страница: 53, ID: 12645, KP_ID: 1253001
+2022-10-21 21:01:05 Страница: 54, ID: 12646, KP_ID: 1311145
+2022-10-21 21:01:05 Страница: 55, ID: 12648, KP_ID: 1313313
+2022-10-21 21:01:06 Страница: 56, ID: 12649, KP_ID: 1338255
+2022-10-21 21:01:06 Страница: 57, ID: 12650, KP_ID: 1383059
+2022-10-21 21:01:07 Страница: 58, ID: 12654, KP_ID: 1274538
+2022-10-21 21:01:08 Страница: 59, ID: 12655, KP_ID: 1281911
+2022-10-21 21:01:08 Страница: 60, ID: 12657, KP_ID: 1355620
+2022-10-21 21:01:09 Страница: 61, ID: 12659, KP_ID: 1352417
+2022-10-21 21:01:10 Страница: 62, ID: 12662, KP_ID: 1309179
+2022-10-21 21:01:11 Страница: 63, ID: 12663, KP_ID: 1165045
+2022-10-21 21:01:12 Страница: 64, ID: 12665, KP_ID: 1272834
+2022-10-21 21:01:13 Страница: 65, ID: 12667, KP_ID: 1254396
+2022-10-21 21:01:14 Страница: 66, ID: 12669, KP_ID: 1316569
+2022-10-21 21:01:14 Страница: 67, ID: 12670, KP_ID: 1262046
+2022-10-21 21:01:15 Страница: 68, ID: 12672, KP_ID: 1311549
+2022-10-21 21:01:15 Страница: 69, ID: 12674, KP_ID: 1285558
+2022-10-21 21:01:16 Страница: 70, ID: 12675, KP_ID: 1040428
+2022-10-21 21:01:18 Страница: 71, ID: 12677, KP_ID: 1266946
+2022-10-21 21:01:18 Страница: 72, ID: 12678, KP_ID: 1266434
+2022-10-21 21:01:19 Страница: 73, ID: 12679, KP_ID: 1155539
+2022-10-21 21:01:19 Страница: 74, ID: 12684, KP_ID: 1202314
+2022-10-21 21:01:20 Страница: 75, ID: 12685, KP_ID: 1301713
+2022-10-21 21:01:21 Страница: 76, ID: 12686, KP_ID: 1331264
+2022-10-21 21:01:21 Страница: 77, ID: 12688, KP_ID: 1323039
+2022-10-21 21:01:22 Страница: 78, ID: 12691, KP_ID: 956189
+2022-10-21 21:01:22 Страница: 79, ID: 12695, KP_ID: 1338545
+2022-10-21 21:01:23 Страница: 80, ID: 12696, KP_ID: 1357762
+2022-10-21 21:01:23 Страница: 81, ID: 12697, KP_ID: 1263217
+2022-10-21 21:01:25 Страница: 82, ID: 12700, KP_ID: 992507
+2022-10-21 21:01:25 Страница: 83, ID: 12701, KP_ID: 1380230
+2022-10-21 21:01:27 Страница: 84, ID: 12702, KP_ID: 1162784
+2022-10-21 21:01:27 Страница: 85, ID: 12704, KP_ID: 1302577
+2022-10-21 21:01:28 Страница: 86, ID: 12705, KP_ID: 1282217
+2022-10-21 21:01:28 Страница: 87, ID: 12707, KP_ID: 1117089
+2022-10-21 21:01:29 Страница: 88, ID: 12708, KP_ID: 1254617
+2022-10-21 21:01:30 Страница: 89, ID: 12709, KP_ID: 1232577
+2022-10-21 21:01:30 Страница: 90, ID: 12716, KP_ID: 1305916
+2022-10-21 21:01:31 Страница: 91, ID: 12717, KP_ID: 1274273
+2022-10-21 21:01:31 Страница: 92, ID: 12720, KP_ID: 1077685
+2022-10-21 21:01:32 Страница: 93, ID: 12721, KP_ID: 1309698
+2022-10-21 21:01:32 Страница: 94, ID: 12723, KP_ID: 1237235
+2022-10-21 21:01:33 Страница: 95, ID: 12728, KP_ID: 1123604
+2022-10-21 21:01:34 Страница: 96, ID: 12732, KP_ID: 1272115
+2022-10-21 21:01:34 Страница: 97, ID: 12733, KP_ID: 1378954
+2022-10-21 21:01:35 Страница: 98, ID: 12734, KP_ID: 1162527
+2022-10-21 21:01:36 Страница: 99, ID: 12735, KP_ID: 1180685
+2022-10-21 21:01:36 Страница: 100, ID: 12739, KP_ID: 995474
+2022-10-21 21:01:37 Страница: 101, ID: 12740, KP_ID: 1303040
+2022-10-21 21:01:37 Страница: 102, ID: 12742, KP_ID: 1016160
+2022-10-21 21:01:39 Страница: 103, ID: 12743, KP_ID: 1244637
+2022-10-21 21:01:39 Страница: 104, ID: 12744, KP_ID: 906657
+2022-10-21 21:01:42 Страница: 105, ID: 12746, KP_ID: 1338026
+2022-10-21 21:01:43 Страница: 106, ID: 12750, KP_ID: 1253333
+2022-10-21 21:01:46 Страница: 107, ID: 12751, KP_ID: 1338272
+2022-10-21 21:01:47 Страница: 108, ID: 12752, KP_ID: 1328345
+2022-10-21 21:01:47 Страница: 109, ID: 12753, KP_ID: 1272750
+2022-10-21 21:01:48 Страница: 110, ID: 12755, KP_ID: 1198814
+2022-10-21 21:01:48 Страница: 111, ID: 12757, KP_ID: 1309926
+2022-10-21 21:01:49 Страница: 112, ID: 12760, KP_ID: 1328367
+2022-10-21 21:01:50 Страница: 113, ID: 12762, KP_ID: 1330639
+2022-10-21 21:01:50 Страница: 114, ID: 12763, KP_ID: 1232982
+2022-10-21 21:01:53 Страница: 115, ID: 12764, KP_ID: 1262088
+2022-10-21 21:01:54 Страница: 116, ID: 12766, KP_ID: 1291231
+2022-10-21 21:01:55 Страница: 117, ID: 12767, KP_ID: 1246629
+2022-10-21 21:01:55 Страница: 118, ID: 12770, KP_ID: 1239696
+2022-10-21 21:01:56 Страница: 119, ID: 12773, KP_ID: 1283727
+2022-10-21 21:01:56 Страница: 120, ID: 12775, KP_ID: 1263705
+2022-10-21 21:01:57 Страница: 121, ID: 12777, KP_ID: 1269314
+2022-10-21 21:01:58 Страница: 122, ID: 12778, KP_ID: 1347314
+2022-10-21 21:01:58 Страница: 123, ID: 12780, KP_ID: 706019
+2022-10-21 21:01:59 Страница: 124, ID: 12786, KP_ID: 1266917
+2022-10-21 21:01:59 Страница: 125, ID: 12790, KP_ID: 1007761
+2022-10-21 21:02:00 Страница: 126, ID: 12791, KP_ID: 1346604
+2022-10-21 21:02:01 Страница: 127, ID: 12794, KP_ID: 1281709
+2022-10-21 21:02:02 Страница: 128, ID: 12795, KP_ID: 1259272
+2022-10-21 21:02:02 Страница: 129, ID: 12796, KP_ID: 1209191
+2022-10-21 21:02:03 Страница: 130, ID: 12798, KP_ID: 1374275
+2022-10-21 21:02:04 Страница: 131, ID: 12799, KP_ID: 1328290
+2022-10-21 21:02:05 Страница: 132, ID: 12800, KP_ID: 1345724
+2022-10-21 21:02:05 Страница: 133, ID: 12802, KP_ID: 1328286
+2022-10-21 21:02:06 Страница: 134, ID: 12804, KP_ID: 1293403
+2022-10-21 21:02:06 Страница: 135, ID: 12805, KP_ID: 1200818
+2022-10-21 21:02:07 Страница: 136, ID: 12809, KP_ID: 1334367
+2022-10-21 21:02:08 Страница: 137, ID: 12810, KP_ID: 1312745
+2022-10-21 21:02:08 Страница: 138, ID: 12811, KP_ID: 1356424
+2022-10-21 21:02:09 Страница: 139, ID: 12812, KP_ID: 1232285
+2022-10-21 21:02:10 Страница: 140, ID: 12813, KP_ID: 1112558
+2022-10-21 21:02:10 Страница: 141, ID: 12814, KP_ID: 1311143
+2022-10-21 21:02:11 Страница: 142, ID: 12816, KP_ID: 1317850
+2022-10-21 21:02:11 Страница: 143, ID: 12819, KP_ID: 1272854
+2022-10-21 21:02:12 Страница: 144, ID: 12823, KP_ID: 1202266
+2022-10-21 21:02:12 Страница: 145, ID: 12827, KP_ID: 1274275
+2022-10-21 21:02:16 Страница: 146, ID: 12828, KP_ID: 1236795
+2022-10-21 21:02:17 Страница: 147, ID: 12830, KP_ID: 1307377
+2022-10-21 21:02:18 Страница: 148, ID: 12832, KP_ID: 1370484
+2022-10-21 21:02:19 Страница: 149, ID: 12833, KP_ID: 1281638
+2022-10-21 21:02:20 Страница: 150, ID: 12836, KP_ID: 1291491
+2022-10-21 21:02:20 Страница: 151, ID: 12837, KP_ID: 1273277
+2022-10-21 21:02:21 Страница: 152, ID: 12838, KP_ID: 677996
+2022-10-21 21:02:21 Страница: 153, ID: 12839, KP_ID: 1328238
+2022-10-21 21:02:22 Страница: 154, ID: 12840, KP_ID: 1338103
+2022-10-21 21:02:23 Страница: 155, ID: 12841, KP_ID: 1379019
+2022-10-21 21:02:23 Страница: 156, ID: 12844, KP_ID: 1312668
+2022-10-21 21:02:24 Страница: 157, ID: 12846, KP_ID: 1108690
+2022-10-21 21:02:25 Страница: 158, ID: 12848, KP_ID: 1247350
+2022-10-21 21:02:26 Страница: 159, ID: 12849, KP_ID: 1244537
+2022-10-21 21:02:27 Страница: 160, ID: 12850, KP_ID: 1332268
+2022-10-21 21:02:27 Страница: 161, ID: 12853, KP_ID: 1162497
+2022-10-21 21:02:28 Страница: 162, ID: 12854, KP_ID: 1243035
+2022-10-21 21:02:29 Страница: 163, ID: 12855, KP_ID: 1126786
+2022-10-21 21:02:30 Страница: 164, ID: 12859, KP_ID: 1265896
+2022-10-21 21:02:30 Страница: 165, ID: 12862, KP_ID: 1359033
+2022-10-21 21:02:32 Страница: 166, ID: 12863, KP_ID: 1088125
+2022-10-21 21:02:32 Страница: 167, ID: 12864, KP_ID: 1355622
+2022-10-21 21:02:33 Страница: 168, ID: 12865, KP_ID: 1201934
+2022-10-21 21:02:33 Страница: 169, ID: 12869, KP_ID: 1348832
+2022-10-21 21:02:35 Страница: 170, ID: 12872, KP_ID: 1344919
+2022-10-21 21:02:35 Страница: 171, ID: 12874, KP_ID: 1208829
+2022-10-21 21:02:36 Страница: 172, ID: 12875, KP_ID: 1374525
+2022-10-21 21:02:36 Страница: 173, ID: 12879, KP_ID: 1248354
+2022-10-21 21:02:37 Страница: 174, ID: 12880, KP_ID: 894972
+2022-10-21 21:02:37 Страница: 175, ID: 12884, KP_ID: 1373690
+2022-10-21 21:02:38 Страница: 176, ID: 12887, KP_ID: 1217320
+2022-10-21 21:02:39 Страница: 177, ID: 12888, KP_ID: 1259607
+2022-10-21 21:02:39 Вы сделали более 200 запросов за сутки. Лимиты будут обновлены в 00: 00. Чтобы получить больше лимитов и личный токен, напишите в telegram @mdwit
+2022-10-21 22:32:21 Ошибка: Exception: Cannot add or update a child row: a foreign key constraint fails (`randomizer`.`films`, CONSTRAINT `fk_films_countries` FOREIGN KEY (`country_id`) REFERENCES `f_countries` (`id`)) in /media/sf_Repos/randomizer/lib/SQL.class.php:44
+Stack trace:
+#0 /media/sf_Repos/randomizer/lib/SQL.class.php(68): SQL->execQuery()
+#1 /media/sf_Repos/randomizer/lib/SQL.class.php(257): SQL->update()
+#2 /media/sf_Repos/randomizer/model/RndFilm.class.php(263): SQL->uniUpdate()
+#3 /media/sf_Repos/randomizer/model/ApiMethod.class.php(419): RndFilm->updateFilm()
+#4 /media/sf_Repos/randomizer/lib/App.class.php(114): ApiMethod->updateFilmId()
+#5 /media/sf_Repos/randomizer/lib/App.class.php(12): App->api()
+#6 /media/sf_Repos/randomizer/App.php(5): App->init()
+#7 /media/sf_Repos/randomizer/www/index.php(3): include_once('/media/sf_Repos...')
+#8 {main}
+2022-10-21 22:38:50 Ошибка: Exception: Cannot add or update a child row: a foreign key constraint fails (`randomizer`.`films`, CONSTRAINT `fk_films_countries` FOREIGN KEY (`country_id`) REFERENCES `f_countries` (`id`)) in /media/sf_Repos/randomizer/lib/SQL.class.php:44
+Stack trace:
+#0 /media/sf_Repos/randomizer/lib/SQL.class.php(68): SQL->execQuery()
+#1 /media/sf_Repos/randomizer/lib/SQL.class.php(257): SQL->update()
+#2 /media/sf_Repos/randomizer/model/RndFilm.class.php(263): SQL->uniUpdate()
+#3 /media/sf_Repos/randomizer/model/ApiMethod.class.php(419): RndFilm->updateFilm()
+#4 /media/sf_Repos/randomizer/lib/App.class.php(114): ApiMethod->updateFilmId()
+#5 /media/sf_Repos/randomizer/lib/App.class.php(12): App->api()
+#6 /media/sf_Repos/randomizer/App.php(5): App->init()
+#7 /media/sf_Repos/randomizer/www/index.php(3): include_once('/media/sf_Repos...')
+#8 {main}
+2022-10-21 22:39:42 Ошибка: Exception: Cannot add or update a child row: a foreign key constraint fails (`randomizer`.`films`, CONSTRAINT `fk_films_countries` FOREIGN KEY (`country_id`) REFERENCES `f_countries` (`id`)) in /media/sf_Repos/randomizer/lib/SQL.class.php:44
+Stack trace:
+#0 /media/sf_Repos/randomizer/lib/SQL.class.php(68): SQL->execQuery()
+#1 /media/sf_Repos/randomizer/lib/SQL.class.php(257): SQL->update()
+#2 /media/sf_Repos/randomizer/model/RndFilm.class.php(263): SQL->uniUpdate()
+#3 /media/sf_Repos/randomizer/model/ApiMethod.class.php(419): RndFilm->updateFilm()
+#4 /media/sf_Repos/randomizer/lib/App.class.php(114): ApiMethod->updateFilmId()
+#5 /media/sf_Repos/randomizer/lib/App.class.php(12): App->api()
+#6 /media/sf_Repos/randomizer/App.php(5): App->init()
+#7 /media/sf_Repos/randomizer/www/index.php(3): include_once('/media/sf_Repos...')
+#8 {main}
+2022-10-21 22:39:58 Ошибка: Exception: Cannot add or update a child row: a foreign key constraint fails (`randomizer`.`films`, CONSTRAINT `fk_films_countries` FOREIGN KEY (`country_id`) REFERENCES `f_countries` (`id`)) in /media/sf_Repos/randomizer/lib/SQL.class.php:44
+Stack trace:
+#0 /media/sf_Repos/randomizer/lib/SQL.class.php(68): SQL->execQuery()
+#1 /media/sf_Repos/randomizer/lib/SQL.class.php(257): SQL->update()
+#2 /media/sf_Repos/randomizer/model/RndFilm.class.php(263): SQL->uniUpdate()
+#3 /media/sf_Repos/randomizer/model/ApiMethod.class.php(419): RndFilm->updateFilm()
+#4 /media/sf_Repos/randomizer/lib/App.class.php(114): ApiMethod->updateFilmId()
+#5 /media/sf_Repos/randomizer/lib/App.class.php(12): App->api()
+#6 /media/sf_Repos/randomizer/App.php(5): App->init()
+#7 /media/sf_Repos/randomizer/www/index.php(3): include_once('/media/sf_Repos...')
+#8 {main}

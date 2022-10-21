@@ -416,6 +416,12 @@ class Films {
     }
 	
 	_render(film) {
+		let kp_link;
+		if (film.kp_id) {
+			kp_link = `<p class="film-desc"><b>Рейтинг <a target="_blank" href="https://www.kinopoisk.ru/film/${film.kp_id}/"> <img class="img_kp" src="/img/other/kp_small.jpg" alt="">инопоиска</a>: </b>${film.rating}</p>`;
+		} else {
+			kp_link = `<p class="film-desc"><b>Рейтинг Кинопоиска: </b>${film.rating}</p>`;
+		}
 		// console.log('запуск');
 		document.querySelector('.main-block').className = 'main-block main-color-1';
 		$('.main-block-menu').empty();
@@ -437,7 +443,7 @@ class Films {
 							<span class="left-aquo">«${film.title_ru}»</span>
 						</p>
                         <p class="film-info">${film.info.join(', ')} мин.</p>
-						<p class="film-desc"><b>Рейтинг Кинопоиска:</b> ${film.rating}</p>
+						${kp_link}
                         <p class="film-desc">${film.description_ru}</p>
                         <p class="film-desc"><b>В главных ролях:</b> ${film.actors}</p>
                         <p class="film-desc"><b>Режиссёр:</b> ${film.director}</p>

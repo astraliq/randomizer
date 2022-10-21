@@ -47,7 +47,7 @@
         </div>
         <div class="div-ul">
             <p class="filtr-title">Рейтинг кинопоиска</p>
-            <ul>
+            <ul id="filtr-film-rating">
                 <li class="checkbox"><input type="checkbox" id="film-check40" value="0" data-id="0"><label for="film-check40">меньше 5</label></li>
                 <li class="checkbox"><input type="checkbox" id="film-check41" value="2" data-id="2"><label for="film-check41">6 - 7</label></li>
                 <li class="checkbox"><input type="checkbox" id="film-check42" value="4" data-id="4"><label for="film-check42">8 - 9</label></li>

@@ -27,7 +27,13 @@
                             {{ content.randomData.categories|join(', ') }}, 
                         {% endif %}
                         {{ content.randomData.data.country }}, {{ content.randomData.data.duration }} мин.</p>
-                        <p class="film-desc"><b>Рейтинг Кинопоиска: </b>
+                        <p class="film-desc" #="film-rating_block">
+                            {% if not content.randomData.data.kp_id %}
+                            <b>Рейтинг Кинопоиска:</b>
+                            {% else %}
+                            <b>Рейтинг <a target="_blank" href="https://www.kinopoisk.ru/film/{{ content.randomData.data.kp_id }}/"> <img class="img_kp" src="/img/other/kp_small.jpg" alt="">инопоиска</a>: </b>
+                            {% endif %}
+
                         {% if content.randomData.data.rating == 0 %}           
                                 нет данных
                             {% else %}

@@ -512,6 +512,16 @@ main {
   line-height: 26px;
   text-align: justify;
 }
+.film-desc a {
+  text-decoration: underline;
+  color: black;
+}
+.film-desc .img_kp {
+  height: 20px;
+  position: relative;
+  top: 3px;
+  margin: 0 1px 0 0;
+}
 .film-rating_block {
   position: absolute;
   bottom: -20px;
@@ -1179,12 +1189,16 @@ label {
   padding: 0 0 10px 0;
   order: 1;
   text-decoration: underline;
-  font-size: 14px;
+  font-size: 16px;
   cursor: pointer;
+  line-height: 22px;
 }
 label:hover {
   color: #ccc;
   text-decoration: none;
+}
+#filtr-film-rating .checkbox {
+  width: 150px !important;
 }
 .off_block_off {
   display: none;
