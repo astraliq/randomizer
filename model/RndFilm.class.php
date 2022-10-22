@@ -207,6 +207,10 @@ class RndFilm extends Model
             $path = Config::get('path_public') . '/img/films/' . $film['main_img'];
             file_put_contents($path, file_get_contents($film['imgSrc']));
         }
+//        echo '<pre>';
+//        print_r($film);
+//        echo '</pre>';
+//        exit();
 
 
         $counter1 = 0;
@@ -256,7 +260,7 @@ class RndFilm extends Model
                 if ($film['duration'] !== '') {
                     $object['duration'] = $film['duration'];
                 }
-                if ($film['premier_date'] !== '') {
+                if ($film['premier_date'] !== '' && !is_null($film['premier_date'])) {
                     $object['premier_date'] = $film['premier_date'];
                 }
 
@@ -283,6 +287,32 @@ class RndFilm extends Model
             } else {
                 $result = false;
             }
+        } catch (Exception $e) {
+            $log = date('Y-m-d H:i:s') . ' Ошибка: ' . $e;
+            file_put_contents(Config::get('path_root_project') . '/parse_log.txt', $log . PHP_EOL, FILE_APPEND);
+            return false;
+        }
+
+        return true;
+    }
+
+    public function updatePersonsFilm($film)
+    {
+
+//        echo '<pre>';
+//        print_r($film);
+//        echo '</pre>';
+//        exit();
+
+        try {
+            $object = [
+                'actors' => implode(', ', $film['actors']),
+                'director' => implode(', ', $film['director']),
+                'kp_id' => $film['kp_id'],
+            ];
+
+            $result = $this->dataBase->uniUpdate($this->filmsTable, $object, ['kp_id' => $film['kp_id']]);
+
         } catch (Exception $e) {
             $log = date('Y-m-d H:i:s') . ' Ошибка: ' . $e;
             file_put_contents(Config::get('path_root_project') . '/parse_log.txt', $log . PHP_EOL, FILE_APPEND);

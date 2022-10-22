@@ -394,7 +394,11 @@ class Films {
 					this.film.actors = this.film.actors ? this.film.actors : 'нет данных';
 					this.film.director = this.film.director ? this.film.director : 'нет данных';
 					this.film.rating = this.film.rating > 0 ? this.film.rating : 'нет данных';
-					this.film.info = [this.film.year,...film_cats.splice(0, 4),this.film.country,this.film.duration];
+					this.film.info = [this.film.year,...film_cats.splice(0, 4),this.film.country];
+					this.film.durationInfo = this.film.duration ? this.film.duration + ' мин.' : '';
+					if (this.film.durationInfo !== '')  {
+						this.film.info.push(this.film.durationInfo);
+					}
 					this._render(this.film);
 					this.otherCat.render(data.otherCat);
 					this._updateLinkFilm();
@@ -418,7 +422,7 @@ class Films {
 	_render(film) {
 		let kp_link;
 		if (film.kp_id) {
-			kp_link = `<p class="film-desc"><b>Рейтинг <a target="_blank" href="https://www.kinopoisk.ru/film/${film.kp_id}/"> <img class="img_kp" src="/img/other/kp_small.jpg" alt="">инопоиска</a>: </b>${film.rating}</p>`;
+			kp_link = `<p class="film-desc"><b>Рейтинг <a target="_blank" href="https://www.kinopoisk.ru/film/${film.kp_id}/"> <img height="20" class="img_kp" src="/img/other/kp_small.jpg" alt="">инопоиска</a>: </b>${film.rating}</p>`;
 		} else {
 			kp_link = `<p class="film-desc"><b>Рейтинг Кинопоиска: </b>${film.rating}</p>`;
 		}
@@ -442,7 +446,7 @@ class Films {
                         <p class="main-data-title">
 							<span class="left-aquo">«${film.title_ru}»</span>
 						</p>
-                        <p class="film-info">${film.info.join(', ')} мин.</p>
+                        <p class="film-info">${film.info.join(', ')}</p>
 						${kp_link}
                         <p class="film-desc">${film.description_ru}</p>
                         <p class="film-desc"><b>В главных ролях:</b> ${film.actors}</p>
