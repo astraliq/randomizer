@@ -22,11 +22,19 @@
                         <p class="main-data-title">
 							<span class="left-aquo">«{{ content.randomData.data.title_ru }}»</span>
 						</p>
-                        <p class="film-info">{{ content.randomData.data.year }}, 
-                        {%if content.randomData.categories %}           
-                            {{ content.randomData.categories|join(', ') }}, 
-                        {% endif %}
-                        {{ content.randomData.data.country }},
+                        <p class="film-info">
+                            {%if content.randomData.data.year %}
+                            {{ content.randomData.data.year }},
+                            {% endif %}
+
+                            {%if content.randomData.categories %}
+                                {{ content.randomData.categories|join(', ') }},
+                            {% endif %}
+
+                            {% if content.randomData.data.country %}
+                            {{ content.randomData.data.country }},
+                            {% endif %}
+
                             {% if content.randomData.data.duration %}
                             {{ content.randomData.data.duration }} мин.</p>
                             {% endif %}

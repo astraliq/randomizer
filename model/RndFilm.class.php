@@ -88,7 +88,6 @@ class RndFilm extends Model
         } else {
             $randomFilm = null;
         }
-
         return $randomFilm;
     }
 

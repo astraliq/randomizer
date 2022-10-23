@@ -832,7 +832,6 @@ main {
 }
 .button-send {
   margin: 10px 0 0 0;
-  padding: 10px 20px;
   background-color: #ebbd2f;
   color: #000;
   width: 160px;
@@ -883,6 +882,21 @@ main {
 .button-send-big:hover {
   cursor: pointer;
   border-radius: 20px;
+}
+#filtr_btns {
+  display: flex;
+  justify-content: space-around;
+}
+#filtr_btns .button-send {
+  height: 45px;
+}
+#filtr_btns .button-send:active {
+  background-color: #b88400;
+}
+#filtr_btns .button-reset {
+  background-color: goldenrod;
+  font-size: 15px;
+  width: 150px;
 }
 #quote-filter .button-send {
   width: 180px;
@@ -971,6 +985,7 @@ ul {
   margin: 0 15px 3px 0;
   width: 120px;
   font-size: 16px;
+  flex-basis: 25%;
 }
 .checkbox input[type=checkbox] {
   display: none;
@@ -994,7 +1009,7 @@ ul {
   width: 14px;
   outline: 1px solid #939598;
   position: absolute;
-  top: 7px;
+  top: 4px;
   left: 0;
 }
 .filtr-title {
@@ -1617,7 +1632,7 @@ label:hover {
   color: #ccc;
   text-decoration: none;
 }
-@media only screen and (min-width: 951px) and (max-width: 1215px) {
+@media only screen and (max-width: 1215px) {
   .see-now-main-data:nth-last-child(2) {
     display: none;
   }
@@ -1798,7 +1813,7 @@ label:hover {
   .button-send {
     width: 300px;
     height: 60px;
-    font-size: 30px;
+    font-size: 27px;
   }
   .button-send-2 {
     width: 300px;
@@ -1973,6 +1988,7 @@ label:hover {
   .modalDialog label:after {
     width: 30px;
     height: 30px;
+    top: -3px;
   }
   .modalDialog input[type=checkbox]:checked + label:after {
     width: 30px;
@@ -1980,7 +1996,6 @@ label:hover {
     box-sizing: border-box;
   }
   .modalDialog .checkbox {
-    width: 25%;
     padding-left: 50px;
     margin: 0 15px 15px 0;
   }
@@ -2063,5 +2078,15 @@ label:hover {
   }
   .end_stub_head_text {
     font-size: 35px;
+  }
+  #filtr-film-rating .checkbox {
+    width: 215px !important;
+  }
+  #filtr_btns .button-send {
+    height: 80px;
+  }
+  #filtr_btns .button-reset {
+    font-size: 27px;
+    width: 200px;
   }
 }

@@ -362,6 +362,10 @@ class Films {
 		this.filter.closeFilmFilter();
 		this.getRndFilm();
 	}
+
+	setDefaultFilters() {
+		this.filter.setDefaultAll();
+	}
 	
     getRndFilm() {
 		this.years = this.filter.years;
@@ -394,11 +398,22 @@ class Films {
 					this.film.actors = this.film.actors ? this.film.actors : 'нет данных';
 					this.film.director = this.film.director ? this.film.director : 'нет данных';
 					this.film.rating = this.film.rating > 0 ? this.film.rating : 'нет данных';
-					this.film.info = [this.film.year,...film_cats.splice(0, 4),this.film.country];
+					// this.film.info = [this.film.year,...film_cats.splice(0, 4)];
+					this.film.info = [];
+					if (this.film.year !== '' && this.film.year)  {
+						this.film.info.push(this.film.year);
+					}
+					if (data.categories.length)  {
+						this.film.info.push(...film_cats.splice(0, 4));
+					}
+					if (this.film.country !== '' && this.film.country)  {
+						this.film.info.push(this.film.country);
+					}
 					this.film.durationInfo = this.film.duration ? this.film.duration + ' мин.' : '';
 					if (this.film.durationInfo !== '')  {
 						this.film.info.push(this.film.durationInfo);
 					}
+					console.log(this.film.info);
 					this._render(this.film);
 					this.otherCat.render(data.otherCat);
 					this._updateLinkFilm();

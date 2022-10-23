@@ -49,13 +49,16 @@
             <p class="filtr-title">Рейтинг кинопоиска</p>
             <ul id="filtr-film-rating">
                 <li class="checkbox"><input type="checkbox" id="film-check40" value="0" data-id="0"><label for="film-check40">меньше 5</label></li>
-                <li class="checkbox"><input type="checkbox" id="film-check41" value="2" data-id="2"><label for="film-check41">6 - 7</label></li>
-                <li class="checkbox"><input type="checkbox" id="film-check42" value="4" data-id="4"><label for="film-check42">8 - 9</label></li>
-                <li class="checkbox"><input type="checkbox" id="film-check43" value="1" data-id="1"><label for="film-check43">5 - 6</label></li>
-                <li class="checkbox"><input type="checkbox" id="film-check44" value="3" data-id="3"><label for="film-check44">7 - 8</label></li>
-                <li class="checkbox"><input type="checkbox" id="film-check45" value="5" data-id="5"><label for="film-check45">9 - 10</label></li>
+                <li class="checkbox"><input type="checkbox" id="film-check41" value="2" data-id="2"><label for="film-check41">6 &#8211; 7</label></li>
+                <li class="checkbox"><input type="checkbox" id="film-check42" value="4" data-id="4"><label for="film-check42">8 &#8211; 9</label></li>
+                <li class="checkbox"><input type="checkbox" id="film-check43" value="1" data-id="1"><label for="film-check43">5 &#8211; 6</label></li>
+                <li class="checkbox"><input type="checkbox" id="film-check44" value="3" data-id="3"><label for="film-check44">7 &#8211; 8</label></li>
+                <li class="checkbox"><input type="checkbox" id="film-check45" value="5" data-id="5"><label for="film-check45">9 &#8211; 10</label></li>
             </ul>
         </div>
-        <button class="button-send" id="button-filter-film" onclick="film.setFilters()">Найти фильм</button>
+        <div id="filtr_btns">
+            <button class="button-send" id="button-filter-film" onclick="film.setFilters()">Найти фильм</button>
+            <button class="button-send button-reset" id="button-filter-film-reset" onclick="film.setDefaultFilters()">Сбросить настройки</button>
+        </div>
     </div>
 </div>
