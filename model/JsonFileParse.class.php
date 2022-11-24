@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 class JsonFileParse extends Model {
-	public $table_main = 'words';
+	public $table_main = 'numbers';
 	public $table_first = '';
 	public $table_second = '';
 
@@ -32,7 +32,7 @@ class JsonFileParse extends Model {
 		$columns = ['number','info'];
 		$object = array();
 		foreach ($arr as $element => $value) {
-			$object[] = [$element['language'],$element['word'],$element['meaning']];
+			$object[] = [$element,$value];
 			
 		};
 		echo '<pre>'; 

@@ -16,9 +16,14 @@
 			$dsn = Config::get('db_driver') . ':host='. Config::get('db_host') . ';dbname=' . Config::get('db_base');
 			$user = Config::get('db_user');
 			$pass = Config::get('db_pass');
-			$this->dataBase = new PDO($dsn, $user, $pass);
-			$this->dataBase->exec('SET NAMES UTF8');
-			$this->dataBase->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+			try {
+				$this->dataBase = new PDO($dsn, $user, $pass);
+				$this->dataBase->exec('SET NAMES UTF8');
+				$this->dataBase->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+			} catch (PDOException $e) {
+			    echo 'Ошибка: ' . $e->getMessage();
+			    exit();
+			}
 		}
 
 		/*
@@ -28,9 +33,17 @@
 	    private function __wakeup() {}
 	    private function __clone() {}
 
-		public function execQuery($sql,$args) {
+        /**
+         * @throws Exception
+         */
+        public function execQuery($sql, $args) {
 			$stmt = $this->dataBase->prepare($sql);
 			$stmt->execute($args);
+			if ($stmt->errorCode() != PDO::ERR_NONE) {
+                $info = $stmt->errorInfo();
+                throw new Exception($info[2]);
+//                exit($info[2]);
+            }
 			return $stmt;
 		}
 
@@ -75,6 +88,28 @@
 				return self::getRow($query, $whereObj);
 			} else {
 				$query = "SELECT * FROM `$table`";
+
+				return self::getRows($query,null);
+			};
+		}
+
+		public function uniSelectUnique($table, $columns, $whereObj) {
+			if ($whereObj) {
+				$sets = array();
+				foreach ($whereObj as $key => $value) {
+					$sets[] = "`$key` = :$key";
+					if ($value === NULL) {
+						$whereObj[$key] = 'NULL';
+					}
+				};
+				$sets_s = implode(' AND ', $sets);
+				$columns_s = implode('`, `', $columns);
+
+				$query = "SELECT DISTINCT `$columns_s` FROM `$table` WHERE $sets_s";
+
+				return self::getRows($query, $whereObj);
+			} else {
+				$query = "SELECT DISTINCT `$columns_s` FROM `$table`";
 
 				return self::getRows($query,null);
 			};
@@ -200,7 +235,7 @@
 			foreach ($object as $key => $value) {
 				$sets[] = "`$key` = :$key";
 				if ($value === NULL) {
-					$object[$key]='NULL';
+					$object[$key]= PDO::PARAM_NULL;
 				}
 			};
 			 
@@ -211,12 +246,13 @@
 			foreach ($whereObj as $key => $value) {
 				$wheres[] = "`$key` = :$key";
 				if ($value === NULL) {
-					$whereObj[$key] = 'NULL';
+					$whereObj[$key] = PDO::PARAM_NULL;
 				}
 			};
 			$wheres_s = implode(' AND ', $wheres);
 
 			$query = "UPDATE `$table` SET $sets_s WHERE $wheres_s";
+
 			$superObject = array_merge($object, $whereObj);
 			return self::update($query, $superObject);
 		}

@@ -45,8 +45,8 @@ class ApiMethod {
     }
 
 	//Функция вывода ошибки
-	private static function error($error_text) {
-		// header('Content-Type: application/json; charset=utf-8');
+	private static function error($error_text, $code = 404) {
+		http_response_code($code);
 		echo json_encode([
 			'error' => true,
 			'error_text' => $error_text,
@@ -58,7 +58,7 @@ class ApiMethod {
 
 	//Функция успешного ответа
 	private static function success($data = true) {
-		// header('Content-Type: application/json; charset=utf-8');
+		header('Content-Type: application/json; charset=utf-8');
 		echo json_encode($data, JSON_UNESCAPED_UNICODE);
 		exit();
 
@@ -145,14 +145,16 @@ class ApiMethod {
 		$years = $_POST['postData']['years'] ?? [0];
 		$countries = $_POST['postData']['countries'] ?? [0];
 		$categories = $_POST['postData']['categories'] ?? [0];
-		$film = $this->rndFilm->getRandomFilm($years, $categories, $countries);
-		$categories = $this->rndFilm->getFilmCategories($film['id']);
+		$rating = $_POST['postData']['rating'] ?? [];
+
+		$film = $this->rndFilm->getRandomFilm($years, $categories, $countries, $rating);
+        if ($film['id']) {
+            $categories = $this->rndFilm->getFilmCategories($film['id']);
+        }
 		$currentCategory = 'Фильм';
 		$otherCat = $this->randomType->getRndBrowseNowCat([$currentCategory]);
 		$otherCatData = $this->randomType->categories[$otherCat];
 
-		// print_r($_POST['postData']);
-		// exit();
 		if ($film && $otherCat) {
 			$data['rnd'] = $film;
 			$data['categories'] = $categories;
@@ -162,10 +164,14 @@ class ApiMethod {
 				'name' => $otherCat,
 			];
 			$data['result'] = "OK";
+
+			$_SESSION['films'][] = $film['id'];
 			
 			$this->success($data);
 		} else {
-			$this->error('Ошибка чтения из БД');
+			if (is_null($film)) {
+				$this->error('Ошибка чтения из БД', 404);
+			}
 		}
 	}
 
@@ -191,17 +197,31 @@ class ApiMethod {
 			$data['result'] = "OK";
 			$this->success($data);
 		} else {
-			$this->error('Ошибка чтения из БД');
+			$this->error('Ошибка чтения из БД',404);
 		}
 	}
 
 	public function getRndCongratulate() {
-		$who = $_POST['postData']['who'] ?? '';
-		$theme = $_POST['postData']['theme'] ?? '';
-		$alreadyViewedIds = $_POST['postData']['alreadyViewedIds'] ?? '';
-		$congr = $this->rndCongratulate->getRandomCongratulate($who, $theme);
+		$themeId = $_POST['postData']['themeId'] ?? '';
+		$whoId = $_POST['postData']['whoId'] ?? '';
+		$typeId = $_POST['postData']['typeId'] ?? '';
+		$congr = $this->rndCongratulate->getRandomCongratulate($themeId, $whoId, $typeId);
 		if ($congr) {
 			$data['rnd'] = $congr;
+			$data['result'] = "OK";
+			$this->success($data);
+		} else {
+			$this->error('Ошибка чтения из БД');
+		}
+	}
+
+	public function getCongrFilters() {
+		$themeId = $_POST['postData']['themeId'] ?? '';
+		$whoId = $_POST['postData']['whoId'] ?? '';
+		$typeId = $_POST['postData']['typeId'] ?? '';
+		$filter = $this->rndCongratulate->getFIlters($themeId, $whoId, $typeId);
+		if ($filter) {
+			$data['filter'] = $filter;
 			$data['result'] = "OK";
 			$this->success($data);
 		} else {
@@ -251,7 +271,7 @@ class ApiMethod {
 			];
 			$this->success($data);
 		} else {
-			$this->error('Ошибка чтения из БД');
+			$this->error('Ошибка чтения из БД',200);
 		}
 	}
 
@@ -263,7 +283,7 @@ class ApiMethod {
         $browseSecond = $this->randomType->getRndBrowseNowCat([$catTitle, $browseFirst]);
         $browseThird = $this->randomType->getRndBrowseNowCat([$catTitle, $browseFirst, $browseSecond]);
         $browseFourth = $this->randomType->getRndBrowseNowCat([$catTitle, $browseFirst, $browseSecond, $browseThird]);
-        $browseNowData = $this->randomType->getBrowseNowData([$browseFirst, $browseSecond, $browseThird, $browseThird]);
+        $browseNowData = $this->randomType->getBrowseNowData([$browseFirst, $browseSecond, $browseThird, $browseFourth]);
 		if ($browseThird) {
 			$data['browseFirst'] = $browseFirst;
 			$data['browseSecond'] = $browseSecond;
@@ -308,6 +328,77 @@ class ApiMethod {
 		}
 	}
 
+	public function addParserDataPozdravok() {
+		
+		$congrs = $_POST['postData']['congrs'] ?? '';
+		$type = $_POST['postData']['type'] ?? '';
+		$who = $_POST['postData']['who'] ?? '';
+		$themeId = 6;
+        $res = $this->rndCongratulate->addCongratulates($congrs, $type, $who, $themeId);
+		if ($res) {
+			$data['result'] = "OK";
+			$this->success($data);
+		} else {
+			$this->error('Ошибка записи в БД',200);
+		}
+	}
+	public function addParserDataPozdravok2() {
+		
+		$links = $_POST['postData']['typesLinks'] ?? '';
+		$notes = $_POST['postData']['notes'] ?? '';
+		$who = $_POST['postData']['who'] ?? '';
+		// $whoId = 20;
+		// $themeId = 2;
+        $res = $this->rndCongratulate->addLinks($links, $notes, $who);
+		if ($res) {
+			$data['result'] = "OK";
+			$this->success($data);
+		} else {
+			$this->error('Ошибка записи в БД',200);
+		}
+	}
+
+	public function addParserDataSocratify() {
+		
+		$authors = $_POST['postData']['authors'] ?? '';
+
+        $res = $this->rndQuote->addAuthor($authors);
+		if ($res) {
+			$data['result'] = "OK";
+			$this->success($data);
+		} else {
+			$this->error('Ошибка записи в БД',200);
+		}
+	}
+
+	public function addParserQuoteSocratify() {
+		
+		$author = $_POST['postData']['author'] ?? '';
+		$quotes = $_POST['postData']['quotes'] ?? '';
+
+        $res = $this->rndQuote->addQuotes($author, $quotes);
+		if ($res) {
+			$data['result'] = "OK";
+			$this->success($data);
+		} else {
+			$this->error('Ошибка записи в БД',200);
+		}
+	}
+
+	public function addParserNumbers() {
+		
+		$numbers = $_POST['postData']['numbers'] ?? '';
+
+        $res = $this->rndNumber->addNumbers($numbers);
+		if ($res) {
+			$data['result'] = "OK";
+			$this->success($data);
+		} else {
+			$this->error('Ошибка записи в БД',200);
+		}
+	}
+
+
 	public function addFilmsIds() {
 		
 		$filmsIds = $_POST['postData']['film'] ?? '';
@@ -318,6 +409,34 @@ class ApiMethod {
 			$this->success($data);
 		} else {
 			$this->error('Ошибка записи в БД');
+		}
+	}
+
+	public function updateFilmId() {
+
+        $film = $_POST['postData']['film'] ?? '';
+
+		$add = $this->rndFilm->updateFilm($film);
+		if ($add) {
+			$data['result'] = "OK";
+			$this->success($data);
+		} else {
+			$this->error('Ошибка записи в БД');
+		}
+	}
+
+	public function getNextFilmId() {
+
+        $prevFilmId = $_POST['postData']['curFilmId'] ?? '';
+
+		$get = $this->rndFilm->getNextFilmId($prevFilmId);
+		if ($get) {
+			$data['result'] = "OK";
+			$data['next_kp_id'] = $get['kp_id'];
+			$data['next_id'] = $get['id'];
+			$this->success($data);
+		} else {
+			$this->error('Ошибка чтения БД');
 		}
 	}
 
@@ -350,6 +469,20 @@ class ApiMethod {
 			$this->success($data);
 		} else {
 			$this->error('Ошибка записи в БД');
+		}
+	}
+
+	public function vkAuthSet() {
+		$vkAuth = $_POST['postData']['vkAuth'] ?? '';
+		if ($vkAuth === 1) {
+			try {
+				$_SESSION['vkAuth'] = 1;
+				$data['result'] = "OK";
+				$this->success($data);
+			} catch (Exception $e) {
+				$this->error('Ошибка сесии');
+			}
+			
 		}
 	}
 

@@ -12,12 +12,22 @@ class App {
 			$this->api($_POST);		
 		}
 		if (isset($_SERVER) && isset($_GET)) {
-			$this->web(isset($_GET['path']) ? $_GET['path'] : '');		
+			$this->web($_GET['path'] ?? '');
 		}
 	}
 	
 	//http://site.ru/index.php?path=news/edit/5
+
+	/**
+	 * @throws Throwable
+	 * @throws \Twig\Error\SyntaxError
+	 * @throws \Twig\Error\RuntimeError
+	 * @throws \Twig\Error\LoaderError
+	 */
 	protected function web($url) {
+		$newGen = new SomeGenerator();
+		$_SESSION['h'] = $newGen->genHash(strtotime('now'));
+
 		// if (empty($_SESSION['referrer'])) {
 		//     $_SESSION['referrer'] = $_SERVER['REQUEST_URI'];
 		//     $_SESSION['request'] = $_SERVER['REQUEST_URI'];
@@ -32,6 +42,7 @@ class App {
 
 		/*парсинг строки*/
 		$url= explode("/",$url);
+
 		if (!empty($url[0])) {
 			$_GET['page']=$url[0];//часть имени контроллера
 			if (isset($url[1])) {
@@ -46,14 +57,16 @@ class App {
 			}				
 		} else {
 			$_GET['page'] = 'Index';	
-		}	
+		}
+
+		$_SESSION['vk_token'] = $_SESSION['vk_token'] ?? $_SESSION['vk_token'];
 		//$_GET['page']='Index';	
 		/*парсинг строки*/	
 		/*поиск контролера*/
 		if (isset($_GET['page'])) {
 			$controllerName = ucfirst($_GET['page'])."Controller";
 		//	echo ($controllerName)."<br>";
-			$methodName = isset($_GET['action'])?$_GET['action']:'index';
+			$methodName = $_GET['action'] ?? 'index';
 		//	echo ($methodName)."<br>";
 			$controller = new $controllerName(); //создаем контролер класса с указанным именем
 		/*поиск контролера*/	
@@ -69,13 +82,13 @@ class App {
 					'user'=> $_SESSION['user']['login'],
 			];
 		/*формирование контроллером данных для шаблона*/		
-		/*вытаскинвание из контроллера название шаблона и подгрузка twig*/	
+		/*вытаскивание из контроллера название шаблона и подгрузка twig*/
 			$view = $controller->view.'.tpl';
 			$loader = new \Twig\Loader\FilesystemLoader('../templates');
 			$twig = new \Twig\Environment($loader);
 			$template = $twig->loadtemplate($view);
 			echo $template->render($data);	
-		/*вытаскинвание из контроллера название шаблона и подгрузка twig c отрисовкой страницы с посланными данными*/	
+		/*вытаскивание из контроллера название шаблона и подгрузка twig c отрисовкой страницы с посланными данными*/
 		}
 
 	}	

@@ -1,7 +1,6 @@
 "use strict"
 
 let mainBlock = document.querySelector('#main_rnd_block');
-//let quoteLink = document.querySelector('.data-title-link');
 let quoteLinkMain = document.querySelector('.quote_main_lnk');
 
 
@@ -38,7 +37,6 @@ class Quote {
                 }
             },
             success: function (data) {
-                data = JSON.parse(data);
                 if (data.result !== "OK") {
                     console.log('ERROR_GET_QUOTE');
                 }
@@ -64,66 +62,50 @@ class Quote {
         //по идее должен отправять на сервер новый запрос но уже с фильтрами и рендерить на их основании новую цитату
 
         this.init();
-
-        for (let i = 0; i < this.filterQuote.quotecheckboxCat.length; i++) {
-            if (this.filterQuote.quotecheckboxCat[i].checked == true) {
-                this.filterQuote.quotecheckboxCat[i].checked = false
-            }
-        }
-
-        for (let i = 0; i < this.filterQuote.quotecheckboxAutor.length; i++) {
-            if (this.filterQuote.quotecheckboxAutor[i].checked == true) {
-                this.filterQuote.quotecheckboxAutor[i].checked = false
-            }
-        }
     }
 
     //идет по коллекции чекбоксов и если они чекнуты пушит из дата атрибута айди
     setSelectedFilters() {
+		this.filterQuote.filters.categories = [];
         //идет по коллекции чекбоксов по категориям
         for (let i = 0; i < this.filterQuote.quotecheckboxCat.length; i++) {
             if (this.filterQuote.quotecheckboxCat[i].checked == true) {
-                this.filterQuote.filters.categories = [...this.filterQuote.filters.categories, this.filterQuote.quotecheckboxCat[i].dataset.id]
+                this.filterQuote.filters.categories.push(this.filterQuote.quotecheckboxCat[i].dataset.id);
             }
         }
-
+		this.filterQuote.filters.authors = [];
         //идет по коллекции чекбоксов по авторам
         for (let i = 0; i < this.filterQuote.quotecheckboxAutor.length; i++) {
             if (this.filterQuote.quotecheckboxAutor[i].checked == true) {
-                this.filterQuote.filters.authors = [...this.filterQuote.filters.authors, this.filterQuote.quotecheckboxAutor[i].dataset.id]
-
+                this.filterQuote.filters.authors.push(this.filterQuote.quotecheckboxAutor[i].dataset.id);
             }
         }
-
-        console.log(this.filterQuote.filters);
+//        console.log(this.filterQuote.filters);
         //эта функция формирует объект из фильтров
     }
 
 
     init() {
+		if (!reqLimit.checkReqLimits()) {
+			return;
+		}
+		
         this.getRndQuote()
             .then(data => {
-                data = JSON.parse(data);
                 fakeAPI.id = data.rnd.id;
                 fakeAPI.text = data.rnd.text;
                 fakeAPI.author = data.rnd.author;
                 fakeAPI.authorInfo = data.rnd.authorInfo;
                 fakeAPI.catgegories = data.rnd.categories;
                 fakeAPI.picture = data.rnd.picture;
-                fakeAPI.picture = fakeAPI.picture === null ? 'img/quoters/stub.jpg' : fakeAPI.picture;
+                fakeAPI.picture = fakeAPI.picture === null ? 'person-error.png' : fakeAPI.picture;
                 fakeAPI.author = (fakeAPI.author === null) ? "" : fakeAPI.author;
                 fakeAPI.authorInfo = (fakeAPI.authorInfo === null) ? "" : fakeAPI.authorInfo;
                 this._render(fakeAPI);
                 this._getNextQuote();
                 this._putAlreadyViewedIds(fakeAPI);
             });
-
-        // //после отправки на сервер сформированный массив с фильтрами его нужно отчистить
-
-        for (let key in this.filterQuote.filters) {
-            this.filterQuote.filters[key] = []
-        }
-        console.log(this.filterQuote.filters);
+ 
     }
 
     _render(quote) {
@@ -135,30 +117,29 @@ class Quote {
 				Cлучайность из категории:<span class="cat-sel">Цитата</span>
 			</div>
 			<div>
-				<span class="cat-settings quote_filter_open">Настроить фильтр</span>
+				<span class="cat-settings" id="quote_filter_open">Настроить фильтр</span>
 				<span class="next-random">Следующая цитата</span>
 			</div>
 		</div>
 		<div class="main-block-data">
 			<div class="main-block-data-primary">
 				<div class="main-block-data-pic">
-						<img src="${quote.picture}" width="276" alt="${quote.author}" title="${quote.author}">
+						<img class="quote-pic" src="" width="276" alt="${quote.author}" title="${quote.author}" data-c="q" data-i="${quote.picture}">
 				</div>
 				<div class="main-block-data-text">
-					<p class="main-data-title"><span class="left-aquo">&laquo;${quote.text}&raquo;</span></p>
+					<p class="main-data-title main-data-title-quote">${quote.text}</p>
 					<p class="qoutes-title">${quote.author}</p>
 					<p class="poet-desc">${quote.authorInfo}</p>
 				</div>
 			</div>
 		</div>
-		<div class="other-cat">Кроме цитат наш генератор выдаёт варианты из <a href="#" class="link-in-text">других категорий</a>, например, &laquo;<a href="#" class="link-in-text" onclick="film.getRndFilm()">Фильмы</a>&raquo;
+		<div class="other-cat">Кроме цитат наш генератор выдаёт варианты из <a class="link-in-text">других категорий</a>, например, &laquo;<a class="link-in-text" href="/film">Фильм</a>&raquo;
 		</div>
         `);
-
-        let quote_filter_open = document.querySelector('.quote_filter_open');
-
-        this.filterQuote.setFilersCallBack(quote_filter_open);
-
+		//  <span class="left-aquo">&laquo;   &raquo;</span>
+		newSrc.changeSrc(document.querySelector('.quote-pic'));
+      	this.filterQuote.updateLinkQuoteFilterOpen();
+        this.filterQuote.updateLinkQuoteFilterClose();
     }
 
 }
@@ -196,7 +177,8 @@ class FilterQuote {
         modalWindow.css('left', winW / 2 - modalWindow.width() / 2);
         //эффект перехода
         modalWindow.fadeIn(1);
-
+		
+		// закрытие окна при клике вне окна
         $(document).mouseup(function (e) { // событие клика по веб-документу
             if (!modalWindow.is(e.target) && modalWindow.has(e.target).length === 0) { // если клик был не по нашему блоку и не по его дочерним элементам 
                 modalWindow.fadeOut(1); // скрываем его
@@ -205,7 +187,7 @@ class FilterQuote {
     }
 
     updateLinkQuoteFilterOpen() {
-        $('.main-block-menu').on('click', '#quote-filter-close', (e) => { this.openQuoteFilter(e) });
+        $('.main-block-menu').on('click', '#quote_filter_open', (e) => { this.openQuoteFilter(e) });
     }
     // обновление события закрытия окна на крестик
     updateLinkQuoteFilterClose() {
@@ -228,5 +210,4 @@ class FilterQuote {
 
 let filterQuote = new FilterQuote();
 let quote = new Quote(filterQuote);
-//quoteLink.addEventListener('click', e => { quote.init() });
-quoteLinkMain.addEventListener('click', e => { quote.init() });
+//quoteLinkMain.addEventListener('click', e => { quote.init() });

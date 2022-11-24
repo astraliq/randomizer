@@ -17,7 +17,6 @@ class Numbers {
             data: data,
             success: function (data) {
                 //data приходят те данные, который прислал на сервер
-                data = JSON.parse(data);
             }
         })
 	}
@@ -59,8 +58,7 @@ class Numbers {
 		};
 		this._getJson(`/index.php`, sendData)
 			.then(data => {
-				data = JSON.parse(data);
-				if (data.result === "OK") {
+				if (data.result === 'OK') {
 					this._renderNumber(answer[0], data.info.info);
 					this.otherCat.render(data.otherCat);
 				} else {
@@ -75,6 +73,10 @@ class Numbers {
 			<span class="spravka">Справка:</span><br>
             <p class="data-info" id="fact"><span class="sel-numb">${number}</span> &#151; ${info}</p>
 		`);
+		if (info.length > 250) {
+			document.querySelector('.data-info').style.fontSize = '15px';
+			document.querySelector('.sel-numb').style.fontSize = '20px';
+		}
     }
 	
 	render() {	
@@ -114,10 +116,10 @@ class Numbers {
     }
 };
 let number = new Numbers();
-numberMainLink.addEventListener('click', e => { 
-	number.render();
-	number.getRandomInt();
-});
+//numberMainLink.addEventListener('click', e => { 
+//	number.render();
+//	number.getRandomInt();
+//});
 if (nextNumber !== null) {
 	nextNumber.addEventListener('click', e => { number.getRandomInt() });
 }

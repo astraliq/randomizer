@@ -11,18 +11,18 @@ class Random extends Model {
 		'Фильм' => [
 			'tpl' => 'see_now_film.tpl',
 			'case' => 'фильмов',
-			'function' => 'film.getRndFilm()',
+			'function' => 'film',
 		],
 		'Цитата' => [
 			'tpl' => 'see_now_quote.tpl',
 			'case' => 'цитат',
-			'function' => 'quote.init()',
+			'function' => 'quote',
 		],
-		'Подарок' => [
-			'tpl' => 'see_now_gift.tpl',
-			'case' => 'подарков',
-			'function' => '',
-		],
+		// 'Подарок' => [
+		// 	'tpl' => 'see_now_gift.tpl',
+		// 	'case' => 'подарков',
+		// 	'function' => '',
+		// ],
 		'Произведение искусства' => [
 			'tpl' => 'see_now_artwork.tpl',
 			'case' => 'произведений искусств',
@@ -31,17 +31,17 @@ class Random extends Model {
 		'Интересное слово' => [
 			'tpl' => 'see_now_foreign_word.tpl',
 			'case' => 'интересных слов',
-			'function' => '',
+			'function' => 'word',
 		],
 		'Поздравление' => [
 			'tpl' => 'see_now_congratulate.tpl',
 			'case' => 'поздравлений',
-			'function' => "congratulate.runProgr()",
+			'function' => "congratulate",
 		],
 		'Число' => [
 			'tpl' => 'empty.tpl',
 			'case' => 'случайных чисел',
-			'function' => '',
+			'function' => 'number',
 		]
 	];
 
@@ -61,10 +61,16 @@ class Random extends Model {
 		    	$years = [
 			    		0 => [
 			    			'min' => 1900,
-				    		'max' => 2030,
+				    		'max' => 1950,
 				    	]
 			    ];
-		        $film = $this->film->getRandomFilm($years,[0],[0]);
+		    	$rating = [
+			    		0 => [
+			    			'min' => 0,
+				    		'max' => 10,
+				    	]
+			    ];
+		        $film = $this->film->getRandomFilm($years,[0],[0],$rating);
 		        $getCategories = $this->film->getFilmCategories($film['id']);
 		        $categories = [];
 		        $k = 0;
@@ -92,7 +98,7 @@ class Random extends Model {
 		        ];
 		        break;
 		    case "Поздравление":
-		        $result = $this->congratulate->getRandomCongratulate('','');
+		        $result = $this->congratulate->getRandomCongratulate(null,null,null);
 		        break;
 		}
 		// print_r($result);
@@ -104,7 +110,6 @@ class Random extends Model {
 		$categories = $this->dataBase->uniSelect($this->categoriesTable, []);
 		// $randomCategory = $categories[array_rand($categories, 1)];
 		$list = ['Фильм', 'Цитата', 'Поздравление', 'Число', 'Интересное слово'];
-		$list = ['Число'];
 		$randomCategory = $list[array_rand($list, 1)];
 		return $randomCategory;
 	}
@@ -176,7 +181,13 @@ class Random extends Model {
 		foreach ($usedCategories as $cat) {
 			switch ($cat) {
 				case 'Фильм':
-					$data['filmData'] = $this->film->getRandomFilm([0],[0],[0]);
+                    $rating = [
+                        0 => [
+                            'min' => 0,
+                            'max' => 10,
+                        ]
+                    ];
+					$data['filmData'] = $this->film->getRandomFilm([0],[0],[0],$rating);
 					$cats = $this->film->getFilmCategories($data['filmData']['id']);
 					$object = array();
 					foreach ($cats as $element) {
@@ -188,7 +199,7 @@ class Random extends Model {
 					$data['quoteData'] = $this->quote->getRandomQuote('');
 					break;
 				case 'Поздравление':
-					$data['congrData'] = $this->congratulate->getRandomCongratulate('','');
+					$data['congrData'] = $this->congratulate->getRandomCongratulate(null,null,null);
 					break;
 				case 'Интересное слово':
 					$data['wordData'] = $this->word->getRandomWord(['']);

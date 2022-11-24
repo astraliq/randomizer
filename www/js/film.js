@@ -6,11 +6,12 @@ let categoryName = $('.cat-sel');
 
 class FilmsFilter {
     constructor() {
-		this.maxCountFilters = 28; // максимальное количество фильтров + 1
+		this.maxCountFilters = 50; // максимальное количество фильтров + 1
 		this.idName = '#film-check';
 		this.years = [];
         this.countries = [];
         this.categories = [];
+        this.rating = [];
 		this.filters = {
 			'ids': [],
 			'value': [],
@@ -33,10 +34,11 @@ class FilmsFilter {
 		this.setDefCategories();
 		this.setDefYears();
 		this.setDefCountries();
+		this.setDefRating();
 	}
 	// установить начальное значения фильтров по категориям
 	setDefCategories() {
-		for (let i = 0; i < 12; i++) {
+		for (let i = 0; i < 19; i++) {
 			this._checkFilter(i, false);
 		}
 		this._checkFilter(0, true);
@@ -44,19 +46,26 @@ class FilmsFilter {
 	}
 	// установить начальное значения фильтров по годам
 	setDefYears() {
-		for (let i = 12; i < 20; i++) {
+		for (let i = 20; i < 29; i++) {
 			this._checkFilter(i, false);
 		}
-		this._checkFilter(12, true);
+		this._checkFilter(20, true);
 		this.years = [0];
 	}
 	// установить начальное значения фильтров по странам
 	setDefCountries() {
-		for (let i = 20; i < 28; i++) {
+		for (let i = 30; i < 39; i++) {
 			this._checkFilter(i, false);
 		}
-		this._checkFilter(20, true);
+		this._checkFilter(30, true);
 		this.countries = [0];
+	}
+	// выключить фильтр по рейнтингу
+	setDefRating() {
+		for (let i = 40; i < 49; i++) {
+			this._checkFilter(i, false);
+		}
+		this.rating = [];
 	}
 
 	// получить период лет в зависимости от data-id элемента
@@ -105,6 +114,12 @@ class FilmsFilter {
 					max: 1970
 				};
 			break;
+			case 8:
+				period = {
+					min: 2020,
+					max: 2022
+				};
+			break;
 			default:
 				period = {
 					min: 1900,
@@ -113,35 +128,93 @@ class FilmsFilter {
 		}
 		return period;
 	}
+
+	// получить интервал рейтинга в зависимости от data-id элемента
+	getRatingInt(dataId) {
+		let interval;
+		switch (dataId) {
+			case 0:
+				interval = {
+					min: 0,
+					max: 5
+				};
+			break;
+			case 1:
+				interval = {
+					min: 5,
+					max: 6
+				};
+			break;
+			case 2:
+				interval = {
+					min: 6,
+					max: 7
+				};
+			break;
+			case 3:
+				interval = {
+					min: 7,
+					max: 8
+				};
+			break;
+			case 4:
+				interval = {
+					min: 8,
+					max: 9
+				};
+			break;
+			case 5:
+				interval = {
+					min: 9,
+					max: 10
+				};
+			break;
+			default:
+				interval = {
+					min: 0,
+					max: 10
+				};
+		}
+		return interval;
+	}
 	// записать значения фильтров в свойства по видам с id номерами из базы
 	setSelectedFilters() {
 		this.years = [];
         this.countries = [];
         this.categories = [];
+        this.rating = [];
 		let counter = 0;
-		for (let i = 0; i < 12; i++) {
+		for (let i = 0; i < 19; i++) {
 			if (this.getFilterValue(i)) {
 				this.categories[counter] = this.filters.filterId[i];
 				counter++;
 			}
 		}
 		counter = 0;
-		for (let i = 12; i < 20; i++) {
+		for (let i = 20; i < 29; i++) {
 			if (this.getFilterValue(i)) {
 				this.years[counter] = this.getYearsPeriod(this.filters.filterId[i]);
 				counter++;
 			}
 		}
 		counter = 0;
-		for (let i = 20; i < 28; i++) {
+		for (let i = 30; i < 39; i++) {
 			if (this.getFilterValue(i)) {
 				this.countries[counter] = this.filters.filterId[i];
+				counter++;
+			}
+		}
+		counter = 0;
+		for (let i = 40; i < 50; i++) {
+			if (this.getFilterValue(i)) {
+				this.rating[counter] = this.getRatingInt(this.filters.filterId[i]);
 				counter++;
 			}
 		}
 //		console.log(this.categories);
 //		console.log(this.years);
 //		console.log(this.countries);
+// 		console.log(this.rating);
 	}
 	
 	// установить значение фильтра по id
@@ -181,7 +254,7 @@ class FilmsFilter {
 			this._checkFilter(elementId, false);
 		}
 	}
-	// установка фильтров и запись занчений в свойства
+	// установка фильтров и запись значений в свойства
 	_updateCheckboxes(event) {
 		let re = /film-check/gi;
 		let idNum = event.target.id.replace(re, '');
@@ -190,9 +263,9 @@ class FilmsFilter {
 		} else {
 			this._checkFilter(idNum, true);
 		}
-		this._clearIfSelectedBy(0, 12, idNum);
-		this._clearIfSelectedBy(12, 20, idNum);
-		this._clearIfSelectedBy(20, 28, idNum);
+		this._clearIfSelectedBy(0, 19, idNum);
+		this._clearIfSelectedBy(20, 29, idNum);
+		this._clearIfSelectedBy(30, 39, idNum);
 //		console.log(idNum);
 //		console.log(this.filters);
 	}
@@ -209,7 +282,8 @@ class FilmsFilter {
 		modalWindow.css('left', winW / 2 - modalWindow.width() / 2);
 		//эффект перехода
 		modalWindow.fadeIn(1);
-
+		
+		// закрытие окна при клике вне окна
 		$(document).mouseup(function (e) { // событие клика по веб-документу
 			if (!modalWindow.is(e.target) && modalWindow.has(e.target).length === 0) { // если клик был не по нашему блоку и не по его дочерним элементам 
 				modalWindow.fadeOut(1); // скрываем его
@@ -266,7 +340,6 @@ class Films {
             data: data,
             success: function (data) {
                 //data приходят те данные, который прислал на сервер
-                data = JSON.parse(data);
                 if (data.result !== "OK") {
                     console.log('ERROR_GET_DATA_');
                 }
@@ -287,45 +360,88 @@ class Films {
 	setFilters() {
 		this.filter.setSelectedFilters();
 		this.filter.closeFilmFilter();
-		
 		this.getRndFilm();
+	}
+
+	setDefaultFilters() {
+		this.filter.setDefaultAll();
 	}
 	
     getRndFilm() {
 		this.years = this.filter.years;
         this.countries = this.filter.countries;
         this.categories = this.filter.categories;
-		
+        this.rating = this.filter.rating;
+
 		let sendData = {
 			apiMethod: 'getRndFilm',
 			postData: {
 				years: this.years,
 				categories: this.categories,
-				countries: this.countries
+				countries: this.countries,
+				rating: this.rating
 			}
 		};
+		
+		if (!reqLimit.checkReqLimits()) {
+			return;
+		}
+		
 		this._getJson(`/index.php`, sendData)
 			.then(data => {
-				data = JSON.parse(data);
 				if (data.result === "OK") {
-					let film = data.rnd;
+					this.film = data.rnd;
 					let film_cats = data.categories.map(function(elem) {
 						return elem.categories;
 					});
-					film.main_img = film.main_img === null ? 'stub.jpg' : film.main_img;
-					this._render(film,film_cats);
+					this.film.main_img = this.film.main_img === null ? 'film-error.png' : this.film.main_img;
+					this.film.actors = this.film.actors ? this.film.actors : 'нет данных';
+					this.film.director = this.film.director ? this.film.director : 'нет данных';
+					this.film.rating = this.film.rating > 0 ? this.film.rating : 'нет данных';
+					// this.film.info = [this.film.year,...film_cats.splice(0, 4)];
+					this.film.info = [];
+					if (this.film.year !== '' && this.film.year)  {
+						this.film.info.push(this.film.year);
+					}
+					if (data.categories.length)  {
+						this.film.info.push(...film_cats.splice(0, 4));
+					}
+					if (this.film.country !== '' && this.film.country)  {
+						this.film.info.push(this.film.country);
+					}
+					this.film.durationInfo = this.film.duration ? this.film.duration + ' мин.' : '';
+					if (this.film.durationInfo !== '')  {
+						this.film.info.push(this.film.durationInfo);
+					}
+					console.log(this.film.info);
+					this._render(this.film);
 					this.otherCat.render(data.otherCat);
 					this._updateLinkFilm();
 					this._putAlreadyViewedIds(film);
 					this.filter.updateLinkFilmFilterOpen();
-					this.browseNow.getBrowseNowData('Фильм');
+//					this.browseNow.getBrowseNowData('Фильм');
 				} else {
 					console.log('ERROR_GET_FILM');
 				}
-			});
+			})
+			.catch(error => {
+//			console.log(this.film);
+				if (document.querySelector('.cat-sel').innerText !== 'Фильм') {
+					this._render(this.film);
+					this._updateLinkFilm();
+					this.filter.updateLinkFilmFilterOpen();
+				}
+			  });
     }
 	
-	_render(film,filmCategories) {	
+	_render(film) {
+		let kp_link;
+		if (film.kp_id) {
+			kp_link = `<p class="film-desc"><b>Рейтинг <a target="_blank" href="https://www.kinopoisk.ru/film/${film.kp_id}/"> <img height="20" class="img_kp" src="/img/other/kp_small.jpg" alt="К">инопоиска</a>: </b>${film.rating}</p>`;
+		} else {
+			kp_link = `<p class="film-desc"><b>Рейтинг Кинопоиска: </b>${film.rating}</p>`;
+		}
+		// console.log('запуск');
 		document.querySelector('.main-block').className = 'main-block main-color-1';
 		$('.main-block-menu').empty();
 		$('.main-block-menu').prepend(`
@@ -339,23 +455,40 @@ class Films {
 		$('.main-block-data').prepend(`
                 <div class="main-block-data-primary">
                     <div class="main-block-data-pic">
-                        <img src="img/films/${film.main_img}" width="276" alt="Фильм &laquo;${film.title_ru}&raquo;" title="${film.title_ru}">
+                        <img class="film-pic" src="" width="276" height="380" alt="Фильм &laquo;${film.title_ru}&raquo;" title="${film.title_ru}" data-c="m" data-i="${film.main_img}">
                     </div>
                     <div class="main-block-data-text">
                         <p class="main-data-title">
 							<span class="left-aquo">«${film.title_ru}»</span>
 						</p>
-                        <p class="film-info">${film.year}, ${filmCategories.splice(0, 3).join(', ')}, ${film.country}, ${film.duration} мин.</p>
+                        <p class="film-info">${film.info.join(', ')}</p>
+						${kp_link}
                         <p class="film-desc">${film.description_ru}</p>
                         <p class="film-desc"><b>В главных ролях:</b> ${film.actors}</p>
-                        <p class="film-desc"><b>Режиссёр:</b> ${film.genres}</p>
+                        <p class="film-desc"><b>Режиссёр:</b> ${film.director}</p>
                     </div>
                 </div>
 		`);
+		newSrc.changeSrc(document.querySelector('.film-pic'));
+		
+//		if (film.rating > 0) {
+//				document.querySelector('.main-block-data-pic').innerHTML += `
+//					<img class="film-rating_block" src="img/rate_block.png" width="100" alt="rating" title="${film.rating}">
+//					<span class="film-rating">${film.rating}</span>`;
+//			}
+//		let filmImg = document.querySelector('.film-pic');
+//		filmImg.onload = function() {
+//			if (film.rating > 0) {
+//				document.querySelector('.main-block-data-pic').innerHTML += `
+//					<img class="film-rating_block" src="img/rate_block.png" width="100" alt="rating" title="${film.rating}">
+//					<span class="film-rating">${film.rating}</span>`;
+//			}
+//		}
+		
     }
 };
 let film = new Films();
-mainFilmLink.addEventListener('click', e => { film.getRndFilm() });
+//mainFilmLink.addEventListener('click', e => { film.getRndFilm() });
 
 
 

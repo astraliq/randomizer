@@ -32,9 +32,15 @@ class RndQuote extends Model {
 		$sql = "SELECT q.`id`, `text`, `author_title` as author, `category_title` as categories, author.`authorInfo`, q.`img` as picture FROM `$this->quoteTable` as q LEFT JOIN `$this->quoteCategories` as cat ON q.`category_id` = cat.id LEFT JOIN `$this->quoteAuthors` as author ON q.`author_id` = author.id" . $where . $filterCat . $filterAuthors;
 
 		$quotes = $this->dataBase->getRows($sql, null);
-		$randomQuote = $quotes[array_rand($quotes, 1)];
-		$catId = $this->history->getCategoryId('Цитата');
-		$addToGenHistory = $this->history->addRandomToGeneralHistory($catId, $randomQuote['id']);
+
+		if ($quotes) {
+			$randomQuote = $quotes[array_rand($quotes, 1)];
+			$catId = $this->history->getCategoryId('Цитата');
+			$addToGenHistory = $this->history->addRandomToGeneralHistory($catId, $randomQuote['id']);
+		} else {
+			$randomQuote = null;
+		}
+		
 		return $randomQuote;
 	}
 
@@ -46,7 +52,39 @@ class RndQuote extends Model {
 		return $quote;
 	}
 
+	public function addAuthor($authors) {
+		$columns = ['author_title','href'];
 
+		foreach ($authors as $author) {
+			$object = [
+				'author_title' => $author['title'],
+				'href' => $author['href'],
+			];
+			$result = $this->dataBase->uniInsert($this->quoteAuthors, $object);
+		};
+		
+		return $result;
+
+	}
+
+	public function addQuotes($author, $quotes) {
+		$columns = ['text','author_id','href'];
+
+		$ifExist = $this->dataBase->uniSelect($this->quoteAuthors, ['author_title'=>$author]);
+		// print_r($ifExist);
+		// exit();
+		$object = array();
+		if ($ifExist) {
+			$authorID = $ifExist['id'];
+			foreach ($quotes as $quote) {
+				$object[] = [$quote['text'],$authorID,$quote['href']];
+			}
+			$result = $this->dataBase->uniInsertArray($this->quoteTable, $columns, $object);
+		};
+			
+		
+		return $result;
+
+	}
 }
 ?>
-

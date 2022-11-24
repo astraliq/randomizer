@@ -1,6 +1,6 @@
 <div id="quote-filter" class="modalDialog modalDialogQuot">
     <div>
-        <a href="#close" title="Close" class="close" id="quote-filter-close">X</a>
+        <a href="#close" title="Close" class="close" id="quote-filter-close">+</a>
         <div class="div-ul">
             <p class="quote-title">Автор</p>
                 <ul>
@@ -34,6 +34,6 @@
                     <li class="checkbox"><input type="checkbox" class="quotecheckboxCat" id="quote-check36" value="4" data-id="1"><label for="quote-check36">Из фильмов</label></li>
                 </ul>
         </div>
-        <button class="button-send" onclick="quote.setFilters()">Показать цитату</button>
+        <button class="button-send" id="button-filter-quote" onclick="quote.setFilters()">Показать цитату</button>
     </div>
 </div>

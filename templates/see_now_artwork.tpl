@@ -4,7 +4,7 @@
     </div>
     <div class="see-now-desc">
         <div class="see-now-img">
-            <img src="img/arts/img_art_001.png" width="100">
+            <img src="" width="100" data-c="a" data-i="img_art_001.png">
         </div>
         <div class="see-now-text">
             <p class="see-now-subtitle">Крик, Эдвард Мунк, 1893г.</p>

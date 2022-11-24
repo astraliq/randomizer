@@ -1,6 +1,6 @@
 <div id="film-filter" class="modalDialog">
     <div>
-        <a href="#close" title="Close" class="close" id="film-filter-close">X</a>
+        <a href="#close" title="Close" class="close" id="film-filter-close">+</a>
         <div class="div-ul">
             <p class="filtr-title">Жанры</p>
                 <ul>
@@ -21,29 +21,44 @@
         <div class="div-ul">
             <p class="filtr-title">Год создания</p>
                 <ul>
-                    <li class="checkbox"><input type="checkbox" id="film-check12" value="0" data-id="0"><label for="film-check12">Любой год</label></li>
-                    <li class="checkbox"><input type="checkbox" id="film-check13" value="1" data-id="1"><label for="film-check13">2015 &#151; 2020</label></li>
-                    <li class="checkbox"><input type="checkbox" id="film-check14" value="2" data-id="2"><label for="film-check14">2010 &#151; 2015</label></li>
-                    <li class="checkbox"><input type="checkbox" id="film-check15" value="3" data-id="3"><label for="film-check15">2000 &#151; 2010</label></li>
-                    <li class="checkbox"><input type="checkbox" id="film-check16" value="4" data-id="4"><label for="film-check16">1990 &#151; 2000</label></li>
-                    <li class="checkbox"><input type="checkbox" id="film-check17" value="5" data-id="5"><label for="film-check17">1980 &#151; 1990</label></li>
-                    <li class="checkbox"><input type="checkbox" id="film-check18" value="6" data-id="6"><label for="film-check18">1970 &#151; 1980</label></li>
-                    <li class="checkbox"><input type="checkbox" id="film-check19" value="7" data-id="7"><label for="film-check19">До 1970</label></li>
+                    <li class="checkbox"><input type="checkbox" id="film-check20" value="0" data-id="0"><label for="film-check20">Любой год</label></li>
+                    <li class="checkbox"><input type="checkbox" id="film-check21" value="6" data-id="8"><label for="film-check21">2020 &#8211; 2022</label></li>
+                    <li class="checkbox"><input type="checkbox" id="film-check22" value="1" data-id="1"><label for="film-check22">2015 &#8211; 2020</label></li>
+                    <li class="checkbox"><input type="checkbox" id="film-check23" value="2" data-id="2"><label for="film-check23">2010 &#8211; 2015</label></li>
+                    <li class="checkbox"><input type="checkbox" id="film-check24" value="3" data-id="3"><label for="film-check24">2000 &#8211; 2010</label></li>
+                    <li class="checkbox"><input type="checkbox" id="film-check25" value="4" data-id="4"><label for="film-check25">1990 &#8211; 2000</label></li>
+                    <li class="checkbox"><input type="checkbox" id="film-check26" value="5" data-id="5"><label for="film-check26">1980 &#8211; 1990</label></li>
+                    <li class="checkbox"><input type="checkbox" id="film-check27" value="6" data-id="6"><label for="film-check27">1970 &#8211; 1980</label></li>
+                    <li class="checkbox"><input type="checkbox" id="film-check28" value="7" data-id="7"><label for="film-check28">До 1970</label></li>
                 </ul>
         </div>
         <div class="div-ul">
             <p class="filtr-title">Страна производства</p>
                 <ul>
-                    <li class="checkbox"><input type="checkbox" id="film-check20" value="0" data-id="0"><label for="film-check20">Любая страна</label></li>
-                    <li class="checkbox"><input type="checkbox" id="film-check21" value="1" data-id="3"><label for="film-check21">США</label></li>
-                    <li class="checkbox"><input type="checkbox" id="film-check22" value="2" data-id="1"><label for="film-check22">Россия</label></li>
-                    <li class="checkbox"><input type="checkbox" id="film-check23" value="3" data-id="5"><label for="film-check23">Франция</label></li>
-                    <li class="checkbox"><input type="checkbox" id="film-check24" value="4" data-id="24"><label for="film-check24">Великобритания</label></li>
-                    <li class="checkbox"><input type="checkbox" id="film-check25" value="5" data-id="31"><label for="film-check25">Италия</label></li>
-                    <li class="checkbox"><input type="checkbox" id="film-check26" value="6" data-id="26"><label for="film-check26">Япония</label></li>
-                    <li class="checkbox"><input type="checkbox" id="film-check27" value="7" data-id="23"><label for="film-check27">СССР</label></li>
+                    <li class="checkbox"><input type="checkbox" id="film-check30" value="0" data-id="0"><label for="film-check30">Любая страна</label></li>
+                    <li class="checkbox"><input type="checkbox" id="film-check31" value="1" data-id="3"><label for="film-check31">США</label></li>
+                    <li class="checkbox"><input type="checkbox" id="film-check32" value="2" data-id="1"><label for="film-check32">Россия</label></li>
+                    <li class="checkbox"><input type="checkbox" id="film-check33" value="3" data-id="5"><label for="film-check33">Франция</label></li>
+                    <li class="checkbox"><input type="checkbox" id="film-check34" value="4" data-id="24"><label for="film-check34">Великобритания</label></li>
+                    <li class="checkbox"><input type="checkbox" id="film-check35" value="5" data-id="31"><label for="film-check35">Италия</label></li>
+                    <li class="checkbox"><input type="checkbox" id="film-check36" value="6" data-id="26"><label for="film-check36">Япония</label></li>
+                    <li class="checkbox"><input type="checkbox" id="film-check37" value="7" data-id="23"><label for="film-check37">СССР</label></li>
                 </ul>
         </div>
-        <button class="button-send" onclick="film.setFilters()">Найти фильм</button>
+        <div class="div-ul">
+            <p class="filtr-title">Рейтинг кинопоиска</p>
+            <ul id="filtr-film-rating">
+                <li class="checkbox"><input type="checkbox" id="film-check40" value="0" data-id="0"><label for="film-check40">меньше 5</label></li>
+                <li class="checkbox"><input type="checkbox" id="film-check41" value="2" data-id="2"><label for="film-check41">6 &#8211; 7</label></li>
+                <li class="checkbox"><input type="checkbox" id="film-check42" value="4" data-id="4"><label for="film-check42">8 &#8211; 9</label></li>
+                <li class="checkbox"><input type="checkbox" id="film-check43" value="1" data-id="1"><label for="film-check43">5 &#8211; 6</label></li>
+                <li class="checkbox"><input type="checkbox" id="film-check44" value="3" data-id="3"><label for="film-check44">7 &#8211; 8</label></li>
+                <li class="checkbox"><input type="checkbox" id="film-check45" value="5" data-id="5"><label for="film-check45">9 &#8211; 10</label></li>
+            </ul>
+        </div>
+        <div id="filtr_btns">
+            <button class="button-send" id="button-filter-film" onclick="film.setFilters()">Найти фильм</button>
+            <button class="button-send button-reset" id="button-filter-film-reset" onclick="film.setDefaultFilters()">Сбросить настройки</button>
+        </div>
     </div>
 </div>

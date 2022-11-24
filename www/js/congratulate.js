@@ -72,7 +72,7 @@ const renderFirst = `
         `;
 
 const renderMenu = ` <div class="main-block-menu">
-                        <div>Cлучайность из категории:<span class="cat-sel">Поздравления</span></div>
+                        <div>Cлучайность из категории:<span class="cat-sel">Поздравление</span></div>
                         <div>
                             <span class="cat-settings" onclick="rendGo();" style="cursor: pointer;">Настроить фильтр</span>
                             <span class="next-random" onclick="firstRnd();" style="cursor: pointer;">Следующее поздравление</span>
@@ -189,10 +189,10 @@ const renderGo = `
 // let congratulateLink = document.querySelector('.data-title-link');
 
 
-let congratulateLinkMain = document.querySelector('.congratulate_main_lnk');
-congratulateLinkMain.addEventListener('click', function () {
-    congratulate.runProgr();
-});
+//let congratulateLinkMain = document.querySelector('.congratulate_main_lnk');
+//congratulateLinkMain.addEventListener('click', function () {
+//    congratulate.runProgr();
+//});
 
 // runProgr(congratulateLinkMain);
 
@@ -236,7 +236,12 @@ function rendGo() {
     let mainBlock = document.querySelector('.modal_text');//было - .main-block-data    
     let mainBlockMenu = document.querySelector('.main-block-menu');//место вставки строки
     mainBlock.innerHTML = renderGo;
-    mainBlockMenu.innerHTML = renderMenu;
+    mainBlockMenu.innerHTML = `<div>Cлучайность из категории:<span class="cat-sel">Поздравление</span></div>
+                                <div>
+                                    <span class="cat-settings" onclick="rendGo();" style="cursor: pointer;">Настроить фильтр</span>
+                                    <span class="next-random" onclick="firstRnd();" style="cursor: pointer;">Следующее поздравление</span>
+                                </div>
+    `;
     congratulate.btnCross(); // отключение по кресту
     congratulate.btnShadow(); // отключение по тени
     congratulate.init();
@@ -247,26 +252,30 @@ function rendGo() {
 //первое случайное поздравление и также вывод "следующее поздравление"
 function firstRnd() {
     let firstNumber = Math.floor(Math.random() * 92);
-//    console.log(firstNumber);
+    //    console.log(firstNumber);
     findings.id = firstNumber;
-
+	let themeId, whoId, typeId;
     let sendData = {
         apiMethod: 'getRndCongratulate',
-        postData: {
-            who: findings.who,
-            theme: findings.congratulate
-        }
+//        postData: {
+//            who: findings.who,
+//            theme: findings.congratulate
+//        }
+		postData: {
+			themeId: themeId,
+			whoId: whoId,
+			typeId: typeId
+		}
     };
     // запрос случайного поздравления по id номеру
     congratulate._getRndCongratulate(`/index.php`, sendData)
         .then(data => {
-            data = JSON.parse(data);
             findings.id = data.rnd.id;
             findings.congrRnd = data.rnd.congratulate;
             congratulate.renderText(findings.congrRnd);
         });
 
-//    console.log(findings);
+    //    console.log(findings);
 }
 
 class Congratulate {
@@ -280,10 +289,10 @@ class Congratulate {
         // event.addEventListener('click', function () {
         mainSection.innerHTML = `${renderMenu} ${renderFirst} 
         <div class="other-cat">
-        Кроме фильмов наш генератор выдаёт варианты из
+        Кроме поздравлений наш генератор выдаёт варианты из
         <a href="#" class="link-in-text">других категорий</a>,
         например, &laquo;
-        <a href="#" class="link-in-text" onclick="film.getRndFilm()">Фильмы</a>&raquo;
+        <a href="#" class="link-in-text" href="/film">Фильм</a>&raquo;
     </div>
         `;
 
@@ -430,16 +439,15 @@ class Congratulate {
         let sendData = {
             apiMethod: 'getRndCongratulate',
             postData: {
-                who: findings.who,
-                theme: findings.congratulate,
-                alreadyViewedIds: congratulate.alreadyViewedIds
-            }
+				themeId: 2,
+				whoId: 9,
+				typeId: typeId
+			}
         };
 
         //запрос по критерию отбора (who, theme) 
         congratulate._getRndCongratulate(`/index.php`, sendData)
             .then(data => {
-                data = JSON.parse(data);
                 if (data.result === "OK") {
                     congratulate.data = data.rnd;
                     console.log(congratulate.data);
@@ -467,7 +475,7 @@ class Congratulate {
     //рендер поздравления
     renderText(congratulateText) {
         let position = document.querySelector('.main-block-data-text');
-        congratulateText = `<p class="film-desc">${congratulateText}</p>`;
+        congratulateText = `<p class="film-desc congratulate-text">${congratulateText}</p>`;
         position.innerHTML = congratulateText;
     }
 
@@ -477,15 +485,49 @@ class Congratulate {
             url: url,
             data: jdata,
             success: function (data) {
-                data = JSON.parse(data);
                 if (data.result !== "OK") {
                     console.log("ERROR_GET_CONGRATULATE");
                 }
             }
         })
     }
-
-
+	
+	_getJson(url, data) {
+		return $.post({
+            url: url,
+            data: data,
+            success: function (data) {
+                if (data.result !== "OK") {
+                    console.log('ERROR_GET_DATA_');
+                }
+            }
+        })
+	}
+	
+	getFilter(themeId, whoId, typeId) {
+		let sendData = {
+			apiMethod: 'getCongrFilters',
+			postData: {
+				themeId: themeId,
+				whoId: whoId,
+				typeId: typeId
+			}
+		};
+		
+		this._getJson(`/index.php`, sendData)
+			.then(data => {
+				if (data.result === "OK") {
+					console.log('filter:', data.filter);
+				} else {
+					console.log('ERROR_GET_FILTERS');
+				}
+			})
+			.catch(error => {
+			console.log('error_get_filters');
+			  });
+	}
+	
+	
     init() {
         this.congratulateSomeone();
         this.subjectCongratulations();
