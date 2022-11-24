@@ -614,29 +614,28 @@ function genCode(str) {
     return temp.toLowerCase();
 }
 
+let snLabels = {
+    'art': 'artdesc',
+    'congr': 'congr_text',
+    'movie': 'moviedesc',
+    'word': 'word_desc',
+    'quote': 'quote_desc',
+};
+
 function changeStatus(typeModul, typeDesc) {
     let textMore = document.getElementById(typeModul);
     let descLength = document.getElementById(typeDesc).textContent.length;
     let className = document.getElementById(typeDesc);
 
-    if (descLength < 350) {
+    if (descLength < 350  && typeDesc !== 'congr_text') {
         textMore.innerHTML = 'Больше описания';
     } else {
         textMore.innerHTML = '';
         className.style.height = 'auto';
     }
-
     textMore.innerHTML = '';
 }
 
-//
-let snLabels = {
-    art: 'artdesc',
-    congr: 'congr_text',
-    movie: 'moviedesc',
-    word: 'word_desc',
-    quote: 'quote_desc',
-};
 
 function checkLengthSeeNowText(objectSN) {
     let textMore, desc;
@@ -650,7 +649,11 @@ function checkLengthSeeNowText(objectSN) {
             textMore.innerHTML = '';
             continue;
         }
-        if (desc.textContent.length < 340) {
+        if (objectSN[prop] === 'congr_text' && desc.textContent.length < 100) {
+            textMore.innerHTML = '';
+            continue;
+        }
+        if (desc.textContent.length < 340 && objectSN[prop] !== 'congr_text') {
             textMore.innerHTML = '';
         }
     }
@@ -951,3 +954,4 @@ window.onclick = function (event) {
 //		}
 //	});
 //}
+

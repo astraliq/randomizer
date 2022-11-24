@@ -1,9 +1,8 @@
 <?php
 declare(strict_types=1);
 
-class RndFilm extends Model
-{
-    // public $dataBase;
+class RndFilm extends Model {
+
     public $filmsTable = 'films';
     public $categories = 'f_categories';
     public $countries = 'f_countries';
@@ -71,15 +70,6 @@ class RndFilm extends Model
 
         $sql = "SELECT f.`id`, f.`kp_id`, title_ru, description_ru, year, cat.`category_title` as `main_category`, cntr.`country_title` as `country`, f.`main_img`, f.`actors`, f.`director`, duration, f.`rating`  FROM `$this->filmsTable` as f LEFT JOIN `$this->categories` as cat ON f.`main_category_id` = cat.id LEFT JOIN `$this->countries` as cntr ON f.`country_id` = cntr.id WHERE f.`year` IN ($allYears)" . $filterCountry . $filterCategory . $filterRating . $exclude;
         $films = $this->dataBase->getRows($sql, null);
-
-        // $idFilms = [];
-        // $k=0;
-        // foreach ($films as $film) {
-        // 	$idFilms[$k]= $film['id'];
-        // 	$k++;
-        // }
-        // print_r($films);
-        // exit();
 
         if (!empty($films)) {
             $randomFilm = $films[array_rand($films, 1)];
@@ -206,14 +196,10 @@ class RndFilm extends Model
             $path = Config::get('path_public') . '/img/films/' . $film['main_img'];
             file_put_contents($path, file_get_contents($film['imgSrc']));
         }
-//        echo '<pre>';
-//        print_r($film);
-//        echo '</pre>';
-//        exit();
-
 
         $counter1 = 0;
         $film['category_id'] = [];
+
         foreach ($film['categories'] as $cat) {
             if ($cat === 'длявзрослых') {
                 $cat = 'Для взрослых';
@@ -239,7 +225,7 @@ class RndFilm extends Model
 //                    'title_ru' => $film['title_ru'],
 //                    'title_en' => $film['title_en'],
 //                    'description_ru' => $film['description_ru'],
-                    'main_category_id' => $film['category_id'][0],
+//                    'main_category_id' => $film['category_id'][0],
 //                    'main_img' => $film['main_img'],
                     'year' => $film['year'],
                     'actors' => implode(', ', $film['actors']),
@@ -263,16 +249,21 @@ class RndFilm extends Model
                     $object['premier_date'] = $film['premier_date'];
                 }
 
+                if ($film['category_id'][0] && $film['category_id'][0] !== '') {
+                    $object['main_category_id'] = $film['category_id'][0];
+                }
+
                 $result = $this->dataBase->uniUpdate($this->filmsTable, $object, ['kp_id' => $film['kp_id']]);
                 $lastID = $this->dataBase->uniSelect($this->filmsTable, ['kp_id' => $film['kp_id']]);
 
                 $columns = ['film_id', 'category_id'];
                 $object = array();
-                foreach ($film['category_id'] as $element) {
-                    $object[] = [$lastID['id'], $element];
+                if ($film['category_id']) {
+                    foreach ($film['category_id'] as $element) {
+                        $object[] = [$lastID['id'], $element];
+                    }
+                    $result = $this->dataBase->uniInsertArray($this->filmsCategories, $columns, $object);
                 }
-                $result = $this->dataBase->uniInsertArray($this->filmsCategories, $columns, $object);
-
 
                 if ($film['country_id']) {
                     $columns = ['film_id', 'country_id'];
@@ -297,11 +288,6 @@ class RndFilm extends Model
 
     public function updatePersonsFilm($film)
     {
-
-//        echo '<pre>';
-//        print_r($film);
-//        echo '</pre>';
-//        exit();
 
         try {
             $object = [

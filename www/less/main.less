@@ -59,6 +59,10 @@
  * animation slide-in-bottom
  * ----------------------------------------
  */
+
+@backgroundColorBtnActive: #b88400;
+@backgroundColorBtn: #ebbd2f;
+
 @-webkit-keyframes "slide-in-bottom" {
 	0% {
 		-webkit-transform: translateY(1000px);
@@ -374,7 +378,7 @@ main {
 	display: flex;
 }
 .main-color-1 {
-	background-color: #ebbd2f;
+	background-color: @backgroundColorBtn;
 }
 .main-color-2 {
 	background-color: #39c571;
@@ -558,6 +562,7 @@ main {
 	font-size: 20px;
 	font-weight: 400;
 	line-height: 22px;
+	height: 50px;
 }
 .link-in-text {
 	color: #000;
@@ -843,7 +848,7 @@ main {
 .button-vk {
 	margin: 10px 0 0 0;
 	padding: 10px 20px;
-	background-color: #ebbd2f;
+	background-color: @backgroundColorBtn;
 	color: #000;
 	width: 160px;
 	text-align: center;
@@ -862,7 +867,7 @@ main {
 }
 .button-send {
 	margin: 10px 0 0 0;
-	background-color: #ebbd2f;
+	background-color: @backgroundColorBtn;
 	color: #000;
 	width: 160px;
 	text-align: center;
@@ -871,15 +876,19 @@ main {
 	font-size: 17px;
 	border-radius: 5px;
 	outline: none;
+	height: 50px;
 	&:hover {
 		cursor: pointer;
 		border-radius: 20px;
+	}
+	&:active {
+		background-color: @backgroundColorBtnActive;
 	}
 }
 .button-send-2 {
 	margin: 10px 0 0 0;
 	padding: 10px 20px;
-	background-color: #ebbd2f;
+	background-color: @backgroundColorBtn;
 	color: #000;
 	width: 160px;
 	text-align: center;
@@ -895,11 +904,14 @@ main {
 		cursor: pointer;
 		border-radius: 20px;
 	}
+	&:active {
+		background-color: @backgroundColorBtnActive;
+	}
 }
 .button-send-big {
 	margin: 10px 0 0 0;
 	padding: 10px 20px;
-	background-color: #ebbd2f;
+	background-color: @backgroundColorBtn;
 	color: #000;
 	width: 160px;
 	text-align: center;
@@ -920,7 +932,7 @@ main {
 	& .button-send {
 		height: 45px;
 		&:active {
-			background-color: #b88400;
+			background-color: @backgroundColorBtnActive;
 		}
 	}
 	& .button-reset {
@@ -997,7 +1009,7 @@ main {
 	box-shadow: 1px 1px 3px #000;
 	transform: rotate(45deg);
 	&:hover {
-		background: #ebbd2f;
+		background: @backgroundColorBtn;
 	}
 }
 .div-ul {
@@ -1029,7 +1041,7 @@ ul {
 					border: 2px solid #fff;
 					width: 10px;
 					height: 10px;
-					background-color: #ebbd2f;
+					background-color: @backgroundColorBtn;
 					box-sizing:border-box;
 				}
 			}
@@ -1302,7 +1314,7 @@ label {
 	cursor: pointer;
 	z-index: 15;
 	&:hover {
-		background-color: #ebbd2f;
+		background-color: @backgroundColorBtn;
 	}
 }
 .end_stub_container {
@@ -1685,6 +1697,12 @@ label {
 		}
 	}
 }
+.main-block-data-number_info {
+	width: 35%;
+	min-height: 350px;
+	border-right: 2px solid;
+    border-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), black, rgba(0, 0, 0, 0)) 1 100%;
+}
 @media only screen and  (max-width: 1215px) {
 	.see-now-main-data {
 		&:nth-last-child(2) {
@@ -1796,11 +1814,6 @@ label {
 	}
 	.random-form-input-count {
 		width: 100%;
-	}
-	.main-block-data-number_info {
-		width: 35%;
-		height: 350px;
-		border-right: 1px solid black;
 	}
 	.main-number {
 		width: 100%;

@@ -545,6 +545,7 @@ main {
   font-size: 20px;
   font-weight: 400;
   line-height: 22px;
+  height: 50px;
 }
 .link-in-text {
   color: #000;
@@ -841,10 +842,14 @@ main {
   font-size: 17px;
   border-radius: 5px;
   outline: none;
+  height: 50px;
 }
 .button-send:hover {
   cursor: pointer;
   border-radius: 20px;
+}
+.button-send:active {
+  background-color: #b88400;
 }
 .button-send-2 {
   margin: 10px 0 0 0;
@@ -864,6 +869,9 @@ main {
 .button-send-2:hover {
   cursor: pointer;
   border-radius: 20px;
+}
+.button-send-2:active {
+  background-color: #b88400;
 }
 .button-send-big {
   margin: 10px 0 0 0;
@@ -1632,6 +1640,12 @@ label:hover {
   color: #ccc;
   text-decoration: none;
 }
+.main-block-data-number_info {
+  width: 35%;
+  min-height: 350px;
+  border-right: 2px solid;
+  border-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), black, rgba(0, 0, 0, 0)) 1 100%;
+}
 @media only screen and (max-width: 1215px) {
   .see-now-main-data:nth-last-child(2) {
     display: none;
@@ -1740,11 +1754,6 @@ label:hover {
   }
   .random-form-input-count {
     width: 100%;
-  }
-  .main-block-data-number_info {
-    width: 35%;
-    height: 350px;
-    border-right: 1px solid black;
   }
   .main-number {
     width: 100%;

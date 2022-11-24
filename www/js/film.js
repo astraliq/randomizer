@@ -437,7 +437,7 @@ class Films {
 	_render(film) {
 		let kp_link;
 		if (film.kp_id) {
-			kp_link = `<p class="film-desc"><b>Рейтинг <a target="_blank" href="https://www.kinopoisk.ru/film/${film.kp_id}/"> <img height="20" class="img_kp" src="/img/other/kp_small.jpg" alt="">инопоиска</a>: </b>${film.rating}</p>`;
+			kp_link = `<p class="film-desc"><b>Рейтинг <a target="_blank" href="https://www.kinopoisk.ru/film/${film.kp_id}/"> <img height="20" class="img_kp" src="/img/other/kp_small.jpg" alt="К">инопоиска</a>: </b>${film.rating}</p>`;
 		} else {
 			kp_link = `<p class="film-desc"><b>Рейтинг Кинопоиска: </b>${film.rating}</p>`;
 		}

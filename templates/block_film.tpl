@@ -42,7 +42,7 @@
                             {% if not content.randomData.data.kp_id %}
                             <b>Рейтинг Кинопоиска:</b>
                             {% else %}
-                            <b>Рейтинг <a target="_blank" href="https://www.kinopoisk.ru/film/{{ content.randomData.data.kp_id }}/"> <img height="20" class="img_kp" src="/img/other/kp_small.jpg" alt="">инопоиска</a>: </b>
+                            <b>Рейтинг <a target="_blank" href="https://www.kinopoisk.ru/film/{{ content.randomData.data.kp_id }}/"> <img height="20" class="img_kp" src="/img/other/kp_small.jpg" alt="К">инопоиска</a>: </b>
                             {% endif %}
 
                         {% if content.randomData.data.rating == 0 %}           
